@@ -54,10 +54,10 @@ export class AggregatedMidPage
     {
         await expect(this.page).toHaveURL(/mids\/aggregated/);
         const rowValues = await this.table.getAllValuesFromRowByIndex(rowIndex);
+        expect(rowValues['Aggregated MID']).toMatch(/^AG-\d{10}$/)
         expect(rowValues['Project']).toBe(expectedData.project);
         expect(rowValues['Type']).toBe(expectedData.type);
         expect(rowValues['Currency']).toBe(expectedData.currency);
-        /* expect(rowValues['Internal MIDs']).toBe(expectedData.internalMid); */
         expect(rowValues['Description']).toBe(expectedData.description || '');
     }
 }

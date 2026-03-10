@@ -54,6 +54,7 @@ export class InternalMidPage
     {
         await expect(this.page).toHaveURL(/mids\/internal/);
         const rowValues = await this.table.getAllValuesFromRowByIndex(rowIndex);
+        expect(rowValues['Internal MID']).toMatch(/^MI-\d{10}$/);
         expect(rowValues['Project']).toBe(expectedData.project);
         expect(rowValues['Provider']).toBe(expectedData.provider);
         expect(rowValues['Currency']).toBe(expectedData.currency);

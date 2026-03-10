@@ -54,6 +54,7 @@ export class SecureDepositsPage
     {
         await expect(this.page).toHaveURL(/mids\/secure-deposits/);
         const rowValues = await this.table.getAllValuesFromRowByIndex(rowIndex);
+        expect(rowValues['Secure Deposit']).toMatch(/^SD-\d+$/);
         expect(rowValues['Project']).toBe(expectedData.project);
         expect(rowValues['Amount']).toBe(expectedData.amount);
         expect(rowValues['Currency']).toBe(expectedData.currency);
