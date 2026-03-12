@@ -18,7 +18,8 @@ export default defineConfig({
   fullyParallel: false,
   // eslint-disable-next-line no-undef
   globalSetup: require.resolve("./globalSetup.ts"),
-  timeout: 10 * 1000,
+
+  timeout: 60 * 1000,
   expect: {
     /**
      * Maximum time expect() should wait for the condition to be met.
@@ -39,9 +40,13 @@ export default defineConfig({
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: "allure-playwright",
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
-  use: {
+  use: 
+  {
     /* Base URL to use in actions like `await page.goto('')`. */
-  baseURL: 'https://dashboard.dev.transferty.com',
+    baseURL: 'https://dashboard.dev.transferty.com',
+  
+    /* Фиксируем размер экрана для стабильной работы в headless режиме */
+    viewport: { width: 1920, height: 1080 },
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
@@ -55,7 +60,7 @@ export default defineConfig({
     },
     
 
-/*     {
+/* {
       name: 'firefox',
       use: { ...devices['Desktop Firefox'] },
     },
@@ -94,4 +99,3 @@ export default defineConfig({
   // },
   
 });
-

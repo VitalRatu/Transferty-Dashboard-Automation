@@ -75,11 +75,12 @@ export class CreditCardWidget
      * Populates the card number field
      * If a card selection dropdown is present, it automatically triggers the "New Card" option 
      * before attempting to fill the secure iframe input
-     * @param cardNumber - The full credit card number string to enter
+     * @param cardNumbeToInput - The full credit card number string to enter
      * @returns A promise that resolves when the card number is successfully typed into the iframe
      */
-    public async fillCardNumber(cardNumber: string)
+    public async fillCardNumber(cardNumbeToInput: string)
     {
+        await expect(this.selectCardDropDown).toBeVisible()
         if (await this.selectCardDropDown.isVisible())
         {
             await this.selectCardDropDown.click();
@@ -88,7 +89,9 @@ export class CreditCardWidget
         }
         const frame = await this.getIframe(this.textInputLocator, CreditCardWidget.cardNumber); 
         const inputForCardNumber = frame.locator('input[name = "cardInput"]').first();
-        await inputForCardNumber.fill(cardNumber);
+        await expect(inputForCardNumber).toBeVisible()
+        await expect(inputForCardNumber).toBeEnabled({ timeout: 15000 })
+        await inputForCardNumber.fill(cardNumbeToInput);
     }
 
     /**
@@ -101,6 +104,8 @@ export class CreditCardWidget
     {
         const frame = await this.getIframe(this.ExpiryCvvContainer, CreditCardWidget.ExpireAndCVC, 0);
         const inputForExpireDate = frame.locator('input[name = "expiryInput"]').first();
+        await expect(inputForExpireDate).toBeVisible()
+        await expect(inputForExpireDate).toBeEnabled({ timeout: 15000 })
         if (await inputForExpireDate.inputValue() !== '')
         {
             await inputForExpireDate.fill('');
@@ -121,6 +126,8 @@ export class CreditCardWidget
     {
         const frame = await this.getIframe(this.ExpiryCvvContainer, CreditCardWidget.ExpireAndCVC, 1);
         const inputForCVC = frame.locator('input[name = "cvcInput"]').first();
+        await expect(inputForCVC).toBeVisible()
+        await expect(inputForCVC).toBeEnabled({ timeout: 15000 })
         if (cvc !== undefined)
         {
             await inputForCVC.fill(cvc);

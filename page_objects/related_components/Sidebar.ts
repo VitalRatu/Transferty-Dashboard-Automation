@@ -40,28 +40,29 @@ export class Sidebar
      * to reach the desired state, followed by an assertion to confirm the change
      * @returns A promise that resolves when the toggle action and verification are complete
      */    
-    public async setLiveMode(): Promise<void>
+    public async setLiveMode(targetState: boolean = true): Promise<void>
     {
-        await expect(this.toggleContainer).toBeVisible().catch((error) => 
+        const currentUrl = this.page.url();
+        if (!currentUrl.includes('dashboard')) 
         {
-            throw new Error(`Live Mode toggle not found: ${error}`);
-        });
-        await this.page.waitForTimeout(500);
-        const classAttr = await this.toggleContainer.getAttribute('class');
-        const isCurrentlyChecked = classAttr?.includes('checked');
+            throw new Error(`CRITICAL: Cannot find Live Mode toggle because we are on the wrong page! Current URL is: ${currentUrl}`);
+        }
 
-        if (isCurrentlyChecked) 
+        await expect(this.toggleContainer).toBeVisible({ timeout: 20000 })
+        const classAttr = await this.toggleContainer.getAttribute('class');
+        const isCurrentlyChecked = classAttr?.includes('checked') ?? false;
+
+        if (targetState && !isCurrentlyChecked) 
         {
             await this.toggleContainer.click();
             await expect(this.toggleContainer).toHaveClass(/checked/);
         }
-        else if (!isCurrentlyChecked) 
+        else if (!targetState && isCurrentlyChecked) 
         {
             await this.toggleContainer.click();
             await expect(this.toggleContainer).not.toHaveClass(/checked/);
         }
     }
-    
     /**
      * Navigates to a specific section of the application by clicking a sidebar menu button
      * Waits for any active loaders to disappear, locates the button by its display name, 

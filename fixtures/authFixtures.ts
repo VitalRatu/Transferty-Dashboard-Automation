@@ -93,13 +93,15 @@ export const authTest = pomTest.extend<AuthFixtures>({
             
             // Jump straight to the dashboard since the browser now believes we are fully authenticated
             await page.goto(Routes.DASHBOARD)
+            await page.waitForURL(/dashboard/, { timeout: 15000 });
+            await page.waitForLoadState('load');
         }
 
         // Perform post-login UI actions, like setting the Live Mode toggle
         await dashboardPage.sidebar.setLiveMode()
         
         // Pass the dashboardPage object to the actual test body and suspend fixture execution
-        await use(dashboardPage) 
+        await use() 
     },
 
     adminUser: async ({ page, loginPage, dashboardPage }, use) => 
@@ -136,10 +138,12 @@ export const authTest = pomTest.extend<AuthFixtures>({
             }, cachedAdminStorage)
             
             await page.goto(Routes.DASHBOARD)
+            await page.waitForURL(/projects/, { timeout: 15000 });
+            await page.waitForLoadState('load');
         }
 
         await dashboardPage.sidebar.setLiveMode()
-        await use(dashboardPage)
+        await use()
     },
 })
 

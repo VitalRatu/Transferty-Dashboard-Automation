@@ -1,4 +1,5 @@
-import {expect, test} from '../../fixtures/fixtures';          
+import {expect, test, } from '../../fixtures/fixtures';         
+import {pomTest} from '../../fixtures/pomFixtures' 
 import {SideBarMenuButtons} from '../../page_data/SideBarMenuButtons';
 import {TransactionsPageFilters} from '../../test_data/filtersData';
 import {BillingAdjustmentsSubTabs, BillingBalancesSubTabs, BillingTabs, EMoneyTabs, EMoneyWalletsTabs, MIDsTabs } from '../../page_data/TabNames';
@@ -109,7 +110,6 @@ test.only('Edit Fee Object to existing EXP date', async ({ adminUser, dashboardP
 
 test.only('Edit Merchant Wallet', async ({ adminUser, dashboardPage, emoneyPage, merchantWalletDetailsPage }) =>
 {
-    await dashboardPage.page.pause()
     await dashboardPage.sidebar.clickButton(SideBarMenuButtons.E_MONEY);
     await emoneyPage.tab.open(EMoneyTabs.Wallets);
     await emoneyPage.walletsPage.tab.open(EMoneyWalletsTabs.Merchant)
@@ -119,7 +119,6 @@ test.only('Edit Merchant Wallet', async ({ adminUser, dashboardPage, emoneyPage,
 
 test('Edit Limit Details', async ({ adminUser, dashboardPage, emoneyPage, limitDetailsPage, editLimitPage }) =>
 {
-    await dashboardPage.page.pause()
     await dashboardPage.sidebar.clickButton(SideBarMenuButtons.E_MONEY);
     await emoneyPage.tab.open(EMoneyTabs.Settings);
     await emoneyPage.settingsPage.table.clickOnCellValueByUniqueValue('Currency', 'KZT', 'Currency' )
@@ -127,5 +126,3 @@ test('Edit Limit Details', async ({ adminUser, dashboardPage, emoneyPage, limitD
     await limitDetailsPage.editLimit()
     await editLimitPage.editLimit({currency: 'USD'})
 });
-
-

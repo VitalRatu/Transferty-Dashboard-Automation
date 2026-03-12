@@ -245,8 +245,9 @@ export class Table
      */
     public async getAllValuesFromRowByIndex(rowIndex: number): Promise<Record<string, string>>
     {
+        await this.page.waitForLoadState('load');
         const row = this.tableRows.nth(rowIndex);
-        await expect(row).toBeVisible();
+        await expect(row).toBeVisible({timeout: 200});
         const headerTexts = await this.getHeaders();
         const cellCount = await row.getByRole('cell').count();
         
