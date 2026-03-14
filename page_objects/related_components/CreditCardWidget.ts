@@ -25,10 +25,10 @@ export class CreditCardWidget
     private readonly newCardOption: Locator;
 
     /** Static label for the card number field group */
-    static readonly cardNumber: string = 'Card Number';
+    public static readonly cardNumber: string = 'Card Number';
     
     /** Static label for the combined expiry and CVC field group */
-    static readonly ExpireAndCVC: string = 'Expire date / CVC';
+    public static readonly ExpireAndCVC: string = 'Expire date / CVC';
     
     /**
      * Initializes a new instance of the CreditCardWidget class
@@ -90,7 +90,7 @@ export class CreditCardWidget
         const frame = await this.getIframe(this.textInputLocator, CreditCardWidget.cardNumber); 
         const inputForCardNumber = frame.locator('input[name = "cardInput"]').first();
         await expect(inputForCardNumber).toBeVisible()
-        await expect(inputForCardNumber).toBeEnabled({ timeout: 15000 })
+        await expect(inputForCardNumber).toBeEnabled({ timeout: 1000 })
         await inputForCardNumber.fill(cardNumbeToInput);
     }
 
@@ -105,7 +105,7 @@ export class CreditCardWidget
         const frame = await this.getIframe(this.ExpiryCvvContainer, CreditCardWidget.ExpireAndCVC, 0);
         const inputForExpireDate = frame.locator('input[name = "expiryInput"]').first();
         await expect(inputForExpireDate).toBeVisible()
-        await expect(inputForExpireDate).toBeEnabled({ timeout: 15000 })
+        await expect(inputForExpireDate).toBeEnabled({ timeout: 1000 })
         if (await inputForExpireDate.inputValue() !== '')
         {
             await inputForExpireDate.fill('');
@@ -127,7 +127,7 @@ export class CreditCardWidget
         const frame = await this.getIframe(this.ExpiryCvvContainer, CreditCardWidget.ExpireAndCVC, 1);
         const inputForCVC = frame.locator('input[name = "cvcInput"]').first();
         await expect(inputForCVC).toBeVisible()
-        await expect(inputForCVC).toBeEnabled({ timeout: 15000 })
+        await expect(inputForCVC).toBeEnabled({ timeout: 1000 })
         if (cvc !== undefined)
         {
             await inputForCVC.fill(cvc);

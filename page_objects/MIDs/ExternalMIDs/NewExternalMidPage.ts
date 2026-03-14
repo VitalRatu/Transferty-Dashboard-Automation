@@ -2,6 +2,7 @@ import { expect, Locator, Page } from '@playwright/test';
 import { BasePage } from '../../BasePage';
 import { CreationForm } from '../../related_components/CreationForm';
 import { ExternalMidData } from '../../../test_data/MIDsData';
+import { CustomerFee } from './CustomerFee';
 
 /**
  * Represents the page for configuring and adding a new External Merchant Identifier (MID)
@@ -21,6 +22,7 @@ export class NewExternalMidPage
     
     /** Locator for the page's loading overlay to ensure all dynamic fields are ready for interaction */
     private readonly pageLoaded: Locator;
+    private readonly customerFee: CustomerFee;
 
     /**
      * Initializes a new instance of the NewExternalMidPage class
@@ -32,6 +34,7 @@ export class NewExternalMidPage
         this.page = page;
         this.form = new CreationForm(page);
         this.pageLoaded = page.locator('.ui.inverted.text.loader').first();
+        this.customerFee = new CustomerFee(page)
     }
 
     /**
@@ -78,6 +81,14 @@ export class NewExternalMidPage
         if (data.customer_data_randomization) 
         {
             await this.form.selectDropDown('Enable customer data randomization', data.customer_data_randomization);
+        }
+
+        if (data.customerFees && data.customerFees.length > 0) 
+        {
+            for (const fee of data.customerFees) 
+            {
+                await this.customerFee.fillFeeData(fee);
+            }
         }
         await this.form.save();
     }

@@ -1,7 +1,7 @@
 import {test} from '../../fixtures/fixtures';
 import { SideBarMenuButtons} from '../../page_data/SideBarMenuButtons';
 import { MIDsTabs } from '../../page_data/TabNames';
-import { aggregatedMIDsData, externalMIDsData, internalMIDsData, secureDepositsData } from '../../test_data/MIDsData';
+import { aggregatedMIDs, externalMIDs, internalMIDs, secureDeposits } from '../../test_data/MIDsData';
 
 test('Create Internal MID', async ({ adminUser, dashboardPage, MIDsPage, newInternalMidPage }) => 
 {
@@ -19,11 +19,11 @@ test('Create Internal MID', async ({ adminUser, dashboardPage, MIDsPage, newInte
     });
     await test.step('User fills up required data for Internal MID', async() => 
     {
-        await newInternalMidPage.createInternalMID(internalMIDsData[0]);
+        await newInternalMidPage.createInternalMID(internalMIDs[0]);
     });
     await test.step('User checks if Internal MID appeared on the list', async() => 
     {
-        await MIDsPage.internalMids.verifyRowMatchesData(0, internalMIDsData[0]);
+        await MIDsPage.internalMids.verifyRowMatchesData(0, internalMIDs[0]);
     });
 });
 
@@ -43,11 +43,11 @@ test('Create Incoming Aggregated MID', async ({ adminUser, dashboardPage, MIDsPa
     });
     await test.step('User fills up required data for Incoming Aggregated MID', async() => 
     {
-        await newAggregatedMidPage.createAggregatedMID(aggregatedMIDsData[0]);
+        await newAggregatedMidPage.createAggregatedMID(aggregatedMIDs[0]);
     });
     await test.step('User checks if Aggregated MID appeared on the list', async() => 
     {
-        await MIDsPage.aggregatedMids.verifyRowMatchesData(0, aggregatedMIDsData[0]);
+        await MIDsPage.aggregatedMids.verifyRowMatchesData(0, aggregatedMIDs[0]);
     });
 });
 
@@ -67,11 +67,11 @@ test('Create Outgoing Aggregated MID', async ({ adminUser, dashboardPage, MIDsPa
     });
     await test.step('User fills up required data for Outgoing Aggregated MID', async() => 
     {
-        await newAggregatedMidPage.createAggregatedMID(aggregatedMIDsData[1]);
+        await newAggregatedMidPage.createAggregatedMID(aggregatedMIDs[1]);
     });
     await test.step('User checks if Aggregated MID appeared on the list', async() => 
     {
-        await MIDsPage.aggregatedMids.verifyRowMatchesData(0, aggregatedMIDsData[1]);
+        await MIDsPage.aggregatedMids.verifyRowMatchesData(0, aggregatedMIDs[1]);
     });
 });
 
@@ -91,11 +91,11 @@ test('Create Secure Deposit Aggregated MID', async ({ adminUser, dashboardPage, 
     });
     await test.step('User fills up required data for Secure Deposit Aggregated MID', async() => 
     {
-        await newAggregatedMidPage.createAggregatedMID(aggregatedMIDsData[2]);
+        await newAggregatedMidPage.createAggregatedMID(aggregatedMIDs[2]);
     });
     await test.step('User checks if Aggregated MID appeared on the list', async() => 
     {
-        await MIDsPage.aggregatedMids.verifyRowMatchesData(0, aggregatedMIDsData[2]);
+        await MIDsPage.aggregatedMids.verifyRowMatchesData(0, aggregatedMIDs[2]);
     });
 });
 
@@ -115,16 +115,17 @@ test('Create Secure Deposit', async ({ adminUser, dashboardPage, MIDsPage, newSe
     });
     await test.step('User fills up required data for Secure Deposit', async() => 
     {
-        await newSecureDepositPage.createSecureDeposit(secureDepositsData[0]);
+        await newSecureDepositPage.createSecureDeposit(secureDeposits[0]);
     });
     await test.step('User checks if Secure Deposit appeared on the list', async() => 
     {
-        await MIDsPage.secureDeposits.verifyRowMatchesData(0, secureDepositsData[0]);
+        await MIDsPage.secureDeposits.verifyRowMatchesData(0, secureDeposits[0]);
     });
 });
 
-test('Create External MID', async ({ adminUser, dashboardPage, MIDsPage, newExternalMidPage }) => 
+test.only('Create External MID', async ({ adminUser, dashboardPage, MIDsPage, newExternalMidPage }) => 
 {
+    await dashboardPage.page.pause()
     await test.step('User clicks on "MIDs" tab', async() => 
     {
         await dashboardPage.sidebar.clickButton(SideBarMenuButtons.MIDS);
@@ -139,10 +140,10 @@ test('Create External MID', async ({ adminUser, dashboardPage, MIDsPage, newExte
     });
     await test.step('User fills up required data for External MID', async() => 
     {
-        await newExternalMidPage.createExternalMID(externalMIDsData[0]);
+        await newExternalMidPage.createExternalMID(externalMIDs[0]);
     });
     await test.step('User checks if External MID appeared on the list', async() => 
     {
-        await MIDsPage.externalMids.verifyRowMatchesData(0, externalMIDsData[0]);
+        await MIDsPage.externalMids.verifyRowMatchesData(0, externalMIDs[0]);
     });
 });

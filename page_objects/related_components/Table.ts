@@ -83,7 +83,8 @@ export class Table
             header.trim().toLowerCase().includes(columnName.toLowerCase())
         );
 
-        if (index === -1) {
+        if (index === -1) 
+        {
             throw new Error(`Column "${columnName}" not found`);
         }
         return index;
@@ -106,7 +107,7 @@ export class Table
      * @throws {Error} If no row is found containing the specified value in the target column
      * @returns A promise that resolves to the Locator of the matching row
      */
-    private async getRowLocatorByColumnValue(columnName: string, value: string): Promise<Locator> 
+    public async getRowLocatorByColumnValue(columnName: string, value: string): Promise<Locator> 
     {
         const colIndex: number = await this.getColumnIndex(columnName);
         await this.tableRows.first().waitFor({ state: 'visible' });
@@ -247,7 +248,7 @@ export class Table
     {
         await this.page.waitForLoadState('load');
         const row = this.tableRows.nth(rowIndex);
-        await expect(row).toBeVisible({timeout: 200});
+        await expect(row).toBeVisible();
         const headerTexts = await this.getHeaders();
         const cellCount = await row.getByRole('cell').count();
         

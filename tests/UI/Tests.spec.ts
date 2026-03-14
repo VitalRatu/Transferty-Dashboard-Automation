@@ -91,7 +91,7 @@ test('Edit Fee Object to Permanent EXP date', async ({ adminUser, dashboardPage,
     }, { uniqueValue: '10' });
 });
 
-test.only('Edit Fee Object to existing EXP date', async ({ adminUser, dashboardPage, emoneyPage, operationalWalletDetailsPage, editFeeObjectPage }) =>
+test('Edit Fee Object to existing EXP date', async ({ adminUser, dashboardPage, emoneyPage, operationalWalletDetailsPage, editFeeObjectPage }) =>
 {
     await dashboardPage.sidebar.clickButton(SideBarMenuButtons.E_MONEY);
     await emoneyPage.tab.open(EMoneyTabs.Wallets);
@@ -108,7 +108,7 @@ test.only('Edit Fee Object to existing EXP date', async ({ adminUser, dashboardP
     }, { uniqueValue: '10' });
 });
 
-test.only('Edit Merchant Wallet', async ({ adminUser, dashboardPage, emoneyPage, merchantWalletDetailsPage }) =>
+test('Edit Merchant Wallet', async ({ adminUser, dashboardPage, emoneyPage, merchantWalletDetailsPage }) =>
 {
     await dashboardPage.sidebar.clickButton(SideBarMenuButtons.E_MONEY);
     await emoneyPage.tab.open(EMoneyTabs.Wallets);
