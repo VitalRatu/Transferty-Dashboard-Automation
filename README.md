@@ -24,3 +24,55 @@ The project is built on modern automation architectural standards:
     Playwright Fixtures: Page initialization and authorization management (e.g., merchantUser, adminUser) happen "under the hood" using custom fixtures. Tests remain clean and focused solely on business logic.
 
     Data-Driven Testing: All test data is managed via strictly typed interfaces (e.g., ExternalMidData, EMoneyOperationalWallet), which eliminates typos and allows for easy test scaling.
+
+# Setup & Local Installation
+
+1. Clone the repository:
+Bash
+
+git clone (https://github.com/Oleh-Tymchuk/Transferty-Dashboard-Automation)
+cd transferty-dashboard-automation
+
+1. Install Node.js dependencies:
+Bash
+
+npm install
+
+3. Install Playwright browsers:
+Bash
+
+npx playwright install --with-deps
+
+Running Tests
+
+The framework supports various execution modes.
+
+Run all tests in headless mode:
+Bash
+
+npx playwright test
+
+Run tests in headed mode for visual debugging:
+Bash
+
+npx playwright test --headed
+
+Run a specific test file:
+Bash
+
+npx playwright test tests/UI/PayoutTransactions.spec.ts
+
+Viewing Reports
+
+If a test fails, Playwright automatically takes a screenshot, records a trace file (on retries), and saves the logs.
+
+Open the standard HTML report:
+Bash
+
+npx playwright show-report
+
+Generate and open the Allure report (if configured):
+Bash
+
+npm run allure:generate
+npm run allure:open
