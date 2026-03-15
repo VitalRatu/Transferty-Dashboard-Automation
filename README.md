@@ -13,7 +13,7 @@ This repository contains the End-to-End (E2E) testing framework for the Transfer
     Reporting: Allure Report / Built-in Playwright HTML Reporter
 
 
-# Architecture & Core Principles
+# 🛠 Architecture & Core Principles
 
 The project is built on modern automation architectural standards:
 
@@ -25,7 +25,7 @@ The project is built on modern automation architectural standards:
 
     Data-Driven Testing: All test data is managed via strictly typed interfaces (e.g., ExternalMidData, EMoneyOperationalWallet), which eliminates typos and allows for easy test scaling.
 
-# Setup & Local Installation
+# 🛠 Setup & Local Installation
 
 1. Clone the repository:
 Bash
@@ -43,7 +43,7 @@ Bash
 
     npx playwright install --with-deps
 
-# Running Tests
+# 🛠 Running Tests
 
 The framework supports various execution modes.
 
@@ -62,16 +62,15 @@ Bash
 
     npx playwright test tests/UI/PayoutTransactions.spec.ts
 
-# Viewing Reports
+# 🛠 Viewing Reports
 
 If a test fails, Playwright automatically takes a screenshot, records a trace file (on retries), and saves the logs.
 
 1. Open the standard HTML report:
-Bash
+   
+**bash npx playwright show-report**
 
-    npx playwright show-report
-
-2. Generate and open the Allure report (if configured):
+1. Generate and open the Allure report (if configured):
 Bash
 
     npm run allure:generate
