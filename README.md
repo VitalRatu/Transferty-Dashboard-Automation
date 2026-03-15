@@ -1,9 +1,4 @@
-Твой текст отличный, в нем есть вся необходимая информация! Я только "причесал" его, применив правильный синтаксис Markdown: добавил списки, выделил ключевые термины жирным шрифтом, исправил нумерацию в последнем разделе и обернул консольные команды в аккуратные блоки кода с подсветкой синтаксиса bash.
-
-Также я немного разнообразил эмодзи в заголовках, чтобы они не повторялись и визуально разделяли разделы.
-
-Скопируй текст ниже и вставь его в свой README.md:
-🚀 Transferty Dashboard Automation
+# 🚀 Transferty Dashboard Automation
 
 This repository contains the End-to-End (E2E) testing framework for the Transferty Dashboard project.
 🛠 Technology Stack
@@ -16,7 +11,7 @@ This repository contains the End-to-End (E2E) testing framework for the Transfer
 
     Reporting: Allure Report / Built-in Playwright HTML Reporter
 
-🏗 Architecture & Core Principles
+# 🏗 Architecture & Core Principles
 
 The project is built on modern automation architectural standards:
 
@@ -28,7 +23,7 @@ The project is built on modern automation architectural standards:
 
     Data-Driven Testing: All test data is managed via strictly typed interfaces (e.g., ExternalMidData, EMoneyOperationalWallet), which eliminates typos and allows for easy test scaling.
 
-⚙️ Setup & Local Installation
+# ⚙️ Setup & Local Installation
 
     Clone the repository:
 
@@ -49,7 +44,7 @@ Bash
 
 npx playwright install --with-deps
 
-🏃‍♂️ Running Tests
+# 🏃‍♂️ Running Tests
 
 The framework supports various execution modes.
 
@@ -71,7 +66,7 @@ Bash
 
 npx playwright test tests/UI/PayoutTransactions.spec.ts
 
-📊 Viewing Reports
+# 📊 Viewing Reports
 
 If a test fails, Playwright automatically takes a screenshot, records a trace file (on retries), and saves the logs.
 
