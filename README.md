@@ -1,4 +1,4 @@
-# 🚀 Transferty Dashboard Automation
+# 🛠 Transferty Dashboard Automation
 
 This repository contains the End-to-End (E2E) testing framework for the Transferty Dashboard project.
 
@@ -11,18 +11,7 @@ This repository contains the End-to-End (E2E) testing framework for the Transfer
 
 ---
 
-## 🏗 Architecture & Core Principles
-
-The project is built on modern automation architectural standards:
-
-* **Single Responsibility Principle (SRP):** Pages are separated by action logic. For example, `OperationalWalletDetailsPage` is strictly responsible for reading data and assertions, while `EditOperationalWalletPage` handles only form filling and saving.
-* **Composition over Inheritance:** Complex UI elements are extracted into independent, reusable widgets (`Table`, `CreationForm`, `CustomerFee`, `Sidebar`). Pages are assembled from these widgets like building blocks.
-* **Playwright Fixtures:** Page initialization and authorization management happen "under the hood" using custom fixtures. Tests remain clean and focused solely on business logic.
-* **Data-Driven Testing:** All test data is managed via strictly typed interfaces, which eliminates typos and allows for easy test scaling.
-
----
-
-## ⚙️ Setup & Local Installation
+## 🛠 Setup & Local Installation
 
 1. Clone the repository:
 ```bash
@@ -42,7 +31,7 @@ npx playwright install --with-deps
 
 ---
 
-## 🏃‍♂️ Running Tests
+## 🛠 Running Tests
 
 The framework supports various execution modes.
 
@@ -63,7 +52,7 @@ npx playwright test tests/UI/PayoutTransactions.spec.ts
 
 ---
 
-## 📊 Viewing Reports
+## 🛠 Viewing Reports
 
 If a test fails, Playwright automatically takes a screenshot, records a trace file (on retries), and saves the logs.
 
