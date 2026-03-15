@@ -1,8 +1,12 @@
-# Transferty Dashboard Automation
+Твой текст отличный, в нем есть вся необходимая информация! Я только "причесал" его, применив правильный синтаксис Markdown: добавил списки, выделил ключевые термины жирным шрифтом, исправил нумерацию в последнем разделе и обернул консольные команды в аккуратные блоки кода с подсветкой синтаксиса bash.
+
+Также я немного разнообразил эмодзи в заголовках, чтобы они не повторялись и визуально разделяли разделы.
+
+Скопируй текст ниже и вставь его в свой README.md:
+🚀 Transferty Dashboard Automation
 
 This repository contains the End-to-End (E2E) testing framework for the Transferty Dashboard project.
-
-# 🛠 Technology Stack
+🛠 Technology Stack
 
     Automation Tool: Playwright
 
@@ -12,8 +16,7 @@ This repository contains the End-to-End (E2E) testing framework for the Transfer
 
     Reporting: Allure Report / Built-in Playwright HTML Reporter
 
-
-# 🛠 Architecture & Core Principles
+🏗 Architecture & Core Principles
 
 The project is built on modern automation architectural standards:
 
@@ -25,53 +28,62 @@ The project is built on modern automation architectural standards:
 
     Data-Driven Testing: All test data is managed via strictly typed interfaces (e.g., ExternalMidData, EMoneyOperationalWallet), which eliminates typos and allows for easy test scaling.
 
-# 🛠 Setup & Local Installation
+⚙️ Setup & Local Installation
 
-1. Clone the repository:
+    Clone the repository:
+
 Bash
 
-    git clone (https://github.com/Oleh-Tymchuk/Transferty-Dashboard-Automation)
-    cd transferty-dashboard-automation
+git clone https://github.com/Oleh-Tymchuk/Transferty-Dashboard-Automation.git
+cd transferty-dashboard-automation
 
-2. Install Node.js dependencies:
+    Install Node.js dependencies:
+
 Bash
 
-    npm install
+npm install
 
-3. Install Playwright browsers:
+    Install Playwright browsers:
+
 Bash
 
-    npx playwright install --with-deps
+npx playwright install --with-deps
 
-# 🛠 Running Tests
+🏃‍♂️ Running Tests
 
 The framework supports various execution modes.
 
-1. Run all tests in headless mode:
+    Run all tests in headless mode:
+
 Bash
 
-    npx playwright test
+npx playwright test
 
-2. Run tests in headed mode for visual debugging:
+    Run tests in headed mode for visual debugging:
+
 Bash
 
-    npx playwright test --headed
+npx playwright test --headed
 
-3. Run a specific test file:
+    Run a specific test file:
+
 Bash
 
-    npx playwright test tests/UI/PayoutTransactions.spec.ts
+npx playwright test tests/UI/PayoutTransactions.spec.ts
 
-# 🛠 Viewing Reports
+📊 Viewing Reports
 
 If a test fails, Playwright automatically takes a screenshot, records a trace file (on retries), and saves the logs.
 
-1. Open the standard HTML report:
-   
-**bash npx playwright show-report**
+    Open the standard HTML report:
 
-1. Generate and open the Allure report (if configured):
 Bash
 
-    npm run allure:generate
-    npm run allure:open
+npx playwright show-report
+
+    Generate and open the Allure report (if configured):
+
+Bash
+
+npm run allure:generate
+npm run allure:open
