@@ -1,4 +1,4 @@
-# 🛠 Transferty Dashboard Automation
+# Transferty Dashboard Automation
 
 This repository contains the End-to-End (E2E) testing framework for the Transferty Dashboard project.
 
