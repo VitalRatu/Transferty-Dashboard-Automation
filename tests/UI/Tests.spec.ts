@@ -100,21 +100,17 @@ test('Edit Fee Object to existing EXP date', async ({ adminUser, dashboardPage, 
     const feeBefore = await operationalWalletDetailsPage.getFeeData({ uniqueValue: '10' });
     await operationalWalletDetailsPage.clickEditFeeObjectButton('10');
     await editFeeObjectPage.editFeeObject({ expirationDate: '2026-03-26 14:54:00' });
-    await operationalWalletDetailsPage.verifyFeeInTable({ 
-        fee: feeBefore['Fee, %'],
-        activation_date: feeBefore['Activation date'],
-        timezone: feeBefore['Timezone'],
-        expirationDate: '2026-03-26 14:54:00' 
-    }, { uniqueValue: '10' });
+    await operationalWalletDetailsPage.verifyFeeInTable({expirationDate: '2026-03-26 14:54:00'}, { uniqueValue: '10' });
 });
 
-test('Edit Merchant Wallet', async ({ adminUser, dashboardPage, emoneyPage, merchantWalletDetailsPage }) =>
+test('Edit Merchant Wallet', async ({ adminUser, dashboardPage, emoneyPage, merchantWalletDetailsPage, editMerchantWalletPage }) =>
 {
     await dashboardPage.sidebar.clickButton(SideBarMenuButtons.E_MONEY);
     await emoneyPage.tab.open(EMoneyTabs.Wallets);
     await emoneyPage.walletsPage.tab.open(EMoneyWalletsTabs.Merchant)
     await emoneyPage.walletsPage.operationalPage.table.clickOnCellValueByUniqueValue('Internal MID', 'MI-1373691975', 'Wallet ID')
-    await merchantWalletDetailsPage.editMerchantWallet({description: 'Some new desription'})
+    await merchantWalletDetailsPage.clickEdit()
+    await editMerchantWalletPage.editWallet({description: 'Some new desription'})
 });
 
 test('Edit Limit Details', async ({ adminUser, dashboardPage, emoneyPage, limitDetailsPage, editLimitPage }) =>

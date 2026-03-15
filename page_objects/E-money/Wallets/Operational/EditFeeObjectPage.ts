@@ -1,6 +1,7 @@
 import { Page, expect } from '@playwright/test';
 import { EMoneyFeeWallelObject, EMoneyOperationalWallet } from '../../../../test_data/EMoneyWalletsData'; // 
 import { CreationForm } from '../../../related_components/CreationForm';
+import { BasePage } from '../../../BasePage';
 
 /**
  * Represents the page for managing Fee entities within an Operational Wallet
@@ -8,11 +9,8 @@ import { CreationForm } from '../../../related_components/CreationForm';
  * by validating that core financial parameters like the fee percentage and activation date 
  * remain locked once established
  */
-export class EditFeeObjectPage
+export class EditFeeObjectPage extends BasePage
 {
-    /** The Playwright Page instance */
-    public readonly page: Page;
-    
     /** The shared form component used for field validation, checkbox toggling, and data entry */
     public readonly form: CreationForm;
 
@@ -23,8 +21,8 @@ export class EditFeeObjectPage
      */
     constructor(page: Page) 
     {
-        this.page = page;
-        this.form = new CreationForm(page)
+        super(page);
+        this.form = new CreationForm(page);
     }
 
     /**

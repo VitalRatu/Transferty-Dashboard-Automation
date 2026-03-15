@@ -8,17 +8,11 @@ import { SecureDepositData } from '../../../test_data/MIDsData';
  * Provides a structured interface to fill out financial details such as project, amount, and income date
  * utilizing the shared CreationForm component
  */
-export class NewSecureDepositPage
+export class NewSecureDepositPage extends BasePage
 {
-    /** The relative URL path for the secure deposit creation page */
-    public readonly url: string = '/mids/secure-deposits/add';
-    
     /** The shared form component used to interact with input fields and dropdowns */
     public readonly form: CreationForm;
-    
-    /** The Playwright Page instance */
-    private readonly page: Page;
-    
+ 
     /** Locator for the page's loading overlay to ensure synchronization before interaction */
     private readonly pageLoaded: Locator;
 
@@ -29,7 +23,7 @@ export class NewSecureDepositPage
      */
     constructor(page: Page) 
     {
-        this.page = page;
+        super(page, '/mids/secure-deposits/add')
         this.form = new CreationForm(page);
         this.pageLoaded = page.locator('.ui.inverted.text.loader').first();
     }

@@ -8,7 +8,7 @@ import { ExternalMidData } from '../../../test_data/MIDsData';
  * This class provides methods to navigate to the creation form and verify that the external merchant 
  * configuration data is correctly displayed in the application's data table
  */
-export class ExternalMidPage 
+export class ExternalMidsListPage 
 {
     /** The Playwright Page instance */
     private readonly page: Page;

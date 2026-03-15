@@ -8,13 +8,10 @@ import { FilterBar } from '../../../related_components/FilterBar';
  * Provides access to customer-specific digital wallet records, allowing for data filtering 
  * and table interactions via specialized sub-components
  */
-export class CustomerPage 
+export class CustomerWalletsListPage 
 {
     /** The Playwright Page instance */
     private readonly page: Page;
-    
-    /** The Tab component used for navigation between different wallet modules */
-    public readonly tab: Tab;
     
     /** The FilterBar component used for searching and filtering customer wallet records */
     public readonly filter: FilterBar;
@@ -30,7 +27,6 @@ export class CustomerPage
     constructor(page: Page) 
     {
         this.page = page;
-        this.tab = new Tab(page);
         this.filter = new FilterBar(page);
         this.table = new Table(page);
     }

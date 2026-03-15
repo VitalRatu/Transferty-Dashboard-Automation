@@ -1,6 +1,7 @@
 import { expect, Locator, Page } from '@playwright/test';
 import { CreationForm } from '../../../related_components/CreationForm';
 import { EMoneyOperationalWallet } from '../../../../test_data/EMoneyWalletsData';
+import { BasePage } from '../../../BasePage';
 
 /**
  * Represents the page for adding a new Operational Wallet within the E-money system
@@ -8,14 +9,8 @@ import { EMoneyOperationalWallet } from '../../../../test_data/EMoneyWalletsData
  * including standard operational wallets and fee-collecting wallets with specific 
  * validity periods and tax/fee percentages
  */
-export class NewOperationalWalletPage 
+export class NewOperationalWalletPage extends BasePage
 {
-    /** The relative URL path for the operational wallet creation page */
-    public readonly url: string = '/emoney/wallets/operational/add'; 
-    
-    /** The Playwright Page instance */
-    public readonly page: Page;
-    
     /** The shared form component used to interact with input fields, dropdowns, and checkboxes */
     public readonly form: CreationForm;
     
@@ -29,7 +24,7 @@ export class NewOperationalWalletPage
      */
     constructor(page: Page) 
     {
-        this.page = page;
+        super(page, '/emoney/wallets/operational/add' )
         this.form = new CreationForm(page);
         this.pageLoaded = page.locator('.ui.inverted.text.loader').first();
     }

@@ -1,20 +1,15 @@
 import { expect, Locator, Page } from '@playwright/test';
 import { CreationForm } from '../../../related_components/CreationForm';
 import { EMoneyMerchantWallet} from '../../../../test_data/EMoneyWalletsData';
+import { BasePage } from '../../../BasePage';
 
 /**
  * Represents the page for creating a new Merchant Wallet within the E-money system
  * Provides methods to configure wallet parameters specifically for merchant entities,
  * including project association, currency settings, and linking to an Internal MID
  */
-export class NewMerchantWalletPage 
+export class NewMerchantWalletPage extends BasePage
 {
-    /** The relative URL path for the merchant wallet creation page */
-    public readonly url: string = '/emoney/wallets/operational/add'; 
-    
-    /** The Playwright Page instance */
-    public readonly page: Page;
-    
     /** The shared form component used to interact with dropdowns and input fields */
     public readonly form: CreationForm;
     
@@ -28,7 +23,7 @@ export class NewMerchantWalletPage
      */
     constructor(page: Page) 
     {
-        this.page = page;
+        super(page, '/emoney/wallets/operational/add')
         this.form = new CreationForm(page);
         this.pageLoaded = page.locator('.ui.inverted.text.loader').first();
     }

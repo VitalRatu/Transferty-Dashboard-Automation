@@ -8,7 +8,7 @@ import { AggregatedMidData } from '../../../test_data/MIDsData';
  * Provides functionality to navigate to the aggregated MID creation form and verify 
  * existing aggregated records within the data table against expected test data
  */
-export class AggregatedMidPage 
+export class AggregatedMidsListPage 
 {
     /** The Playwright Page instance */
     private readonly page: Page;

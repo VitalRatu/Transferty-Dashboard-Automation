@@ -8,7 +8,7 @@ import { SecureDepositData } from '../../../test_data/MIDsData';
  * Provides functionality to initiate the creation of new secure deposits and verify existing 
  * deposit records within the data table against expected test data
  */
-export class SecureDepositsPage 
+export class SecureDepositsListPage
 {
     /** The Playwright Page instance */
     private readonly page: Page;

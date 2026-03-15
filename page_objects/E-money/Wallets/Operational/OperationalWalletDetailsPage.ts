@@ -36,20 +36,37 @@ export class OperationalWalletDetailsPage extends BasePage
      * @param expectedData - The data object containing the expected operational wallet attributes
      * @returns A promise that resolves when all detail assertions pass successfully
      */
-    public async verifyWalletDetails(expectedData: EMoneyOperationalWallet): Promise<void> 
+    public async verifyWalletDetails(expectedData: Partial<EMoneyOperationalWallet>): Promise<void> 
     {
         const expectedHeading = new RegExp(`OPERATIONAL WALLET DETAILS`, 'i');
         const detailsPageHeader = this.page.getByRole('heading', { name: expectedHeading });
         await expect(detailsPageHeader).toBeVisible();
 
-        expect(await this.view.getValue('Project')).toBe(expectedData.project);
+        if (expectedData.project !== undefined) 
+        {
+            expect(await this.view.getValue('Project')).toBe(expectedData.project);
+        }
+        
+        if (expectedData.type !== undefined) 
+        {
+            expect(await this.view.getValue('Type')).toBe(expectedData.type);
+        }
+        
+        if (expectedData.currency !== undefined) 
+        {
+            expect(await this.view.getValue('Currency')).toBe(expectedData.currency);
+        }
+        
+        if (expectedData.description !== undefined) 
+        {
+            expect(await this.view.getValue('Description')).toBe(expectedData.description);
+        }
         const walletId = await this.view.getValue('Wallet ID');
         expect(walletId).toMatch(/^W[FAI]-\d{12}$/); 
-        expect(await this.view.getValue('Type')).toBe(expectedData.type);
+        
         const balanceUI = await this.view.getValue('Balance');
         expect(balanceUI).toMatch(/^-?\d{1,3}(,\d{3})*\.\d{2}$/);
-        expect(await this.view.getValue('Currency')).toBe(expectedData.currency);
-        expect(await this.view.getValue('Description')).toBe(expectedData.description);
+        
         const createdDate = await this.view.getValue('Created');
         expect(createdDate).not.toBe('');
     }

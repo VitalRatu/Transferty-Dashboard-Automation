@@ -8,7 +8,7 @@ import { InternalMidData } from '../../../test_data/MIDsData';
  * Provides functionality to navigate to the creation form and verify existing Internal MID
  * records within the data table against expected test data
  */
-export class InternalMidPage 
+export class InternalMidsListPage
 {
     /** The Playwright Page instance */
     private readonly page: Page;

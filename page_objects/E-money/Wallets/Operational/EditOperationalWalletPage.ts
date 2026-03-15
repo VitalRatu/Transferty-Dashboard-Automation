@@ -2,23 +2,15 @@ import { Page, expect } from '@playwright/test';
 import { DetailsPageReader } from '../../../related_components/DetailsPageReader';
 import { Table } from '../../../related_components/Table';
 import { CreationForm } from '../../../related_components/CreationForm';
+import { BasePage } from '../../../BasePage';
 
 /**
  * Represents the page for editing an existing Operational Wallet
  * This class provides methods to modify wallet metadata while ensuring that 
  * critical, immutable fields (e.g., Project, Wallet ID, Currency) remain read-only
  */
-export class EditOperationalWalletPage
+export class EditOperationalWalletPage extends BasePage
 {
-    /** The Playwright Page instance */
-    public readonly page: Page;
-    
-    /** The reader component used to verify field values after saving changes */
-    public readonly view: DetailsPageReader;
-    
-    /** The table component used if there are nested records to manage during editing */
-    public readonly table: Table;
-    
     /** The form component used to interact with input fields and perform validation checks */
     public readonly form: CreationForm;
 
@@ -29,12 +21,9 @@ export class EditOperationalWalletPage
      */
     constructor(page: Page) 
     {
-        this.page = page;
-        this.view = new DetailsPageReader(page);
-        this.table = new Table(page)
-        this.form = new CreationForm(page)
+        super(page);
+        this.form = new CreationForm(page);
     }
-
     /**
      * Updates the wallet details, specifically focusing on the description field
      * Before applying changes, it performs a strict validation check to ensure that 
@@ -57,9 +46,5 @@ export class EditOperationalWalletPage
         
         await this.form.fillInputField('Description', newDescription);
         await this.form.save();
-
-        const actualDescription = await this.view.getValue('Description')
-
-        expect(actualDescription).toBe(newDescription)
     }
 }

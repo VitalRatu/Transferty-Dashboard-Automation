@@ -9,13 +9,10 @@ import { EMoneyMerchantWallet } from '../../../../test_data/EMoneyWalletsData';
  * Provides a management interface for viewing merchant-specific digital wallets,
  * initiating new wallet creation, and verifying wallet record integrity in the data table
  */
-export class MerchantPage 
+export class MerchantWalletsListPage 
 {
     /** The Playwright Page instance */
     private readonly page: Page;
-    
-    /** The Tab component used for switching between wallet categories */
-    public readonly tab: Tab;
     
     /** The FilterBar component used for searching and navigating to the creation form */
     public readonly filter: FilterBar;
@@ -31,7 +28,6 @@ export class MerchantPage
     constructor(page: Page) 
     {
         this.page = page;
-        this.tab = new Tab(page);
         this.filter = new FilterBar(page);
         this.table = new Table(page);
     }

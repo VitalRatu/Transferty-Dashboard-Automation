@@ -2,10 +2,10 @@ import { BasePage } from '../BasePage';
 import { Page } from '@playwright/test';
 import { Routes } from '../../page_data/routes';
 import { Tab } from '../related_components/Tab';
-import { SecureDepositsPage } from '..//MIDs/SecureDeposits/SecureDepositPage';
-import { InternalMidPage } from '../MIDs/InternalMIDs/InternalMidPage';
-import { AggregatedMidPage } from './AggregatedMIDs/AggregatedMidPage';
-import { ExternalMidPage } from './ExternalMIDs/ExternalMidPage';
+import { SecureDepositsListPage } from '..//MIDs/SecureDeposits/SecureDepositsListPage';
+import { InternalMidsListPage } from '../MIDs/InternalMIDs/InternalMidsListPage';
+import { AggregatedMidsListPage } from './AggregatedMIDs/AggregatedMidsListPage';
+import { ExternalMidsListPage } from './ExternalMIDs/ExternalMidsListPage';
 
 /**
  * Acts as the central orchestrator for the Merchant Identifiers (MIDs) management section
@@ -18,16 +18,16 @@ export class MIDsPage extends BasePage
     public readonly tab: Tab;
     
     /** The page instance dedicated to managing Secure Deposit settings and records */
-    public readonly secureDeposits: SecureDepositsPage;
+    public readonly secureDeposits: SecureDepositsListPage;
     
     /** The page instance dedicated to managing Internal Merchant Identifiers */
-    public readonly internalMids: InternalMidPage;
+    public readonly internalMids: InternalMidsListPage;
     
     /** The page instance dedicated to managing Aggregated Merchant Identifiers */
-    public readonly aggregatedMids: AggregatedMidPage;
+    public readonly aggregatedMids: AggregatedMidsListPage;
     
     /** The page instance dedicated to managing External Merchant Identifiers from third-party providers */
-    public readonly externalMids: ExternalMidPage;
+    public readonly externalMids: ExternalMidsListPage;
 
     /**
      * Initializes a new instance of the MIDsPage class
@@ -38,10 +38,10 @@ export class MIDsPage extends BasePage
     {
         super(page, Routes.MIDs); 
         this.tab = new Tab(page);
-        this.secureDeposits = new SecureDepositsPage(page);
-        this.internalMids = new InternalMidPage(page);
-        this.aggregatedMids = new AggregatedMidPage(page);
-        this.externalMids = new ExternalMidPage(page);
+        this.secureDeposits = new SecureDepositsListPage(page);
+        this.internalMids = new InternalMidsListPage(page);
+        this.aggregatedMids = new AggregatedMidsListPage(page);
+        this.externalMids = new ExternalMidsListPage(page);
     }
 
 }

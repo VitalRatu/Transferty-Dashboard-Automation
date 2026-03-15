@@ -8,13 +8,10 @@ import { AggregatedMidData } from '../../../test_data/MIDsData';
  * Provides an interface to group multiple Internal MIDs or Secure Deposits into a single 
  * aggregated entity for simplified financial tracking and management
  */
-export class NewAggregatedMidPage 
+export class NewAggregatedMidPage extends BasePage
 {
     /** The relative URL path for the aggregated MID creation page */
     public readonly url: string = '/mids/aggregated/add';
-    
-    /** The Playwright Page instance */
-    public readonly page: Page;
     
     /** The shared form component used to interact with the input fields and selection menus */
     public readonly form: CreationForm;
@@ -29,7 +26,7 @@ export class NewAggregatedMidPage
      */
     constructor(page: Page) 
     {
-        this.page = page;
+        super(page, '/mids/aggregated/add');
         this.form = new CreationForm(page);
         this.pageLoaded = page.locator('.ui.inverted.text.loader').first();
     }
@@ -54,5 +51,4 @@ export class NewAggregatedMidPage
         }
         await this.form.save();
     }
-
 }

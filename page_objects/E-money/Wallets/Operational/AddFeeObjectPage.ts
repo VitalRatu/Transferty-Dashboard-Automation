@@ -1,17 +1,15 @@
 import { Page, expect } from '@playwright/test';
 import { EMoneyFeeWallelObject, EMoneyOperationalWallet } from '../../../../test_data/EMoneyWalletsData'; // 
 import { CreationForm } from '../../../related_components/CreationForm';
+import { BasePage } from '../../../BasePage';
 
 /**
  * Represents the page for adding new Fee entities to an Operational Wallet
  * This class provides a structured way to interact with the 'Add Fee' modal, 
  * handling input validation, date selection, and timezone configurations
  */
-export class AddFeeObjectPage
+export class AddFeeObjectPage extends BasePage
 {
-    /** The Playwright Page instance */
-    public readonly page: Page;
-    
     /** The shared form component used for interacting with text inputs, dates, and dropdowns */
     public readonly form: CreationForm;
 
@@ -22,8 +20,8 @@ export class AddFeeObjectPage
      */
     constructor(page: Page) 
     {
-        this.page = page;
-        this.form = new CreationForm(page)
+        super(page);
+        this.form = new CreationForm(page);
     }
 
     /**

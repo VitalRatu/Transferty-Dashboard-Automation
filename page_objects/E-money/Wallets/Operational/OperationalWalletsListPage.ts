@@ -9,13 +9,10 @@ import { EMoneyOperationalWallet } from '../../../../test_data/EMoneyWalletsData
  * Provides functionality to manage internal system wallets, including navigation to the 
  * creation form and verification of operational wallet data within the records table
  */
-export class OperationalPage 
+export class OperationalWalletsListPage 
 {
     /** The Playwright Page instance */
     private readonly page: Page;
-    
-    /** The Tab component used for navigating between different wallet sub-categories */
-    public readonly tab: Tab;
     
     /** The FilterBar component used for searching records and initiating the creation of new wallets */
     public readonly filter: FilterBar;
@@ -31,7 +28,6 @@ export class OperationalPage
     constructor(page: Page) 
     {
         this.page = page;
-        this.tab = new Tab(page);
         this.filter = new FilterBar(page);
         this.table = new Table(page);
     }

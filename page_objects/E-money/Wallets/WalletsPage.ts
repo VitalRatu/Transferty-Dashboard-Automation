@@ -1,8 +1,8 @@
 import { Page, Locator, expect } from '@playwright/test';
 import {Tab} from '../../../page_objects/related_components/Tab';
-import { MerchantPage } from '.././Wallets/Merchant/MerchantPage';
-import { CustomerPage } from '.././Wallets/Customer/CustomerPage';
-import { OperationalPage } from '.././Wallets/Operational/OperationalPage';
+import { MerchantWalletsListPage } from '.././Wallets/Merchant/MerchantWalletsListPage';
+import { CustomerWalletsListPage } from '.././Wallets/Customer/CustomerWalletsListPage';
+import { OperationalWalletsListPage } from '.././Wallets/Operational/OperationalWalletsListPage';
 
 /**
  * Represents the Wallets management hub within the E-money section
@@ -18,13 +18,13 @@ export class WalletsPage
     public readonly tab: Tab;
     
     /** The page instance dedicated to managing internal operational wallets used for system fees and balances */
-    public readonly operationalPage: OperationalPage;
+    public readonly operationalPage: OperationalWalletsListPage;
     
     /** The page instance dedicated to managing merchant-specific wallets and their transaction histories */
-    public readonly merchantPage: MerchantPage
+    public readonly merchantPage: MerchantWalletsListPage
     
     /** The page instance dedicated to managing individual customer wallets and balances */
-    public readonly customerPage: CustomerPage;
+    public readonly customerPage: CustomerWalletsListPage;
 
     /**
      * Initializes a new instance of the WalletsPage class
@@ -35,9 +35,9 @@ export class WalletsPage
     {
         this.page = page;
         this.tab = new Tab(page, 1);
-        this.operationalPage = new OperationalPage(page);
-        this.merchantPage = new MerchantPage(page);
-        this.customerPage = new CustomerPage(page);
+        this.operationalPage = new OperationalWalletsListPage(page);
+        this.merchantPage = new MerchantWalletsListPage(page);
+        this.customerPage = new CustomerWalletsListPage(page);
 
     }
 }

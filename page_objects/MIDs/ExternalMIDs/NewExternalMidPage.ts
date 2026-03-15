@@ -9,17 +9,14 @@ import { CustomerFee } from './CustomerFee';
  * Provides a complex interface for mapping external payment providers, intermediaries, and PSPs,
  * as well as managing provider-specific credentials and API support settings
  */
-export class NewExternalMidPage
+export class NewExternalMidPage extends BasePage
 {
     /** The relative URL path for the external MID creation page */
     public readonly url: string = '/mids/external/add';
     
     /** The shared form component used to interact with inputs, dropdowns, and dynamic credential fields */
     public readonly form: CreationForm;
-    
-    /** The Playwright Page instance */
-    private readonly page: Page;
-    
+
     /** Locator for the page's loading overlay to ensure all dynamic fields are ready for interaction */
     private readonly pageLoaded: Locator;
     private readonly customerFee: CustomerFee;
@@ -31,7 +28,7 @@ export class NewExternalMidPage
      */
     constructor(page: Page) 
     {
-        this.page = page;
+        super(page, '/mids/external/add')
         this.form = new CreationForm(page);
         this.pageLoaded = page.locator('.ui.inverted.text.loader').first();
         this.customerFee = new CustomerFee(page)

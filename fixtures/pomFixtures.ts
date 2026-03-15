@@ -22,6 +22,7 @@ import { LimitDetailsPage } from '../page_objects/E-money/Settings/LimitDetailsP
 import { OperationalWalletDetailsPage } from '../page_objects/E-money/Wallets/Operational/OperationalWalletDetailsPage'
 import { EditLimitPage } from '../page_objects/E-money/Settings/EditLimitPage'
 import { EditFeeObjectPage } from '../page_objects/E-money/Wallets/Operational/EditFeeObjectPage'
+import { EditMerchantWalletPage } from '../page_objects/E-money/Wallets/Merchant/EditMerchantWalletPage'
 
 type Fixtures = 
 {
@@ -48,6 +49,7 @@ type Fixtures =
     operationalWalletDetailsPage: OperationalWalletDetailsPage
     editLimitPage: EditLimitPage
     editFeeObjectPage: EditFeeObjectPage
+    editMerchantWalletPage: EditMerchantWalletPage
 }
 
 export const pomTest = base.extend<Fixtures>(
@@ -145,6 +147,11 @@ export const pomTest = base.extend<Fixtures>(
     merchantWalletDetailsPage : async ({page}, use) =>
     {
         await use(new MerchantWalletDetailsPage(page));
+    },
+
+    editMerchantWalletPage: async ({page}, use) =>
+    {
+        await use(new EditMerchantWalletPage(page));
     },
 
     limitDetailsPage: async ({page}, use) =>
