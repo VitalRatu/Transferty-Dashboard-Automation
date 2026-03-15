@@ -30,18 +30,18 @@ The project is built on modern automation architectural standards:
 1. Clone the repository:
 Bash
 
-git clone (https://github.com/Oleh-Tymchuk/Transferty-Dashboard-Automation)
-cd transferty-dashboard-automation
+    git clone (https://github.com/Oleh-Tymchuk/Transferty-Dashboard-Automation)
+    cd transferty-dashboard-automation
 
 2. Install Node.js dependencies:
 Bash
 
-npm install
+    npm install
 
 3. Install Playwright browsers:
 Bash
 
-npx playwright install --with-deps
+    npx playwright install --with-deps
 
 # Running Tests
 
@@ -50,17 +50,17 @@ The framework supports various execution modes.
 1. Run all tests in headless mode:
 Bash
 
-npx playwright test
+    npx playwright test
 
 2. Run tests in headed mode for visual debugging:
 Bash
 
-npx playwright test --headed
+    npx playwright test --headed
 
 3. Run a specific test file:
 Bash
 
-npx playwright test tests/UI/PayoutTransactions.spec.ts
+    npx playwright test tests/UI/PayoutTransactions.spec.ts
 
 # Viewing Reports
 
@@ -69,10 +69,10 @@ If a test fails, Playwright automatically takes a screenshot, records a trace fi
 1. Open the standard HTML report:
 Bash
 
-npx playwright show-report
+    npx playwright show-report
 
 2. Generate and open the Allure report (if configured):
 Bash
 
-npm run allure:generate
-npm run allure:open
+    npm run allure:generate
+    npm run allure:open
