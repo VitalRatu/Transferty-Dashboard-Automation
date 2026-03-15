@@ -28,11 +28,6 @@ export class CreationForm
     /** Locator for generic label elements used for mapping inputs */
     private readonly labelElement: Locator;
     
-    /** Locator for the main container of error toast notifications */
-    private readonly errorPopUp: Locator;
-    
-    /** Locator for the text content within the error toast notification */
-    private readonly errorPopUpContent: Locator;
     /** Locator for the checkbox */
     private readonly checkBoxLocator: Locator;
 
@@ -52,8 +47,6 @@ export class CreationForm
         this.errorMessageLocator = page.locator('.form-input-error');
         this.labelElement = this.page.locator('span.form-input-label')
         this.checkBoxLocator = this.page.locator('.ui.checkbox, .ui.checked.checkbox')
-        this.errorPopUp = this.page.locator('.react-toast-notifications__toast--error')
-        this.errorPopUpContent = this.errorPopUp.locator('.react-toast-notifications__toast__content')
     }
 
     /**

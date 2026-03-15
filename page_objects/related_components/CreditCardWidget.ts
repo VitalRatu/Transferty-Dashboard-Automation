@@ -1,5 +1,4 @@
 import { Locator, Page, FrameLocator, expect } from '@playwright/test';
-import { exec } from 'node:child_process';
 
 /**
  * Represents a specialized widget for secure credit card data entry

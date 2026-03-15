@@ -77,7 +77,6 @@ export class MerchantWalletDetailsPage extends BasePage
             expect(await this.view.getValue('Internal MID')).toBe(expectedData.internalMID);
         }
 
-        // Static format checks that should always pass regardless of specific test data
         const walletId = await this.view.getValue('Wallet ID');
         expect(walletId).toMatch(/^WM-\d+$/); 
         
@@ -92,7 +91,7 @@ export class MerchantWalletDetailsPage extends BasePage
      * Initiates the edit flow by clicking the 'Edit' action button.
      * @returns A promise that resolves when the edit button is clicked
      */
-    public async clickEdit(): Promise<void>
+    public async clickEditButton(): Promise<void>
     {
         await this.view.clickActionButton('Edit');
     }

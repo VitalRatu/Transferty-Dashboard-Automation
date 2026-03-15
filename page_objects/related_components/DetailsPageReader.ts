@@ -44,7 +44,7 @@ export class DetailsPageReader
      * @param label - The exact text of the field label to search for (e.g., 'Project')
      * @returns A Locator pointing to the specific field container
      */
-    private getFieldLocator(label: string): Locator 
+    private getFieldLocator(label: string |RegExp): Locator 
     {
         return this.allFields.filter(
         { 
@@ -58,7 +58,7 @@ export class DetailsPageReader
      * @param label - The exact text of the field label to read from
      * @returns A promise that resolves to the cleaned text value of the specified field
      */
-    public async getValue(label: string): Promise<string> 
+    public async getValue(label: string | RegExp): Promise<string> 
     {
         const fieldLocator = this.getFieldLocator(label);
         await expect(fieldLocator).toBeVisible();
@@ -104,7 +104,6 @@ export class DetailsPageReader
     public async clickActionButton(buttonName: string): Promise<void> 
     {
         const button = this.page.getByRole('button', { name: buttonName, exact: true });
-        
         await expect(button).toBeVisible();
         await button.click();
     }
