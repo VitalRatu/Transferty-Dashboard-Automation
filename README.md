@@ -33,7 +33,7 @@ Bash
 git clone (https://github.com/Oleh-Tymchuk/Transferty-Dashboard-Automation)
 cd transferty-dashboard-automation
 
-1. Install Node.js dependencies:
+2. Install Node.js dependencies:
 Bash
 
 npm install
@@ -43,35 +43,35 @@ Bash
 
 npx playwright install --with-deps
 
-Running Tests
+# Running Tests
 
 The framework supports various execution modes.
 
-Run all tests in headless mode:
+1. Run all tests in headless mode:
 Bash
 
 npx playwright test
 
-Run tests in headed mode for visual debugging:
+2. Run tests in headed mode for visual debugging:
 Bash
 
 npx playwright test --headed
 
-Run a specific test file:
+3. Run a specific test file:
 Bash
 
 npx playwright test tests/UI/PayoutTransactions.spec.ts
 
-Viewing Reports
+# Viewing Reports
 
 If a test fails, Playwright automatically takes a screenshot, records a trace file (on retries), and saves the logs.
 
-Open the standard HTML report:
+1. Open the standard HTML report:
 Bash
 
 npx playwright show-report
 
-Generate and open the Allure report (if configured):
+2. Generate and open the Allure report (if configured):
 Bash
 
 npm run allure:generate
