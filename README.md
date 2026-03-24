@@ -15,7 +15,7 @@ This repository contains the End-to-End (E2E) testing framework for the Transfer
 
 1. Clone the repository:
 ```bash
-git clone [https://github.com/Oleh-Tymchuk/Transferty-Dashboard-Automation.git](https://github.com/Oleh-Tymchuk/Transferty-Dashboard-Automation.git)
+git clone [https://github.com/VitalRatu/Transferty-Dashboard-Automation.git](https://github.com/VitalRatu/Transferty-Dashboard-Automation.git)
 cd transferty-dashboard-automation
 ```
 

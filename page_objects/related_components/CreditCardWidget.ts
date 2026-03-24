@@ -117,7 +117,7 @@ export class CreditCardWidget
 
     /**
      * Populates the CVC/CVV security code field
-     * Targets the second iframe (index 1) within the Expiry/CVC container
+     * Targets the iframe within the Expiry/CVC container
      * @param cvc - The security code string or undefined to skip the action
      * @returns A promise that resolves when the CVC is entered into the secure iframe
      */

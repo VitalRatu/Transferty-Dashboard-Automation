@@ -109,7 +109,7 @@ test('Edit Merchant Wallet', async ({ adminUser, dashboardPage, emoneyPage, merc
     await emoneyPage.tab.open(EMoneyTabs.Wallets);
     await emoneyPage.walletsPage.tab.open(EMoneyWalletsTabs.Merchant)
     await emoneyPage.walletsPage.operationalPage.table.clickOnCellValueByUniqueValue('Internal MID', 'MI-1373691975', 'Wallet ID')
-    await merchantWalletDetailsPage.clickEdit()
+    await merchantWalletDetailsPage.clickEditButton()
     await editMerchantWalletPage.editWallet({description: 'Some new desription'})
 });
 
