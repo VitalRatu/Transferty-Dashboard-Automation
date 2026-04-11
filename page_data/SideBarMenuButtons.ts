@@ -1,5 +1,6 @@
 export enum SideBarMenuButtons 
 {
+    PROJECTS = 'Projects',
     DASHBOARD = 'Dashboard',
     BILLING = 'Billing',
     MIDS = 'MIDs',
@@ -20,5 +21,7 @@ export enum SideBarMenuButtons
     SETTINGS = 'Settings',
     CONFIGURATIONS = 'Configurations',
     TEAM = 'Team',
-    LISTS = 'Lists'
+    LISTS = 'Lists',
+    PARTNERS = 'Partners',
+    USERS = 'Users'
 }

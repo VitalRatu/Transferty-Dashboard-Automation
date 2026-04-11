@@ -23,6 +23,9 @@ import { OperationalWalletDetailsPage } from '../page_objects/E-money/Wallets/Op
 import { EditLimitPage } from '../page_objects/E-money/Settings/EditLimitPage'
 import { EditFeeObjectPage } from '../page_objects/E-money/Wallets/Operational/EditFeeObjectPage'
 import { EditMerchantWalletPage } from '../page_objects/E-money/Wallets/Merchant/EditMerchantWalletPage'
+import {RoleDetailsPage} from '../page_objects/Settings/Users/Roles/RoleDetailsPage'
+import {EditRolePage} from '../page_objects/Settings/Users/Roles/EditRolePage'
+import {NewRolePage} from '../page_objects/Settings/Users/Roles/NewRolePage'
 
 type Fixtures = 
 {
@@ -50,6 +53,9 @@ type Fixtures =
     editLimitPage: EditLimitPage
     editFeeObjectPage: EditFeeObjectPage
     editMerchantWalletPage: EditMerchantWalletPage
+    roleDetailsPage: RoleDetailsPage
+    editRolePage: EditRolePage
+    newRolePage: NewRolePage
 }
 
 export const pomTest = base.extend<Fixtures>(
@@ -172,6 +178,18 @@ export const pomTest = base.extend<Fixtures>(
     {
         await use(new EditFeeObjectPage(page));
     },
+    roleDetailsPage: async ({page}, use) =>
+    {
+        await use(new RoleDetailsPage(page));
+    },
+    editRolePage: async ({page}, use) =>
+    {
+        await use(new EditRolePage(page));
+    },
+    newRolePage: async ({page}, use) =>
+    {
+        await use(new NewRolePage(page));
+    }
 })
 
 export {expect} from "@playwright/test"

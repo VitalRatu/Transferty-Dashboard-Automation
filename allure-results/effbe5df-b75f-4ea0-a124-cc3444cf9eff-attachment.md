@@ -1,0 +1,1260 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e3]:
+  - generic [ref=e5]:
+    - link [ref=e7] [cursor=pointer]:
+      - /url: /projects
+      - img [ref=e8]
+    - generic [ref=e9]:
+      - link "v.ratushniak@matrix.partners" [ref=e11] [cursor=pointer]:
+        - /url: /profile
+        - text: v.ratushniak@matrix.partners
+        - img [ref=e12]
+      - button [ref=e18] [cursor=pointer]:
+        - generic [ref=e19]: 
+      - img [ref=e21] [cursor=pointer]
+  - generic:
+    - generic [ref=e27]:
+      - button [ref=e28] [cursor=pointer]:
+        - img [ref=e29]
+      - link "Projects" [ref=e31] [cursor=pointer]:
+        - /url: /projects
+        - generic [ref=e32]:
+          - img [ref=e33]
+          - generic [ref=e35]: Projects
+      - link "Billing" [ref=e36] [cursor=pointer]:
+        - /url: /billing
+        - generic [ref=e37]:
+          - img [ref=e38]
+          - generic [ref=e40]: Billing
+      - link "MIDs" [ref=e41] [cursor=pointer]:
+        - /url: /mids
+        - generic [ref=e42]:
+          - img [ref=e43]
+          - generic [ref=e47]: MIDs
+      - link "Orders" [ref=e48] [cursor=pointer]:
+        - /url: /orders
+        - generic [ref=e49]:
+          - img [ref=e50]
+          - generic [ref=e52]: Orders
+      - link "Transactions" [ref=e53] [cursor=pointer]:
+        - /url: /transactions
+        - generic [ref=e54]:
+          - img [ref=e55]
+          - generic [ref=e59]: Transactions
+      - link "E-money" [ref=e60] [cursor=pointer]:
+        - /url: /emoney
+        - generic [ref=e61]:
+          - img [ref=e62]
+          - generic [ref=e64]: E-money
+      - link "Subscriptions" [ref=e65] [cursor=pointer]:
+        - /url: /subscriptions
+        - generic [ref=e66]:
+          - img [ref=e67]
+          - generic [ref=e69]: Subscriptions
+      - link "Customers" [ref=e70] [cursor=pointer]:
+        - /url: /customers
+        - generic [ref=e71]:
+          - img [ref=e72]
+          - generic [ref=e74]: Customers
+      - link "Cards & accounts" [ref=e75] [cursor=pointer]:
+        - /url: /cards-and-accounts
+        - generic [ref=e76]:
+          - img [ref=e77]
+          - generic [ref=e81]: Cards & accounts
+      - link "Invoices" [ref=e82] [cursor=pointer]:
+        - /url: /invoices
+        - generic [ref=e83]:
+          - img [ref=e84]
+          - generic [ref=e88]: Invoices
+      - link "Reports" [ref=e89] [cursor=pointer]:
+        - /url: /reports
+        - generic [ref=e90]:
+          - img [ref=e91]
+          - generic [ref=e93]: Reports
+      - link "Monitoring" [ref=e94] [cursor=pointer]:
+        - /url: /monitoring
+        - generic [ref=e95]:
+          - img [ref=e96]
+          - generic [ref=e98]: Monitoring
+      - generic [ref=e99]:
+        - generic [ref=e100] [cursor=pointer]:
+          - img [ref=e101]
+          - generic [ref=e106]: Developers
+        - generic [ref=e107]:
+          - link "API keys" [ref=e108] [cursor=pointer]:
+            - /url: /apikeys
+            - generic [ref=e109]:
+              - img [ref=e110]
+              - generic [ref=e113]: API keys
+          - link "Documentation" [ref=e114] [cursor=pointer]:
+            - /url: https://docs.dev.transferty.com
+            - generic [ref=e115]:
+              - img [ref=e116]
+              - generic [ref=e118]: Documentation
+      - generic [ref=e119]:
+        - generic [ref=e120] [cursor=pointer]:
+          - img [ref=e121]
+          - generic [ref=e124]: Settings
+        - generic [ref=e125]:
+          - link "Users" [ref=e126] [cursor=pointer]:
+            - /url: /users
+            - generic [ref=e127]:
+              - img [ref=e128]
+              - generic [ref=e134]: Users
+          - link "Lists" [ref=e135] [cursor=pointer]:
+            - /url: /lists
+            - generic [ref=e136]:
+              - img [ref=e137]
+              - generic [ref=e139]: Lists
+          - link "Partners" [ref=e140] [cursor=pointer]:
+            - /url: /partners
+            - generic [ref=e141]:
+              - img [ref=e142]
+              - generic [ref=e146]: Partners
+      - generic [ref=e152] [cursor=pointer]: Live mode
+    - generic [ref=e154]:
+      - heading "USERS" [level=3] [ref=e158]
+      - generic [ref=e161]:
+        - generic [ref=e162]:
+          - link "Users" [ref=e163] [cursor=pointer]:
+            - /url: /users/list/users
+          - link "Admins" [ref=e164] [cursor=pointer]:
+            - /url: /users/list/admins
+          - link "Sessions" [ref=e165] [cursor=pointer]:
+            - /url: /users/list/sessions
+          - link "Roles" [ref=e166] [cursor=pointer]:
+            - /url: /users/list/roles
+        - generic [ref=e168]:
+          - heading "EDIT ROLE" [level=3] [ref=e172]
+          - generic [ref=e175]:
+            - heading "Role details" [level=3] [ref=e176]
+            - generic [ref=e177]:
+              - generic [ref=e178]:
+                - generic [ref=e179]: Role
+                - textbox [ref=e180]: Automated Dump Role
+              - generic [ref=e181]:
+                - generic [ref=e182]: Description
+                - textbox [active] [ref=e183]: Automated Dump Role description
+            - generic [ref=e184]:
+              - heading "Permissions" [level=3] [ref=e185]
+              - table [ref=e186]:
+                - rowgroup [ref=e187]:
+                  - row "Projects " [ref=e188]:
+                    - cell "Projects " [ref=e189]:
+                      - generic [ref=e191] [cursor=pointer]: Projects 
+                  - row " projects_list_view Projects" [ref=e192]:
+                    - cell "" [ref=e193]:
+                      - generic [ref=e194]:
+                        - generic: 
+                    - cell "projects_list_view" [ref=e195]
+                    - cell "Projects" [ref=e196]
+                  - row " projects_list_export Projects - Export to csv" [ref=e197]:
+                    - cell "" [ref=e198]:
+                      - generic [ref=e199]:
+                        - generic: 
+                    - cell "projects_list_export" [ref=e200]
+                    - cell "Projects - Export to csv" [ref=e201]
+                  - row " project_view Projects - Project details" [ref=e202]:
+                    - cell "" [ref=e203]:
+                      - generic [ref=e204]:
+                        - generic: 
+                    - cell "project_view" [ref=e205]
+                    - cell "Projects - Project details" [ref=e206]
+                  - row " project_update Projects - Edit project" [ref=e207]:
+                    - cell "" [ref=e208]:
+                      - generic [ref=e209]:
+                        - generic: 
+                    - cell "project_update" [ref=e210]
+                    - cell "Projects - Edit project" [ref=e211]
+                  - row " project_status_update Projects - Edit project - Update status" [ref=e212]:
+                    - cell "" [ref=e213]:
+                      - generic [ref=e214]:
+                        - generic: 
+                    - cell "project_status_update" [ref=e215]
+                    - cell "Projects - Edit project - Update status" [ref=e216]
+                  - row " project_checkout_settings_view Projects - Project details - Checkout (HPP) & receipt" [ref=e217]:
+                    - cell "" [ref=e218]:
+                      - generic [ref=e219]:
+                        - generic: 
+                    - cell "project_checkout_settings_view" [ref=e220]
+                    - cell "Projects - Project details - Checkout (HPP) & receipt" [ref=e221]
+                  - row " project_checkout_settings_update Projects - Project details - Checkout (HPP) & receipt - Edit" [ref=e222]:
+                    - cell "" [ref=e223]:
+                      - generic [ref=e224]:
+                        - generic: 
+                    - cell "project_checkout_settings_update" [ref=e225]
+                    - cell "Projects - Project details - Checkout (HPP) & receipt - Edit" [ref=e226]
+                  - row " projects_emoney_receipt_update Projects - Project details - Checkout (HPP) & receipt - E-money receipt - Edit" [ref=e227]:
+                    - cell "" [ref=e228]:
+                      - generic [ref=e229]:
+                        - generic: 
+                    - cell "projects_emoney_receipt_update" [ref=e230]
+                    - cell "Projects - Project details - Checkout (HPP) & receipt - E-money receipt - Edit" [ref=e231]
+                  - row " configuration_changelog_view Projects - Project details - Changelog" [ref=e232]:
+                    - cell "" [ref=e233]:
+                      - generic [ref=e234]:
+                        - generic: 
+                    - cell "configuration_changelog_view" [ref=e235]
+                    - cell "Projects - Project details - Changelog" [ref=e236]
+                  - row " assignment_rule_view Projects - Project details - Settings - Assigment rules" [ref=e237]:
+                    - cell "" [ref=e238]:
+                      - generic [ref=e239]:
+                        - generic: 
+                    - cell "assignment_rule_view" [ref=e240]
+                    - cell "Projects - Project details - Settings - Assigment rules" [ref=e241]
+                  - row " assignment_rule_update Projects - Project details - Settings - Assigment rules - Add / Delete" [ref=e242]:
+                    - cell "" [ref=e243]:
+                      - generic [ref=e244]:
+                        - generic: 
+                    - cell "assignment_rule_update" [ref=e245]
+                    - cell "Projects - Project details - Settings - Assigment rules - Add / Delete" [ref=e246]
+                  - row " settings_reconciliation_view Projects - Project details - Settings - Reconciliation" [ref=e247]:
+                    - cell "" [ref=e248]:
+                      - generic [ref=e249]:
+                        - generic: 
+                    - cell "settings_reconciliation_view" [ref=e250]
+                    - cell "Projects - Project details - Settings - Reconciliation" [ref=e251]
+                  - row " settings_reconciliation_update Projects - Project details - Settings - Reconciliation - Edit" [ref=e252]:
+                    - cell "" [ref=e253]:
+                      - generic [ref=e254]:
+                        - generic: 
+                    - cell "settings_reconciliation_update" [ref=e255]
+                    - cell "Projects - Project details - Settings - Reconciliation - Edit" [ref=e256]
+                  - row " fallback_domain_view Projects - Project details - Settings - Fallback domains" [ref=e257]:
+                    - cell "" [ref=e258]:
+                      - generic [ref=e259]:
+                        - generic: 
+                    - cell "fallback_domain_view" [ref=e260]
+                    - cell "Projects - Project details - Settings - Fallback domains" [ref=e261]
+                  - row " fallback_domain_update Projects - Project details - Settings - Fallback domains - Edit" [ref=e262]:
+                    - cell "" [ref=e263]:
+                      - generic [ref=e264]:
+                        - generic: 
+                    - cell "fallback_domain_update" [ref=e265]
+                    - cell "Projects - Project details - Settings - Fallback domains - Edit" [ref=e266]
+                  - row " project_ems_update Projects - Project details - EM scheme - Edit" [ref=e267]:
+                    - cell "" [ref=e268]:
+                      - generic [ref=e269]:
+                        - generic: 
+                    - cell "project_ems_update" [ref=e270]
+                    - cell "Projects - Project details - EM scheme - Edit" [ref=e271]
+                  - row " fx_spread_view Projects - Project details - FX Spread - View" [ref=e272]:
+                    - cell "" [ref=e273]:
+                      - generic [ref=e274]:
+                        - generic: 
+                    - cell "fx_spread_view" [ref=e275]
+                    - cell "Projects - Project details - FX Spread - View" [ref=e276]
+                  - row " fx_spread_create Projects - Project details - FX Spread - Create" [ref=e277]:
+                    - cell "" [ref=e278]:
+                      - generic [ref=e279]:
+                        - generic: 
+                    - cell "fx_spread_create" [ref=e280]
+                    - cell "Projects - Project details - FX Spread - Create" [ref=e281]
+                  - row " fx_spread_update Projects - Project details - FX Spread - Update" [ref=e282]:
+                    - cell "" [ref=e283]:
+                      - generic [ref=e284]:
+                        - generic: 
+                    - cell "fx_spread_update" [ref=e285]
+                    - cell "Projects - Project details - FX Spread - Update" [ref=e286]
+                  - row "Users " [ref=e287]:
+                    - cell "Users " [ref=e288]:
+                      - generic [ref=e290] [cursor=pointer]: Users 
+                  - row " users_list_view Users" [ref=e291]:
+                    - cell "" [ref=e292]:
+                      - generic [ref=e293]:
+                        - generic: 
+                    - cell "users_list_view" [ref=e294]
+                    - cell "Users" [ref=e295]
+                  - row " user_view Users - User details" [ref=e296]:
+                    - cell "" [ref=e297]:
+                      - generic [ref=e298]:
+                        - generic: 
+                    - cell "user_view" [ref=e299]
+                    - cell "Users - User details" [ref=e300]
+                  - row " user_update Users - Edit user" [ref=e301]:
+                    - cell "" [ref=e302]:
+                      - generic [ref=e303]:
+                        - generic: 
+                    - cell "user_update" [ref=e304]
+                    - cell "Users - Edit user" [ref=e305]
+                  - row " admin_create Users - Admins - Create admin" [ref=e306]:
+                    - cell "" [ref=e307]:
+                      - generic [ref=e308]:
+                        - generic: 
+                    - cell "admin_create" [ref=e309]
+                    - cell "Users - Admins - Create admin" [ref=e310]
+                  - row " user_delete Users - Delete" [ref=e311]:
+                    - cell "" [ref=e312]:
+                      - generic [ref=e313]:
+                        - generic: 
+                    - cell "user_delete" [ref=e314]
+                    - cell "Users - Delete" [ref=e315]
+                  - row " admin_delete Users - Admins - Delete" [ref=e316]:
+                    - cell "" [ref=e317]:
+                      - generic [ref=e318]:
+                        - generic: 
+                    - cell "admin_delete" [ref=e319]
+                    - cell "Users - Admins - Delete" [ref=e320]
+                  - row "Internal MIDs " [ref=e321]:
+                    - cell "Internal MIDs " [ref=e322]:
+                      - generic [ref=e324] [cursor=pointer]: Internal MIDs 
+                  - row " internal_mid_view MIDs - Internal - View" [ref=e325]:
+                    - cell "" [ref=e326]:
+                      - generic [ref=e327]:
+                        - generic: 
+                    - cell "internal_mid_view" [ref=e328]
+                    - cell "MIDs - Internal - View" [ref=e329]
+                  - row " internal_mid_create MIDs - Internal - Create" [ref=e330]:
+                    - cell "" [ref=e331]:
+                      - generic [ref=e332]:
+                        - generic: 
+                    - cell "internal_mid_create" [ref=e333]
+                    - cell "MIDs - Internal - Create" [ref=e334]
+                  - row " internal_mid_update MIDs - Internal - Update" [ref=e335]:
+                    - cell "" [ref=e336]:
+                      - generic [ref=e337]:
+                        - generic: 
+                    - cell "internal_mid_update" [ref=e338]
+                    - cell "MIDs - Internal - Update" [ref=e339]
+                  - row "External MIDs " [ref=e340]:
+                    - cell "External MIDs " [ref=e341]:
+                      - generic [ref=e343] [cursor=pointer]: External MIDs 
+                  - row " external_mid_view MIDs - External - View" [ref=e344]:
+                    - cell "" [ref=e345]:
+                      - generic [ref=e346]:
+                        - generic: 
+                    - cell "external_mid_view" [ref=e347]
+                    - cell "MIDs - External - View" [ref=e348]
+                  - row " external_mid_create MIDs - External - Create" [ref=e349]:
+                    - cell "" [ref=e350]:
+                      - generic [ref=e351]:
+                        - generic: 
+                    - cell "external_mid_create" [ref=e352]
+                    - cell "MIDs - External - Create" [ref=e353]
+                  - row " external_mid_update MIDs - External - Update" [ref=e354]:
+                    - cell "" [ref=e355]:
+                      - generic [ref=e356]:
+                        - generic: 
+                    - cell "external_mid_update" [ref=e357]
+                    - cell "MIDs - External - Update" [ref=e358]
+                  - row " external_mid_delete MIDs - External - Delete" [ref=e359]:
+                    - cell "" [ref=e360]:
+                      - generic [ref=e361]:
+                        - generic: 
+                    - cell "external_mid_delete" [ref=e362]
+                    - cell "MIDs - External - Delete" [ref=e363]
+                  - row " external_mid_secret_view MIDs - Provider's credentials - View" [ref=e364]:
+                    - cell "" [ref=e365]:
+                      - generic [ref=e366]:
+                        - generic: 
+                    - cell "external_mid_secret_view" [ref=e367]
+                    - cell "MIDs - Provider's credentials - View" [ref=e368]
+                  - row " external_mid_secret_update MIDs - Provider's credentials - Update" [ref=e369]:
+                    - cell "" [ref=e370]:
+                      - generic [ref=e371]:
+                        - generic: 
+                    - cell "external_mid_secret_update" [ref=e372]
+                    - cell "MIDs - Provider's credentials - Update" [ref=e373]
+                  - row " customer_fees_view MIDs - External - Customer fees - View" [ref=e374]:
+                    - cell "" [ref=e375]:
+                      - generic [ref=e376]:
+                        - generic: 
+                    - cell "customer_fees_view" [ref=e377]
+                    - cell "MIDs - External - Customer fees - View" [ref=e378]
+                  - row " customer_fees_update MIDs - External - Customer fees - Update" [ref=e379]:
+                    - cell "" [ref=e380]:
+                      - generic [ref=e381]:
+                        - generic: 
+                    - cell "customer_fees_update" [ref=e382]
+                    - cell "MIDs - External - Customer fees - Update" [ref=e383]
+                  - row " customer_fees_reference MIDs - External - Customer fees - Reports reference" [ref=e384]:
+                    - cell "" [ref=e385]:
+                      - generic [ref=e386]:
+                        - generic: 
+                    - cell "customer_fees_reference" [ref=e387]
+                    - cell "MIDs - External - Customer fees - Reports reference" [ref=e388]
+                  - row "Aggregated MIDs " [ref=e389]:
+                    - cell "Aggregated MIDs " [ref=e390]:
+                      - generic [ref=e392] [cursor=pointer]: Aggregated MIDs 
+                  - row " aggregated_mid_view MIDs - Aggregated - View" [ref=e393]:
+                    - cell "" [ref=e394]:
+                      - generic [ref=e395]:
+                        - generic: 
+                    - cell "aggregated_mid_view" [ref=e396]
+                    - cell "MIDs - Aggregated - View" [ref=e397]
+                  - row " aggregated_mid_create MIDs - Aggregated - Create/Update" [ref=e398]:
+                    - cell "" [ref=e399]:
+                      - generic [ref=e400]:
+                        - generic: 
+                    - cell "aggregated_mid_create" [ref=e401]
+                    - cell "MIDs - Aggregated - Create/Update" [ref=e402]
+                  - row " aggregated_mid_delete MIDs - Aggregated - Delete" [ref=e403]:
+                    - cell "" [ref=e404]:
+                      - generic [ref=e405]:
+                        - generic: 
+                    - cell "aggregated_mid_delete" [ref=e406]
+                    - cell "MIDs - Aggregated - Delete" [ref=e407]
+                  - row "Secure Deposits " [ref=e408]:
+                    - cell "Secure Deposits " [ref=e409]:
+                      - generic [ref=e411] [cursor=pointer]: Secure Deposits 
+                  - row " secure_deposits_view Secure Deposits - View" [ref=e412]:
+                    - cell "" [ref=e413]:
+                      - generic [ref=e414]:
+                        - generic: 
+                    - cell "secure_deposits_view" [ref=e415]
+                    - cell "Secure Deposits - View" [ref=e416]
+                  - row " secure_deposits_create Secure Deposits - Create" [ref=e417]:
+                    - cell "" [ref=e418]:
+                      - generic [ref=e419]:
+                        - generic: 
+                    - cell "secure_deposits_create" [ref=e420]
+                    - cell "Secure Deposits - Create" [ref=e421]
+                  - row " secure_deposits_update Secure Deposits - Update" [ref=e422]:
+                    - cell "" [ref=e423]:
+                      - generic [ref=e424]:
+                        - generic: 
+                    - cell "secure_deposits_update" [ref=e425]
+                    - cell "Secure Deposits - Update" [ref=e426]
+                  - row "Allowed currencies" [ref=e427]:
+                    - cell "Allowed currencies" [ref=e428]:
+                      - generic [ref=e430] [cursor=pointer]: Allowed currencies
+                  - row "currency_settings_view Configurations - Allowed currencies" [ref=e431]:
+                    - cell [ref=e432]
+                    - cell "currency_settings_view" [ref=e434]
+                    - cell "Configurations - Allowed currencies" [ref=e435]
+                  - row "currency_settings_create Configurations - Allowed currencies - Create/Update/Delete" [ref=e436]:
+                    - cell [ref=e437]
+                    - cell "currency_settings_create" [ref=e439]
+                    - cell "Configurations - Allowed currencies - Create/Update/Delete" [ref=e440]
+                  - row "Reports " [ref=e441]:
+                    - cell "Reports " [ref=e442]:
+                      - generic [ref=e444] [cursor=pointer]: Reports 
+                  - row " analytics_financial_general_view Reports - Financial - General" [ref=e445]:
+                    - cell "" [ref=e446]:
+                      - generic [ref=e447]:
+                        - generic: 
+                    - cell "analytics_financial_general_view" [ref=e448]
+                    - cell "Reports - Financial - General" [ref=e449]
+                  - row " analytics_financial_view Reports - Financial - Volume / Methods / Countries" [ref=e450]:
+                    - cell "" [ref=e451]:
+                      - generic [ref=e452]:
+                        - generic: 
+                    - cell "analytics_financial_view" [ref=e453]
+                    - cell "Reports - Financial - Volume / Methods / Countries" [ref=e454]
+                  - row " analytics_financial_providers_view Reports - Financial - Providers" [ref=e455]:
+                    - cell "" [ref=e456]:
+                      - generic [ref=e457]:
+                        - generic: 
+                    - cell "analytics_financial_providers_view" [ref=e458]
+                    - cell "Reports - Financial - Providers" [ref=e459]
+                  - row " tx_stats_view Reports - Transactions - General" [ref=e460]:
+                    - cell "" [ref=e461]:
+                      - generic [ref=e462]:
+                        - generic: 
+                    - cell "tx_stats_view" [ref=e463]
+                    - cell "Reports - Transactions - General" [ref=e464]
+                  - row " reports_conversion_view Reports - Conversion" [ref=e465]:
+                    - cell "" [ref=e466]:
+                      - generic [ref=e467]:
+                        - generic: 
+                    - cell "reports_conversion_view" [ref=e468]
+                    - cell "Reports - Conversion" [ref=e469]
+                  - row " reconciliation_transactions_export Reports - Reconciliation - Transactions" [ref=e470]:
+                    - cell "" [ref=e471]:
+                      - generic [ref=e472]:
+                        - generic: 
+                    - cell "reconciliation_transactions_export" [ref=e473]
+                    - cell "Reports - Reconciliation - Transactions" [ref=e474]
+                  - row " reconciliation_tx_attempts_export Reports - Reconciliation - Tx attempts" [ref=e475]:
+                    - cell "" [ref=e476]:
+                      - generic [ref=e477]:
+                        - generic: 
+                    - cell "reconciliation_tx_attempts_export" [ref=e478]
+                    - cell "Reports - Reconciliation - Tx attempts" [ref=e479]
+                  - row " reconciliation_tx_status_mismatch Reports - Reconciliation - Tx status mismatch" [ref=e480]:
+                    - cell "" [ref=e481]:
+                      - generic [ref=e482]:
+                        - generic: 
+                    - cell "reconciliation_tx_status_mismatch" [ref=e483]
+                    - cell "Reports - Reconciliation - Tx status mismatch" [ref=e484]
+                  - row " financial_projects_report_view Reports - Financial - Projects" [ref=e485]:
+                    - cell "" [ref=e486]:
+                      - generic [ref=e487]:
+                        - generic: 
+                    - cell "financial_projects_report_view" [ref=e488]
+                    - cell "Reports - Financial - Projects" [ref=e489]
+                  - row "Orders " [ref=e490]:
+                    - cell "Orders " [ref=e491]:
+                      - generic [ref=e493] [cursor=pointer]: Orders 
+                  - row " order_view Orders - View" [ref=e494]:
+                    - cell "" [ref=e495]:
+                      - generic [ref=e496]:
+                        - generic: 
+                    - cell "order_view" [ref=e497]
+                    - cell "Orders - View" [ref=e498]
+                  - row "Transactions " [ref=e499]:
+                    - cell "Transactions " [ref=e500]:
+                      - generic [ref=e502] [cursor=pointer]: Transactions 
+                  - row " tnx_view Transactions" [ref=e503]:
+                    - cell "" [ref=e504]:
+                      - generic [ref=e505]:
+                        - generic: 
+                    - cell "tnx_view" [ref=e506]
+                    - cell "Transactions" [ref=e507]
+                  - row " tnx_refund Transaction details - Refund" [ref=e508]:
+                    - cell "" [ref=e509]:
+                      - generic [ref=e510]:
+                        - generic: 
+                    - cell "tnx_refund" [ref=e511]
+                    - cell "Transaction details - Refund" [ref=e512]
+                  - row " tnx_proc_suspended Transactions - Review - Accept / Block" [ref=e513]:
+                    - cell "" [ref=e514]:
+                      - generic [ref=e515]:
+                        - generic: 
+                    - cell "tnx_proc_suspended" [ref=e516]
+                    - cell "Transactions - Review - Accept / Block" [ref=e517]
+                  - row " tnx_log_view Transaction details - Transaction logs view" [ref=e518]:
+                    - cell "" [ref=e519]:
+                      - generic [ref=e520]:
+                        - generic: 
+                    - cell "tnx_log_view" [ref=e521]
+                    - cell "Transaction details - Transaction logs view" [ref=e522]
+                  - row " tx_attempts_view Transactions - Tx attempts" [ref=e523]:
+                    - cell "" [ref=e524]:
+                      - generic [ref=e525]:
+                        - generic: 
+                    - cell "tx_attempts_view" [ref=e526]
+                    - cell "Transactions - Tx attempts" [ref=e527]
+                  - row " tnx_init Transactions - Create payment" [ref=e528]:
+                    - cell "" [ref=e529]:
+                      - generic [ref=e530]:
+                        - generic: 
+                    - cell "tnx_init" [ref=e531]
+                    - cell "Transactions - Create payment" [ref=e532]
+                  - row " tx_log_dump_all_providers Transactions - All providers in TX logs dump" [ref=e533]:
+                    - cell "" [ref=e534]:
+                      - generic [ref=e535]:
+                        - generic: 
+                    - cell "tx_log_dump_all_providers" [ref=e536]
+                    - cell "Transactions - All providers in TX logs dump" [ref=e537]
+                  - row " tx_details_update_transaction Transaction details - Update transaction" [ref=e538]:
+                    - cell "" [ref=e539]:
+                      - generic [ref=e540]:
+                        - generic: 
+                    - cell "tx_details_update_transaction" [ref=e541]
+                    - cell "Transaction details - Update transaction" [ref=e542]
+                  - row " tx_deatils_resend_callback Transaction details - Resend callback" [ref=e543]:
+                    - cell "" [ref=e544]:
+                      - generic [ref=e545]:
+                        - generic: 
+                    - cell "tx_deatils_resend_callback" [ref=e546]
+                    - cell "Transaction details - Resend callback" [ref=e547]
+                  - row "Subscriptions " [ref=e548]:
+                    - cell "Subscriptions " [ref=e549]:
+                      - generic [ref=e551] [cursor=pointer]: Subscriptions 
+                  - row " subscriptions_view Subscriptions, Plans" [ref=e552]:
+                    - cell "" [ref=e553]:
+                      - generic [ref=e554]:
+                        - generic: 
+                    - cell "subscriptions_view" [ref=e555]
+                    - cell "Subscriptions, Plans" [ref=e556]
+                  - row " subscriptions_deactivate Subscriptions - Deactivation" [ref=e557]:
+                    - cell "" [ref=e558]:
+                      - generic [ref=e559]:
+                        - generic: 
+                    - cell "subscriptions_deactivate" [ref=e560]
+                    - cell "Subscriptions - Deactivation" [ref=e561]
+                  - row " recurring_plan_create Plans - Create" [ref=e562]:
+                    - cell "" [ref=e563]:
+                      - generic [ref=e564]:
+                        - generic: 
+                    - cell "recurring_plan_create" [ref=e565]
+                    - cell "Plans - Create" [ref=e566]
+                  - row " recurring_plan_deactivate Plans - Deactivate" [ref=e567]:
+                    - cell "" [ref=e568]:
+                      - generic [ref=e569]:
+                        - generic: 
+                    - cell "recurring_plan_deactivate" [ref=e570]
+                    - cell "Plans - Deactivate" [ref=e571]
+                  - row "Invoices " [ref=e572]:
+                    - cell "Invoices " [ref=e573]:
+                      - generic [ref=e575] [cursor=pointer]: Invoices 
+                  - row " invoices_view Invoices - View" [ref=e576]:
+                    - cell "" [ref=e577]:
+                      - generic [ref=e578]:
+                        - generic: 
+                    - cell "invoices_view" [ref=e579]
+                    - cell "Invoices - View" [ref=e580]
+                  - row "Disputes " [ref=e581]:
+                    - cell "Disputes " [ref=e582]:
+                      - generic [ref=e584] [cursor=pointer]: Disputes 
+                  - row " dispute_view Transactions - Disputes" [ref=e585]:
+                    - cell "" [ref=e586]:
+                      - generic [ref=e587]:
+                        - generic: 
+                    - cell "dispute_view" [ref=e588]
+                    - cell "Transactions - Disputes" [ref=e589]
+                  - row " dispute_chat Transactions - Disputes - Chat" [ref=e590]:
+                    - cell "" [ref=e591]:
+                      - generic [ref=e592]:
+                        - generic: 
+                    - cell "dispute_chat" [ref=e593]
+                    - cell "Transactions - Disputes - Chat" [ref=e594]
+                  - row " dispute_create Transactions - Disputes - Create" [ref=e595]:
+                    - cell "" [ref=e596]:
+                      - generic [ref=e597]:
+                        - generic: 
+                    - cell "dispute_create" [ref=e598]
+                    - cell "Transactions - Disputes - Create" [ref=e599]
+                  - row " dispute_edit Transactions - Disputes - Update" [ref=e600]:
+                    - cell "" [ref=e601]:
+                      - generic [ref=e602]:
+                        - generic: 
+                    - cell "dispute_edit" [ref=e603]
+                    - cell "Transactions - Disputes - Update" [ref=e604]
+                  - row "Billing " [ref=e605]:
+                    - cell "Billing " [ref=e606]:
+                      - generic [ref=e608] [cursor=pointer]: Billing 
+                  - row " balance_view Billing - Balance" [ref=e609]:
+                    - cell "" [ref=e610]:
+                      - generic [ref=e611]:
+                        - generic: 
+                    - cell "balance_view" [ref=e612]
+                    - cell "Billing - Balance" [ref=e613]
+                  - row " balance_acquiring_view Billing - Balance - Acquiring - View" [ref=e614]:
+                    - cell "" [ref=e615]:
+                      - generic [ref=e616]:
+                        - generic: 
+                    - cell "balance_acquiring_view" [ref=e617]
+                    - cell "Billing - Balance - Acquiring - View" [ref=e618]
+                  - row " balance_distribution_view Billing - Balance - Distribution - View" [ref=e619]:
+                    - cell "" [ref=e620]:
+                      - generic [ref=e621]:
+                        - generic: 
+                    - cell "balance_distribution_view" [ref=e622]
+                    - cell "Billing - Balance - Distribution - View" [ref=e623]
+                  - row " balance_internal_view Billing - Balance - Internal - View" [ref=e624]:
+                    - cell "" [ref=e625]:
+                      - generic [ref=e626]:
+                        - generic: 
+                    - cell "balance_internal_view" [ref=e627]
+                    - cell "Billing - Balance - Internal - View" [ref=e628]
+                  - row " balance_aggregated_view Billing - Balance - Aggregated - View" [ref=e629]:
+                    - cell "" [ref=e630]:
+                      - generic [ref=e631]:
+                        - generic: 
+                    - cell "balance_aggregated_view" [ref=e632]
+                    - cell "Billing - Balance - Aggregated - View" [ref=e633]
+                  - row " balance_currency_view Billing - Balance - Currency - View" [ref=e634]:
+                    - cell "" [ref=e635]:
+                      - generic [ref=e636]:
+                        - generic: 
+                    - cell "balance_currency_view" [ref=e637]
+                    - cell "Billing - Balance - Currency - View" [ref=e638]
+                  - row " balance_provider_view Billing - Balance - Provider - View" [ref=e639]:
+                    - cell "" [ref=e640]:
+                      - generic [ref=e641]:
+                        - generic: 
+                    - cell "balance_provider_view" [ref=e642]
+                    - cell "Billing - Balance - Provider - View" [ref=e643]
+                  - row " balance_psp_view Billing - Balance - PSP - View" [ref=e644]:
+                    - cell "" [ref=e645]:
+                      - generic [ref=e646]:
+                        - generic: 
+                    - cell "balance_psp_view" [ref=e647]
+                    - cell "Billing - Balance - PSP - View" [ref=e648]
+                  - row " adjustments_view Billing - Adjustments - View" [ref=e649]:
+                    - cell "" [ref=e650]:
+                      - generic [ref=e651]:
+                        - generic: 
+                    - cell "adjustments_view" [ref=e652]
+                    - cell "Billing - Adjustments - View" [ref=e653]
+                  - row " adjustments_export Billing - Adjustments - Export to csv" [ref=e654]:
+                    - cell "" [ref=e655]:
+                      - generic [ref=e656]:
+                        - generic: 
+                    - cell "adjustments_export" [ref=e657]
+                    - cell "Billing - Adjustments - Export to csv" [ref=e658]
+                  - row " adjustments_autotransfer_by_percent_view Billing - Adjustments - Auto-transfer by % - View" [ref=e659]:
+                    - cell "" [ref=e660]:
+                      - generic [ref=e661]:
+                        - generic: 
+                    - cell "adjustments_autotransfer_by_percent_view" [ref=e662]
+                    - cell "Billing - Adjustments - Auto-transfer by % - View" [ref=e663]
+                  - row " adjustments_autotransfer_by_percent_create Billing - Adjustments - Auto-transfer by % - Create" [ref=e664]:
+                    - cell "" [ref=e665]:
+                      - generic [ref=e666]:
+                        - generic: 
+                    - cell "adjustments_autotransfer_by_percent_create" [ref=e667]
+                    - cell "Billing - Adjustments - Auto-transfer by % - Create" [ref=e668]
+                  - row " adjustments_autotransfer_by_percent_update Billing - Adjustments - Auto-transfer by % - Update" [ref=e669]:
+                    - cell "" [ref=e670]:
+                      - generic [ref=e671]:
+                        - generic: 
+                    - cell "adjustments_autotransfer_by_percent_update" [ref=e672]
+                    - cell "Billing - Adjustments - Auto-transfer by % - Update" [ref=e673]
+                  - row " adjustments_autotransfer_scheduled_view Billing - Adjustments - Auto-schedule rules - View" [ref=e674]:
+                    - cell "" [ref=e675]:
+                      - generic [ref=e676]:
+                        - generic: 
+                    - cell "adjustments_autotransfer_scheduled_view" [ref=e677]
+                    - cell "Billing - Adjustments - Auto-schedule rules - View" [ref=e678]
+                  - row " adjustments_autotransfer_scheduled_create Billing - Adjustments - Auto-schedule rules - Create" [ref=e679]:
+                    - cell "" [ref=e680]:
+                      - generic [ref=e681]:
+                        - generic: 
+                    - cell "adjustments_autotransfer_scheduled_create" [ref=e682]
+                    - cell "Billing - Adjustments - Auto-schedule rules - Create" [ref=e683]
+                  - row " adjustments_autotransfer_scheduled_update Billing - Adjustments - Auto-schedule rules - Update" [ref=e684]:
+                    - cell "" [ref=e685]:
+                      - generic [ref=e686]:
+                        - generic: 
+                    - cell "adjustments_autotransfer_scheduled_update" [ref=e687]
+                    - cell "Billing - Adjustments - Auto-schedule rules - Update" [ref=e688]
+                  - row " adjustments_holiday_calendars_view Billing - Adjustments - Holiday calendars - View" [ref=e689]:
+                    - cell "" [ref=e690]:
+                      - generic [ref=e691]:
+                        - generic: 
+                    - cell "adjustments_holiday_calendars_view" [ref=e692]
+                    - cell "Billing - Adjustments - Holiday calendars - View" [ref=e693]
+                  - row " adjustments_holiday_calendars_create Billing - Adjustments - Holiday calendars - Create" [ref=e694]:
+                    - cell "" [ref=e695]:
+                      - generic [ref=e696]:
+                        - generic: 
+                    - cell "adjustments_holiday_calendars_create" [ref=e697]
+                    - cell "Billing - Adjustments - Holiday calendars - Create" [ref=e698]
+                  - row " adjustments_holiday_calendars_update Billing - Adjustments - Holiday calendars - Update" [ref=e699]:
+                    - cell "" [ref=e700]:
+                      - generic [ref=e701]:
+                        - generic: 
+                    - cell "adjustments_holiday_calendars_update" [ref=e702]
+                    - cell "Billing - Adjustments - Holiday calendars - Update" [ref=e703]
+                  - row " adjustments_holiday_calendars_delete Billing - Adjustments - Holiday calendars - Delete" [ref=e704]:
+                    - cell "" [ref=e705]:
+                      - generic [ref=e706]:
+                        - generic: 
+                    - cell "adjustments_holiday_calendars_delete" [ref=e707]
+                    - cell "Billing - Adjustments - Holiday calendars - Delete" [ref=e708]
+                  - row " balance_adjust Billing - Adjustments - Add adjustment" [ref=e709]:
+                    - cell "" [ref=e710]:
+                      - generic [ref=e711]:
+                        - generic: 
+                    - cell "balance_adjust" [ref=e712]
+                    - cell "Billing - Adjustments - Add adjustment" [ref=e713]
+                  - row " settlements_view Billing - Settlements - View" [ref=e714]:
+                    - cell "" [ref=e715]:
+                      - generic [ref=e716]:
+                        - generic: 
+                    - cell "settlements_view" [ref=e717]
+                    - cell "Billing - Settlements - View" [ref=e718]
+                  - row " settlements_create Billing - Settlements - Create" [ref=e719]:
+                    - cell "" [ref=e720]:
+                      - generic [ref=e721]:
+                        - generic: 
+                    - cell "settlements_create" [ref=e722]
+                    - cell "Billing - Settlements - Create" [ref=e723]
+                  - row " reserve_create Billing - Reserve - Create / Edit" [ref=e724]:
+                    - cell "" [ref=e725]:
+                      - generic [ref=e726]:
+                        - generic: 
+                    - cell "reserve_create" [ref=e727]
+                    - cell "Billing - Reserve - Create / Edit" [ref=e728]
+                  - row " reserve_view Billing - Reserve" [ref=e729]:
+                    - cell "" [ref=e730]:
+                      - generic [ref=e731]:
+                        - generic: 
+                    - cell "reserve_view" [ref=e732]
+                    - cell "Billing - Reserve" [ref=e733]
+                  - row " exchange_rates_view Billing - Exchange rates - View" [ref=e734]:
+                    - cell "" [ref=e735]:
+                      - generic [ref=e736]:
+                        - generic: 
+                    - cell "exchange_rates_view" [ref=e737]
+                    - cell "Billing - Exchange rates - View" [ref=e738]
+                  - row " fee_view Billing - Fees" [ref=e739]:
+                    - cell "" [ref=e740]:
+                      - generic [ref=e741]:
+                        - generic: 
+                    - cell "fee_view" [ref=e742]
+                    - cell "Billing - Fees" [ref=e743]
+                  - row " fee_create Billing - Fees - Create" [ref=e744]:
+                    - cell "" [ref=e745]:
+                      - generic [ref=e746]:
+                        - generic: 
+                    - cell "fee_create" [ref=e747]
+                    - cell "Billing - Fees - Create" [ref=e748]
+                  - row " fee_update Billing - Fees - Edit" [ref=e749]:
+                    - cell "" [ref=e750]:
+                      - generic [ref=e751]:
+                        - generic: 
+                    - cell "fee_update" [ref=e752]
+                    - cell "Billing - Fees - Edit" [ref=e753]
+                  - row " fee_deactivate Billing - Fees - Fee - Deactivate" [ref=e754]:
+                    - cell "" [ref=e755]:
+                      - generic [ref=e756]:
+                        - generic: 
+                    - cell "fee_deactivate" [ref=e757]
+                    - cell "Billing - Fees - Fee - Deactivate" [ref=e758]
+                  - row " fee_recalculate Billing - Fees - Fee - Recalculate" [ref=e759]:
+                    - cell "" [ref=e760]:
+                      - generic [ref=e761]:
+                        - generic: 
+                    - cell "fee_recalculate" [ref=e762]
+                    - cell "Billing - Fees - Fee - Recalculate" [ref=e763]
+                  - row " fee_view_file Billing - Fees - Fee - Export to csv" [ref=e764]:
+                    - cell "" [ref=e765]:
+                      - generic [ref=e766]:
+                        - generic: 
+                    - cell "fee_view_file" [ref=e767]
+                    - cell "Billing - Fees - Fee - Export to csv" [ref=e768]
+                  - row " psp_view Billing - PSP / Intermediary" [ref=e769]:
+                    - cell "" [ref=e770]:
+                      - generic [ref=e771]:
+                        - generic: 
+                    - cell "psp_view" [ref=e772]
+                    - cell "Billing - PSP / Intermediary" [ref=e773]
+                  - row " psp_create Billing - PSP / Intermediary - Create / Edit" [ref=e774]:
+                    - cell "" [ref=e775]:
+                      - generic [ref=e776]:
+                        - generic: 
+                    - cell "psp_create" [ref=e777]
+                    - cell "Billing - PSP / Intermediary - Create / Edit" [ref=e778]
+                  - row "API keys " [ref=e779]:
+                    - cell "API keys " [ref=e780]:
+                      - generic [ref=e782] [cursor=pointer]: API keys 
+                  - row " apikeys_view API keys" [ref=e783]:
+                    - cell "" [ref=e784]:
+                      - generic [ref=e785]:
+                        - generic: 
+                    - cell "apikeys_view" [ref=e786]
+                    - cell "API keys" [ref=e787]
+                  - row " apikeys_create API keys - Add / Edit" [ref=e788]:
+                    - cell "" [ref=e789]:
+                      - generic [ref=e790]:
+                        - generic: 
+                    - cell "apikeys_create" [ref=e791]
+                    - cell "API keys - Add / Edit" [ref=e792]
+                  - row "Team " [ref=e793]:
+                    - cell "Team " [ref=e794]:
+                      - generic [ref=e796] [cursor=pointer]: Team 
+                  - row " project_member_view Projects - Team" [ref=e797]:
+                    - cell "" [ref=e798]:
+                      - generic [ref=e799]:
+                        - generic: 
+                    - cell "project_member_view" [ref=e800]
+                    - cell "Projects - Team" [ref=e801]
+                  - row " project_member_invite Projects - Team - Add member" [ref=e802]:
+                    - cell "" [ref=e803]:
+                      - generic [ref=e804]:
+                        - generic: 
+                    - cell "project_member_invite" [ref=e805]
+                    - cell "Projects - Team - Add member" [ref=e806]
+                  - row " project_member_remove Projects - Team - Remove" [ref=e807]:
+                    - cell "" [ref=e808]:
+                      - generic [ref=e809]:
+                        - generic: 
+                    - cell "project_member_remove" [ref=e810]
+                    - cell "Projects - Team - Remove" [ref=e811]
+                  - row " project_member_migrate Projects - Team - Migrate to other project" [ref=e812]:
+                    - cell "" [ref=e813]:
+                      - generic [ref=e814]:
+                        - generic: 
+                    - cell "project_member_migrate" [ref=e815]
+                    - cell "Projects - Team - Migrate to other project" [ref=e816]
+                  - row "Customers " [ref=e817]:
+                    - cell "Customers " [ref=e818]:
+                      - generic [ref=e820] [cursor=pointer]: Customers 
+                  - row " customer_view Customer token details" [ref=e821]:
+                    - cell "" [ref=e822]:
+                      - generic [ref=e823]:
+                        - generic: 
+                    - cell "customer_view" [ref=e824]
+                    - cell "Customer token details" [ref=e825]
+                  - row " customer_edit Customer token details - Edit" [ref=e826]:
+                    - cell "" [ref=e827]:
+                      - generic [ref=e828]:
+                        - generic: 
+                    - cell "customer_edit" [ref=e829]
+                    - cell "Customer token details - Edit" [ref=e830]
+                  - row " customer_block Customer token details - Block" [ref=e831]:
+                    - cell "" [ref=e832]:
+                      - generic [ref=e833]:
+                        - generic: 
+                    - cell "customer_block" [ref=e834]
+                    - cell "Customer token details - Block" [ref=e835]
+                  - row " customer_unblock Customer token details - Unblock" [ref=e836]:
+                    - cell "" [ref=e837]:
+                      - generic [ref=e838]:
+                        - generic: 
+                    - cell "customer_unblock" [ref=e839]
+                    - cell "Customer token details - Unblock" [ref=e840]
+                  - row " customer_block_log Customer token details - Block log" [ref=e841]:
+                    - cell "" [ref=e842]:
+                      - generic [ref=e843]:
+                        - generic: 
+                    - cell "customer_block_log" [ref=e844]
+                    - cell "Customer token details - Block log" [ref=e845]
+                  - row " customer_labels_update Customer token details - Customer token details - Add / Delete" [ref=e846]:
+                    - cell "" [ref=e847]:
+                      - generic [ref=e848]:
+                        - generic: 
+                    - cell "customer_labels_update" [ref=e849]
+                    - cell "Customer token details - Customer token details - Add / Delete" [ref=e850]
+                  - row "Cards & accounts " [ref=e851]:
+                    - cell "Cards & accounts " [ref=e852]:
+                      - generic [ref=e854] [cursor=pointer]: Cards & accounts 
+                  - row " card_view Card details" [ref=e855]:
+                    - cell "" [ref=e856]:
+                      - generic [ref=e857]:
+                        - generic: 
+                    - cell "card_view" [ref=e858]
+                    - cell "Card details" [ref=e859]
+                  - row " card_block Card details - Block" [ref=e860]:
+                    - cell "" [ref=e861]:
+                      - generic [ref=e862]:
+                        - generic: 
+                    - cell "card_block" [ref=e863]
+                    - cell "Card details - Block" [ref=e864]
+                  - row " card_unblock Card details - Unblock" [ref=e865]:
+                    - cell "" [ref=e866]:
+                      - generic [ref=e867]:
+                        - generic: 
+                    - cell "card_unblock" [ref=e868]
+                    - cell "Card details - Unblock" [ref=e869]
+                  - row " card_block_log Card details - Block log" [ref=e870]:
+                    - cell "" [ref=e871]:
+                      - generic [ref=e872]:
+                        - generic: 
+                    - cell "card_block_log" [ref=e873]
+                    - cell "Card details - Block log" [ref=e874]
+                  - row " card_label_update Card details - Card labels - Add / Delete" [ref=e875]:
+                    - cell "" [ref=e876]:
+                      - generic [ref=e877]:
+                        - generic: 
+                    - cell "card_label_update" [ref=e878]
+                    - cell "Card details - Card labels - Add / Delete" [ref=e879]
+                  - row "APMs " [ref=e880]:
+                    - cell "APMs " [ref=e881]:
+                      - generic [ref=e883] [cursor=pointer]: APMs 
+                  - row " apm_view View APMs" [ref=e884]:
+                    - cell "" [ref=e885]:
+                      - generic [ref=e886]:
+                        - generic: 
+                    - cell "apm_view" [ref=e887]
+                    - cell "View APMs" [ref=e888]
+                  - row " apm_block APMs - Block" [ref=e889]:
+                    - cell "" [ref=e890]:
+                      - generic [ref=e891]:
+                        - generic: 
+                    - cell "apm_block" [ref=e892]
+                    - cell "APMs - Block" [ref=e893]
+                  - row " apm_unblock APMs - Unblock" [ref=e894]:
+                    - cell "" [ref=e895]:
+                      - generic [ref=e896]:
+                        - generic: 
+                    - cell "apm_unblock" [ref=e897]
+                    - cell "APMs - Unblock" [ref=e898]
+                  - row "BINs " [ref=e899]:
+                    - cell "BINs " [ref=e900]:
+                      - generic [ref=e902] [cursor=pointer]: BINs 
+                  - row " bin_view BINs" [ref=e903]:
+                    - cell "" [ref=e904]:
+                      - generic [ref=e905]:
+                        - generic: 
+                    - cell "bin_view" [ref=e906]
+                    - cell "BINs" [ref=e907]
+                  - row " bin_create BINs - Create/Update" [ref=e908]:
+                    - cell "" [ref=e909]:
+                      - generic [ref=e910]:
+                        - generic: 
+                    - cell "bin_create" [ref=e911]
+                    - cell "BINs - Create/Update" [ref=e912]
+                  - row " bin_delete BINs - Delete" [ref=e913]:
+                    - cell "" [ref=e914]:
+                      - generic [ref=e915]:
+                        - generic: 
+                    - cell "bin_delete" [ref=e916]
+                    - cell "BINs - Delete" [ref=e917]
+                  - row "Transaction rules " [ref=e918]:
+                    - cell "Transaction rules " [ref=e919]:
+                      - generic [ref=e921] [cursor=pointer]: Transaction rules 
+                  - row " tnx_rule_view Projects - Routing rules / Antifraud rules" [ref=e922]:
+                    - cell "" [ref=e923]:
+                      - generic [ref=e924]:
+                        - generic: 
+                    - cell "tnx_rule_view" [ref=e925]
+                    - cell "Projects - Routing rules / Antifraud rules" [ref=e926]
+                  - row " tnx_rule_create Projects - Routing rules / Antifraud rules - Create" [ref=e927]:
+                    - cell "" [ref=e928]:
+                      - generic [ref=e929]:
+                        - generic: 
+                    - cell "tnx_rule_create" [ref=e930]
+                    - cell "Projects - Routing rules / Antifraud rules - Create" [ref=e931]
+                  - row " tnx_rule_update Projects - Routing rules / Antifraud rules - Update" [ref=e932]:
+                    - cell "" [ref=e933]:
+                      - generic [ref=e934]:
+                        - generic: 
+                    - cell "tnx_rule_update" [ref=e935]
+                    - cell "Projects - Routing rules / Antifraud rules - Update" [ref=e936]
+                  - row " tnx_rule_delete Projects - Routing rules / Antifraud rules - Delete" [ref=e937]:
+                    - cell "" [ref=e938]:
+                      - generic [ref=e939]:
+                        - generic: 
+                    - cell "tnx_rule_delete" [ref=e940]
+                    - cell "Projects - Routing rules / Antifraud rules - Delete" [ref=e941]
+                  - row "Monitoring " [ref=e942]:
+                    - cell "Monitoring " [ref=e943]:
+                      - generic [ref=e945] [cursor=pointer]: Monitoring 
+                  - row " audittrail_view Monitoring - Audit trail" [ref=e946]:
+                    - cell "" [ref=e947]:
+                      - generic [ref=e948]:
+                        - generic: 
+                    - cell "audittrail_view" [ref=e949]
+                    - cell "Monitoring - Audit trail" [ref=e950]
+                  - row " monitoring_limits_view Monitoring - Limits" [ref=e951]:
+                    - cell "" [ref=e952]:
+                      - generic [ref=e953]:
+                        - generic: 
+                    - cell "monitoring_limits_view" [ref=e954]
+                    - cell "Monitoring - Limits" [ref=e955]
+                  - row " conversion_monitoring_view Monitoring - Conversion" [ref=e956]:
+                    - cell "" [ref=e957]:
+                      - generic [ref=e958]:
+                        - generic: 
+                    - cell "conversion_monitoring_view" [ref=e959]
+                    - cell "Monitoring - Conversion" [ref=e960]
+                  - row "Event rules " [ref=e961]:
+                    - cell "Event rules " [ref=e962]:
+                      - generic [ref=e964] [cursor=pointer]: Event rules 
+                  - row " event_rule_view Monitoring - Event rules" [ref=e965]:
+                    - cell "" [ref=e966]:
+                      - generic [ref=e967]:
+                        - generic: 
+                    - cell "event_rule_view" [ref=e968]
+                    - cell "Monitoring - Event rules" [ref=e969]
+                  - row " event_rule_create Monitoring - Event rules - Create" [ref=e970]:
+                    - cell "" [ref=e971]:
+                      - generic [ref=e972]:
+                        - generic: 
+                    - cell "event_rule_create" [ref=e973]
+                    - cell "Monitoring - Event rules - Create" [ref=e974]
+                  - row " event_rule_update Monitoring - Event rules - Update" [ref=e975]:
+                    - cell "" [ref=e976]:
+                      - generic [ref=e977]:
+                        - generic: 
+                    - cell "event_rule_update" [ref=e978]
+                    - cell "Monitoring - Event rules - Update" [ref=e979]
+                  - row " event_rule_deactivate Monitoring - Event rules - Deactivate" [ref=e980]:
+                    - cell "" [ref=e981]:
+                      - generic [ref=e982]:
+                        - generic: 
+                    - cell "event_rule_deactivate" [ref=e983]
+                    - cell "Monitoring - Event rules - Deactivate" [ref=e984]
+                  - row "Endpoints " [ref=e985]:
+                    - cell "Endpoints " [ref=e986]:
+                      - generic [ref=e988] [cursor=pointer]: Endpoints 
+                  - row " event_endpoint_view Monitoring - Endpoints - View" [ref=e989]:
+                    - cell "" [ref=e990]:
+                      - generic [ref=e991]:
+                        - generic: 
+                    - cell "event_endpoint_view" [ref=e992]
+                    - cell "Monitoring - Endpoints - View" [ref=e993]
+                  - row " event_endpoint_create Monitoring - Endpoints - Create" [ref=e994]:
+                    - cell "" [ref=e995]:
+                      - generic [ref=e996]:
+                        - generic: 
+                    - cell "event_endpoint_create" [ref=e997]
+                    - cell "Monitoring - Endpoints - Create" [ref=e998]
+                  - row " event_endpoint_update Monitoring - Endpoints - Update / Delete" [ref=e999]:
+                    - cell "" [ref=e1000]:
+                      - generic [ref=e1001]:
+                        - generic: 
+                    - cell "event_endpoint_update" [ref=e1002]
+                    - cell "Monitoring - Endpoints - Update / Delete" [ref=e1003]
+                  - row "Triggered rules " [ref=e1004]:
+                    - cell "Triggered rules " [ref=e1005]:
+                      - generic [ref=e1007] [cursor=pointer]: Triggered rules 
+                  - row " triggered_rules_view Triggered rules - View" [ref=e1008]:
+                    - cell "" [ref=e1009]:
+                      - generic [ref=e1010]:
+                        - generic: 
+                    - cell "triggered_rules_view" [ref=e1011]
+                    - cell "Triggered rules - View" [ref=e1012]
+                  - row "Roles " [ref=e1013]:
+                    - cell "Roles " [ref=e1014]:
+                      - generic [ref=e1016] [cursor=pointer]: Roles 
+                  - row " role_view Roles" [ref=e1017]:
+                    - cell "" [ref=e1018]:
+                      - generic [ref=e1019]:
+                        - generic: 
+                    - cell "role_view" [ref=e1020]
+                    - cell "Roles" [ref=e1021]
+                  - row " custom_role_create Roles - Create" [ref=e1022]:
+                    - cell "" [ref=e1023]:
+                      - generic [ref=e1024]:
+                        - generic: 
+                    - cell "custom_role_create" [ref=e1025]
+                    - cell "Roles - Create" [ref=e1026]
+                  - row " custom_role_update Roles - Role - Update" [ref=e1027]:
+                    - cell "" [ref=e1028]:
+                      - generic [ref=e1029]:
+                        - generic: 
+                    - cell "custom_role_update" [ref=e1030]
+                    - cell "Roles - Role - Update" [ref=e1031]
+                  - row " custom_role_delete Roles - Role - Delete" [ref=e1032]:
+                    - cell "" [ref=e1033]:
+                      - generic [ref=e1034]:
+                        - generic: 
+                    - cell "custom_role_delete" [ref=e1035]
+                    - cell "Roles - Role - Delete" [ref=e1036]
+                  - row " custom_role_migrate Roles - Role - Migrate to other project" [ref=e1037]:
+                    - cell "" [ref=e1038]:
+                      - generic [ref=e1039]:
+                        - generic: 
+                    - cell "custom_role_migrate" [ref=e1040]
+                    - cell "Roles - Role - Migrate to other project" [ref=e1041]
+                  - row "IP whitelist " [ref=e1042]:
+                    - cell "IP whitelist " [ref=e1043]:
+                      - generic [ref=e1045] [cursor=pointer]: IP whitelist 
+                  - row " ip_wl_view Project - IP whitelist" [ref=e1046]:
+                    - cell "" [ref=e1047]:
+                      - generic [ref=e1048]:
+                        - generic: 
+                    - cell "ip_wl_view" [ref=e1049]
+                    - cell "Project - IP whitelist" [ref=e1050]
+                  - row " ip_wl_create Project - IP whitelist - Create" [ref=e1051]:
+                    - cell "" [ref=e1052]:
+                      - generic [ref=e1053]:
+                        - generic: 
+                    - cell "ip_wl_create" [ref=e1054]
+                    - cell "Project - IP whitelist - Create" [ref=e1055]
+                  - row " ip_wl_update Project - IP whitelist - Update" [ref=e1056]:
+                    - cell "" [ref=e1057]:
+                      - generic [ref=e1058]:
+                        - generic: 
+                    - cell "ip_wl_update" [ref=e1059]
+                    - cell "Project - IP whitelist - Update" [ref=e1060]
+                  - row " ip_wl_delete Project - IP whitelist - Delete" [ref=e1061]:
+                    - cell "" [ref=e1062]:
+                      - generic [ref=e1063]:
+                        - generic: 
+                    - cell "ip_wl_delete" [ref=e1064]
+                    - cell "Project - IP whitelist - Delete" [ref=e1065]
+                  - row "Partners " [ref=e1066]:
+                    - cell "Partners " [ref=e1067]:
+                      - generic [ref=e1069] [cursor=pointer]: Partners 
+                  - row " partners_view Partners - View" [ref=e1070]:
+                    - cell "" [ref=e1071]:
+                      - generic [ref=e1072]:
+                        - generic: 
+                    - cell "partners_view" [ref=e1073]
+                    - cell "Partners - View" [ref=e1074]
+                  - row " partners_create Partners - Create/Update" [ref=e1075]:
+                    - cell "" [ref=e1076]:
+                      - generic [ref=e1077]:
+                        - generic: 
+                    - cell "partners_create" [ref=e1078]
+                    - cell "Partners - Create/Update" [ref=e1079]
+                  - row "Sanctions " [ref=e1080]:
+                    - cell "Sanctions " [ref=e1081]:
+                      - generic [ref=e1083] [cursor=pointer]: Sanctions 
+                  - row " lists_sanctions_view Settings - Lists - Sanctions - View" [ref=e1084]:
+                    - cell "" [ref=e1085]:
+                      - generic [ref=e1086]:
+                        - generic: 
+                    - cell "lists_sanctions_view" [ref=e1087]
+                    - cell "Settings - Lists - Sanctions - View" [ref=e1088]
+                  - row " lists_sanctions_update Settings - Lists - Sanctions - Create/Delete" [ref=e1089]:
+                    - cell "" [ref=e1090]:
+                      - generic [ref=e1091]:
+                        - generic: 
+                    - cell "lists_sanctions_update" [ref=e1092]
+                    - cell "Settings - Lists - Sanctions - Create/Delete" [ref=e1093]
+                  - row "System lists " [ref=e1094]:
+                    - cell "System lists " [ref=e1095]:
+                      - generic [ref=e1097] [cursor=pointer]: System lists 
+                  - row " lists_view Settings - Lists - System/Custom/Cards - View" [ref=e1098]:
+                    - cell "" [ref=e1099]:
+                      - generic [ref=e1100]:
+                        - generic: 
+                    - cell "lists_view" [ref=e1101]
+                    - cell "Settings - Lists - System/Custom/Cards - View" [ref=e1102]
+                  - row " lists_create Settings - Lists - System/Custom/Cards - Create" [ref=e1103]:
+                    - cell "" [ref=e1104]:
+                      - generic [ref=e1105]:
+                        - generic: 
+                    - cell "lists_create" [ref=e1106]
+                    - cell "Settings - Lists - System/Custom/Cards - Create" [ref=e1107]
+                  - row " lists_update Settings - Lists - System/Custom/Cards - Update/Delete" [ref=e1108]:
+                    - cell "" [ref=e1109]:
+                      - generic [ref=e1110]:
+                        - generic: 
+                    - cell "lists_update" [ref=e1111]
+                    - cell "Settings - Lists - System/Custom/Cards - Update/Delete" [ref=e1112]
+                  - row "E-money " [ref=e1113]:
+                    - cell "E-money " [ref=e1114]:
+                      - generic [ref=e1116] [cursor=pointer]: E-money 
+                  - row " wallet_view E-money - Wallets - View" [ref=e1117]:
+                    - cell "" [ref=e1118]:
+                      - generic [ref=e1119]:
+                        - generic: 
+                    - cell "wallet_view" [ref=e1120]
+                    - cell "E-money - Wallets - View" [ref=e1121]
+                  - row " wallet_create E-money - Wallets - Create" [ref=e1122]:
+                    - cell "" [ref=e1123]:
+                      - generic [ref=e1124]:
+                        - generic: 
+                    - cell "wallet_create" [ref=e1125]
+                    - cell "E-money - Wallets - Create" [ref=e1126]
+                  - row " wallet_update E-money - Wallets - Update" [ref=e1127]:
+                    - cell "" [ref=e1128]:
+                      - generic [ref=e1129]:
+                        - generic: 
+                    - cell "wallet_update" [ref=e1130]
+                    - cell "E-money - Wallets - Update" [ref=e1131]
+                  - row " customer_wallet_limits_view E-money - Settings - Limit settings - View" [ref=e1132]:
+                    - cell "" [ref=e1133]:
+                      - generic [ref=e1134]:
+                        - generic: 
+                    - cell "customer_wallet_limits_view" [ref=e1135]
+                    - cell "E-money - Settings - Limit settings - View" [ref=e1136]
+                  - row " customer_wallet_limits_create E-money - Settings - Limit settings - Create" [ref=e1137]:
+                    - cell "" [ref=e1138]:
+                      - generic [ref=e1139]:
+                        - generic: 
+                    - cell "customer_wallet_limits_create" [ref=e1140]
+                    - cell "E-money - Settings - Limit settings - Create" [ref=e1141]
+                  - row " customer_wallet_limits_update E-money - Settings - Limit settings - Update" [ref=e1142]:
+                    - cell "" [ref=e1143]:
+                      - generic [ref=e1144]:
+                        - generic: 
+                    - cell "customer_wallet_limits_update" [ref=e1145]
+                    - cell "E-money - Settings - Limit settings - Update" [ref=e1146]
+                  - row " emoney_receipt_view E-money receipt - View" [ref=e1147]:
+                    - cell "" [ref=e1148]:
+                      - generic [ref=e1149]:
+                        - generic: 
+                    - cell "emoney_receipt_view" [ref=e1150]
+                    - cell "E-money receipt - View" [ref=e1151]
+                  - row " ledger_view E-money - Ledger - View" [ref=e1152]:
+                    - cell "" [ref=e1153]:
+                      - generic [ref=e1154]:
+                        - generic: 
+                    - cell "ledger_view" [ref=e1155]
+                    - cell "E-money - Ledger - View" [ref=e1156]
+                  - row " ledger_export E-money - Ledger - Export to csv" [ref=e1157]:
+                    - cell "" [ref=e1158]:
+                      - generic [ref=e1159]:
+                        - generic: 
+                    - cell "ledger_export" [ref=e1160]
+                    - cell "E-money - Ledger - Export to csv" [ref=e1161]
+                  - row " ledger_operation_create E-money - Ledger - Manual operation - Add" [ref=e1162]:
+                    - cell "" [ref=e1163]:
+                      - generic [ref=e1164]:
+                        - generic: 
+                    - cell "ledger_operation_create" [ref=e1165]
+                    - cell "E-money - Ledger - Manual operation - Add" [ref=e1166]
+              - button "Save" [ref=e1167] [cursor=pointer]
+```

@@ -1,7 +1,7 @@
 import { Page, Locator, expect } from '@playwright/test';
 import { Table } from '../../related_components/Table';
 import { FilterBar } from '../../related_components/FilterBar';
-import { LedgerOperationsData } from '../../../test_data/LedgerOpeationsData';
+import { LedgerOperationsData } from '../../../test_data/LedgerOperationsData';
 
 /**
  * Represents the Ledger page within the E-money section

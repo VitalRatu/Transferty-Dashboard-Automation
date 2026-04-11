@@ -151,7 +151,6 @@ export class Table
 
     /**
      * Locates a row by a unique value and clicks the first link within a target column's cell
-     * Useful for navigating to details pages from a specific row identified by a ID or name
      * @param lookupColumn - The column name used to identify the unique row (e.g., 'Tx ID')
      * @param uniqueValue - The unique identifier to look for in the lookup column
      * @param targetColumn - The column name containing the link to be clicked (e.g., 'Aggregated MID')

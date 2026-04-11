@@ -1,5 +1,6 @@
 export const Routes = 
 {
+    PROJECTS: '/projects',
     LOGIN: '/signin',
     DASHBOARD: '/dashboard',
     BILLING: '/billing',
@@ -24,6 +25,8 @@ export const Routes =
     {
         CONFIGURATIONS: '/configurations',
         TEAM: '/team',
-        LISTS: '/lists'
+        LISTS: '/lists',
+        PARTNERS: '/partners',
+        USERS: '/users'      
     }
 };
