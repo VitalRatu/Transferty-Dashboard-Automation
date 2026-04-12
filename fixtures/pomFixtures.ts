@@ -1,31 +1,32 @@
-import {test as base } from '@playwright/test'
-import { LoginPage} from '../page_objects/LoginPage'
-import { DashboardPage } from '../page_objects/Dashboard/DashboardPage'
-import { BillingPage } from '../page_objects/Billing/BillingPage'
-import { OrdersPage } from '../page_objects/Orders/OrdersPage'
-import { ReportsPage } from '../page_objects/Reports/ReportsPage'
-import { TransactionAddPage } from '../page_objects/Transactions/TransactionAddPage'
-import { MIDsPage } from '../page_objects/MIDs/MIDsPage'
-import { NewAggregatedMidPage } from '../page_objects/MIDs/AggregatedMIDs/NewAggregatedMidPage'
-import { NewSecureDepositPage } from '../page_objects/MIDs/SecureDeposits/NewSecureDepositPage'
-import { NewInternalMidPage } from '../page_objects/MIDs/InternalMIDs/NewInternalMidPage'
-import { TransactionsMainPage } from '../page_objects/Transactions/TransactionsMainPage'
-import { NewExternalMidPage } from '../page_objects/MIDs/ExternalMIDs/NewExternalMidPage'
-import { EmoneyPage } from '../page_objects/E-money/EmoneyPage'
-import { NewOperationalWalletPage } from '../page_objects/E-money/Wallets/Operational/NewOperationalWalletPage'
-import { NewMerchantWalletPage } from '../page_objects/E-money/Wallets/Merchant/NewMerchantWalletPage'
-import {LedgerAddOperationPage} from '../page_objects/E-money/Ledger/LedgerAddOperationPage'
-import {AddLimitPage} from '../page_objects/E-money/Settings/AddLimitPage'
-import { CustomerWalletDetailsPage } from '../page_objects/E-money/Wallets/Customer/CustomerWalletDetailsPage'
-import {MerchantWalletDetailsPage} from '../page_objects/E-money/Wallets/Merchant/MerchantWalletDetailsPage'
-import { LimitDetailsPage } from '../page_objects/E-money/Settings/LimitDetailsPage'
-import { OperationalWalletDetailsPage } from '../page_objects/E-money/Wallets/Operational/OperationalWalletDetailsPage'
-import { EditLimitPage } from '../page_objects/E-money/Settings/EditLimitPage'
-import { EditFeeObjectPage } from '../page_objects/E-money/Wallets/Operational/EditFeeObjectPage'
-import { EditMerchantWalletPage } from '../page_objects/E-money/Wallets/Merchant/EditMerchantWalletPage'
-import {RoleDetailsPage} from '../page_objects/Settings/Users/Roles/RoleDetailsPage'
-import {EditRolePage} from '../page_objects/Settings/Users/Roles/EditRolePage'
-import {NewRolePage} from '../page_objects/Settings/Users/Roles/NewRolePage'
+import { test                         as base } from '@playwright/test'
+import { LoginPage                            } from '../page_objects/LoginPage'
+import { DashboardPage                        } from '../page_objects/Dashboard/DashboardPage'
+import { BillingPage                          } from '../page_objects/Billing/BillingPage'
+import { OrdersPage                           } from '../page_objects/Orders/OrdersPage'
+import { ReportsPage                          } from '../page_objects/Reports/ReportsPage'
+import { TransactionAddPage                   } from '../page_objects/Transactions/TransactionAddPage'
+import { MIDsPage                             } from '../page_objects/MIDs/MIDsPage'
+import { NewAggregatedMidPage                 } from '../page_objects/MIDs/AggregatedMIDs/NewAggregatedMidPage'
+import { NewSecureDepositPage                 } from '../page_objects/MIDs/SecureDeposits/NewSecureDepositPage'
+import { NewInternalMidPage                   } from '../page_objects/MIDs/InternalMIDs/NewInternalMidPage'
+import { TransactionsMainPage                 } from '../page_objects/Transactions/TransactionsMainPage'
+import { NewExternalMidPage                   } from '../page_objects/MIDs/ExternalMIDs/NewExternalMidPage'
+import { EmoneyPage                           } from '../page_objects/E-money/EmoneyPage'
+import { NewOperationalWalletPage             } from '../page_objects/E-money/Wallets/Operational/NewOperationalWalletPage'
+import { NewMerchantWalletPage                } from '../page_objects/E-money/Wallets/Merchant/NewMerchantWalletPage'
+import { LedgerAddOperationPage               } from '../page_objects/E-money/Ledger/LedgerAddOperationPage'
+import { AddLimitPage                         } from '../page_objects/E-money/Settings/AddLimitPage'
+import { CustomerWalletDetailsPage            } from '../page_objects/E-money/Wallets/Customer/CustomerWalletDetailsPage'
+import { MerchantWalletDetailsPage            } from '../page_objects/E-money/Wallets/Merchant/MerchantWalletDetailsPage'
+import { LimitDetailsPage                     } from '../page_objects/E-money/Settings/LimitDetailsPage'
+import { OperationalWalletDetailsPage         } from '../page_objects/E-money/Wallets/Operational/OperationalWalletDetailsPage'
+import { EditLimitPage                        } from '../page_objects/E-money/Settings/EditLimitPage'
+import { EditFeeObjectPage                    } from '../page_objects/E-money/Wallets/Operational/EditFeeObjectPage'
+import { EditMerchantWalletPage               } from '../page_objects/E-money/Wallets/Merchant/EditMerchantWalletPage'
+import { RoleDetailsPage                      } from '../page_objects/Settings/Users/Roles/RoleDetailsPage'
+import { EditRolePage                         } from '../page_objects/Settings/Users/Roles/EditRolePage'
+import { NewRolePage                          } from '../page_objects/Settings/Users/Roles/NewRolePage'
+import { InternalMidsListPage } from '../page_objects/MIDs/InternalMIDs/InternalMidsListPage'
 
 type Fixtures = 
 {
@@ -40,6 +41,7 @@ type Fixtures =
     newSecureDepositPage: NewSecureDepositPage;
     newAggregatedMidPage: NewAggregatedMidPage;
     newInternalMidPage: NewInternalMidPage;
+    internalMidsListPage: InternalMidsListPage;
     newExternalMidPage: NewExternalMidPage;
     emoneyPage: EmoneyPage;
     newOperationalWalletPage: NewOperationalWalletPage
@@ -114,7 +116,10 @@ export const pomTest = base.extend<Fixtures>(
     {
         await use (new NewInternalMidPage(page))
     },
-
+    internalMidsListPage : async ({page}, use) =>
+    {
+        await use (new InternalMidsListPage(page))
+    },
     newExternalMidPage : async ({page}, use) =>
     {
         await use (new NewExternalMidPage(page))

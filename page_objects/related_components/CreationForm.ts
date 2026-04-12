@@ -59,6 +59,7 @@ export class CreationForm
      */
     public async fillInputField(label: string, value: string) 
     {
+        await this.page.waitForLoadState('networkidle');
         const fieldLocator = this.textInputLocator.filter({ has: this.page.getByText(label, { exact: true })}).last();
         await expect(fieldLocator).toBeVisible();
         const inputFieldLocator = fieldLocator.locator('input, textarea').first();
@@ -78,6 +79,7 @@ export class CreationForm
      */
     public async selectDropDown(label: string | RegExp, option?: string) 
     {
+        await this.page.waitForLoadState('networkidle');
         const dropdownInput = this.dropdownLocator.filter({ has: this.page.getByText(label, { exact: true }) }).first();
         await expect(dropdownInput).toBeVisible();
         await dropdownInput.click();
@@ -95,7 +97,7 @@ export class CreationForm
         }
         else 
         {
-            const optionLocator = this.page.getByRole('option', { name: option, exact: true }).first();
+            const optionLocator = this.page.getByRole('option', { name: option, exact: true });
             await expect(optionLocator).toBeVisible();
             await optionLocator.click();
         }
@@ -113,6 +115,7 @@ export class CreationForm
      */
     public async selectMultiDropDown(label: string, index: number, option?: string): Promise<void> 
     {
+        await this.page.waitForLoadState('networkidle');
         const elementLable = this.labelElement.filter({ has: this.page.getByText(label, { exact: true }) }).first();
         const dropdownInput = elementLable.locator('..').locator('.Input.dropdown-input').nth(index);
         
@@ -148,6 +151,7 @@ export class CreationForm
      */
     public async fillDateInput(label: string, date: string): Promise<void> 
     {
+        await this.page.waitForLoadState('networkidle');
         const fieldContainer = this.textInputLocator.filter({ has: this.page.getByText(label, { exact: true }) }).first();
         await expect(fieldContainer).toBeVisible();
         const input = fieldContainer.locator('input.form-control').first();
@@ -169,6 +173,7 @@ export class CreationForm
      */
     public async setCheckbox(labelText: string, state: boolean): Promise<void> 
     {
+        await this.page.waitForLoadState('networkidle');
         const wrapper = this.checkBoxLocator.filter({ hasText: new RegExp(`^${labelText}$`) }).first();
         await expect(wrapper).toBeVisible();
 
@@ -202,6 +207,7 @@ export class CreationForm
      */
     public async checkIsDisabled(label: string): Promise<void> 
     {
+        await this.page.waitForLoadState('networkidle');
         const textLocator = this.textInputLocator.filter({ has: this.page.getByText(label, { exact: true }) }).last();
         
         const dropLocator = this.dropdownLocator.filter({ has: this.page.getByText(label, { exact: true }) }).first();

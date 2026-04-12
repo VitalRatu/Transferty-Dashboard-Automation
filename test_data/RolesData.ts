@@ -1,8 +1,8 @@
-import { ValidPermission } from "./Permissions";
+import { ValidPermissions } from "./Permissions";
 
 export type RoleData = 
 {
     name: string;          
     description: string;          
-    permissions: ValidPermission[]; 
+    permissions: ValidPermissions[]; 
 }

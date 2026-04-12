@@ -42,6 +42,12 @@ export class InternalMidsListPage
         await this.page.waitForURL(/\/mids\/internal\/add/);
     }
 
+    public async exportInternalMidsToCSV(): Promise<void>
+    {
+        await this.filterBar.clickSecondaryButton();
+        await this.page.waitForLoadState('networkidle');
+    }
+
     /**
      * Verifies that the values in a specific table row match the provided internal MID data
      * Checks the current URL, extracts row data by index, and asserts that fields like Project,

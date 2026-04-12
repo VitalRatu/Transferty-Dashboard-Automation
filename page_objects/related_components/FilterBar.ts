@@ -1,4 +1,6 @@
 import { expect, Locator, Page } from '@playwright/test';
+import fs from 'fs';
+import path from 'path/win32';
 
 /**
  * Represents the Filter Bar component used for searching, filtering, and performing actions on data tables
@@ -234,6 +236,40 @@ export class FilterBar
         }
     }
 
+    public async exportCsv(): Promise<void> 
+    {
+        await this.page.waitForLoadState('networkidle');
+        
+        await expect(this.secondaryButton).toBeVisible();
+
+        const tempFilePath = path.join(process.cwd(), `temp_export_${Date.now()}.csv`);
+
+        const downloadPromise = this.page.waitForEvent('download');
+        
+        await this.clickSecondaryButton();
+        
+        const download = await downloadPromise;
+
+        await download.saveAs(tempFilePath);
+
+        try 
+        {
+
+            const stats = fs.statSync(tempFilePath);
+            
+            console.log(`📊 Exported file: ${stats.size} bytes`);
+
+            expect(stats.size, 'CSV file should not be empty').toBeGreaterThan(0);
+        } 
+        finally 
+        {
+            if (fs.existsSync(tempFilePath)) 
+            {
+                fs.unlinkSync(tempFilePath);
+            }
+        }
+    }
+
     /**
      * Clicks the primary action button and waits for a URL navigation to occur
      * Typically used for "Create" or "Add" actions located in the filter bar
@@ -255,9 +291,8 @@ export class FilterBar
     public async clickSecondaryButton(): Promise<void> 
     {
         await expect(this.secondaryButton).toBeVisible();
-        const currentUrl = this.page.url();
         await this.secondaryButton.click();
-        await this.page.waitForURL((url) => url.toString() !== currentUrl);
+        await this.page.waitForLoadState('networkidle');
     }
 
     /**

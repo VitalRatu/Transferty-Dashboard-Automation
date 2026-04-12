@@ -38,26 +38,22 @@ async function updatePermissions()
         const rawBody = await permsResponse.text();
         const permissions = rawBody.match(/[a-zA-Z0-9]+_[a-zA-Z0-9_]+/g) || [];
 
-        if (permissions.length === 0)
-        {
-            throw new Error(`Permissions list is empty! Raw response was: ${rawBody}`);
-        }
-
-
 const fileContent = 
-`export const ALL_PERMISSIONS = [
+`export const PERMISSIONS = [
 ${permissions.map(p => `    '${p}'`).join(',\n')}
 ] as const;
-export type ValidPermission = typeof ALL_PERMISSIONS[number];
+export type ValidPermissions = typeof PERMISSIONS[number];
 `;
         
         fs.writeFileSync(OUTPUT_PATH, fileContent, 'utf-8');
         console.log(`Success! File written to ${OUTPUT_PATH}`);
 
-    } catch (error) {
+    } catch (error) 
+    {
         console.error('Error updating permissions:', error);
         process.exit(1);
-    } finally {
+    } finally 
+    {
         await browser.close(); 
     }
 }

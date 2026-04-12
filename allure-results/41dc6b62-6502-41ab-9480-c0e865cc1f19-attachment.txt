@@ -1,9 +1,0 @@
-{
-  Role: 'E-money tester',
-  'Role type': 'Custom',
-  Description: 'test',
-  Created: '2026-02-11 16:00:18',
-  'Created by': 'v.ratushniak@matrix.partners',
-  Updated: '2026-02-18 15:35:42',
-  'Updated by': 'v.ratushniak@matrix.partners'
-}

@@ -1,4 +1,4 @@
-export const ALL_PERMISSIONS = [
+export const PERMISSIONS = [
     'admin_create',
     'admin_group_create',
     'admin_group_setup',
@@ -214,4 +214,4 @@ export const ALL_PERMISSIONS = [
     'internal_mid_export',
     'cards_and_accounts_list_export'
 ] as const;
-export type ValidPermission = typeof ALL_PERMISSIONS[number];
+export type ValidPermissions = typeof PERMISSIONS[number];

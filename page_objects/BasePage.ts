@@ -75,7 +75,7 @@ export abstract class BasePage
              throw new Error('No URL provided for navigation');
         }
         await this.page.goto(targetUrl);
-        await this.page.waitForURL(new RegExp(targetUrl))
+        await this.page.waitForURL(targetUrl, { timeout: 3000 });
     }
 
     /**

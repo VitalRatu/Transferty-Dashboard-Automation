@@ -1,7 +1,7 @@
-import { pomTest } from './pomFixtures';
-import { merchantData, adminData } from '../test_data/userCredentials';
-import { Routes } from '../page_data/routes';
-import { DashboardPage } from '../page_objects/Dashboard/DashboardPage';
+import { pomTest                  } from './pomFixtures'                          ;
+import { merchantData , adminData } from '../test_data/userCredentials'           ;
+import { Routes                   } from '../page_data/routes'                    ;
+import { DashboardPage            } from '../page_objects/Dashboard/DashboardPage';
 
 type AuthFixtures = 
 {

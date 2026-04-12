@@ -7,7 +7,7 @@ import { EMoneyOperationalWallet, EMoneyMerchantWallets, EMoneyCustomerWallets }
 import {LedgerOperations} from '../../test_data/LedgerOperationsData';
 import { EMoneyLimits } from '../../test_data/EMoneyLimitsData';
 
-test('Get Filtesrs', async ({ adminUser, transactionsMainPage }) =>
+test('Get Filters', async ({ adminUser, transactionsMainPage }) =>
 {
     await transactionsMainPage.transactionsPage.filter.reset();
     await transactionsMainPage.transactionsPage.filter.openMoreOptionFilter();
@@ -123,7 +123,8 @@ test('Edit Limit Details', async ({ adminUser, dashboardPage, emoneyPage, limitD
     await editLimitPage.editLimit({currency: 'USD'})
 });
 
-test.only('Get all roles details', async ({ adminUser, dashboardPage, editRolePage }) =>
+test.only('Get all roles details', async ({ adminUser, dashboardPage, internalMidsListPage }) =>
 {
-    await dashboardPage.goTo('https://dashboard.dev.transferty.com/users/list/roles/fcba3b69b5e3ef6ae9c200de3fe2ae9c/edit');
+    await dashboardPage.goTo('https://dashboard.dev.transferty.com/mids/secure-deposits?f=%7B%22projectIdsList%22%3A%5B1777849357%5D%7D');
+    await internalMidsListPage.filterBar.exportCsv();
 });
