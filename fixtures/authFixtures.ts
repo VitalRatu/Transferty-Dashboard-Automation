@@ -1,5 +1,5 @@
 import { pomTest } from './pomFixtures';
-import { userData, adminData } from '../test_data/userCredentials';
+import { merchantData, adminData } from '../test_data/userCredentials';
 import { Routes } from '../page_data/routes';
 import { DashboardPage } from '../page_objects/Dashboard/DashboardPage';
 
@@ -29,34 +29,27 @@ type AuthFixtures =
     },
 }); */
 
-// Global variables to store the exact snapshot of Local Storage in memory
+// Merchant state
 let cachedMerchantStorage: Record<string, string>
 let merchantTokenTimestamp = 0
 
-// Separate variables for Admin state to prevent session crossover
+// Admin state
 let cachedAdminStorage: Record<string, string> 
 let adminTokenTimestamp = 0
 
-// Set token expiration threshold to 14 minutes (in milliseconds)
 const TOKEN_LIFETIME_MS = 14 * 60 * 1000 
 
 export const authTest = pomTest.extend<AuthFixtures>({
     
     merchantUser: async ({ page, loginPage, dashboardPage }, use) => 
     {
-        // Capture the current timestamp to verify token freshness
         const now = Date.now()
 
-        // Check if we need to perform a real UI login
-        // Triggers if cache is empty (first test run) OR if 14 minutes have passed
         if (!cachedMerchantStorage || (now - merchantTokenTimestamp > TOKEN_LIFETIME_MS)) 
         {
-            // Navigate to the login page and perform standard UI authentication
             await loginPage.goTo(Routes.LOGIN)
-            await loginPage.signIn(userData.EMAIL, userData.PASSWORD)
+            await loginPage.signIn(merchantData.MERCHANT_EMAIL, merchantData.MERCHANT_PASSWORD)
             
-            // Execute code inside the browser context to capture the session
-            // We iterate through all Local Storage keys to ensure we don't miss anything (like userId or settings)
             cachedMerchantStorage = await page.evaluate(() => 
             {
                 const StorageContent: Record<string, string> = {}
@@ -68,21 +61,16 @@ export const authTest = pomTest.extend<AuthFixtures>({
                         StorageContent[key] = window.localStorage.getItem(key) || ''
                     } 
                 }
-                return StorageContent // Return the complete state snapshot to the Node.js environment
+                return StorageContent
             })
             
-            // Update the timestamp to reset the 14-minute countdown
             merchantTokenTimestamp = Date.now()
         } 
         else 
         {
-            // Fast path: bypass the UI login by injecting the cached session
-            
-            // Navigate to the app's domain first
-            // Browsers block Local Storage access on blank pages due to security policies
+
             await page.goto(Routes.LOGIN)
-            
-            // Execute code inside the browser to restore the saved session data
+
             await page.evaluate((value) => 
             {
                 for (const key in value) 
@@ -91,16 +79,13 @@ export const authTest = pomTest.extend<AuthFixtures>({
                 }
             }, cachedMerchantStorage)
             
-            // Jump straight to the dashboard since the browser now believes we are fully authenticated
             await page.goto(Routes.DASHBOARD)
             await page.waitForURL(/dashboard/, { timeout: 15000 });
             await page.waitForLoadState('load');
         }
 
-        // Perform post-login UI actions, like setting the Live Mode toggle
         await dashboardPage.sidebar.setLiveMode()
         
-        // Pass the dashboardPage object to the actual test body and suspend fixture execution
         await use() 
     },
 

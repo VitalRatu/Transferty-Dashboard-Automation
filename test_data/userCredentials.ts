@@ -1,7 +1,7 @@
-export const userData: { EMAIL: string; PASSWORD: string } = 
+export const merchantData: { MERCHANT_EMAIL: string; MERCHANT_PASSWORD: string } = 
 {
-    EMAIL: process.env.EMAIL!,
-    PASSWORD: process.env.PASSWORD!,
+    MERCHANT_EMAIL: process.env.MERCHANT_EMAIL!,
+    MERCHANT_PASSWORD: process.env.MERCHANT_PASSWORD!,
 };
 
 export const adminData: { ADMIN_EMAIL: string; ADMIN_PASSWORD: string } = 

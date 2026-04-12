@@ -123,7 +123,7 @@ test('Create Secure Deposit', async ({ adminUser, dashboardPage, MIDsPage, newSe
     });
 });
 
-test.only('Create External MID', async ({ adminUser, dashboardPage, MIDsPage, newExternalMidPage }) => 
+test('Create External MID', async ({ adminUser, dashboardPage, MIDsPage, newExternalMidPage }) => 
 {
     await dashboardPage.page.pause()
     await test.step('User clicks on "MIDs" tab', async() => 

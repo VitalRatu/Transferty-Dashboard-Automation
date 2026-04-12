@@ -123,8 +123,7 @@ test('Edit Limit Details', async ({ adminUser, dashboardPage, emoneyPage, limitD
     await editLimitPage.editLimit({currency: 'USD'})
 });
 
-test.only('Get all roles details', async ({ adminUser, dashboardPage, roleDetailsPage }) =>
+test.only('Get all roles details', async ({ adminUser, dashboardPage, editRolePage }) =>
 {
-    await dashboardPage.goTo('https://dashboard.dev.transferty.com/users/list/roles/745bd3be828434f94d6f5e955c48d7ab');
-    await roleDetailsPage.deleteRole();
+    await dashboardPage.goTo('https://dashboard.dev.transferty.com/users/list/roles/fcba3b69b5e3ef6ae9c200de3fe2ae9c/edit');
 });

@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import { expect, Locator, Page } from '@playwright/test';
 import { BasePage } from './BasePage';
 import { Routes } from '../page_data/routes';
