@@ -1,6 +1,6 @@
 import { expect, Locator, Page } from '@playwright/test';
 import { CreationForm } from '../../related_components/CreationForm';
-import { LedgerOperationsData } from '../../../test_data/LedgerOpeationsData';
+import { LedgerOperationsData } from '../../../test_data/LedgerOperationsData';
 
 /**
  * Represents the page for creating manual ledger operations within the E-money system
