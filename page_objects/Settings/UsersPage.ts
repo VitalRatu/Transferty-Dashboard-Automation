@@ -3,7 +3,7 @@ import { Page } from '@playwright/test';
 import { Routes } from '../../page_data/routes';
 import { Tab } from '../related_components/Tab';
 import { UsersListPage } from '../Settings/Users/UsersListPage';
-import { AdminsListPage } from './Users/AdminsListPage';
+import { AdminsListPage } from './Users/Admins/AdminsListPage';
 import { SessionsListPage } from "../Settings/Users/SessionsListPage";
 import { RolesListPage } from '../Settings/Users/Roles/RolesListPage';
 

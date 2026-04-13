@@ -24,7 +24,7 @@ export class RoleDetailsPage extends BasePage
         this.permissionsDataRows = this.permissionsTable.locator('tbody tr:not(.section-name)');
     }
 
-    public async editRole(): Promise<void>
+    public async clickOnEditbutton(): Promise<void>
     {
         await this.view.clickActionButton('Edit');
         const expectedHeading = new RegExp(`EDIT ROLE`, 'i')
@@ -32,7 +32,7 @@ export class RoleDetailsPage extends BasePage
         await expect(editPageHeader).toBeVisible()
     }
 
-    public async deleteRole(): Promise<void>
+    public async clickOnDeleteButton(): Promise<void>
     {
         await this.view.clickActionButton('Remove');
 
@@ -45,10 +45,11 @@ export class RoleDetailsPage extends BasePage
 
     public async getRoleDetails(): Promise<Record<string, string>>
     {
-       return await this.view.getAllFieldsAndValues();
+        await this.page.waitForLoadState('networkidle');
+        return await this.view.getAllFieldsAndValues();
     }
 
-    public async getPermissions(): Promise<Record<string, string>>
+    public async getAllPermissions(): Promise<Record<string, string>>
     {
         const permissions: Record<string, string> = {};
         
@@ -69,5 +70,24 @@ export class RoleDetailsPage extends BasePage
         }
 
         return permissions;
+    }
+    public async getAllActivePermissions(): Promise<string[]>
+    {
+        const activePermissions: string[] = [];
+        await expect(this.permissionsTable).toBeVisible();
+
+        const count = await this.permissionsDataRows.count();
+        for (let i = 0; i < count; i++) 
+        {
+            const row = this.permissionsDataRows.nth(i);
+            const rowClass = await row.getAttribute('class');
+            const isDisabled = rowClass?.includes('disabled-permission-row') ?? false;
+            if (!isDisabled) 
+            {
+                const nameCellText = await row.locator('td').nth(0).innerText();
+                activePermissions.push(nameCellText.trim());
+            }
+        }
+        return activePermissions;
     }
 }

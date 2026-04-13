@@ -25,6 +25,7 @@ export class Header
     
     /** Locator for the container of project dropdown options */
     private readonly projectOptions: Locator;
+    private readonly currentUser: Locator;
 
     /**
      * Initializes a new instance of the Header class
@@ -35,11 +36,13 @@ export class Header
     {
         this.page = page;
         this.logOutButton = this.page.locator('.user-logout');
+        this.currentUser = this.page.locator('.item .user-email');
         this.timeZoneLocator = this.page.locator('.tz-value');
         this.currentProject = this.page.locator('.project-name');
         this.transfertLogoLocator = this.page.locator('.header-logo-link')
         this.projectOptions = this.page.locator('.visible.menu.transition');
         this.projectOptions = this.page.locator('.visible.menu.transition .item');
+
     }
 
     /**
@@ -75,6 +78,13 @@ export class Header
         expect (this.currentProject).toBeVisible();
         const projectName: string = await this.currentProject.innerText();
         return projectName;
+    }
+
+    public async getCurrentUserEmail(): Promise<string>
+    {
+        expect (this.currentUser).toBeVisible();
+        const userEmail: string = await this.currentUser.innerText();
+        return userEmail;
     }
 
     /**

@@ -1,8 +1,7 @@
-import {expect, test, } from '../../fixtures/fixtures';         
-import {pomTest} from '../../fixtures/pomFixtures' 
+import {test} from '../../fixtures/fixtures';         
 import {SideBarMenuButtons} from '../../page_data/SideBarMenuButtons';
 import {TransactionsPageFilters} from '../../test_data/filtersData';
-import {BillingAdjustmentsSubTabs, BillingBalancesSubTabs, BillingTabs, EMoneyTabs, EMoneyWalletsTabs, MIDsTabs } from '../../page_data/TabNames';
+import {EMoneyTabs, EMoneyWalletsTabs } from '../../page_data/TabNames';
 import { EMoneyOperationalWallet, EMoneyMerchantWallets, EMoneyCustomerWallets } from '../../test_data/EMoneyWalletsData';
 import {LedgerOperations} from '../../test_data/LedgerOperationsData';
 import { EMoneyLimits } from '../../test_data/EMoneyLimitsData';
@@ -113,18 +112,9 @@ test('Edit Merchant Wallet', async ({ adminUser, dashboardPage, emoneyPage, merc
     await editMerchantWalletPage.editWallet({description: 'Some new desription'})
 });
 
-test('Edit Limit Details', async ({ adminUser, dashboardPage, emoneyPage, limitDetailsPage, editLimitPage }) =>
+test('Edit Limit Details', async ({ adminUser, dashboardPage, adminDetailsPage }) =>
 {
-    await dashboardPage.sidebar.clickButton(SideBarMenuButtons.E_MONEY);
-    await emoneyPage.tab.open(EMoneyTabs.Settings);
-    await emoneyPage.settingsPage.table.clickOnCellValueByUniqueValue('Currency', 'KZT', 'Currency' )
-    await limitDetailsPage.verifyDetails(EMoneyLimits[0])
-    await limitDetailsPage.editLimit()
-    await editLimitPage.editLimit({currency: 'USD'})
-});
-
-test.only('Get all roles details', async ({ adminUser, dashboardPage, internalMidsListPage }) =>
-{
-    await dashboardPage.goTo('https://dashboard.dev.transferty.com/mids/secure-deposits?f=%7B%22projectIdsList%22%3A%5B1777849357%5D%7D');
-    await internalMidsListPage.filterBar.exportCsv();
+    await dashboardPage.goTo('https://dashboard.dev.transferty.com/users/list/admins/1926918471/details')
+    const details = await adminDetailsPage.getAdminDetails()
+    console.log(details)
 });

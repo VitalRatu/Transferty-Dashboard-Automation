@@ -242,7 +242,7 @@ export class FilterBar
         
         await expect(this.secondaryButton).toBeVisible();
 
-        const tempFilePath = path.join(process.cwd(), `temp_export_${Date.now()}.csv`);
+        const tempFilePath = path.join(process.cwd(), `export_${Date.now()}.csv`);
 
         const downloadPromise = this.page.waitForEvent('download');
         
@@ -256,8 +256,6 @@ export class FilterBar
         {
 
             const stats = fs.statSync(tempFilePath);
-            
-            console.log(`📊 Exported file: ${stats.size} bytes`);
 
             expect(stats.size, 'CSV file should not be empty').toBeGreaterThan(0);
         } 

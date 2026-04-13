@@ -1,7 +1,7 @@
 import { Page, expect } from '@playwright/test';
 import { BasePage } from '../../../BasePage';
 import { CreationForm } from '../../../related_components/CreationForm';
-import { PermissionsTable } from '../../../related_components/PermissionsTable'; // Наш новый класс
+import { PermissionsTable } from '../../../related_components/PermissionsTable';
 import { RoleData } from '../../../../test_data/RolesData';
 
 export class NewRolePage extends BasePage 
@@ -16,7 +16,7 @@ export class NewRolePage extends BasePage
         this.permissions = new PermissionsTable(page);
     }
 
-    public async fillRoleData(data: RoleData): Promise<void> 
+    public async createNewRole(data: RoleData): Promise<void> 
     {
         const header = this.page.getByRole('heading', { name: 'CREATE ROLE', exact: true });
         await expect(header).toBeVisible();

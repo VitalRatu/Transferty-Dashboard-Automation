@@ -27,6 +27,9 @@ import { RoleDetailsPage                      } from '../page_objects/Settings/U
 import { EditRolePage                         } from '../page_objects/Settings/Users/Roles/EditRolePage'
 import { NewRolePage                          } from '../page_objects/Settings/Users/Roles/NewRolePage'
 import { InternalMidsListPage } from '../page_objects/MIDs/InternalMIDs/InternalMidsListPage'
+import { UsersPage } from '../page_objects/Settings/UsersPage'
+import { AdminDetailsPage } from '../page_objects/Settings/Users/Admins/AdminDetailsPage'
+import { NewAdminPage } from '../page_objects/Settings/Users/Admins/NewAdminPage'
 
 type Fixtures = 
 {
@@ -58,6 +61,9 @@ type Fixtures =
     roleDetailsPage: RoleDetailsPage
     editRolePage: EditRolePage
     newRolePage: NewRolePage
+    usersPage: UsersPage
+    adminDetailsPage: AdminDetailsPage
+    newAdminPage: NewAdminPage
 }
 
 export const pomTest = base.extend<Fixtures>(
@@ -194,7 +200,20 @@ export const pomTest = base.extend<Fixtures>(
     newRolePage: async ({page}, use) =>
     {
         await use(new NewRolePage(page));
+    },
+    usersPage: async ({page}, use) =>
+    {
+        await use(new UsersPage(page));
+    },
+    adminDetailsPage: async ({page}, use) =>
+    {
+        await use(new AdminDetailsPage(page));
+    },
+    newAdminPage: async ({page}, use) =>
+    {
+        await use(new NewAdminPage(page));
     }
 })
+
 
 export {expect} from "@playwright/test"

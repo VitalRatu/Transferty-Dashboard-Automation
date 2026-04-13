@@ -79,4 +79,12 @@ export enum EMoneyTabs
         Customer = 'Customer'
     }
 
-export type AllTabs = TransactionTabs | ReportsTabs | ReportsFinancialSubTabs | BillingTabs | BillingAdjustmentsSubTabs | BillingBalancesSubTabs | MIDsTabs | EMoneyTabs | EMoneyWalletsTabs;
+
+export enum UsersTabs
+{
+    Users = 'Users',
+    Admins = 'Admins',
+    Sessions = 'Sessions',
+    Roles = 'Roles'
+}
+export type AllTabs = TransactionTabs | ReportsTabs | ReportsFinancialSubTabs | BillingTabs | BillingAdjustmentsSubTabs | BillingBalancesSubTabs | MIDsTabs | EMoneyTabs | EMoneyWalletsTabs | UsersTabs;

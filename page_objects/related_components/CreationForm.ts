@@ -97,7 +97,7 @@ export class CreationForm
         }
         else 
         {
-            const optionLocator = this.page.getByRole('option', { name: option, exact: true });
+            const optionLocator = this.page.getByRole('option', { name: option, exact: true }).first();
             await expect(optionLocator).toBeVisible();
             await optionLocator.click();
         }

@@ -26,7 +26,7 @@ export class RolesListPage
     public async openRoleDetails(roleName: string): Promise<void>
     {
         await this.table.clickOnCellValueByUniqueValue('Role', roleName, 'Role');
-        await this.page.waitForURL(/\/users\/list\/roles\/\d+/);
+        await this.page.waitForURL(new RegExp('/users/list/roles/[a-f0-9]+', 'i'));
     }
 
     public async getAllRolesName(): Promise<string[]>
