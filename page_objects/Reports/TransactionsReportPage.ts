@@ -1,0 +1,30 @@
+import { Page } from 'playwright';
+import { Tab } from '../related_components/Tab';
+import { TranGeneralReportPage } from './Transactions/TranGeneralReportPage';
+import { TranMethodsReportPage } from './Transactions/TranMethodsReportPage';
+import { TranCountriesReportPage } from './Transactions/TranCountriesReportPage';
+import { TranDistributionReportPage } from './Transactions/TranDistributionReportPage';
+
+export class TransactionsReportPage
+{
+    public readonly page: Page;
+
+    public readonly tab: Tab;
+
+    public readonly tranGeneralReportPage: TranGeneralReportPage;
+    public readonly tranMethodsReportPage: TranMethodsReportPage
+    public readonly tranCountriesReportPage: TranCountriesReportPage;
+    public readonly tranDistributionReportPage: TranDistributionReportPage;
+    
+    constructor(page: Page) 
+    {
+        this.page = page;
+    
+        this.tab = new Tab(page, 1);
+
+        this.tranGeneralReportPage = new TranGeneralReportPage(page);
+        this.tranMethodsReportPage = new TranMethodsReportPage(page);
+        this.tranCountriesReportPage = new TranCountriesReportPage(page);
+        this.tranDistributionReportPage = new TranDistributionReportPage(page);
+    }
+}

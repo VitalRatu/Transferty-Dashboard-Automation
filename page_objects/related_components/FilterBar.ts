@@ -74,7 +74,7 @@ export class FilterBar
         this.moreFilterDropdownMenuItem = this.filterWrapper.getByRole("option");
         this.checkboxLocatorString = 'input[type="checkbox"]';
         this.showInEurToggleLocator = this.filterWrapper.locator("#show-in-equivalent-checkbox");
-        this.primaryButton = this.actionsContainer.locator(".ui.primary.button");
+        this.primaryButton = this.actionsContainer.locator(".ui.primary.button, .ui.button.submit-button, ui.button");
         this.secondaryButton  = this.actionsContainer.locator(".ui.secondary.button");
     }
 
@@ -273,12 +273,18 @@ export class FilterBar
      * Typically used for "Create" or "Add" actions located in the filter bar
      * @returns A promise that resolves when the page navigates away from the current URL
      */
-    public async clickPrimaryButton(): Promise<void> 
+    public async clickPrimaryButton(buttonName?: string): Promise<void> 
     {
+        if (buttonName)
+        {
+            
+            const button = this.primaryButton.filter({ hasText: buttonName});
+            await expect(button).toBeVisible();
+            await button.click();
+        }
         await expect(this.primaryButton).toBeVisible();
-        const currentUrl = this.page.url();
         await this.primaryButton.click();
-        await this.page.waitForURL((url) => url.toString() !== currentUrl);
+        await this.page.waitForLoadState('networkidle');
     }
 
     /**
@@ -286,8 +292,14 @@ export class FilterBar
      * Typically used for secondary actions like "Export" or "Bulk Edit"
      * @returns A promise that resolves when navigation is complete
      */
-    public async clickSecondaryButton(): Promise<void> 
+    public async clickSecondaryButton(buttonName?: string): Promise<void> 
     {
+        if (buttonName)
+        {
+            const button = this.secondaryButton.filter({ hasText: buttonName});
+            await expect(button).toBeVisible();
+            await button.click();
+        }
         await expect(this.secondaryButton).toBeVisible();
         await this.secondaryButton.click();
         await this.page.waitForLoadState('networkidle');

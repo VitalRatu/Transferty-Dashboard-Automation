@@ -2,7 +2,7 @@ import { test                         as base } from '@playwright/test'
 import { LoginPage                            } from '../page_objects/LoginPage'
 import { DashboardPage                        } from '../page_objects/Dashboard/DashboardPage'
 import { BillingPage                          } from '../page_objects/Billing/BillingPage'
-import { OrdersPage                           } from '../page_objects/Orders/OrdersPage'
+import { OrdersListPage                           } from '../page_objects/Orders/OrdersListPage'
 import { ReportsPage                          } from '../page_objects/Reports/ReportsPage'
 import { TransactionAddPage                   } from '../page_objects/Transactions/TransactionAddPage'
 import { MIDsPage                             } from '../page_objects/MIDs/MIDsPage'
@@ -36,7 +36,7 @@ type Fixtures =
     loginPage: LoginPage
     dashboardPage: DashboardPage
     billingPage: BillingPage
-    ordersPage: OrdersPage
+    ordersListPage: OrdersListPage
     transactionsMainPage: TransactionsMainPage;
     transactionAddPage: TransactionAddPage;
     reportsPage: ReportsPage;
@@ -83,9 +83,9 @@ export const pomTest = base.extend<Fixtures>(
         await use (new BillingPage(page))
     },
     
-    ordersPage: async ({page}, use) =>
+    ordersListPage: async ({page}, use) =>
     {
-        await use (new OrdersPage(page))
+        await use (new OrdersListPage(page))
     },
     
     transactionsMainPage: async ({page}, use) =>

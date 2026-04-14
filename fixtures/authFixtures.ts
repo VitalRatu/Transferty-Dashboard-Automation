@@ -105,7 +105,10 @@ export const authTest = pomTest.extend<AuthFixtures>({
                 for (let i = 0; i < window.localStorage.length; i++) 
                 {
                     const key = window.localStorage.key(i)
-                    if (key) state[key] = window.localStorage.getItem(key) || ''
+                    if (key) 
+                    {
+                        state[key] = window.localStorage.getItem(key) || ''
+                    }
                 }
                 return state
             })

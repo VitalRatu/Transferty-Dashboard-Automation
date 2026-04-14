@@ -13,7 +13,7 @@ export class TxAttemptsPage
     private readonly page: Page;
     
     /** The FilterBar component used to apply search criteria and filter the transaction attempts */
-    private readonly filter: FilterBar;
+    public readonly filter: FilterBar;
     
     /** The Table component used to interact with the grid of transaction attempt records */
     public readonly table: Table;

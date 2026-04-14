@@ -9,8 +9,13 @@ export class Pagination
     /** Locator for the specific button used to trigger additional data fetching */
     private readonly loadMoreButton: Locator;
 
+    private readonly paginationContainer: Locator;
+
     /** The default number of items loaded per single pagination step */
-    readonly paginationAmount: number = 25;
+    private readonly paginationAmount: number = 25;
+
+    private readonly deactivateButtonLocator: Locator;
+    
 
     /**
      * Initializes a new instance of the Pagination class
@@ -19,17 +24,9 @@ export class Pagination
      */
     constructor(page: Page) 
     {
-        this.loadMoreButton = page.locator('#show-more-button');
-    }
-
-    /**
-     * Asserts that the "Load More" button is currently visible on the page
-     * This is typically used to determine if there is more data available to be fetched
-     * @returns A promise that resolves when the button visibility assertion passes
-     */
-    public async isVisible(): Promise<void>
-    {
-        return await expect(this.loadMoreButton).toBeVisible();
+        this.paginationContainer = page.locator('.show-more');
+        this.loadMoreButton = page.locator('.show-more-button');
+        this.deactivateButtonLocator = page.locator('.mt-1 .trigger-container');
     }
 
     /**
@@ -39,5 +36,10 @@ export class Pagination
     public async click(): Promise<void>
     {
         await this.loadMoreButton.click();
+    }
+
+    public async deactivateSelected(): Promise<void>
+    {
+        await this.deactivateButtonLocator.click();
     }
 }

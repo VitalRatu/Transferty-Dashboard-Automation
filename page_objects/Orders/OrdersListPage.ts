@@ -9,7 +9,7 @@ import { Routes } from '../../page_data/routes';
  * Provides access to the centralized order management system, allowing users to view,
  * filter, and interact with order data through the integrated Table and FilterBar components
  */
-export class OrdersPage extends BasePage 
+export class OrdersListPage extends BasePage 
 {
     /** The Table component used to display and manage the grid of order records */
     public readonly table: Table;
