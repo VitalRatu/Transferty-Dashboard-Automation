@@ -21,7 +21,7 @@ export class EditSecureDepositPage extends BasePage
      */
     constructor(page: Page) 
     {
-        super(page);
+        super(page, /\/mids\/secure-deposits\/SD-\d+\/edit/);
         this.form = new CreationForm(page);
     }
     

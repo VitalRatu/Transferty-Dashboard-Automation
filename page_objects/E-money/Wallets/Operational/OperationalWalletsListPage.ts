@@ -1,19 +1,16 @@
 import { Page, Locator, expect } from '@playwright/test';
-import { Tab } from '../../../related_components/Tab';
 import { Table } from '../../../related_components/Table';
 import { FilterBar } from '../../../related_components/FilterBar';
 import { EMoneyOperationalWallet } from '../../../../test_data/EMoneyWalletsData';
+import { BasePage } from '../../../BasePage';
 
 /**
  * Represents the Operational Wallets page within the E-money section
  * Provides functionality to manage internal system wallets, including navigation to the 
  * creation form and verification of operational wallet data within the records table
  */
-export class OperationalWalletsListPage 
+export class OperationalWalletsListPage extends BasePage
 {
-    /** The Playwright Page instance */
-    private readonly page: Page;
-    
     /** The FilterBar component used for searching records and initiating the creation of new wallets */
     public readonly filter: FilterBar;
     
@@ -27,7 +24,7 @@ export class OperationalWalletsListPage
      */
     constructor(page: Page) 
     {
-        this.page = page;
+        super(page, /\/emoney\/wallets\/operational/);
         this.filter = new FilterBar(page);
         this.table = new Table(page);
     }

@@ -2,17 +2,15 @@ import { Page, Locator, expect } from '@playwright/test';
 import { Table } from '../../related_components/Table';
 import { FilterBar } from '../../related_components/FilterBar';
 import { EMoneyLimitsData } from '../../../test_data/EMoneyLimitsData';
+import { BasePage } from '../../BasePage';
 
 /**
  * Represents the Settings page within the E-money section
  * Provides an interface to manage global transaction constraints, customer wallet limits, 
  * and currency-specific configurations through the integrated FilterBar and Table components
  */
-export class SettingsPage 
+export class SettingsPage extends BasePage
 {
-    /** The Playwright Page instance */
-    private readonly page: Page;
-    
     /** The FilterBar component used for searching settings and initiating the creation of new limits */
     public readonly filter: FilterBar;
     
@@ -26,7 +24,7 @@ export class SettingsPage
      */
     constructor(page: Page) 
     {
-        this.page = page;
+        super(page, /\/emoney\/settings/);
         this.filter = new FilterBar(page);
         this.table = new Table(page);
     }

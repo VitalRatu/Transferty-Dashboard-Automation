@@ -15,10 +15,10 @@ export class ChannelsReportPage
     public readonly intermediariesReportPage: IntermediariesReportPage;
 
 
-    constructor(page: Page) 
+    constructor(page: Page, tabDepth: number = 0) 
     {
         this.page = page;
-        this.tab = new Tab(page, 2);
+        this.tab = new Tab(page, tabDepth);
 
         this.providersReportPage = new ProvidersReportPage(page);
         this.pspReportPage = new PSPReportPage(page);

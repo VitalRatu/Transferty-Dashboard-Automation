@@ -22,6 +22,7 @@ export class ChannelPage
     /** The Table component used to display and audit balances and transaction flows for each active channel */
     public readonly table: Table;
 
+    //TODO: Implement pages for Provider and PSP
     /**
      * Initializes a new instance of the ChannelPage class
      * Sets up the core UI components required for managing and auditing channel-based financial data

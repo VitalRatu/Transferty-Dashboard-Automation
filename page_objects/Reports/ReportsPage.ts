@@ -36,19 +36,20 @@ export class ReportsPage extends BasePage
      * Initializes a new instance of the ReportsPage class
      * Sets the base route to the reports endpoint and instantiates components for tables, filters, and hierarchical tabs
      * @param page - The Playwright Page instance used for browser interactions
+     * @param tabDepth - The depth of the tab hierarchy
      */
-    constructor(page: Page) 
+    constructor(page: Page, tabDepth: number = 0) 
     {
         super(page, Routes.REPORTS);
         
         this.table = new Table(page);   
         this.filters = new FilterBar(page);
-        this.tab = new Tab(page, 0);
+        this.tab = new Tab(page, tabDepth);
 
-        this.financialReportPage = new FinancialReportPage(page);
-        this.transactionsReportPage = new TransactionsReportPage(page);
-        this.conversionReportPage = new ConversionReportPage(page);
-        this.reconciliationReportPage = new ReconciliationReportPage(page);
+        this.financialReportPage = new FinancialReportPage(page , tabDepth + 1);
+        this.transactionsReportPage = new TransactionsReportPage(page, tabDepth + 1);
+        this.conversionReportPage = new ConversionReportPage(page, tabDepth + 1);
+        this.reconciliationReportPage = new ReconciliationReportPage(page, tabDepth + 1);
         this.marginReportPage = new MarginReportPage(page);
     }
 }

@@ -39,7 +39,7 @@ export class Tab
      * @param tabIdentifier - The exact text name of the tab to switch to as defined in AllTabs
      * @returns A promise that resolves when the tab is confirmed to be in the active state
      */
-    public async open(tabIdentifier: AllTabs): Promise<void> 
+    public async open(tabIdentifier: string): Promise<void> 
     {
         let tab = this.item.getByText(tabIdentifier, { exact: true });
         const classAttribute: string | null = await tab.getAttribute('class');

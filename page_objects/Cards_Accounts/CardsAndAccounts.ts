@@ -1,15 +1,12 @@
-import { BasePage } from '../BasePage';
 import { Page } from '@playwright/test';
-import { Routes } from '../../page_data/routes';
 import { Tab } from '../related_components/Tab';
 import { APMsListPage } from './APMs/APMsListPage';
 import { BINsListPage } from './BINs/BINsListPage';
 import { CardsListPage } from './Cards/CardsListPage';
 import { LabelsListPage } from './Labels/LabelsListPage';
 
-export class CardsAndAccounts extends BasePage 
+export class CardsAndAccounts
 {
-
     public readonly tab: Tab;
 
     public readonly apmsListPage: APMsListPage;
@@ -19,7 +16,6 @@ export class CardsAndAccounts extends BasePage
 
     constructor(page: Page) 
     {
-        super(page, Routes.MIDs); 
         this.tab = new Tab(page);
 
         this.apmsListPage = new APMsListPage(page);

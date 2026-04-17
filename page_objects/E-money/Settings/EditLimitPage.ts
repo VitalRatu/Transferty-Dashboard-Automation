@@ -1,17 +1,15 @@
 import { expect, Page } from '@playwright/test';
 import { CreationForm } from '../../related_components/CreationForm';
 import { EMoneyLimitsData } from '../../../test_data/EMoneyLimitsData';
+import { BasePage } from '../../BasePage';
 
 /**
  * Represents the page for editing existing E-money transaction and wallet limits
  * Provides functionality to update currency configurations, daily wallet caps, 
  * and maximum transaction amounts via a shared creation form component
  */
-export class EditLimitPage 
+export class EditLimitPage extends BasePage 
 {
-    /** The Playwright Page instance */
-    public readonly page: Page;
-    
     /** The shared form component used to interact with dropdowns and input fields during the edit process */
     public readonly form: CreationForm;
 
@@ -22,7 +20,7 @@ export class EditLimitPage
      */
     constructor(page: Page) 
     {
-        this.page = page;
+        super(page, /\/emoney\/settings\/\d+\/edit/);
         this.form = new CreationForm(page);
     }
 

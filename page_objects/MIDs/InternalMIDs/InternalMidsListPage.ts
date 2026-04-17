@@ -2,17 +2,15 @@ import { Page, Locator, expect } from '@playwright/test';
 import { FilterBar } from '../../related_components/FilterBar'; 
 import { Table } from '../../related_components/Table';
 import { InternalMidData } from '../../../test_data/MIDsData';  
+import { BasePage } from '../../BasePage';
 
 /**
  * Represents the Internal MIDs management page within the MIDs section
  * Provides functionality to navigate to the creation form and verify existing Internal MID
  * records within the data table against expected test data
  */
-export class InternalMidsListPage
+export class InternalMidsListPage extends BasePage
 {
-    /** The Playwright Page instance */
-    private readonly page: Page;
-    
     /** The FilterBar component used for searching and initiating new MID creation */
     public readonly filterBar: FilterBar;
     
@@ -26,7 +24,7 @@ export class InternalMidsListPage
      */
     constructor(page: Page) 
     {
-        this.page = page;
+        super(page, /\/mids\/internal/);
         this.filterBar = new FilterBar(page);
         this.table = new Table(page);
     }
@@ -44,7 +42,7 @@ export class InternalMidsListPage
 
     public async exportInternalMidsToCSV(): Promise<void>
     {
-        await this.filterBar.clickSecondaryButton();
+        await this.filterBar.exportCsv();
         await this.page.waitForLoadState('networkidle');
     }
 

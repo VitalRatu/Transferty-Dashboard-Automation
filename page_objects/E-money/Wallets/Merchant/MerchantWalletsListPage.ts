@@ -1,19 +1,16 @@
 import { Page, Locator, expect } from '@playwright/test';
-import { Tab } from '../../../related_components/Tab';
 import { Table } from '../../../related_components/Table';
 import { FilterBar } from '../../../related_components/FilterBar';
 import { EMoneyMerchantWallet } from '../../../../test_data/EMoneyWalletsData';
+import { BasePage } from '../../../BasePage';
 
 /**
  * Represents the Merchant Wallets page within the E-money section
  * Provides a management interface for viewing merchant-specific digital wallets,
  * initiating new wallet creation, and verifying wallet record integrity in the data table
  */
-export class MerchantWalletsListPage 
+export class MerchantWalletsListPage extends BasePage
 {
-    /** The Playwright Page instance */
-    private readonly page: Page;
-    
     /** The FilterBar component used for searching and navigating to the creation form */
     public readonly filter: FilterBar;
     
@@ -27,7 +24,7 @@ export class MerchantWalletsListPage
      */
     constructor(page: Page) 
     {
-        this.page = page;
+        super(page, /\/emoney\/wallets\/merchant/);
         this.filter = new FilterBar(page);
         this.table = new Table(page);
     }

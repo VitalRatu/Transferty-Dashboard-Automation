@@ -1,4 +1,4 @@
-import { Page, Locator, expect } from '@playwright/test';
+import { Page} from '@playwright/test';
 import {Tab} from '../../../page_objects/related_components/Tab';
 import { MerchantWalletsListPage } from '.././Wallets/Merchant/MerchantWalletsListPage';
 import { CustomerWalletsListPage } from '.././Wallets/Customer/CustomerWalletsListPage';
@@ -11,8 +11,6 @@ import { OperationalWalletsListPage } from '.././Wallets/Operational/Operational
  */
 export class WalletsPage 
 {
-    /** The Playwright Page instance */
-    private readonly page: Page;
     
     /** The secondary Tab component (index 1) used to switch between different wallet types */
     public readonly tab: Tab;
@@ -31,10 +29,9 @@ export class WalletsPage
      * Sets up the secondary tab navigation and instantiates all specialized wallet category pages
      * @param page - The Playwright Page instance
      */
-    constructor(page: Page) 
+    constructor(page: Page, tabDepth: number = 0) 
     {
-        this.page = page;
-        this.tab = new Tab(page, 1);
+        this.tab = new Tab(page, tabDepth);
         this.operationalPage = new OperationalWalletsListPage(page);
         this.merchantPage = new MerchantWalletsListPage(page);
         this.customerPage = new CustomerWalletsListPage(page);

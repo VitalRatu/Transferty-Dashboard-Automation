@@ -1,4 +1,4 @@
-import { Page, expect } from '@playwright/test';
+import { Locator, Page, expect } from '@playwright/test';
 import { BasePage } from '../../BasePage';
 import { DetailsPageReader } from '../../related_components/DetailsPageReader';
 import { AggregatedMidData} from '../../../test_data/MIDsData'; // 
@@ -9,6 +9,9 @@ export class AggregatedMidDetailsPage extends BasePage
     /** The reader component used to extract field values from the details container */
     public readonly view: DetailsPageReader;
 
+    private readonly deleteModal:Locator;
+    private readonly confirmDeleteButton:Locator;
+
     /**
      * Initializes a new instance of the OperationalWalletDetailsPage class
      * Sets up the view reader and data table for managing operational wallet details
@@ -16,8 +19,10 @@ export class AggregatedMidDetailsPage extends BasePage
      */
     constructor(page: Page) 
     {
-        super(page);
+        super(page, /\/mids\/aggregated\/AG-\d{10}/);
         this.view = new DetailsPageReader(page);
+        this.deleteModal = this.page.locator('.ui.small.modal.transition.visible.active.Modal.live');
+        this.confirmDeleteButton = this.deleteModal.getByRole('button', { name: 'Delete', exact: true });
     }
 
     /**
@@ -85,6 +90,12 @@ export class AggregatedMidDetailsPage extends BasePage
     public async clickDeleteButton(): Promise<void> 
     {
         await this.view.clickActionButton('Delete');
+
+        await expect(this.deleteModal).toBeVisible();
+        await this.confirmDeleteButton.click();
+        await expect(this.deleteModal).toBeHidden();
+        
+        await this.page.waitForURL(new RegExp(`/mids/aggregated`));
     }
 
 }

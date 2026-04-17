@@ -15,7 +15,7 @@ import { PSPPage } from './PSPPage';
  * This class serves as a central hub that initializes and provides access to all sub-modules 
  * related to fund management, accounting adjustments, settlements, and provider configurations
  */
-export class BillingPage extends BasePage 
+export class BillingPage 
 {
     /** The primary navigation tab component used to switch between various billing sub-pages */
     public readonly tab: Tab;
@@ -47,17 +47,16 @@ export class BillingPage extends BasePage
      * to provide a unified interface for financial automation
      * @param page - The Playwright Page instance
      */
-    constructor(page: Page) 
+    constructor(page: Page, tabDepth: number = 0 ) 
     {
-        super(page, Routes.BILLING);
-        this.tab = new Tab(page, 0);
+        this.tab = new Tab(page, tabDepth);
 
-        this.balancesPage = new BalancesPage(page);
-        this.adjustmentsPage = new AdjustmentsPage(page);
-        this.settlementsPage = new SettlementsPage(page);
-        this.feesPage = new FeesPage(page);
-        this.reservePage = new ReservePage(page);
-        this.exchangeRatesPage = new ExchangeRatesPage(page);
-        this.pspPage = new PSPPage(page);
+        this.balancesPage = new BalancesPage(page, tabDepth + 1);
+        this.adjustmentsPage = new AdjustmentsPage(page, tabDepth + 1);
+        this.settlementsPage = new SettlementsPage(page, tabDepth + 1);
+        this.feesPage = new FeesPage(page, tabDepth + 1);
+        this.reservePage = new ReservePage(page, tabDepth + 1);
+        this.exchangeRatesPage = new ExchangeRatesPage(page, tabDepth + 1);
+        this.pspPage = new PSPPage(page, tabDepth + 1);
     }
 }

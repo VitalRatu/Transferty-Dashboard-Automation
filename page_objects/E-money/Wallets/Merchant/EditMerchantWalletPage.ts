@@ -18,7 +18,7 @@ export class EditMerchantWalletPage extends BasePage
      */
     constructor(page: Page) 
     {
-        super(page);
+        super(page, /\/emoney\/wallets\/merchant\/\d+\/edit/);
         this.form = new CreationForm(page);
     }
 

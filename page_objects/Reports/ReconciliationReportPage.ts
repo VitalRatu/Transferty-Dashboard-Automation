@@ -14,11 +14,11 @@ export class ReconciliationReportPage
     public readonly recTxAttemptsReportPage: RecTxAttemptsReportPage
     public readonly recTxStatusMismatchReportPage: RecTxStatusMismatchReportPage;
     
-    constructor(page: Page) 
+    constructor(page: Page, tabDepth: number = 0) 
     {
         this.page = page;
     
-        this.tab = new Tab(page, 1);
+        this.tab = new Tab(page, tabDepth);
 
         this.recTransactionReportPage = new RecTransactionReportPage(page);
         this.recTxAttemptsReportPage = new RecTxAttemptsReportPage(page);

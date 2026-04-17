@@ -1,7 +1,7 @@
 import { Page, Locator, expect } from '@playwright/test';
-import { Tab } from '../../related_components/Tab';
 import { Table } from '../../related_components/Table';
 import { FilterBar } from '../../related_components/FilterBar';
+import { BasePage } from '../../BasePage';
 
 /**
  * Represents the Acquiring balances page within the billing module
@@ -9,14 +9,8 @@ import { FilterBar } from '../../related_components/FilterBar';
  * tracking merchant processing volumes, and auditing funds collected through 
  * various acquiring routes and payment methods
  */
-export class AcquiringPage 
+export class AcquiringPage extends BasePage
 {
-    /** The Playwright Page instance */
-    private readonly page: Page;
-    
-    /** The navigation tab component used for internal routing within the acquiring section */
-    public readonly tab: Tab;
-    
     /** The FilterBar component used for searching through acquiring records by project, terminal, or date */
     public readonly filter: FilterBar;
     
@@ -30,8 +24,7 @@ export class AcquiringPage
      */
     constructor(page: Page) 
     {
-        this.page = page;
-        this.tab = new Tab(page);
+        super(page, /\/billing\/balances\/acquiring/);
         this.filter = new FilterBar(page);
         this.table = new Table(page);
     }

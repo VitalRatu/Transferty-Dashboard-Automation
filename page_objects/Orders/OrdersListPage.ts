@@ -24,10 +24,9 @@ export class OrdersListPage extends BasePage
      */
     constructor(page: Page) 
     {
-        super(page, Routes.ORDERS); 
+        super(page, /\/orders/); 
 
         this.table = new Table(page); 
-
         this.filters = new FilterBar(page);
     }
 }

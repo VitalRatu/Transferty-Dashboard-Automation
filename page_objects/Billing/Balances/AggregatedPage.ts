@@ -1,7 +1,7 @@
-import { Page, Locator, expect } from '@playwright/test';
-import { Tab } from '../../related_components/Tab';
+import { Page } from '@playwright/test';
 import { Table } from '../../related_components/Table';
 import { FilterBar } from '../../related_components/FilterBar';
+import { BasePage } from '../../BasePage';
 
 /**
  * Represents the Aggregated MIDs balances page within the billing module
@@ -9,14 +9,8 @@ import { FilterBar } from '../../related_components/FilterBar';
  * across multiple merchant identifiers, allowing for high-level financial oversight 
  * and reporting of grouped payment processing entities
  */
-export class AggregatedPage 
+export class AggregatedPage extends BasePage
 {
-    /** The Playwright Page instance */
-    private readonly page: Page;
-    
-    /** The navigation tab component used for internal routing within the aggregated balances section */
-    public readonly tab: Tab;
-    
     /** The FilterBar component used for searching through aggregated groups by project, status, or MID details */
     public readonly filter: FilterBar;
     
@@ -30,8 +24,7 @@ export class AggregatedPage
      */
     constructor(page: Page) 
     {
-        this.page = page;
-        this.tab = new Tab(page);
+        super(page, /\/billing\/balances\/aggregated/);
         this.filter = new FilterBar(page);
         this.table = new Table(page);
     }

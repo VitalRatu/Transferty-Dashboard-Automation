@@ -10,9 +10,6 @@ import { IntermediaryPage } from './PSP/IntermediaryPage';
  */
 export class PSPPage 
 {
-    /** The Playwright Page instance */
-    private readonly page: Page;
-    
     /** The navigation tab component (index 1) used to toggle between PSP and Intermediary views */
     public readonly tab: Tab;
     
@@ -26,11 +23,11 @@ export class PSPPage
      * Initializes a new instance of the PSPPage class
      * Sets up the secondary tab navigation and instantiates sub-pages for providers and intermediaries
      * @param page - The Playwright Page instance
+     * @param tabDepth - The depth of the tab navigation
      */
-    constructor(page: Page) 
+    constructor(page: Page, tabDepth: number = 0) 
     {
-        this.page = page;
-        this.tab = new Tab(page, 1);
+        this.tab = new Tab(page, tabDepth + 1);
         this.pspSubtab = new PSPsubtab(page);
         this.intermediaryPage = new IntermediaryPage(page);
     }

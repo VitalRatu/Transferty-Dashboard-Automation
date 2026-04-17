@@ -1,7 +1,7 @@
 import { Page, Locator, expect } from '@playwright/test';
-import { Tab } from '../../related_components/Tab';
 import { Table } from '../../related_components/Table';
 import { FilterBar } from '../../related_components/FilterBar';
+import { BasePage } from '../../BasePage';
 
 /**
  * Represents the Intermediary management page within the PSP section
@@ -9,14 +9,9 @@ import { FilterBar } from '../../related_components/FilterBar';
  * allowing users to search through records and audit middle-man entities within 
  * the payment processing pipeline
  */
-export class IntermediaryPage 
+export class IntermediaryPage extends BasePage
 {
-    /** The Playwright Page instance */
-    private readonly page: Page;
-    
-    /** The navigation tab component used for internal routing within the Intermediary section */
-    public readonly tab: Tab;
-    
+
     /** The FilterBar component used for searching through intermediary records by name, status, or type */
     public readonly filter: FilterBar;
     
@@ -30,9 +25,14 @@ export class IntermediaryPage
      */
     constructor(page: Page) 
     {
-        this.page = page;
-        this.tab = new Tab(page);
+        super(page, /\/billing\/psp\/intermediary/);
         this.filter = new FilterBar(page);
         this.table = new Table(page);
+    }
+
+    public async createNewIntermediary(): Promise<void>
+    {
+        await this.filter.clickPrimaryButton('Create');
+        await this.page.waitForURL(/\/billing\/psp\/intermediary\/add/);
     }
 }

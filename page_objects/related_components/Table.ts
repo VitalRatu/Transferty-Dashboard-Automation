@@ -79,8 +79,9 @@ export class Table
     {
         await this.headers.first().waitFor({ state: 'visible', timeout: 10000 });
         const headersText: string[] = await this.getHeaders();
-        const index: number = headersText.findIndex(header => 
-            header.trim().toLowerCase().includes(columnName.toLowerCase())
+        const index: number = headersText.findIndex(
+          (header) =>
+            header.trim().toLowerCase() === columnName.trim().toLowerCase(),
         );
 
         if (index === -1) 
@@ -109,6 +110,7 @@ export class Table
      */
     public async getRowLocatorByColumnValue(columnName: string, value: string): Promise<Locator> 
     {
+        await this.page.waitForLoadState('networkidle');
         const colIndex: number = await this.getColumnIndex(columnName);
         await this.tableRows.first().waitFor({ state: 'visible' });
         const rowCount: number = await this.tableRows.count();
@@ -158,6 +160,8 @@ export class Table
      */
     public async clickOnCellValueByUniqueValue(lookupColumn: string, uniqueValue: string, targetColumn: string): Promise<void> 
     {
+        await this.page.waitForLoadState('networkidle');
+
         const row = await this.getRowLocatorByColumnValue(lookupColumn, uniqueValue);
 
         await expect(row).toBeVisible();
@@ -201,6 +205,29 @@ export class Table
             }
         }
         throw new Error(`Cell with text "${textValue}" not found in the table.`);
+    }
+
+    /**
+     * Finds a specific value within a designated column and clicks on the link inside that exact cell
+     * This avoids heavy loops by leveraging Playwright's native locators and existing row-finding logic
+     * @param columnName - The exact name of the table column header to search within
+     * @param targetValue - The text value to locate and click
+     * @returns A promise that resolves when the targeted value is clicked
+     */
+    public async clickOnColumnValue(columnName: string, targetValue: string): Promise<void> 
+    {
+        await this.page.waitForLoadState('networkidle');
+        
+        const row = await this.getRowLocatorByColumnValue(columnName, targetValue);
+        await expect(row).toBeVisible();
+
+        const columnIndex = await this.getColumnIndex(columnName);
+
+        const targetCell = row.getByRole('cell').nth(columnIndex);
+
+        const link = targetCell.locator('a, [role="link"], button').first();
+        
+        await link.click();
     }
 
    /**
@@ -320,13 +347,16 @@ export class Table
      * Triggers the pagination to load more data and waits for the row count to increase
      * Ensures the "Load More" button is visible before clicking and validates the table expansion
      * @throws {Error} If the pagination button is not visible on the page
-     * @returns A promise that resolves once the table has successfully loaded additional rows
+     * @returns A promise that resolves once the table has successfully loade
+     * d additional rows
      */
     public async loadMoreTableData(): Promise<void>
     {
-        if (!expect(await this.pagination.isVisible())) 
+        const isButtonVisible = await this.pagination.isVisible();
+
+        if (!isButtonVisible)
         {
-            throw new Error('Load More button is not visible.');
+          throw new Error("Load More button is not visible.");
         }
 
         const rowsBefore: number = await this.getRowCount();

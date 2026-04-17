@@ -3,11 +3,10 @@ import { Tab } from '../../../related_components/Tab';
 import { Table } from '../../../related_components/Table';
 import { FilterBar } from '../../../related_components/FilterBar';
 import { Pagination } from '../../../related_components/Pagination';
+import { BasePage } from '../../../BasePage';
 
-export class BasicRulesListPage 
+export class BasicRulesListPage  extends BasePage
 {
-    private readonly page: Page;
-    
     public readonly tab: Tab;
     
     public readonly filter: FilterBar;
@@ -16,11 +15,9 @@ export class BasicRulesListPage
 
     public readonly pagination: Pagination;
 
-
-
     constructor(page: Page) 
     {
-        this.page = page;
+        super(page, /\/monitoring\/rules\/basic/);
         this.tab = new Tab(page);
         this.filter = new FilterBar(page);
         this.table = new Table(page);

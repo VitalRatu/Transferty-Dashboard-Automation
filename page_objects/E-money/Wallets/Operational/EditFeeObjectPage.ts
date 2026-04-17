@@ -21,7 +21,7 @@ export class EditFeeObjectPage extends BasePage
      */
     constructor(page: Page) 
     {
-        super(page);
+        super(page, /\/emoney\/wallets\/operational\/\d+\/\d+\/edit/);
         this.form = new CreationForm(page);
     }
 

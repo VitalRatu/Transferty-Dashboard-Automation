@@ -1,18 +1,17 @@
-import { Page, Locator, expect } from '@playwright/test';
+import { Page, expect } from '@playwright/test';
 import { Table } from '../../related_components/Table';
 import { FilterBar } from '../../related_components/FilterBar';
 import { LedgerOperationsData } from '../../../test_data/LedgerOperationsData';
+import { BasePage } from '../../BasePage';
 
 /**
  * Represents the Ledger page within the E-money section
  * Provides functionality to audit financial operations, search through transaction history 
  * using filters, and initiate manual ledger entries
  */
-export class LedgerPage 
+export class LedgerPage extends BasePage
 {
-    /** The Playwright Page instance */
-    private readonly page: Page;
-    
+
     /** The FilterBar component used for searching and navigating to the operation creation form */
     public readonly filter: FilterBar;
     
@@ -26,7 +25,7 @@ export class LedgerPage
      */
     constructor(page: Page) 
     {
-        this.page = page;
+        super(page, /\/emoney\/ledger/);
         this.filter = new FilterBar(page);
         this.table = new Table(page);
     }

@@ -16,14 +16,14 @@ export class ConversionReportPage
     public readonly dynamicsReportPage: DynamicsReportPage;
     public readonly conCountriesReportPage: ConCountriesReportPage;
     
-    constructor(page: Page) 
+    constructor(page: Page, tabDepth: number = 0) 
     {
         this.page = page;
     
-        this.tab = new Tab(page, 1);
+        this.tab = new Tab(page, tabDepth);
 
         this.funnelReportPage = new FunnelReportPage(page);
-        this.channelsReportPage = new ChannelsReportPage(page);
+        this.channelsReportPage = new ChannelsReportPage(page, tabDepth + 1);
         this.dynamicsReportPage = new DynamicsReportPage(page);
         this.conCountriesReportPage = new ConCountriesReportPage(page);
     }

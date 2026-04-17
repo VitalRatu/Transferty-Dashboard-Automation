@@ -2,12 +2,10 @@ import { Page} from '@playwright/test';
 import { FilterBar } from '../../related_components/FilterBar'; 
 import { Table } from '../../related_components/Table';
 import { Pagination } from '../../related_components/Pagination';
+import { BasePage } from '../../BasePage';
 
-export class LabelsListPage 
+export class LabelsListPage extends BasePage
 {
-
-    public readonly page: Page;
-
     public readonly filterBar: FilterBar;
     
     public readonly table: Table;
@@ -16,7 +14,7 @@ export class LabelsListPage
 
     constructor(page: Page) 
     {
-        this.page = page;
+        super(page, /\/customers\/labels/);
         this.filterBar = new FilterBar(page);
         this.table = new Table(page);
         this.pagination = new Pagination(page);

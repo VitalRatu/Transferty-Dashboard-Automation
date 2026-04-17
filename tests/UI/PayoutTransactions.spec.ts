@@ -2,7 +2,7 @@ import {test} from '../../fixtures/fixtures';
 import {SideBarMenuButtons} from '../../page_data/SideBarMenuButtons';
 import {testCards} from '../../test_data/testCards';
 
-test('Visa 4012888888881881 Payout', async ({ merchantUser, transactionsMainPage, dashboardPage, transactionAddPage }) => 
+test('Visa 4012888888881881 Payout', async ({ merchantUser, transactionsPage, dashboardPage, transactionAddPage }) => 
 {
     await test.step('User clicks on "Transactions" tab', async() => 
     {
@@ -10,7 +10,7 @@ test('Visa 4012888888881881 Payout', async ({ merchantUser, transactionsMainPage
     });
     await test.step('User clicks on "Create payment" button', async() => 
     {
-        await transactionsMainPage.transactionsPage.AddNewTransaction();
+        await transactionsPage.transactionsListPage.AddNewTransaction();
     });
     await test.step('User fills up required data for Transaction', async() => 
     {
@@ -18,11 +18,11 @@ test('Visa 4012888888881881 Payout', async ({ merchantUser, transactionsMainPage
     });
     await test.step('User checks if transaction appeared on transaction list page', async() =>
     {
-        await transactionsMainPage.transactionsPage.CheckRowData(0, testCards[1]);
+        await transactionsPage.transactionsListPage.CheckRowData(0, testCards[1]);
     });
 });
 
-test('MasterCard 5413330300003002 Payout', async ({ merchantUser, transactionsMainPage, dashboardPage, transactionAddPage }) => 
+test('MasterCard 5413330300003002 Payout', async ({ merchantUser, transactionsPage, dashboardPage, transactionAddPage }) => 
 {
     await test.step('User clicks on "Transactions" tab', async() => 
     {
@@ -30,7 +30,7 @@ test('MasterCard 5413330300003002 Payout', async ({ merchantUser, transactionsMa
     });
     await test.step('User clicks on "Create payment" button', async() => 
     {
-        await transactionsMainPage.transactionsPage.AddNewTransaction();
+        await transactionsPage.transactionsListPage.AddNewTransaction();
     });
     await test.step('User fills up required data for Transaction', async() => 
     {
@@ -38,11 +38,11 @@ test('MasterCard 5413330300003002 Payout', async ({ merchantUser, transactionsMa
     });
     await test.step('User checks if transaction appeared on transaction list page', async() => 
     {
-        await transactionsMainPage.transactionsPage.CheckRowData(0, testCards[3]);
+        await transactionsPage.transactionsListPage.CheckRowData(0, testCards[3]);
     });
 });
 
-test('MasterCard 5555555555554444 Payout', async ({ merchantUser, transactionsMainPage, dashboardPage, transactionAddPage }) => 
+test('MasterCard 5555555555554444 Payout', async ({ merchantUser, transactionsPage, dashboardPage, transactionAddPage }) => 
 {
     await test.step('User clicks on "Transactions" tab', async() => 
     {
@@ -50,7 +50,7 @@ test('MasterCard 5555555555554444 Payout', async ({ merchantUser, transactionsMa
     });
     await test.step('User clicks on "Create payment" button', async() => 
     {
-        await transactionsMainPage.transactionsPage.AddNewTransaction();
+        await transactionsPage.transactionsListPage.AddNewTransaction();
     });
     await test.step('User fills up required data for Transaction', async() => 
     {
@@ -58,11 +58,11 @@ test('MasterCard 5555555555554444 Payout', async ({ merchantUser, transactionsMa
     });
     await test.step('User checks if transaction appeared on transaction list page', async() => 
     {
-        await transactionsMainPage.transactionsPage.CheckRowData(0, testCards[5]);
+        await transactionsPage.transactionsListPage.CheckRowData(0, testCards[5]);
     });
 });
 
-test('Amex 371449635398431 Payout', async ({ merchantUser, transactionsMainPage, dashboardPage, transactionAddPage }) => 
+test('Amex 371449635398431 Payout', async ({ merchantUser, transactionsPage, dashboardPage, transactionAddPage }) => 
 {
     await test.step('User clicks on "Transactions" tab', async() => 
     {
@@ -70,7 +70,7 @@ test('Amex 371449635398431 Payout', async ({ merchantUser, transactionsMainPage,
     });
     await test.step('User clicks on "Create payment" button', async() => 
     {
-        await transactionsMainPage.transactionsPage.AddNewTransaction();
+        await transactionsPage.transactionsListPage.AddNewTransaction();
     });
     await test.step('User fills up required data for Transaction', async() => 
     {
@@ -78,11 +78,11 @@ test('Amex 371449635398431 Payout', async ({ merchantUser, transactionsMainPage,
     });
     await test.step('User checks if transaction appeared on transaction list page', async() => 
     {
-        await transactionsMainPage.transactionsPage.CheckRowData(0, testCards[7]);
+        await transactionsPage.transactionsListPage.CheckRowData(0, testCards[7]);
     });
 });
 
-test('Unionpay 6212345678901232 Payout', async ({ merchantUser, transactionsMainPage, dashboardPage, transactionAddPage }) => 
+test('Unionpay 6212345678901232 Payout', async ({ merchantUser, transactionsPage, dashboardPage, transactionAddPage }) => 
 {
     await test.step('User clicks on "Transactions" tab', async() => 
     {
@@ -90,7 +90,7 @@ test('Unionpay 6212345678901232 Payout', async ({ merchantUser, transactionsMain
     });
     await test.step('User clicks on "Create payment" button', async() => 
     {
-        await transactionsMainPage.transactionsPage.AddNewTransaction();
+        await transactionsPage.transactionsListPage.AddNewTransaction();
     });
     await test.step('User fills up required data for Transaction', async() => 
     {
@@ -98,6 +98,6 @@ test('Unionpay 6212345678901232 Payout', async ({ merchantUser, transactionsMain
     });
     await test.step('User checks if transaction appeared on transaction list page', async() => 
     {
-        await transactionsMainPage.transactionsPage.CheckRowData(0, testCards[9]);
+        await transactionsPage.transactionsListPage.CheckRowData(0, testCards[9]);
     });
 });

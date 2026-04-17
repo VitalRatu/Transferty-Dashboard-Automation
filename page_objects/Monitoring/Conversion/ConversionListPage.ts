@@ -10,7 +10,7 @@ export class ConversionListPage extends BasePage
 
     constructor(page: Page) 
     {
-        super(page); 
+        super(page, /\/monitoring\/conversion/); 
 
         this.filter = new FilterBar(page);
     }

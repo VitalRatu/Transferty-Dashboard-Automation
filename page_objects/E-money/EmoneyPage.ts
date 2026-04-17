@@ -1,6 +1,4 @@
-import { BasePage } from '../BasePage';
 import { Page } from '@playwright/test';
-import { Routes } from '../../page_data/routes';
 import { Tab } from '../related_components/Tab';
 import { WalletsPage } from './Wallets/WalletsPage';
 import { SettingsPage } from './Settings/SettingsPage';
@@ -11,7 +9,7 @@ import { LedgerPage } from './Ledger/LedgerPage';
  * This page consolidates various financial modules including digital wallets, transaction ledgers, 
  * and specific E-money settings, allowing for centralized management of electronic currency flows
  */
-export class EmoneyPage extends BasePage 
+export class EmoneyPage
 {
     /** The primary Tab component used to navigate between Wallets, Ledger, and Settings modules */
     public readonly tab: Tab;
@@ -29,12 +27,12 @@ export class EmoneyPage extends BasePage
      * Initializes a new instance of the EmoneyPage class
      * Sets the base navigation route to the E-money endpoint and instantiates all specialized sub-pages
      * @param page - The Playwright Page instance used for browser interactions
+     * @param tabDepth - The depth of the tab navigation
      */
-    constructor(page: Page) 
+    constructor(page: Page, tabDepth: number = 0) 
     {
-        super(page, Routes.EMONEY); 
-        this.tab = new Tab(page, 0);
-        this.walletsPage = new WalletsPage(page);
+        this.tab = new Tab(page, tabDepth);
+        this.walletsPage = new WalletsPage(page, tabDepth + 1);
         this.ledgerPage = new LedgerPage(page);
         this.settingsPage = new SettingsPage(page);
     }

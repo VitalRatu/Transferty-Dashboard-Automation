@@ -15,7 +15,7 @@ export class TriggeredRulesListPage extends BasePage
 
     constructor(page: Page) 
     {
-        super(page); 
+        super(page, /\/monitoring\/triggered-rules/); 
 
         this.table = new Table(page); 
 

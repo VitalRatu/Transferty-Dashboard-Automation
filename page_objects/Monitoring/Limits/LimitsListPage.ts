@@ -16,7 +16,7 @@ export class LimitsListPage extends BasePage
 
     constructor(page: Page) 
     {
-        super(page); 
+        super(page, /\/monitoring\/limits/); 
 
         this.table = new Table(page); 
 

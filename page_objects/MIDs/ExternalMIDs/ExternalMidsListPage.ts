@@ -2,17 +2,15 @@ import { Page, Locator, expect } from '@playwright/test';
 import { FilterBar } from '../../related_components/FilterBar'; 
 import { Table } from '../../related_components/Table';
 import { ExternalMidData } from '../../../test_data/MIDsData';  
+import { BasePage } from '../../BasePage';
 
 /**
  * Represents the External MIDs management page within the MIDs section
  * This class provides methods to navigate to the creation form and verify that the external merchant 
  * configuration data is correctly displayed in the application's data table
  */
-export class ExternalMidsListPage 
+export class ExternalMidsListPage extends BasePage
 {
-    /** The Playwright Page instance */
-    private readonly page: Page;
-    
     /** The FilterBar component used for searching records and initiating the creation flow */
     public readonly filterBar: FilterBar;
     
@@ -26,7 +24,7 @@ export class ExternalMidsListPage
      */
     constructor(page: Page) 
     {
-        this.page = page;
+        super(page, /\/mids\/external/);
         this.filterBar = new FilterBar(page);
         this.table = new Table(page);
     }

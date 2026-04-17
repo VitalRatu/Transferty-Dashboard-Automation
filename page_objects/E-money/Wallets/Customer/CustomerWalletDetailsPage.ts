@@ -20,7 +20,7 @@ export class CustomerWalletDetailsPage extends BasePage
      */
     constructor(page: Page) 
     {
-        super(page);
+        super(page, /\/emoney\/wallets\/customer\/\d+/);
         this.view = new DetailsPageReader(page);
     }
 

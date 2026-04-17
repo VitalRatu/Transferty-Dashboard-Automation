@@ -1,67 +1,51 @@
-import { Page, expect } from '@playwright/test';
-import { FilterBar } from '../related_components/FilterBar';
-import { Table } from '../related_components/Table';
-import { CardData } from '../../test_data/testCards';
+import { BasePage } from '../BasePage';
+import { Routes } from '../../page_data/routes';
+import { Page } from '@playwright/test';
+import { Tab } from '../related_components/Tab';
+import { TransactionsListPage } from './TransactionsListPage';
+import { ReviewPage } from './ReviewPage';
+import { BlockedPage } from './BlockedPage';
+import { TxAttemptsPage } from './TxAttemptsPage';
+import { DisputePage } from './DisputePage';
 
 /**
- * Represents the main Transactions page in the application
- * Provides access to the filter bar and the data table for managing and verifying transaction records
+ * Acts as the main container and orchestrator for the Transactions section
+ * Groups together all sub-pages and tabs related to transaction management, such as Review, Blocked, Attempts, and Disputes
  */
-export class TransactionsPage 
+export class TransactionsPage extends BasePage 
 {
-    /** The Playwright Page instance used for browser interactions */
-    private readonly page: Page;
+    /** The Tab component used to navigate between different transaction categories */
+    public readonly tab: Tab;
     
-    /** The FilterBar component used for searching and initiating new transaction creation */
-    public readonly filter: FilterBar;
+    /** The default Transactions page instance for viewing and managing standard transactions */
+    public readonly transactionsListPage: TransactionsListPage;
     
-    /** The Table component used to read and interact with transaction data grids */
-    public readonly table: Table;
+    /** The Review page instance for handling transactions that require manual review */
+    public readonly reviewPage: ReviewPage;
+    
+    /** The Blocked page instance for managing blocked transactions */
+    public readonly blockedPage: BlockedPage;
+    
+    /** The TxAttempts page instance for viewing transaction attempt logs */
+    public readonly txAttemptsPage: TxAttemptsPage;
+    
+    /** The Dispute page instance for managing transaction disputes and chargebacks */
+    public readonly disputePage: DisputePage;
 
     /**
-     * Initializes a new instance of the TransactionsPage class
-     * Sets up the necessary sub-components like the filter bar and the data table
-     * @param page - The Playwright Page instance
+     * Initializes a new instance of the TransactionsMainPage class
+     * Sets the base route to the transactions endpoint and instantiates all related sub-pages and components
+     * @param page - The Playwright Page instance used for browser interactions
      */
     constructor(page: Page) 
     {
-        this.page = page;
-        this.filter = new FilterBar(page);
-        this.table = new Table(page);
+        super(page, Routes.TRANSACTIONS);
+        this.tab = new Tab(page);
+        
+        this.transactionsListPage = new TransactionsListPage(page);
+        this.reviewPage = new ReviewPage(page);
+        this.blockedPage = new BlockedPage(page);
+        this.txAttemptsPage = new TxAttemptsPage(page);
+        this.disputePage = new DisputePage(page);
     }
-
-    /**
-     * Opens the transaction creation page by clicking the primary button in the filter bar
-     * Asserts that the browser URL changes to the expected transaction addition route
-     * @returns A promise that resolves when the navigation and URL assertion are complete
-     */
-    public async AddNewTransaction(): Promise<void>
-    {
-        await this.filter.clickPrimaryButton();
-        await expect(this.page).toHaveURL(/\/transactions\/add/); 
-    }
-
-    /**
-     * Verifies the data of a specific transaction row against the expected card data
-     * Extracts row values by index, formats the card string to remove spaces, and uses a regular expression
-     * to assert that the first four (BIN) and last four digits of the card number match exactly
-     * @param rowIndex - The zero-based index of the row to check in the transactions table
-     * @param expectedData - The expected CardData object containing amount, currency, transaction type, and card number
-     * @returns A promise that resolves when all assertions for the row data pass successfully
-     */
-    public async CheckRowData(rowIndex: number, expectedData: CardData): Promise<void>
-    {
-        const rowValues = await this.table.getAllValuesFromRowByIndex(rowIndex);
-        expect(rowValues['Amount']).toContain(expectedData.amount);
-        expect(rowValues['Type']).toBe(expectedData.transaction_type.toLowerCase());
-        expect(rowValues['Amount']).toContain(expectedData.currency);
-        const rawCardString = rowValues['Cards & APM IDs'];
-        const stringWithoutSpaces = rawCardString.replace(/\s+/g, '');
-        const BIN = expectedData.card_number.slice(0, 4);
-        const lastFourDigits = expectedData.card_number.slice(-4);
-        const cardNumberToCheck = new RegExp(`^${BIN}.*${lastFourDigits}`);
-        expect(stringWithoutSpaces).toMatch(cardNumberToCheck);
-        expect(rowValues['Status']).toBe('Success');
-    }
-
 }

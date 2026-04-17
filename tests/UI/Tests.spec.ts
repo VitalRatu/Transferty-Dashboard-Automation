@@ -6,18 +6,17 @@ import { EMoneyOperationalWallet, EMoneyMerchantWallets, EMoneyCustomerWallets }
 import {LedgerOperations} from '../../test_data/LedgerOperationsData';
 import { EMoneyLimits } from '../../test_data/EMoneyLimitsData';
 
-test('Get Filters', async ({ adminUser, transactionsMainPage }) =>
+test('Get Filters', async ({ adminUser, transactionsPage }) =>
 {
-    await transactionsMainPage.transactionsPage.filter.reset();
-    await transactionsMainPage.transactionsPage.filter.openMoreOptionFilter();
-    await transactionsMainPage.transactionsPage.filter.getAllAvailableFilterNames();
-    await transactionsMainPage.transactionsPage.filter.disableFilter(TransactionsPageFilters.TxID);
-    await transactionsMainPage.transactionsPage.filter.isFilterEnabled(TransactionsPageFilters.TxID);
+    await transactionsPage.transactionsListPage.filter.reset();
+    await transactionsPage.transactionsListPage.filter.openMoreOptionFilter();
+    await transactionsPage.transactionsListPage.filter.getAllAvailableFilterNames();
+    await transactionsPage.transactionsListPage.filter.disableFilter(TransactionsPageFilters.TxID);
+    await transactionsPage.transactionsListPage.filter.isFilterEnabled(TransactionsPageFilters.TxID);
 });
 
 test('Create operational Wallet', async ({ adminUser, dashboardPage, emoneyPage, newOperationalWalletPage }) =>
 {
-    await emoneyPage.page.pause();
     await dashboardPage.sidebar.clickButton(SideBarMenuButtons.E_MONEY);
     await emoneyPage.tab.open(EMoneyTabs.Wallets);
     await emoneyPage.walletsPage.operationalPage.addNewOperationalWallet()
@@ -26,7 +25,6 @@ test('Create operational Wallet', async ({ adminUser, dashboardPage, emoneyPage,
 
 test('Create Merchant Wallet', async ({ adminUser, dashboardPage, emoneyPage, newMerchantWalletPage }) =>
 {
-    await emoneyPage.page.pause();
     await dashboardPage.sidebar.clickButton(SideBarMenuButtons.E_MONEY);
     await emoneyPage.tab.open(EMoneyTabs.Wallets);
     await emoneyPage.walletsPage.tab.open(EMoneyWalletsTabs.Merchant)
@@ -36,7 +34,6 @@ test('Create Merchant Wallet', async ({ adminUser, dashboardPage, emoneyPage, ne
 
 test('Create Ledger Issuance', async ({ adminUser, dashboardPage, emoneyPage, ledgerAddOperationPage }) =>
 {
-    await emoneyPage.page.pause();
     await dashboardPage.sidebar.clickButton(SideBarMenuButtons.E_MONEY);
     await emoneyPage.tab.open(EMoneyTabs.Ledger);
     await emoneyPage.ledgerPage.addNewLedgerOperation()
@@ -112,9 +109,9 @@ test('Edit Merchant Wallet', async ({ adminUser, dashboardPage, emoneyPage, merc
     await editMerchantWalletPage.editWallet({description: 'Some new desription'})
 });
 
-test('Edit Limit Details', async ({ adminUser, dashboardPage, adminDetailsPage }) =>
+test.only('Edit Limit Details', async ({ adminUser, projectsListPage, projectPage }) =>
 {
-    await dashboardPage.goTo('https://dashboard.dev.transferty.com/users/list/admins/1926918471/details')
-    const details = await adminDetailsPage.getAdminDetails()
-    console.log(details)
+    await projectsListPage.goToProject('automationStuff')
+    await projectPage.openTab('Team')
+    await projectPage.team.openTab('IP whitelist')
 });

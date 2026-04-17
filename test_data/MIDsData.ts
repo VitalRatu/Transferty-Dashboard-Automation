@@ -93,14 +93,6 @@ export const aggregatedMIDs: AggregatedMidData[] =
         currency: 'USD',
         internalMid: '',
         description: 'Secure Deposit Aggregated MID from automation'
-    },
-    
-    {
-        project: 'Vitaliy_QA Transferty',
-        type: 'Secure Deposit',
-        currency: 'USD',
-        internalMid: '',
-        description: 'Secure Deposit Aggregated MID from automation'
     }
 ]
 

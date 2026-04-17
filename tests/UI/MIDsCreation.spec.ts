@@ -1,13 +1,13 @@
-import {test} from '../../fixtures/fixtures';
+import {expect, test} from '../../fixtures/fixtures';
 import { SideBarMenuButtons} from '../../page_data/SideBarMenuButtons';
 import { MIDsTabs } from '../../page_data/TabNames';
 import { aggregatedMIDs, externalMIDs, internalMIDs, secureDeposits } from '../../test_data/MIDsData';
 
-test('Create Internal MID', async ({ adminUser, dashboardPage, MIDsPage, newInternalMidPage }) => 
+test('Create Internal MID', async ({ adminUser, projectsListPage, MIDsPage, newInternalMidPage }) => 
 {
     await test.step('User clicks on "MIDs" tab', async() => 
     {
-        await dashboardPage.sidebar.clickButton(SideBarMenuButtons.MIDS);
+        await projectsListPage.sidebar.clickButton(SideBarMenuButtons.MIDS);
     });
     await test.step('User opens "Internal MIDs" tab', async() => 
     {
@@ -27,11 +27,11 @@ test('Create Internal MID', async ({ adminUser, dashboardPage, MIDsPage, newInte
     });
 });
 
-test('Create Incoming Aggregated MID', async ({ adminUser, dashboardPage, MIDsPage, newAggregatedMidPage }) => 
+test('Create Incoming Aggregated MID', async ({ adminUser, projectsListPage, MIDsPage, newAggregatedMidPage, aggregatedMidDetailsPage }) => 
 {
     await test.step('User clicks on "MIDs" tab', async() => 
     {
-        await dashboardPage.sidebar.clickButton(SideBarMenuButtons.MIDS);
+        await projectsListPage.sidebar.clickButton(SideBarMenuButtons.MIDS);
     });
     await test.step('User opens "Aggregated MIDs" tab', async() => 
     {
@@ -49,13 +49,25 @@ test('Create Incoming Aggregated MID', async ({ adminUser, dashboardPage, MIDsPa
     {
         await MIDsPage.aggregatedMids.verifyRowMatchesData(0, aggregatedMIDs[0]);
     });
+
+    await test.step('User deletes the Aggregated MID', async() => 
+    {
+        await MIDsPage.aggregatedMids.openAggregatedMidDetails({description: aggregatedMIDs[0].description});
+        await aggregatedMidDetailsPage.clickDeleteButton();
+    });
+
+    await test.step('User checks if Aggregated MID was deleted', async() => 
+    {
+        const tempConst = await MIDsPage.aggregatedMids.table.getAllValuesFromRowByIndex(0);
+        expect(tempConst['Description']).not.toBe(aggregatedMIDs[0].description);  
+    });
 });
 
-test('Create Outgoing Aggregated MID', async ({ adminUser, dashboardPage, MIDsPage, newAggregatedMidPage }) => 
+test('Create Outgoing Aggregated MID', async ({ adminUser, projectsListPage, MIDsPage, newAggregatedMidPage, aggregatedMidDetailsPage}) => 
 {
     await test.step('User clicks on "MIDs" tab', async() => 
     {
-        await dashboardPage.sidebar.clickButton(SideBarMenuButtons.MIDS);
+        await projectsListPage.sidebar.clickButton(SideBarMenuButtons.MIDS);
     });
     await test.step('User opens "Aggregated MIDs" tab', async() => 
     {
@@ -73,37 +85,65 @@ test('Create Outgoing Aggregated MID', async ({ adminUser, dashboardPage, MIDsPa
     {
         await MIDsPage.aggregatedMids.verifyRowMatchesData(0, aggregatedMIDs[1]);
     });
+
+        await test.step('User deletes the Aggregated MID', async() => 
+    {
+        await MIDsPage.aggregatedMids.openAggregatedMidDetails({description: aggregatedMIDs[1].description});
+        await aggregatedMidDetailsPage.clickDeleteButton();
+    });
+    
+    await test.step('User checks if Aggregated MID was deleted', async() => 
+    {
+        const tempConst = await MIDsPage.aggregatedMids.table.getAllValuesFromRowByIndex(0);
+        expect(tempConst['Description']).not.toBe(aggregatedMIDs[1].description);  
+    });
 });
 
-test('Create Secure Deposit Aggregated MID', async ({ adminUser, dashboardPage, MIDsPage, newAggregatedMidPage }) => 
+test('Create Secure Deposit Aggregated MID', async ({ adminUser, projectsListPage, MIDsPage, newAggregatedMidPage, aggregatedMidDetailsPage }) => 
 {
     await test.step('User clicks on "MIDs" tab', async() => 
     {
-        await dashboardPage.sidebar.clickButton(SideBarMenuButtons.MIDS);
+        await projectsListPage.sidebar.clickButton(SideBarMenuButtons.MIDS);
     });
+
     await test.step('User opens "Aggregated MIDs" tab', async() => 
     {
         await MIDsPage.tab.open(MIDsTabs.Aggregated_MIDs);
     });
+
     await test.step('User clicks on "Add new" button', async() => 
     {
         await MIDsPage.aggregatedMids.addNewAggregatedMid();
     });
+
     await test.step('User fills up required data for Secure Deposit Aggregated MID', async() => 
     {
         await newAggregatedMidPage.createAggregatedMID(aggregatedMIDs[2]);
     });
+
     await test.step('User checks if Aggregated MID appeared on the list', async() => 
     {
         await MIDsPage.aggregatedMids.verifyRowMatchesData(0, aggregatedMIDs[2]);
     });
+
+    await test.step('User deletes the Aggregated MID', async() => 
+    {
+        await MIDsPage.aggregatedMids.openAggregatedMidDetails({description: aggregatedMIDs[2].description});
+        await aggregatedMidDetailsPage.clickDeleteButton();
+    });
+    
+    await test.step('User checks if Aggregated MID was deleted', async() => 
+    {
+        const tempConst = await MIDsPage.aggregatedMids.table.getAllValuesFromRowByIndex(0);
+        expect(tempConst['Description']).not.toBe(aggregatedMIDs[2].description);  
+    });  
 });
 
-test('Create Secure Deposit', async ({ adminUser, dashboardPage, MIDsPage, newSecureDepositPage}) => 
+test('Create Secure Deposit', async ({ adminUser, projectsListPage, MIDsPage, newSecureDepositPage}) => 
 {
     await test.step('User clicks on "MIDs" tab', async() => 
     {
-        await dashboardPage.sidebar.clickButton(SideBarMenuButtons.MIDS);
+        await projectsListPage.sidebar.clickButton(SideBarMenuButtons.MIDS);
     });
     await test.step('User opens "Secure Deposits" tab', async() => 
     {
@@ -123,11 +163,11 @@ test('Create Secure Deposit', async ({ adminUser, dashboardPage, MIDsPage, newSe
     });
 });
 
-test('Create External MID', async ({ adminUser, dashboardPage, MIDsPage, newExternalMidPage }) => 
+test('Create External MID', async ({ adminUser, projectsListPage, MIDsPage, newExternalMidPage }) => 
 {
     await test.step('User clicks on "MIDs" tab', async() => 
     {
-        await dashboardPage.sidebar.clickButton(SideBarMenuButtons.MIDS);
+        await projectsListPage.sidebar.clickButton(SideBarMenuButtons.MIDS);
     });
     await test.step('User opens "External MIDs" tab', async() => 
     {

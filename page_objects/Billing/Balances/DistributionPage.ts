@@ -1,21 +1,15 @@
-import { Page, Locator, expect } from '@playwright/test';
-import { Tab } from '../../related_components/Tab';
+import { Page } from '@playwright/test';
 import { Table } from '../../related_components/Table';
 import { FilterBar } from '../../related_components/FilterBar';
+import { BasePage } from '../../BasePage';
 
 /**
  * Represents the Distribution balances page within the billing module
  * This class provides a specialized interface for monitoring how funds are allocated, 
  * split, and distributed across various accounts and financial entities in the system
  */
-export class DistributionPage 
+export class DistributionPage extends BasePage
 {
-    /** The Playwright Page instance */
-    private readonly page: Page;
-    
-    /** The navigation tab component used for internal routing within the distribution balances section */
-    public readonly tab: Tab;
-    
     /** The FilterBar component used for searching distribution records by project, status, or entity */
     public readonly filter: FilterBar;
     
@@ -29,8 +23,7 @@ export class DistributionPage
      */
     constructor(page: Page) 
     {
-        this.page = page;
-        this.tab = new Tab(page);
+        super(page, /\/billing\/balances\/distribution/);
         this.filter = new FilterBar(page);
         this.table = new Table(page);
     }

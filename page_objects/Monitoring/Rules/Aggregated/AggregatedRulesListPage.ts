@@ -1,13 +1,12 @@
-import { Page, Locator, expect } from '@playwright/test';
+import { Page} from '@playwright/test';
 import { Tab } from '../../../related_components/Tab';
 import { Table } from '../../../related_components/Table';
 import { FilterBar } from '../../../related_components/FilterBar';
 import { Pagination } from '../../../related_components/Pagination';
+import { BasePage } from '../../../BasePage';
 
-export class AggregatedRulesListPage 
+export class AggregatedRulesListPage extends BasePage
 {
-    private readonly page: Page;
-    
     public readonly tab: Tab;
     
     public readonly filter: FilterBar;
@@ -18,7 +17,7 @@ export class AggregatedRulesListPage
 
     constructor(page: Page) 
     {
-        this.page = page;
+        super(page, /\/monitoring\/rules\/aggregated/);
         this.tab = new Tab(page);
         this.filter = new FilterBar(page);
         this.table = new Table(page);

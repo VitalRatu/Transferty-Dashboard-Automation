@@ -24,7 +24,7 @@ export class OperationalWalletDetailsPage extends BasePage
      */
     constructor(page: Page) 
     {
-        super(page);
+        super(page, /\/emoney\/wallets\/operational\/\d+/);
         this.view = new DetailsPageReader(page);
         this.table = new Table(page)
     }

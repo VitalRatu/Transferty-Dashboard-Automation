@@ -2,17 +2,15 @@ import { Page, Locator, expect } from '@playwright/test';
 import { FilterBar } from '../../related_components/FilterBar'; 
 import { Table } from '../../related_components/Table';
 import { SecureDepositData } from '../../../test_data/MIDsData';
+import { BasePage } from '../../BasePage';
 
 /**
  * Represents the Secure Deposits management page within the MIDs section
  * Provides functionality to initiate the creation of new secure deposits and verify existing 
  * deposit records within the data table against expected test data
  */
-export class SecureDepositsListPage
+export class SecureDepositsListPage extends BasePage
 {
-    /** The Playwright Page instance */
-    private readonly page: Page;
-    
     /** The FilterBar component used for searching and navigating to the creation form */
     private readonly filterBar: FilterBar;
     
@@ -26,7 +24,7 @@ export class SecureDepositsListPage
      */
     constructor(page: Page) 
     {
-        this.page = page;
+        super(page, /\/mids\/secure-deposits/);
         this.filterBar = new FilterBar(page);
         this.table = new Table(page);
     }
@@ -40,6 +38,12 @@ export class SecureDepositsListPage
     {
         await this.filterBar.clickPrimaryButton();
         await this.page.waitForURL(/\/mids\/secure-deposits\/add/);
+    }
+
+    public async exportSecureDepositsToCSV(): Promise<void>
+    {
+        await this.filterBar.exportCsv();
+        await this.page.waitForLoadState('networkidle');
     }
 
     /**

@@ -12,7 +12,7 @@ import { ExternalMidsListPage } from './ExternalMIDs/ExternalMidsListPage';
  * This page aggregates various MID types including Secure Deposits, Internal, Aggregated, and External MIDs,
  * providing a unified interface to navigate between them using a tab-based system
  */
-export class MIDsPage extends BasePage 
+export class MIDsPage
 {
     /** The Tab component used to switch between different MID categories and management pages */
     public readonly tab: Tab;
@@ -33,11 +33,11 @@ export class MIDsPage extends BasePage
      * Initializes a new instance of the MIDsPage class
      * Sets the base navigation route for MIDs and instantiates all specialized sub-pages and navigation components
      * @param page - The Playwright Page instance used for browser interactions
+     * @param tabDepth - The depth of the tab navigation
      */
-    constructor(page: Page) 
+    constructor(page: Page, tabDepth: number = 0) 
     {
-        super(page, Routes.MIDs); 
-        this.tab = new Tab(page);
+        this.tab = new Tab(page, tabDepth);
         this.secureDeposits = new SecureDepositsListPage(page);
         this.internalMids = new InternalMidsListPage(page);
         this.aggregatedMids = new AggregatedMidsListPage(page);

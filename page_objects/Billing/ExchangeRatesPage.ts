@@ -23,8 +23,9 @@ export class ExchangeRatesPage
      * Initializes a new instance of the ExchangeRatesPage class
      * Sets up the filtering system and the data grid for currency rate management
      * @param page - The Playwright Page instance
+     * @param tabDepth - The depth of the tab navigation
      */
-    constructor(page: Page) 
+    constructor(page: Page, tabDepth: number = 0) 
     {
         this.page = page;
         this.filter = new FilterBar(page);

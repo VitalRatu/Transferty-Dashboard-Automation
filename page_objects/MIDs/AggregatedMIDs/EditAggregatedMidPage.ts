@@ -21,7 +21,7 @@ export class EditAggregatedMidPage extends BasePage
      */
     constructor(page: Page) 
     {
-        super(page);
+        super(page, /\/mids\/aggregated\/AG-\d{10}\/edit/);
         this.form = new CreationForm(page);
     }
     

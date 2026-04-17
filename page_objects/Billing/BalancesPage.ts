@@ -46,11 +46,12 @@ export class BalancesPage
      * Initializes a new instance of the BalancesPage class
      * Sets up the tab navigation and instantiates all specialized balance sub-pages
      * @param page - The Playwright Page instance
+     * @param tabDepth - The depth of the tab navigation
      */
-    constructor(page: Page) 
+    constructor(page: Page, tabDepth: number = 0) 
     {
         this.page = page;
-        this.tab = new Tab(page, 1);
+        this.tab = new Tab(page, tabDepth);
         this.acquiringPage = new AcquiringPage(page);
         this.distributionPage = new DistributionPage(page);
         this.secureDepositsPage = new SecureDepositsPage(page);

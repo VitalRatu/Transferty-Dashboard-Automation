@@ -1,20 +1,15 @@
 import { expect, Locator, Page } from '@playwright/test';
 import { CreationForm } from '../../related_components/CreationForm';
 import { LedgerOperationsData } from '../../../test_data/LedgerOperationsData';
+import { BasePage } from '../../BasePage';
 
 /**
  * Represents the page for creating manual ledger operations within the E-money system
  * This page allows for manual adjustment of balances by recording transfers 
  * between specified operational, merchant, or customer wallets
  */
-export class LedgerAddOperationPage 
+export class LedgerAddOperationPage extends BasePage
 {
-    /** The relative URL path for the manual ledger operation creation page */
-    public readonly url: string = '/emoney/ledger/add'; 
-    
-    /** The Playwright Page instance */
-    public readonly page: Page;
-    
     /** The shared form component used to interact with dropdowns, multi-selects, and text inputs */
     public readonly form: CreationForm;
     
@@ -28,7 +23,7 @@ export class LedgerAddOperationPage
      */
     constructor(page: Page) 
     {
-        this.page = page;
+        super(page, /\/emoney\/ledger\/add/);
         this.form = new CreationForm(page);
         this.pageLoaded = page.locator('.ui.inverted.text.loader').first();
     }

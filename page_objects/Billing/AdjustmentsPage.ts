@@ -10,9 +10,6 @@ import { AutoTransferPage } from './Adjustments/AutoTransferPage';
  */
 export class AdjustmentsPage 
 {
-    /** The Playwright Page instance */
-    private readonly page: Page;
-    
     /** The secondary navigation tab component used to toggle between adjustment logs and transfer settings */
     public readonly tab: Tab;
     
@@ -26,11 +23,11 @@ export class AdjustmentsPage
      * Initializes a new instance of the AdjustmentsPage class
      * Sets up the tab-based navigation and instantiates sub-modules for adjustments and transfers
      * @param page - The Playwright Page instance
+     * @param tabDepth - The depth of the tab navigation
      */
-    constructor(page: Page) 
+    constructor(page: Page, tabDepth: number = 0) 
     {
-        this.page = page;
-        this.tab = new Tab(page, 1);
+        this.tab = new Tab(page, tabDepth);
         this.allAdjustmentsPage = new AllAdjustmentsPage(page);
         this.autoTransferPage = new AutoTransferPage(page);
     }

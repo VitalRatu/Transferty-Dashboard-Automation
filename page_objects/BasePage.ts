@@ -13,7 +13,7 @@ export abstract class BasePage
     public readonly page: Page;
     
     /** The default URL or URL pattern associated with the specific page. */
-    protected readonly url?: string;
+    protected readonly url?: string | RegExp;
 
     /** The application's top navigation header component. */
     public readonly header: Header;
@@ -33,7 +33,7 @@ export abstract class BasePage
      * @param page - The Playwright Page instance
      * @param url - The optional default URL route or pattern for this page
      */
-    constructor(page: Page, url?: string) 
+    constructor(page: Page, url?: string | RegExp) 
     {
         this.page = page;
         this.url = url;
@@ -44,22 +44,7 @@ export abstract class BasePage
         this.errorToastLocator = page.locator('.react-toast-notifications__toast--error');
         this.errorToastContent = this.errorToastLocator.locator('.react-toast-notifications__toast_content');
     }
-
-    /**
-     * Pauses execution until the browser's current URL matches the page's predefined URL pattern
-     * Uses a regular expression match to allow for dynamic URL segments or query parameters
-     * @throws {Error} If the `url` property was not defined when the page object was instantiated
-     * @returns A promise that resolves when the URL assertion passes
-     */
-    public async waitTillURL(): Promise<void> 
-    {
-        if (!this.url) 
-        {
-            throw new Error('URL is not defined');
-        }
-        await expect(this.page).toHaveURL(new RegExp(this.url));
-    }
-    
+ 
     /**
      * Navigates the browser to a specified URL or the page's default URL
      * After navigation, it waits for the target URL to be fully loaded and matched in the browser
@@ -67,14 +52,14 @@ export abstract class BasePage
      * @throws {Error} If neither the argument nor the class `url` property is provided
      * @returns A promise that resolves when the navigation and URL assertion are complete
      */
-    public async goTo(url?: string): Promise<void> 
+    public async goTo(url?: string | RegExp): Promise<void> 
     {
-        const targetUrl: string | undefined = url ?? this.url;
+        const targetUrl: string | RegExp | undefined = url ?? this.url;
         if (!targetUrl) 
         {
              throw new Error('No URL provided for navigation');
         }
-        await this.page.goto(targetUrl);
+        await this.page.goto(targetUrl.toString());
         await this.page.waitForURL(targetUrl, { timeout: 3000 });
     }
 

@@ -3,13 +3,12 @@ import { Page } from '@playwright/test';
 import { Routes } from '../../../page_data/routes';
 import { Tab } from '../../related_components/Tab';
 
-export class RulesListPage extends BasePage 
+export class RulesListPage
 {
     public readonly tab: Tab;
 
-    constructor(page: Page) 
+    constructor(page: Page, tabDepth: number = 0) 
     {
-        super(page); 
-        this.tab = new Tab(page, 1);
+        this.tab = new Tab(page, tabDepth);
     }
 }

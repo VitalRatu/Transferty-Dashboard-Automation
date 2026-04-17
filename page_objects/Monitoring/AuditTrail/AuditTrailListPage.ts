@@ -16,12 +16,10 @@ export class AuditTrailListPage extends BasePage
 
     constructor(page: Page) 
     {
-        super(page); 
+        super(page, /\/monitoring\/audit-trail/); 
 
         this.table = new Table(page); 
-
         this.filter = new FilterBar(page);
-
         this.pagination = new Pagination(page);
     }
 }

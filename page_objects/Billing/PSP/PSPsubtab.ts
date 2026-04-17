@@ -2,20 +2,15 @@ import { Page, Locator, expect } from '@playwright/test';
 import { Tab } from '../../related_components/Tab';
 import { Table } from '../../related_components/Table';
 import { FilterBar } from '../../related_components/FilterBar';
+import { BasePage } from '../../BasePage';
 
 /**
  * Represents the specialized sub-tab for Payment Service Provider (PSP) management
  * This class provides a structured interface for listing, filtering, and interacting 
  * with various payment providers integrated into the system
  */
-export class PSPsubtab 
+export class PSPsubtab extends BasePage
 {
-    /** The Playwright Page instance */
-    private readonly page: Page;
-    
-    /** The navigation tab component used for internal routing within the PSP section */
-    public readonly tab: Tab;
-    
     /** The FilterBar component used for searching through the list of providers by name, status, or type */
     public readonly filter: FilterBar;
     
@@ -29,9 +24,14 @@ export class PSPsubtab
      */
     constructor(page: Page) 
     {
-        this.page = page;
-        this.tab = new Tab(page);
+        super(page, /\/billing\/psp\/psp/);
         this.filter = new FilterBar(page);
         this.table = new Table(page);
+    }
+
+    public async createNewPSP(): Promise<void>
+    {
+        await this.filter.clickPrimaryButton('Create');
+        await this.page.waitForURL(/\/billing\/psp\/psp\/add/);
     }
 }

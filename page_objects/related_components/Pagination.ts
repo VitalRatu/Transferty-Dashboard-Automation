@@ -29,6 +29,11 @@ export class Pagination
         this.deactivateButtonLocator = page.locator('.mt-1 .trigger-container');
     }
 
+    public async isVisible(): Promise<boolean>
+    {
+        return await this.loadMoreButton.isVisible();
+    }
+
     /**
      * Executes a click action on the "Load More" button to fetch and display the next set of items
      * @returns A promise that resolves when the click action is completed

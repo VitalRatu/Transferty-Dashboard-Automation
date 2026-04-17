@@ -1,21 +1,15 @@
-import { Page, Locator, expect } from '@playwright/test';
-import { Tab } from '../../related_components/Tab';
+import { Page } from '@playwright/test';
 import { Table } from '../../related_components/Table';
 import { FilterBar } from '../../related_components/FilterBar';
+import { BasePage } from '../../BasePage';
 
 /**
  * Represents the Currency Balances page within the billing module
  * This class provides a specialized interface for monitoring total funds across the system, 
  * categorized and consolidated by specific currency codes
  */
-export class CurrencyPage 
+export class CurrencyPage extends BasePage
 {
-    /** The Playwright Page instance */
-    private readonly page: Page;
-    
-    /** The navigation tab component used for internal routing within the currency section */
-    public readonly tab: Tab;
-    
     /** The FilterBar component used for searching currency records and applying date or status filters */
     public readonly filter: FilterBar;
     
@@ -29,8 +23,7 @@ export class CurrencyPage
      */
     constructor(page: Page) 
     {
-        this.page = page;
-        this.tab = new Tab(page);
+        super(page, /\/billing\/balances\/currency/);
         this.filter = new FilterBar(page);
         this.table = new Table(page);
     }

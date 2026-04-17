@@ -10,7 +10,7 @@ import { LimitsListPage } from './Limits/LimitsListPage';
 import { ConversionListPage } from './Conversion/ConversionListPage';
 
 
-export class MonitoringPage extends BasePage 
+export class MonitoringPage
 {
     public readonly tab: Tab;
 
@@ -21,13 +21,12 @@ export class MonitoringPage extends BasePage
     public readonly limitsListPage: LimitsListPage;
     public readonly conversionListPage: ConversionListPage;
     
-    constructor(page: Page) 
+    constructor(page: Page, tabDepth: number = 0) 
     {
-        super(page, Routes.MONITORING); 
         this.tab = new Tab(page);
 
         this.auditTrailListPage = new AuditTrailListPage(page);
-        this.rulesListPage = new RulesListPage(page);   
+        this.rulesListPage = new RulesListPage(page, tabDepth + 1);   
         this.endpointsListPage = new EndpointsListPage(page);
         this.triggeredRulesListPage = new TriggeredRulesListPage(page);
         this.limitsListPage = new LimitsListPage(page);

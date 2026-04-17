@@ -1,20 +1,15 @@
 import { expect, Locator, Page } from '@playwright/test';
 import { CreationForm } from '../../related_components/CreationForm';
 import { EMoneyLimitsData } from '../../../test_data/EMoneyLimitsData';
+import { BasePage } from '../../BasePage';
 
 /**
  * Represents the page for adding new financial limits within the E-money settings
  * This class handles the configuration of daily customer wallet limits and maximum 
  * transaction amounts while ensuring the UI is ready for interaction
  */
-export class AddLimitPage 
+export class AddLimitPage extends BasePage
 {
-    /** The relative URL path for the E-money limit addition page */
-    public readonly url: string = '/emoney/settings/add'; 
-    
-    /** The Playwright Page instance */
-    public readonly page: Page;
-    
     /** The shared form component used to interact with input fields and validation checks */
     public readonly form: CreationForm;
     
@@ -28,7 +23,7 @@ export class AddLimitPage
      */
     constructor(page: Page) 
     {
-        this.page = page;
+        super(page, /\/emoney\/settings\/add/);
         this.form = new CreationForm(page);
         this.pageLoaded = page.locator('.ui.inverted.text.loader').first();
     }

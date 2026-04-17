@@ -18,10 +18,10 @@ export class FinancialReportPage
     public readonly finProvidersReportPage: FinProvidersReportPage;
     public readonly projectsReportPage: ProjectsReportPage;
     
-    constructor(page: Page) 
+    constructor(page: Page, tabDepth: number = 0) 
     {
         this.page = page;
-        this.tab = new Tab(page, 1);
+        this.tab = new Tab(page, tabDepth);
 
         this.finCountriesReportPage = new FinCountriesReportPage(page);
         this.finGeneralReportPage = new FinGeneralReportPage(page);

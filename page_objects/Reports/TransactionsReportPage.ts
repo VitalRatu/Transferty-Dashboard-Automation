@@ -16,11 +16,11 @@ export class TransactionsReportPage
     public readonly tranCountriesReportPage: TranCountriesReportPage;
     public readonly tranDistributionReportPage: TranDistributionReportPage;
     
-    constructor(page: Page) 
+    constructor(page: Page, tabDepth: number = 0) 
     {
         this.page = page;
     
-        this.tab = new Tab(page, 1);
+        this.tab = new Tab(page, tabDepth);
 
         this.tranGeneralReportPage = new TranGeneralReportPage(page);
         this.tranMethodsReportPage = new TranMethodsReportPage(page);

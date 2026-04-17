@@ -2,14 +2,14 @@ import { test                         as base } from '@playwright/test'
 import { LoginPage                            } from '../page_objects/LoginPage'
 import { DashboardPage                        } from '../page_objects/Dashboard/DashboardPage'
 import { BillingPage                          } from '../page_objects/Billing/BillingPage'
-import { OrdersListPage                           } from '../page_objects/Orders/OrdersListPage'
+import { OrdersListPage                       } from '../page_objects/Orders/OrdersListPage'
 import { ReportsPage                          } from '../page_objects/Reports/ReportsPage'
 import { TransactionAddPage                   } from '../page_objects/Transactions/TransactionAddPage'
 import { MIDsPage                             } from '../page_objects/MIDs/MIDsPage'
 import { NewAggregatedMidPage                 } from '../page_objects/MIDs/AggregatedMIDs/NewAggregatedMidPage'
 import { NewSecureDepositPage                 } from '../page_objects/MIDs/SecureDeposits/NewSecureDepositPage'
 import { NewInternalMidPage                   } from '../page_objects/MIDs/InternalMIDs/NewInternalMidPage'
-import { TransactionsMainPage                 } from '../page_objects/Transactions/TransactionsMainPage'
+import { TransactionsPage                     } from '../page_objects/Transactions/TransactionsPage'
 import { NewExternalMidPage                   } from '../page_objects/MIDs/ExternalMIDs/NewExternalMidPage'
 import { EmoneyPage                           } from '../page_objects/E-money/EmoneyPage'
 import { NewOperationalWalletPage             } from '../page_objects/E-money/Wallets/Operational/NewOperationalWalletPage'
@@ -26,18 +26,22 @@ import { EditMerchantWalletPage               } from '../page_objects/E-money/Wa
 import { RoleDetailsPage                      } from '../page_objects/Settings/Users/Roles/RoleDetailsPage'
 import { EditRolePage                         } from '../page_objects/Settings/Users/Roles/EditRolePage'
 import { NewRolePage                          } from '../page_objects/Settings/Users/Roles/NewRolePage'
-import { InternalMidsListPage } from '../page_objects/MIDs/InternalMIDs/InternalMidsListPage'
-import { UsersPage } from '../page_objects/Settings/UsersPage'
-import { AdminDetailsPage } from '../page_objects/Settings/Users/Admins/AdminDetailsPage'
-import { NewAdminPage } from '../page_objects/Settings/Users/Admins/NewAdminPage'
+import { InternalMidsListPage                 } from '../page_objects/MIDs/InternalMIDs/InternalMidsListPage'
+import { UsersPage                            } from '../page_objects/Settings/UsersPage'
+import { AdminDetailsPage                     } from '../page_objects/Settings/Users/Admins/AdminDetailsPage'
+import { NewAdminPage                         } from '../page_objects/Settings/Users/Admins/NewAdminPage'
+import { AggregatedMidDetailsPage             } from '../page_objects/MIDs/AggregatedMIDs/AggregatedMIDDetailsPage'
+import { ProjectsListPage                     } from '../page_objects/Projects/ProjectsListPage'
+import { ProjectPage } from '../page_objects/Projects/ProjectPage'
 
 type Fixtures = 
 {
     loginPage: LoginPage
     dashboardPage: DashboardPage
+    projectsListPage: ProjectsListPage
     billingPage: BillingPage
     ordersListPage: OrdersListPage
-    transactionsMainPage: TransactionsMainPage;
+    transactionsPage: TransactionsPage;
     transactionAddPage: TransactionAddPage;
     reportsPage: ReportsPage;
     MIDsPage: MIDsPage;
@@ -64,6 +68,9 @@ type Fixtures =
     usersPage: UsersPage
     adminDetailsPage: AdminDetailsPage
     newAdminPage: NewAdminPage
+    aggregatedMidDetailsPage: AggregatedMidDetailsPage
+    projectPage: ProjectPage
+    
 }
 
 export const pomTest = base.extend<Fixtures>(
@@ -77,6 +84,11 @@ export const pomTest = base.extend<Fixtures>(
     {
         await use(new DashboardPage(page))
     },
+
+    projectsListPage: async ({page}, use) =>
+    {
+        await use(new ProjectsListPage(page))
+    },
     
     billingPage: async ({page}, use) =>
     {
@@ -88,9 +100,9 @@ export const pomTest = base.extend<Fixtures>(
         await use (new OrdersListPage(page))
     },
     
-    transactionsMainPage: async ({page}, use) =>
+    transactionsPage: async ({page}, use) =>
     {
-        await use (new TransactionsMainPage(page))
+        await use (new TransactionsPage(page))
     },
     
     reportsPage: async ({page}, use) =>
@@ -212,7 +224,15 @@ export const pomTest = base.extend<Fixtures>(
     newAdminPage: async ({page}, use) =>
     {
         await use(new NewAdminPage(page));
-    }
+    },
+    aggregatedMidDetailsPage: async ({page}, use) =>
+    {
+        await use(new AggregatedMidDetailsPage(page));
+    },
+    projectPage: async ({page}, use) =>
+    {
+        await use(new ProjectPage(page));
+    },
 })
 
 

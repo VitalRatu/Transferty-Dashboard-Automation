@@ -1,7 +1,7 @@
-import { Page, Locator, expect } from '@playwright/test';
-import { Tab } from '../../related_components/Tab';
+import { Page} from '@playwright/test';
 import { Table } from '../../related_components/Table';
 import { FilterBar } from '../../related_components/FilterBar';
+import { BasePage } from '../../BasePage';
 
 /**
  * Represents the Automated Transfers page within the adjustments module
@@ -9,14 +9,8 @@ import { FilterBar } from '../../related_components/FilterBar';
  * monitoring automated transfer schedules, and auditing the execution history 
  * of system-driven account balancing
  */
-export class AutoTransferPage 
+export class AutoTransferPage extends BasePage
 {
-    /** The Playwright Page instance */
-    private readonly page: Page;
-    
-    /** The navigation tab component used for internal routing within the auto-transfer section */
-    public readonly tab: Tab;
-    
     /** The FilterBar component used for searching through transfer rules by status, project, or target wallet */
     public readonly filter: FilterBar;
     
@@ -30,8 +24,7 @@ export class AutoTransferPage
      */
     constructor(page: Page) 
     {
-        this.page = page;
-        this.tab = new Tab(page);
+        super(page, /\/billing\/adjustments\/auto-transfer-by-percent/);
         this.filter = new FilterBar(page);
         this.table = new Table(page);
     }

@@ -9,9 +9,6 @@ import { Table } from '../../related_components/Table';
  */
 export class CustomerFee 
 {
-    /** The Playwright Page instance */
-    public readonly page: Page;
-    
     /** The main container locator specifically for the customer fees table */
     private readonly container: Locator;
     
@@ -24,7 +21,6 @@ export class CustomerFee
      */
     constructor(page: Page) 
     {
-        this.page = page;
         this.container = page.locator('.Table-container.customer-fees-table');
         this.table = new Table(page)
     }

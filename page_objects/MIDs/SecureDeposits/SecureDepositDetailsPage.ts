@@ -16,7 +16,7 @@ export class SecureDepositDetailsPage extends BasePage
      */
     constructor(page: Page) 
     {
-        super(page);
+        super(page, /\/mids\/secure-deposits\/SD-\d+/);
         this.view = new DetailsPageReader(page);
     }
 
