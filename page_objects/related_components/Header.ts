@@ -1,5 +1,5 @@
 import { Locator, Page, expect } from '@playwright/test';
-import { Routes } from '../../page_data/routes';
+import { LoginPage } from '../LoginPage';
 
 /**
  * Represents the Header component of the application
@@ -54,7 +54,7 @@ export class Header
     {
         expect (this.logOutButton).toBeVisible();
         await this.logOutButton.click();
-        await expect (this.page).toHaveURL(Routes.LOGIN);
+        await expect (this.page).toHaveURL(/\/signin/);
     }
 
     /**
@@ -116,7 +116,7 @@ export class Header
     {
         expect (this.transfertLogoLocator).toBeVisible();
         await this.transfertLogoLocator.click();
-        await expect (this.page).toHaveURL(Routes.DASHBOARD);
+        await expect (this.page).toHaveURL(/\/dashboard/);
     }
 
     /**

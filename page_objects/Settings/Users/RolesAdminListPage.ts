@@ -1,22 +1,21 @@
 import { Page} from '@playwright/test';
-import { FilterBar } from '../../../related_components/FilterBar'; 
-import { Table } from '../../../related_components/Table';
+import { FilterBar } from '../../related_components/FilterBar'; 
+import { Table } from '../../related_components/Table';
+import { BasePage } from '../../BasePage';
 
-export class RolesListPage 
+export class RolesAdminListPage extends BasePage
 {
-    private readonly page: Page;
-
-    private readonly filterBar: FilterBar;
+    public readonly filterBar: FilterBar;
     
-    private readonly table: Table;
+    public readonly table: Table;
 
     constructor(page: Page) 
     {
-        this.page = page;
+        super(page, /\/users\/list\/roles/)
         this.filterBar = new FilterBar(page);
         this.table = new Table(page);
     }
-    
+
     public async addNewRole(): Promise<void>
     {
         await this.filterBar.clickPrimaryButton();
@@ -34,4 +33,4 @@ export class RolesListPage
         const roleNames = this.table.getAllValuesFromColumn('Role');
         return roleNames;
     }
-}   
+}

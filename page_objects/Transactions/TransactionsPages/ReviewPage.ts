@@ -1,16 +1,14 @@
 import { Page, expect } from '@playwright/test';
-import { FilterBar } from '../related_components/FilterBar';
-import { Table } from '../related_components/Table';
+import { FilterBar } from '../../related_components/FilterBar';
+import { Table } from '../../related_components/Table';
+import { BasePage } from '../../BasePage';
 
 /**
  * Represents the Review page within the application's transaction management section
  * Serves as a container for components used to manage and evaluate transactions that require manual review
  */
-export class ReviewPage 
+export class ReviewPage extends BasePage
 {
-    /** The Playwright Page instance used to interact with the browser context */
-    private readonly page: Page;
-    
     /** The FilterBar component used to search and apply specific criteria to the review list */
     public readonly filter: FilterBar;
     
@@ -24,7 +22,7 @@ export class ReviewPage
      */
     constructor(page: Page) 
     {
-        this.page = page;
+        super(page, /\/transactions\/review/)
         this.filter = new FilterBar(page);
         this.table = new Table(page);
     }

@@ -33,6 +33,8 @@ import { NewAdminPage                         } from '../page_objects/Settings/U
 import { AggregatedMidDetailsPage             } from '../page_objects/MIDs/AggregatedMIDs/AggregatedMIDDetailsPage'
 import { ProjectsListPage                     } from '../page_objects/Projects/ProjectsListPage'
 import { ProjectPage } from '../page_objects/Projects/ProjectPage'
+import { MonitoringPage } from '../page_objects/Monitoring/MonitoringPage'
+import { SubscriptionsPage } from '../page_objects/Subscriptions/SubscriptionsPage'
 
 type Fixtures = 
 {
@@ -70,6 +72,8 @@ type Fixtures =
     newAdminPage: NewAdminPage
     aggregatedMidDetailsPage: AggregatedMidDetailsPage
     projectPage: ProjectPage
+    monitoringPage: MonitoringPage
+    subscriptionsPage: SubscriptionsPage
     
 }
 
@@ -232,6 +236,14 @@ export const pomTest = base.extend<Fixtures>(
     projectPage: async ({page}, use) =>
     {
         await use(new ProjectPage(page));
+    },
+    monitoringPage: async ({page}, use) =>
+    {
+        await use(new MonitoringPage(page));
+    },
+    subscriptionsPage: async ({page}, use) =>
+    {
+        await use(new SubscriptionsPage(page));
     },
 })
 

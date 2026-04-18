@@ -1,19 +1,17 @@
 import { Page} from '@playwright/test';
 import { FilterBar } from '../../related_components/FilterBar'; 
 import { Table } from '../../related_components/Table';
+import { BasePage } from '../../BasePage';
 
-export class UsersListPage 
+export class UsersListPage extends BasePage
 {
-
-    private readonly page: Page;
-
-    private readonly filterBar: FilterBar;
+    public readonly filterBar: FilterBar;
     
-    private readonly table: Table;
+    public readonly table: Table;
 
     constructor(page: Page) 
     {
-        this.page = page;
+        super(page, /\/users\/list\/users/)
         this.filterBar = new FilterBar(page);
         this.table = new Table(page);
     }

@@ -1,22 +1,20 @@
 import {expect, test, } from '../../../fixtures/fixtures';         
-import {SideBarMenuButtons} from '../../../page_data/SideBarMenuButtons';
-import { UsersTabs } from '../../../page_data/TabNames';
 
 test('Create new admin role', async ({ adminUser, dashboardPage, usersPage, newRolePage, roleDetailsPage}) =>
 {
     await test.step('User clicks on "Users" tab on the sidebar', async() => 
     {
-        await dashboardPage.sidebar.clickButton(SideBarMenuButtons.USERS);
+        await dashboardPage.sidebar.openSidebarTab('Users');
     });
 
     await test.step('User clicks on "Roles" tab', async() => 
     {
-        await usersPage.tab.open(UsersTabs.Roles);
+        await usersPage.openTab('Roles')
     });
 
     await test.step('User clicks on "Add" button', async() => 
     {
-        await usersPage.rolesListPage.addNewRole();
+        await usersPage.rolesAdminListPage.addNewRole();
     });
 
     await test.step('User creates new role with permissions', async() => 
@@ -30,7 +28,7 @@ test('Create new admin role', async ({ adminUser, dashboardPage, usersPage, newR
 
     await test.step('User checks if new role appeared on the list', async() => 
     {
-        await usersPage.rolesListPage.openRoleDetails('Role from automation');
+        await usersPage.rolesAdminListPage.openRoleDetails('Role from automation');
     });
 
     await test.step('User checks if role contains correct description and permissions', async() => 
@@ -51,7 +49,7 @@ test('Create new admin role', async ({ adminUser, dashboardPage, usersPage, newR
 
     await test.step('User checks if role was deleted', async() => 
     {
-        const allRolesNames = await usersPage.rolesListPage.getAllRolesName();
+        const allRolesNames = await usersPage.rolesAdminListPage.getAllRolesName();
         expect(allRolesNames).not.toContain('Role from automation');
     });
 });
@@ -60,17 +58,17 @@ test('Edit existing role', async ({ adminUser, dashboardPage, usersPage, newRole
 {
     await test.step('User clicks on "Users" tab on the sidebar', async() => 
     {
-        await dashboardPage.sidebar.clickButton(SideBarMenuButtons.USERS);
+        await dashboardPage.sidebar.openSidebarTab('Users');
     });
 
     await test.step('User clicks on "Roles" tab', async() => 
     {
-        await usersPage.tab.open(UsersTabs.Roles);
+        await usersPage.openTab('Roles')
     });
 
     await test.step('User clicks on "Add" button', async() => 
     {
-        await usersPage.rolesListPage.addNewRole();
+        await usersPage.rolesAdminListPage.addNewRole();
     });
 
     await test.step('User creates new role with permissions', async() => 
@@ -84,7 +82,7 @@ test('Edit existing role', async ({ adminUser, dashboardPage, usersPage, newRole
 
     await test.step('User checks if new role appeared on the list', async() => 
     {
-        await usersPage.rolesListPage.openRoleDetails('Role from automation');
+        await usersPage.rolesAdminListPage.openRoleDetails('Role from automation');
     });
 
     await test.step('User checks if role contains correct description and permissions', async() => 
@@ -131,7 +129,7 @@ test('Edit existing role', async ({ adminUser, dashboardPage, usersPage, newRole
 
     await test.step('User checks if role was deleted', async() => 
     {
-        const allRolesNames = await usersPage.rolesListPage.getAllRolesName();
+        const allRolesNames = await usersPage.rolesAdminListPage.getAllRolesName();
         expect(allRolesNames).not.toContain('Role from automation');
     });
 });

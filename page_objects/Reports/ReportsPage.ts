@@ -1,5 +1,3 @@
-import { BasePage } from '../BasePage'
-import { Routes } from '../../page_data/routes'
 import { Page } from 'playwright';
 import { Tab as Tab } from '../related_components/Tab';
 import { FilterBar } from '../related_components/FilterBar';
@@ -9,23 +7,17 @@ import { TransactionsReportPage } from './TransactionsReportPage';
 import { ConversionReportPage } from './ConversionReportPage';
 import { ReconciliationReportPage } from './ReconciliationReportPage';
 import { MarginReportPage } from './MarginReportPage';
+import { Orchestrator } from '../Orchestrator';
 
-/**
- * Represents the Reports page of the application
- * Extends the BasePage to provide functionality for generating, filtering, and viewing various financial and operational reports
- * Manages complex navigation through multiple levels of tabs and filtering options
- */
-export class ReportsPage extends BasePage 
+export type ReportsTabName = 
+    | 'Financial' 
+    | 'Transactions' 
+    | 'Conversion' 
+    | 'Reconciliation' 
+    | 'Margin' 
+
+export class ReportsPage extends Orchestrator<ReportsTabName>
 {
-    /** The Table component used to display report data and generated records */
-    public readonly table: Table;
-    
-    /** The FilterBar component used to apply specific date ranges and criteria for report generation */
-    public readonly filters: FilterBar;
-    
-    /** The primary Tab component used for top-level navigation within the Reports section */
-    public readonly tab: Tab;
-
     public readonly financialReportPage: FinancialReportPage;
     public readonly transactionsReportPage: TransactionsReportPage;
     public readonly conversionReportPage: ConversionReportPage;
@@ -40,11 +32,7 @@ export class ReportsPage extends BasePage
      */
     constructor(page: Page, tabDepth: number = 0) 
     {
-        super(page, Routes.REPORTS);
-        
-        this.table = new Table(page);   
-        this.filters = new FilterBar(page);
-        this.tab = new Tab(page, tabDepth);
+        super(page, tabDepth )
 
         this.financialReportPage = new FinancialReportPage(page , tabDepth + 1);
         this.transactionsReportPage = new TransactionsReportPage(page, tabDepth + 1);

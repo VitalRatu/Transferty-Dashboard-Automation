@@ -1,5 +1,4 @@
 import { BasePage } from '../BasePage';
-import { Routes } from '../../page_data/routes'
 import { Page } from 'playwright';
 
 /**
@@ -9,7 +8,6 @@ import { Page } from 'playwright';
  */
 export class DashboardPage extends BasePage 
 {
-
     /**
      * Initializes a new instance of the DashboardPage class
      * Sets the base navigation route specifically for the dashboard endpoint
@@ -17,6 +15,6 @@ export class DashboardPage extends BasePage
      */
     constructor(page: Page) 
     {
-        super(page, Routes.DASHBOARD);
+        super(page, /\/dashboard/);
     }
 }

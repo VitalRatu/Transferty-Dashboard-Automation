@@ -4,13 +4,17 @@ import { FunnelReportPage } from './Conversion/FunnelReportPage';
 import { ChannelsReportPage } from './Conversion/ChannelsReportPage';
 import { DynamicsReportPage } from './Conversion/DynamicsReportPage';
 import { ConCountriesReportPage } from './Conversion/ConCountriesReportPage';
+import { Orchestrator } from '../Orchestrator';
 
-export class ConversionReportPage
+export type ConversionReportTabName = 
+    | 'Funnel' 
+    | 'Channels' 
+    | 'Dynamics' 
+    | 'Countries' 
+
+
+export class ConversionReportPage extends Orchestrator<ConversionReportTabName>
 {
-    public readonly page: Page;
-
-    public readonly tab: Tab;
-
     public readonly funnelReportPage: FunnelReportPage;
     public readonly channelsReportPage: ChannelsReportPage
     public readonly dynamicsReportPage: DynamicsReportPage;
@@ -18,10 +22,7 @@ export class ConversionReportPage
     
     constructor(page: Page, tabDepth: number = 0) 
     {
-        this.page = page;
-    
-        this.tab = new Tab(page, tabDepth);
-
+        super(page, tabDepth)
         this.funnelReportPage = new FunnelReportPage(page);
         this.channelsReportPage = new ChannelsReportPage(page, tabDepth + 1);
         this.dynamicsReportPage = new DynamicsReportPage(page);

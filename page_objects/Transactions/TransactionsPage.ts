@@ -1,22 +1,20 @@
-import { BasePage } from '../BasePage';
-import { Routes } from '../../page_data/routes';
 import { Page } from '@playwright/test';
-import { Tab } from '../related_components/Tab';
-import { TransactionsListPage } from './TransactionsListPage';
-import { ReviewPage } from './ReviewPage';
-import { BlockedPage } from './BlockedPage';
-import { TxAttemptsPage } from './TxAttemptsPage';
-import { DisputePage } from './DisputePage';
+import { TransactionsListPage } from './TransactionsPages/TransactionsListPage';
+import { ReviewPage } from './TransactionsPages/ReviewPage';
+import { BlockedPage } from './TransactionsPages/BlockedPage';
+import { TxAttemptsPage } from './TransactionsPages/TxAttemptsPage';
+import { DisputePage } from './TransactionsPages/DisputePage'
+import { Orchestrator } from '../Orchestrator';
 
-/**
- * Acts as the main container and orchestrator for the Transactions section
- * Groups together all sub-pages and tabs related to transaction management, such as Review, Blocked, Attempts, and Disputes
- */
-export class TransactionsPage extends BasePage 
+export type TransactionsTabName = 
+    | 'Transactions' 
+    | 'Review' 
+    | 'Blocked'
+    | 'Tx attempts'
+    | 'Disputes'
+
+export class TransactionsPage extends Orchestrator<TransactionsTabName>
 {
-    /** The Tab component used to navigate between different transaction categories */
-    public readonly tab: Tab;
-    
     /** The default Transactions page instance for viewing and managing standard transactions */
     public readonly transactionsListPage: TransactionsListPage;
     
@@ -32,15 +30,9 @@ export class TransactionsPage extends BasePage
     /** The Dispute page instance for managing transaction disputes and chargebacks */
     public readonly disputePage: DisputePage;
 
-    /**
-     * Initializes a new instance of the TransactionsMainPage class
-     * Sets the base route to the transactions endpoint and instantiates all related sub-pages and components
-     * @param page - The Playwright Page instance used for browser interactions
-     */
-    constructor(page: Page) 
+    constructor(page: Page, tabDepth = 0) 
     {
-        super(page, Routes.TRANSACTIONS);
-        this.tab = new Tab(page);
+        super(page, tabDepth);
         
         this.transactionsListPage = new TransactionsListPage(page);
         this.reviewPage = new ReviewPage(page);

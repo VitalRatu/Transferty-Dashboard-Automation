@@ -1,11 +1,10 @@
 import { Page} from '@playwright/test';
 import { FilterBar } from '../../../related_components/FilterBar'; 
 import { Table } from '../../../related_components/Table';
-import { Pagination } from '../../../related_components/Pagination';
+import { BasePage } from '../../../BasePage';
 
-export class FxSpreadListPage 
+export class FxSpreadListPage extends BasePage
 {
-    public readonly page: Page;
 
     public readonly filterBar: FilterBar;
     
@@ -13,7 +12,7 @@ export class FxSpreadListPage
 
     constructor(page: Page) 
     {
-        this.page = page;
+        super(page, /\/projects\/\d+\/configurations\/fxspread/ )
         this.filterBar = new FilterBar(page);
         this.table = new Table(page);
     }

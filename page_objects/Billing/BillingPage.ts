@@ -1,5 +1,3 @@
-import { BasePage } from '../BasePage';
-import { Routes } from '../../page_data/routes'
 import { Page } from 'playwright';
 import { Tab } from '../related_components/Tab';
 import { BalancesPage } from './BalancesPage';
@@ -9,17 +7,19 @@ import { FeesPage } from './FeesPage';
 import { ReservePage } from './ReservePage';
 import { ExchangeRatesPage } from './ExchangeRatesPage';
 import { PSPPage } from './PSPPage';
+import { Orchestrator } from '../Orchestrator';
 
-/**
- * Acts as the primary orchestrator for the Billing and Financial section of the application
- * This class serves as a central hub that initializes and provides access to all sub-modules 
- * related to fund management, accounting adjustments, settlements, and provider configurations
- */
-export class BillingPage 
+export type BillingTabName = 
+    | 'Balances' 
+    | 'Adjustments' 
+    | 'Settlements' 
+    | 'Fees' 
+    | 'Reserve' 
+    | 'Base exchange rates' 
+    | 'PSP' 
+
+export class BillingPage extends Orchestrator<BillingTabName>
 {
-    /** The primary navigation tab component used to switch between various billing sub-pages */
-    public readonly tab: Tab;
-    
     /** The component dedicated to monitoring and verifying project or provider balances */
     public readonly balancesPage: BalancesPage;
     
@@ -49,7 +49,7 @@ export class BillingPage
      */
     constructor(page: Page, tabDepth: number = 0 ) 
     {
-        this.tab = new Tab(page, tabDepth);
+        super(page, tabDepth);
 
         this.balancesPage = new BalancesPage(page, tabDepth + 1);
         this.adjustmentsPage = new AdjustmentsPage(page, tabDepth + 1);

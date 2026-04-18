@@ -1,19 +1,17 @@
 import { Page} from '@playwright/test';
 import { FilterBar } from '../../../related_components/FilterBar'; 
 import { Table } from '../../../related_components/Table';
-import { Pagination } from '../../../related_components/Pagination';
+import { BasePage } from '../../../BasePage';
 
-export class AntifraudRulesListPage 
+export class AntifraudRulesListPage extends BasePage
 {
-    public readonly page: Page;
-
     public readonly filterBar: FilterBar;
     
     public readonly table: Table;
 
     constructor(page: Page) 
     {
-        this.page = page;
+        super(page, /\/projects\/\d+\/configurations\/antifraud-rules/)
         this.filterBar = new FilterBar(page);
         this.table = new Table(page);
     }

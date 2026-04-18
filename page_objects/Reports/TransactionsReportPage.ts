@@ -4,13 +4,16 @@ import { TranGeneralReportPage } from './Transactions/TranGeneralReportPage';
 import { TranMethodsReportPage } from './Transactions/TranMethodsReportPage';
 import { TranCountriesReportPage } from './Transactions/TranCountriesReportPage';
 import { TranDistributionReportPage } from './Transactions/TranDistributionReportPage';
+import { Orchestrator } from '../Orchestrator';
 
-export class TransactionsReportPage
+export type TransactionsReportTabName = 
+    | 'General' 
+    | 'Methods' 
+    | 'Countries' 
+    | 'Distribution' 
+
+export class TransactionsReportPage extends Orchestrator<TransactionsReportTabName>
 {
-    public readonly page: Page;
-
-    public readonly tab: Tab;
-
     public readonly tranGeneralReportPage: TranGeneralReportPage;
     public readonly tranMethodsReportPage: TranMethodsReportPage
     public readonly tranCountriesReportPage: TranCountriesReportPage;
@@ -18,10 +21,7 @@ export class TransactionsReportPage
     
     constructor(page: Page, tabDepth: number = 0) 
     {
-        this.page = page;
-    
-        this.tab = new Tab(page, tabDepth);
-
+        super(page, tabDepth)
         this.tranGeneralReportPage = new TranGeneralReportPage(page);
         this.tranMethodsReportPage = new TranMethodsReportPage(page);
         this.tranCountriesReportPage = new TranCountriesReportPage(page);

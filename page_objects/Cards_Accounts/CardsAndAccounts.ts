@@ -4,19 +4,24 @@ import { APMsListPage } from './APMs/APMsListPage';
 import { BINsListPage } from './BINs/BINsListPage';
 import { CardsListPage } from './Cards/CardsListPage';
 import { LabelsListPage } from './Labels/LabelsListPage';
+import { Orchestrator } from '../Orchestrator';
 
-export class CardsAndAccounts
+export type CardsAndAccountsTabName = 
+    | 'Cards' 
+    | 'APMs' 
+    | 'BINs' 
+    | 'Labels' 
+
+export class CardsAndAccounts extends Orchestrator<CardsAndAccountsTabName>
 {
-    public readonly tab: Tab;
-
     public readonly apmsListPage: APMsListPage;
     public readonly binsListPage: BINsListPage;
     public readonly cardsListPage: CardsListPage;
     public readonly labelsListPage: LabelsListPage;
 
-    constructor(page: Page) 
+    constructor(page: Page, tabDepth: number = 0) 
     {
-        this.tab = new Tab(page);
+        super(page, tabDepth)
 
         this.apmsListPage = new APMsListPage(page);
         this.binsListPage = new BINsListPage(page);

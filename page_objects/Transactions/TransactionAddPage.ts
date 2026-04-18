@@ -3,10 +3,6 @@ import { BasePage } from '../BasePage';
 import { CreationForm } from '../related_components/CreationForm';
 import { CreditCardWidget } from '../related_components/CreditCardWidget';
 
-/**
- * Represents the page dedicated to adding new manual transactions into the system
- * Integrates both standard form inputs and specific credit card widget components to handle complex payment flows
- */
 export class TransactionAddPage extends BasePage 
 {
     /** The Shared form component used to handle standard text inputs and dropdowns */
@@ -25,7 +21,7 @@ export class TransactionAddPage extends BasePage
      */
     constructor(page: Page) 
     {
-        super(page, '/transactions/add');
+        super(page, /\/transactions\/add/)
         this.form = new CreationForm(page);
         this.card = new CreditCardWidget(page);
         this.pageLoaded = page.locator('.ui.inverted.text.loader').first();

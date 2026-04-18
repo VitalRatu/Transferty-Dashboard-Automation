@@ -1,7 +1,5 @@
 import {test} from '../../fixtures/fixtures';         
-import {SideBarMenuButtons} from '../../page_data/SideBarMenuButtons';
 import {TransactionsPageFilters} from '../../test_data/filtersData';
-import {EMoneyTabs, EMoneyWalletsTabs } from '../../page_data/TabNames';
 import { EMoneyOperationalWallet, EMoneyMerchantWallets, EMoneyCustomerWallets } from '../../test_data/EMoneyWalletsData';
 import {LedgerOperations} from '../../test_data/LedgerOperationsData';
 import { EMoneyLimits } from '../../test_data/EMoneyLimitsData';
@@ -17,7 +15,7 @@ test('Get Filters', async ({ adminUser, transactionsPage }) =>
 
 test('Create operational Wallet', async ({ adminUser, dashboardPage, emoneyPage, newOperationalWalletPage }) =>
 {
-    await dashboardPage.sidebar.clickButton(SideBarMenuButtons.E_MONEY);
+    await dashboardPage.sidebar.openSidebarTab('E-money');
     await emoneyPage.tab.open(EMoneyTabs.Wallets);
     await emoneyPage.walletsPage.operationalPage.addNewOperationalWallet()
     await newOperationalWalletPage.createOperationalWallet(EMoneyOperationalWallet[0])
@@ -25,7 +23,7 @@ test('Create operational Wallet', async ({ adminUser, dashboardPage, emoneyPage,
 
 test('Create Merchant Wallet', async ({ adminUser, dashboardPage, emoneyPage, newMerchantWalletPage }) =>
 {
-    await dashboardPage.sidebar.clickButton(SideBarMenuButtons.E_MONEY);
+    await dashboardPage.sidebar.openSidebarTab('E-money');
     await emoneyPage.tab.open(EMoneyTabs.Wallets);
     await emoneyPage.walletsPage.tab.open(EMoneyWalletsTabs.Merchant)
     await emoneyPage.walletsPage.merchantPage.addNewMerchantWallet()
@@ -34,7 +32,7 @@ test('Create Merchant Wallet', async ({ adminUser, dashboardPage, emoneyPage, ne
 
 test('Create Ledger Issuance', async ({ adminUser, dashboardPage, emoneyPage, ledgerAddOperationPage }) =>
 {
-    await dashboardPage.sidebar.clickButton(SideBarMenuButtons.E_MONEY);
+    await dashboardPage.sidebar.openSidebarTab('E-money');
     await emoneyPage.tab.open(EMoneyTabs.Ledger);
     await emoneyPage.ledgerPage.addNewLedgerOperation()
     await ledgerAddOperationPage.createLedgerOperation(LedgerOperations[0])
@@ -45,7 +43,7 @@ test('Create Ledger Issuance', async ({ adminUser, dashboardPage, emoneyPage, le
 test('Create Limit', async ({ adminUser, dashboardPage, emoneyPage, addLimitPage }) =>
 {
     await dashboardPage.page.pause()
-    await dashboardPage.sidebar.clickButton(SideBarMenuButtons.E_MONEY);
+    await dashboardPage.sidebar.openSidebarTab('E-money');
     await emoneyPage.tab.open(EMoneyTabs.Settings);
     await emoneyPage.settingsPage.addNewLimit();
     await addLimitPage.createNewLimit(EMoneyLimits[0])
@@ -54,7 +52,7 @@ test('Create Limit', async ({ adminUser, dashboardPage, emoneyPage, addLimitPage
 
 test('Check Customer Wallets Details', async ({ adminUser, dashboardPage, emoneyPage, customerWalletDetailsPage }) =>
 {
-    await dashboardPage.sidebar.clickButton(SideBarMenuButtons.E_MONEY);
+    await dashboardPage.sidebar.openSidebarTab('E-money');
     await emoneyPage.tab.open(EMoneyTabs.Wallets);
     await emoneyPage.walletsPage.tab.open(EMoneyWalletsTabs.Customer)
     await emoneyPage.walletsPage.customerPage.table.clickOnCellValueByUniqueValue('Wallet ID', 'WC-100000000219', 'Wallet ID' )
@@ -64,7 +62,7 @@ test('Check Customer Wallets Details', async ({ adminUser, dashboardPage, emoney
 
 test('Check Limit Details', async ({ adminUser, dashboardPage, emoneyPage, limitDetailsPage }) =>
 {
-    await dashboardPage.sidebar.clickButton(SideBarMenuButtons.E_MONEY);
+    await dashboardPage.sidebar.openSidebarTab('E-money');
     await emoneyPage.tab.open(EMoneyTabs.Settings);
     await emoneyPage.settingsPage.table.clickOnCellValueByUniqueValue('Currency', 'KZT', 'Currency' )
     await limitDetailsPage.verifyDetails(EMoneyLimits[0])
@@ -72,7 +70,7 @@ test('Check Limit Details', async ({ adminUser, dashboardPage, emoneyPage, limit
 
 test('Edit Fee Object to Permanent EXP date', async ({ adminUser, dashboardPage, emoneyPage, operationalWalletDetailsPage, editFeeObjectPage }) =>
 {
-    await dashboardPage.sidebar.clickButton(SideBarMenuButtons.E_MONEY);
+    await dashboardPage.sidebar.openSidebarTab('E-money');
     await emoneyPage.tab.open(EMoneyTabs.Wallets);
     await emoneyPage.walletsPage.tab.open(EMoneyWalletsTabs.Operational);
     await emoneyPage.walletsPage.operationalPage.table.clickOnCellValueByUniqueValue('Wallet ID', 'WF-100000000222', 'Wallet ID');
@@ -89,7 +87,7 @@ test('Edit Fee Object to Permanent EXP date', async ({ adminUser, dashboardPage,
 
 test('Edit Fee Object to existing EXP date', async ({ adminUser, dashboardPage, emoneyPage, operationalWalletDetailsPage, editFeeObjectPage }) =>
 {
-    await dashboardPage.sidebar.clickButton(SideBarMenuButtons.E_MONEY);
+    await dashboardPage.sidebar.openSidebarTab('E-money');
     await emoneyPage.tab.open(EMoneyTabs.Wallets);
     await emoneyPage.walletsPage.tab.open(EMoneyWalletsTabs.Operational);
     await emoneyPage.walletsPage.operationalPage.table.clickOnCellValueByUniqueValue('Wallet ID', 'WF-100000000222', 'Wallet ID');
@@ -101,7 +99,7 @@ test('Edit Fee Object to existing EXP date', async ({ adminUser, dashboardPage, 
 
 test('Edit Merchant Wallet', async ({ adminUser, dashboardPage, emoneyPage, merchantWalletDetailsPage, editMerchantWalletPage }) =>
 {
-    await dashboardPage.sidebar.clickButton(SideBarMenuButtons.E_MONEY);
+    await dashboardPage.sidebar.openSidebarTab('E-money');
     await emoneyPage.tab.open(EMoneyTabs.Wallets);
     await emoneyPage.walletsPage.tab.open(EMoneyWalletsTabs.Merchant)
     await emoneyPage.walletsPage.operationalPage.table.clickOnCellValueByUniqueValue('Internal MID', 'MI-1373691975', 'Wallet ID')
@@ -109,9 +107,12 @@ test('Edit Merchant Wallet', async ({ adminUser, dashboardPage, emoneyPage, merc
     await editMerchantWalletPage.editWallet({description: 'Some new desription'})
 });
 
-test.only('Edit Limit Details', async ({ adminUser, projectsListPage, projectPage }) =>
+test.only('Edit Limit Details', async ({ adminUser, projectsListPage, projectPage, subscriptionsPage }) =>
 {
     await projectsListPage.goToProject('automationStuff')
-    await projectPage.openTab('Team')
-    await projectPage.team.openTab('IP whitelist')
+    await projectPage.openTab('Configuration')
+    await projectPage.configuration.openTab('FX spread')
+    const URL = await projectPage.configuration.fxSpreads.getCurrentUrl()
+    console.log(URL)
+
 });

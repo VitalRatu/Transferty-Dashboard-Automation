@@ -1,17 +1,15 @@
 import { Page, expect } from '@playwright/test';
-import { FilterBar } from '../related_components/FilterBar';
-import { Table } from '../related_components/Table';
+import { FilterBar } from '../../related_components/FilterBar';
+import { Table } from '../../related_components/Table';
+import { BasePage } from '../../BasePage';
 
 /**
  * Represents the Transaction Attempts (Tx Attempts) page in the application
  * Serves as a container for page-specific components, providing access to the 
  * filtering mechanism and the data table used to view and interact with transaction attempt records
  */
-export class TxAttemptsPage 
+export class TxAttemptsPage extends BasePage
 {
-    /** The Playwright Page instance used to interact with the browser context */
-    private readonly page: Page;
-    
     /** The FilterBar component used to apply search criteria and filter the transaction attempts */
     public readonly filter: FilterBar;
     
@@ -25,7 +23,7 @@ export class TxAttemptsPage
      */
     constructor(page: Page) 
     {
-        this.page = page;
+        super(page, /\/transactions\/tx-attempts/)
         this.filter = new FilterBar(page);
         this.table = new Table(page);
     }

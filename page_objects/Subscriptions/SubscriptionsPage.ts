@@ -1,18 +1,20 @@
-import { BasePage              } from '../BasePage'                          ;
 import { Page                  } from '@playwright/test'                     ;
-import { Routes                } from '../../page_data/routes'               ;
-import { Tab                   } from '../related_components/Tab'            ;
 import { PlansListPage         } from './Plans/PlansListPage'                ;
 import { SubscriptionsListPage } from './Subscriptions/SubscriptionsListPage';
 import { ProvidersListPage     } from './Providers/ProvidersListPage'        ;
 import { OneclicksListPage     } from './Oneclicks/OneclicksListPage'        ;
 import { TokensListPage        } from './Tokens/TokensListPage'              ;
+import { Orchestrator } from '../Orchestrator';
 
-export class SubscriptionsPage extends BasePage 
+export type SubscriptionsTabName = 
+    | 'Plans' 
+    | 'Subscriptions' 
+    | 'Providers'
+    | 'Oneclicks'
+    | 'Tokens'
+
+export class SubscriptionsPage extends Orchestrator<SubscriptionsTabName>
 {
-    /** The Tab component used to switch between different MID categories and management pages */
-    public readonly tab: Tab;
-
     public readonly plansListPage: PlansListPage;
 
     public readonly subscriptionsListPage: SubscriptionsListPage;   
@@ -23,10 +25,9 @@ export class SubscriptionsPage extends BasePage
 
     public readonly tokensListPage: TokensListPage;
     
-    constructor(page: Page) 
+    constructor(page: Page, tabDepth = 0) 
     {
-        super(page, Routes.SUBSCRIPTIONS); 
-        this.tab = new Tab(page);
+        super(page, tabDepth); 
 
         this.plansListPage = new PlansListPage(page);
         this.subscriptionsListPage = new SubscriptionsListPage(page);

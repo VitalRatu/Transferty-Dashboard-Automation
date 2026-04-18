@@ -1,16 +1,14 @@
 import { Page, expect } from '@playwright/test';
-import { FilterBar } from '../related_components/FilterBar';
-import { Table } from '../related_components/Table';
+import { FilterBar } from '../../related_components/FilterBar';
+import { Table } from '../../related_components/Table';
+import { BasePage } from '../../BasePage';
 
 /**
  * Represents the Dispute page in the application for managing chargebacks and transaction disputes
  * Encapsulates the filter bar and data table components specific to dispute records
  */
-export class DisputePage 
+export class DisputePage extends BasePage
 {
-    /** The Playwright Page instance used for browser interactions */
-    private readonly page: Page;
-    
     /** The FilterBar component used to search disputes and initiate the creation of new ones */
     public readonly filter: FilterBar;
     
@@ -24,7 +22,7 @@ export class DisputePage
      */
     constructor(page: Page) 
     {
-        this.page = page;
+        super(page, /\/transactions\/disputes/)
         this.filter = new FilterBar(page);
         this.table = new Table(page);
     }

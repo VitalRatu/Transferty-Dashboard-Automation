@@ -1,5 +1,4 @@
 import { Page, Locator, expect } from '@playwright/test';
-import { AllTabs} from '../../page_data/TabNames';
 
 /**
  * Represents a tab navigation component within the application
@@ -27,7 +26,7 @@ export class Tab
     constructor(page: Page, menuIndex: number = 0) 
     {
         this.page = page;
-        const allMenus: Locator = page.locator('.ui.pointing.secondary.menu');
+        const allMenus: Locator = page.locator('.ui.pointing.secondary.menu:visible');
         this.container = allMenus.nth(menuIndex);
         this.item = this.container.locator('.item');
     }

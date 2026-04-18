@@ -1,33 +1,18 @@
 import { pomTest                  } from './pomFixtures'                          ;
-import { merchantData , adminData } from '../test_data/userCredentials'           ;
-import { Routes                   } from '../page_data/routes'                    ;
+import { merchantData , adminData } from '../test_data/userCredentials'           ;                ;
 import { DashboardPage            } from '../page_objects/Dashboard/DashboardPage';
+
+export const Routes = 
+{
+    LOGIN: '/signin',
+    DASHBOARD: '/dashboard',
+};
 
 type AuthFixtures = 
 {
     merchantUser: DashboardPage;
     adminUser: DashboardPage;
 };
-
-/* export const authTest = pomTest.extend<AuthFixtures>(
-{
-    merchantUser: async ({ loginPage, dashboardPage }, use) => 
-    {
-        await loginPage.goTo(Routes.LOGIN);
-        await loginPage.signIn(userData.EMAIL, userData.PASSWORD);
-        await dashboardPage.sidebar.setLiveMode();
-        await use();
-    },
-
-   
-    adminUser: async ({ loginPage, dashboardPage }, use) => 
-    {
-        await loginPage.goTo(Routes.LOGIN);
-        await loginPage.signIn(adminData.ADMIN_EMAIL, adminData.ADMIN_PASSWORD);
-        await dashboardPage.sidebar.setLiveMode();
-        await use();
-    },
-}); */
 
 // Merchant state
 let cachedMerchantStorage: Record<string, string>

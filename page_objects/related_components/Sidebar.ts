@@ -1,7 +1,27 @@
 import { Page, Locator, expect } from '@playwright/test';
-import { executionAsyncId } from 'node:async_hooks';
-import { error, time } from 'node:console';
-import { SideBarMenuButtons } from '../../page_data/SideBarMenuButtons';
+
+export type SidebarButtonName = 
+    | 'Dashboard'
+    | 'Projects' 
+    | 'Billing' 
+    | 'MIDs' 
+    | 'Orders' 
+    | 'Transactions' 
+    | 'E-money' 
+    | 'Subscriptions' 
+    | 'Customers'
+    | 'Cards & accounts'
+    | 'Invoices'
+    | 'Reports'
+    | 'Monitoring'
+
+    | 'API keys'
+    | 'Documentation'
+
+    | 'Configurations'
+    | 'Users'
+    | 'Lists'
+    | 'Partners'
 
 /**
  * Represents the Sidebar navigation component of the application
@@ -70,7 +90,7 @@ export class Sidebar
      * @param buttonName - The name of the sidebar button to click as defined in SideBarMenuButtons
      * @returns A promise that resolves when the navigation and URL verification are complete
      */
-    public async clickButton(buttonName: SideBarMenuButtons): Promise<void>
+    public async openSidebarTab(buttonName: SidebarButtonName): Promise<void>
     {
         await expect(this.pageLoaded).toBeHidden();
         const button = this.sideButton.filter({ hasText: buttonName });

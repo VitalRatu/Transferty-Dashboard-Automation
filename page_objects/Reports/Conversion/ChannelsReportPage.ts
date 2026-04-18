@@ -3,13 +3,15 @@ import { Tab                      } from '../../related_components/Tab'       ;
 import { ProvidersReportPage      } from './Channels/ProvidersReportPage'     ;
 import { PSPReportPage            } from './Channels/PSPReportPage'           ;
 import { IntermediariesReportPage } from './Channels/IntermediariesReportPage';
+import { Orchestrator } from '../../Orchestrator';
 
-export class ChannelsReportPage
+export type ChannelsReportTabName = 
+    | 'Providers' 
+    | 'PSP' 
+    | 'Intermediaries' 
+
+export class ChannelsReportPage extends Orchestrator<ChannelsReportTabName>
 {
-    public readonly page: Page;
-    
-    public readonly tab: Tab;
-
     public readonly providersReportPage: ProvidersReportPage;
     public readonly pspReportPage: PSPReportPage;
     public readonly intermediariesReportPage: IntermediariesReportPage;
@@ -17,9 +19,7 @@ export class ChannelsReportPage
 
     constructor(page: Page, tabDepth: number = 0) 
     {
-        this.page = page;
-        this.tab = new Tab(page, tabDepth);
-
+        super(page, tabDepth)
         this.providersReportPage = new ProvidersReportPage(page);
         this.pspReportPage = new PSPReportPage(page);
         this.intermediariesReportPage = new IntermediariesReportPage(page);

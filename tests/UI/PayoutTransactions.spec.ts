@@ -1,12 +1,11 @@
 import {test} from '../../fixtures/fixtures';      
-import {SideBarMenuButtons} from '../../page_data/SideBarMenuButtons';
 import {testCards} from '../../test_data/testCards';
 
 test('Visa 4012888888881881 Payout', async ({ merchantUser, transactionsPage, dashboardPage, transactionAddPage }) => 
 {
     await test.step('User clicks on "Transactions" tab', async() => 
     {
-        await dashboardPage.sidebar.clickButton(SideBarMenuButtons.TRANSACTIONS);
+        await dashboardPage.sidebar.openSidebarTab('Transactions');
     });
     await test.step('User clicks on "Create payment" button', async() => 
     {
@@ -26,7 +25,7 @@ test('MasterCard 5413330300003002 Payout', async ({ merchantUser, transactionsPa
 {
     await test.step('User clicks on "Transactions" tab', async() => 
     {
-        await dashboardPage.sidebar.clickButton(SideBarMenuButtons.TRANSACTIONS);
+        await dashboardPage.sidebar.openSidebarTab('Transactions');
     });
     await test.step('User clicks on "Create payment" button', async() => 
     {
@@ -46,7 +45,7 @@ test('MasterCard 5555555555554444 Payout', async ({ merchantUser, transactionsPa
 {
     await test.step('User clicks on "Transactions" tab', async() => 
     {
-        await dashboardPage.sidebar.clickButton(SideBarMenuButtons.TRANSACTIONS);
+        await dashboardPage.sidebar.openSidebarTab('Transactions');
     });
     await test.step('User clicks on "Create payment" button', async() => 
     {
@@ -66,7 +65,7 @@ test('Amex 371449635398431 Payout', async ({ merchantUser, transactionsPage, das
 {
     await test.step('User clicks on "Transactions" tab', async() => 
     {
-        await dashboardPage.sidebar.clickButton(SideBarMenuButtons.TRANSACTIONS);
+        await dashboardPage.sidebar.openSidebarTab('Transactions');
     });
     await test.step('User clicks on "Create payment" button', async() => 
     {
@@ -86,7 +85,7 @@ test('Unionpay 6212345678901232 Payout', async ({ merchantUser, transactionsPage
 {
     await test.step('User clicks on "Transactions" tab', async() => 
     {
-        await dashboardPage.sidebar.clickButton(SideBarMenuButtons.TRANSACTIONS);
+        await dashboardPage.sidebar.openSidebarTab('Transactions');
     });
     await test.step('User clicks on "Create payment" button', async() => 
     {

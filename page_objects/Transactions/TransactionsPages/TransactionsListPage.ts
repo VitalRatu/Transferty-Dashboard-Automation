@@ -1,17 +1,15 @@
 import { Page, expect } from '@playwright/test';
-import { FilterBar } from '../related_components/FilterBar';
-import { Table } from '../related_components/Table';
-import { CardData } from '../../test_data/testCards';
+import { FilterBar } from '../../related_components/FilterBar';
+import { Table } from '../../related_components/Table';
+import { CardData } from '../../../test_data/testCards';
+import { BasePage } from '../../BasePage';
 
 /**
  * Represents the main Transactions page in the application
  * Provides access to the filter bar and the data table for managing and verifying transaction records
  */
-export class TransactionsListPage 
+export class TransactionsListPage extends BasePage
 {
-    /** The Playwright Page instance used for browser interactions */
-    private readonly page: Page;
-    
     /** The FilterBar component used for searching and initiating new transaction creation */
     public readonly filter: FilterBar;
     
@@ -25,7 +23,7 @@ export class TransactionsListPage
      */
     constructor(page: Page) 
     {
-        this.page = page;
+        super(page, /\/transactions\/all/)
         this.filter = new FilterBar(page);
         this.table = new Table(page);
     }

@@ -1,22 +1,23 @@
-import { BasePage } from '../BasePage';
 import { Page } from '@playwright/test';
-import { Routes } from '../../page_data/routes';
 import { Tab } from '../related_components/Tab';
 import { SecureDepositsListPage } from '..//MIDs/SecureDeposits/SecureDepositsListPage';
 import { InternalMidsListPage } from '../MIDs/InternalMIDs/InternalMidsListPage';
 import { AggregatedMidsListPage } from './AggregatedMIDs/AggregatedMidsListPage';
 import { ExternalMidsListPage } from './ExternalMIDs/ExternalMidsListPage';
+import { Orchestrator } from '../Orchestrator';
 
+export type MIDsTabName = 
+    | 'Internal MIDs' 
+    | 'Aggregated MIDs' 
+    | 'Secure Deposits' 
+    | 'External MIDs'
 /**
  * Acts as the central orchestrator for the Merchant Identifiers (MIDs) management section
  * This page aggregates various MID types including Secure Deposits, Internal, Aggregated, and External MIDs,
  * providing a unified interface to navigate between them using a tab-based system
  */
-export class MIDsPage
+export class MIDsPage extends Orchestrator<MIDsTabName>
 {
-    /** The Tab component used to switch between different MID categories and management pages */
-    public readonly tab: Tab;
-    
     /** The page instance dedicated to managing Secure Deposit settings and records */
     public readonly secureDeposits: SecureDepositsListPage;
     
@@ -37,7 +38,7 @@ export class MIDsPage
      */
     constructor(page: Page, tabDepth: number = 0) 
     {
-        this.tab = new Tab(page, tabDepth);
+        super(page, tabDepth);
         this.secureDeposits = new SecureDepositsListPage(page);
         this.internalMids = new InternalMidsListPage(page);
         this.aggregatedMids = new AggregatedMidsListPage(page);

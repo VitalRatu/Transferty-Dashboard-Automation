@@ -62,9 +62,9 @@ export class FilterBar
     constructor(page: Page) 
     {
         this.page = page;
-        this.filterWrapper = page.locator(".filter-wrapper");
+        this.filterWrapper = page.locator(".filter-wrapper:visible");
         this.filterBaseLocator = this.filterWrapper.locator(".filter-container");
-        this.actionsContainer = this.filterWrapper.locator(".actions-container");
+        this.actionsContainer = this.filterWrapper.locator(".after-filters-content, .actions-container");
         this.filterItems = this.filterBaseLocator.locator(".filter-item");
         this.searchInput = this.filterBaseLocator.locator(".filter-search-input");
         this.resetButton = this.filterBaseLocator.locator("#reset-filters-button");
@@ -74,8 +74,8 @@ export class FilterBar
         this.moreFilterDropdownMenuItem = this.filterWrapper.getByRole("option");
         this.checkboxLocatorString = 'input[type="checkbox"]';
         this.showInEurToggleLocator = this.filterWrapper.locator("#show-in-equivalent-checkbox");
-        this.primaryButton = this.actionsContainer.locator(".ui.primary.button, .ui.button.submit-button, ui.button");
-        this.secondaryButton  = this.actionsContainer.locator(".ui.secondary.button");
+        this.primaryButton = this.actionsContainer.locator(".ui.primary.button, .ui.button.submit-button, ui.button"); 
+        this.secondaryButton = this.actionsContainer.locator('.ui.secondary.button');
     }
 
     /**
@@ -277,8 +277,7 @@ export class FilterBar
     {
         if (buttonName)
         {
-            
-            const button = this.primaryButton.filter({ hasText: buttonName});
+            const button = this.primaryButton.getByText(buttonName, {exact: true})
             await expect(button).toBeVisible();
             await button.click();
         }
@@ -296,7 +295,7 @@ export class FilterBar
     {
         if (buttonName)
         {
-            const button = this.secondaryButton.filter({ hasText: buttonName});
+            const button = this.secondaryButton.getByText(buttonName, {exact: true})
             await expect(button).toBeVisible();
             await button.click();
         }

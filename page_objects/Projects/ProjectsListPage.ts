@@ -2,8 +2,6 @@ import { Page } from '@playwright/test';
 import { BasePage } from '../BasePage';
 import { Table } from '../related_components/Table'; 
 import { FilterBar } from '../related_components/FilterBar'; 
-import { Routes } from '../../page_data/routes';
-
 
 export class ProjectsListPage extends BasePage 
 {
@@ -13,7 +11,7 @@ export class ProjectsListPage extends BasePage
 
     constructor(page: Page) 
     {
-        super(page, /\/projects/ ); 
+        super(page, /\/projects/); 
 
         this.table = new Table(page); 
         this.filters = new FilterBar(page);

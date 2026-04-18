@@ -1,11 +1,10 @@
 import { Page } from '@playwright/test';
 import { FilterBar } from '../../related_components/FilterBar'; 
 import { Table } from '../../related_components/Table';
+import { BasePage } from '../../BasePage';
 
-export class FunnelReportPage
+export class FunnelReportPage extends BasePage
 {
-    public readonly page: Page;
-    
     public readonly filterBar: FilterBar;
     
     public readonly table: Table;
@@ -13,7 +12,7 @@ export class FunnelReportPage
 
     constructor(page: Page) 
     {
-        this.page = page;
+        super(page, /\/projects\/\d+\/reports\/conversion\/funnel/)
         this.filterBar = new FilterBar(page);
         this.table = new Table(page);
     }

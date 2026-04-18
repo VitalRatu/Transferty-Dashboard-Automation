@@ -1,7 +1,6 @@
 import 'dotenv/config';
 import { expect, Locator, Page } from '@playwright/test';
 import { BasePage } from './BasePage';
-import { Routes } from '../page_data/routes';
 
 /**
  * Represents the Login Page of the application
@@ -20,7 +19,7 @@ export class LoginPage extends BasePage
      */
     constructor(page: Page) 
     {
-        super(page, Routes.LOGIN);
+        super(page, /\/signin/);
         this.emailField = page.locator('input[name="email"]');
         this.passwordField = page.locator('input[name="password"]');
         this.loginButton = page.getByRole('button', { name: 'Sign in' });
@@ -34,21 +33,6 @@ export class LoginPage extends BasePage
      * @param password - The corresponding password for the user's account
      * @returns A promise that resolves when the login process is complete and the Dashboard URL is verified
      */
-    /* public async signIn(email: string, password: string): Promise<void> 
-    {
-        await this.emailField.pressSequentially(email, { delay: 10 });
-        await this.passwordField.pressSequentially(password, { delay: 10 });
-        
-        await expect(this.loginButton).toBeVisible();
-
-        await this.loginButton.click();
-
-        await this.page.waitForURL(new RegExp(Routes.DASHBOARD));
-
-        await this.page.waitForLoadState('networkidle');
-
-        await expect(this.page).toHaveURL(new RegExp(Routes.DASHBOARD), { timeout: 3000 });
-    } */
    public async signIn(email: string, password: string): Promise<void> 
     {
         await this.emailField.fill(email);
@@ -63,7 +47,5 @@ export class LoginPage extends BasePage
         await this.loginButton.click();
 
         await responsePromise;
-
-        await this.page.waitForURL(new RegExp(Routes.DASHBOARD));
     }
 }

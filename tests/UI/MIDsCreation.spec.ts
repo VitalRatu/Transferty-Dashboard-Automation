@@ -1,17 +1,15 @@
 import {expect, test} from '../../fixtures/fixtures';
-import { SideBarMenuButtons} from '../../page_data/SideBarMenuButtons';
-import { MIDsTabs } from '../../page_data/TabNames';
 import { aggregatedMIDs, externalMIDs, internalMIDs, secureDeposits } from '../../test_data/MIDsData';
 
 test('Create Internal MID', async ({ adminUser, projectsListPage, MIDsPage, newInternalMidPage }) => 
 {
     await test.step('User clicks on "MIDs" tab', async() => 
     {
-        await projectsListPage.sidebar.clickButton(SideBarMenuButtons.MIDS);
+        await projectsListPage.sidebar.openSidebarTab('MIDs');
     });
     await test.step('User opens "Internal MIDs" tab', async() => 
     {
-        await MIDsPage.tab.open(MIDsTabs.Internal_MIDs);
+        await MIDsPage.openTab('Internal MIDs')
     });
     await test.step('User clicks on "Add new" button', async() => 
     {
@@ -31,11 +29,11 @@ test('Create Incoming Aggregated MID', async ({ adminUser, projectsListPage, MID
 {
     await test.step('User clicks on "MIDs" tab', async() => 
     {
-        await projectsListPage.sidebar.clickButton(SideBarMenuButtons.MIDS);
+        await projectsListPage.sidebar.openSidebarTab('MIDs');
     });
     await test.step('User opens "Aggregated MIDs" tab', async() => 
     {
-        await MIDsPage.tab.open(MIDsTabs.Aggregated_MIDs);
+        await MIDsPage.openTab('Aggregated MIDs')
     });
     await test.step('User clicks on "Add new" button', async() => 
     {
@@ -67,11 +65,11 @@ test('Create Outgoing Aggregated MID', async ({ adminUser, projectsListPage, MID
 {
     await test.step('User clicks on "MIDs" tab', async() => 
     {
-        await projectsListPage.sidebar.clickButton(SideBarMenuButtons.MIDS);
+        await projectsListPage.sidebar.openSidebarTab('MIDs');
     });
     await test.step('User opens "Aggregated MIDs" tab', async() => 
     {
-        await MIDsPage.tab.open(MIDsTabs.Aggregated_MIDs);
+        await MIDsPage.openTab('Aggregated MIDs')
     });
     await test.step('User clicks on "Add new" button', async() => 
     {
@@ -103,12 +101,12 @@ test('Create Secure Deposit Aggregated MID', async ({ adminUser, projectsListPag
 {
     await test.step('User clicks on "MIDs" tab', async() => 
     {
-        await projectsListPage.sidebar.clickButton(SideBarMenuButtons.MIDS);
+        await projectsListPage.sidebar.openSidebarTab('MIDs');
     });
 
     await test.step('User opens "Aggregated MIDs" tab', async() => 
     {
-        await MIDsPage.tab.open(MIDsTabs.Aggregated_MIDs);
+        await MIDsPage.openTab('Aggregated MIDs')
     });
 
     await test.step('User clicks on "Add new" button', async() => 
@@ -143,11 +141,11 @@ test('Create Secure Deposit', async ({ adminUser, projectsListPage, MIDsPage, ne
 {
     await test.step('User clicks on "MIDs" tab', async() => 
     {
-        await projectsListPage.sidebar.clickButton(SideBarMenuButtons.MIDS);
+        await projectsListPage.sidebar.openSidebarTab('MIDs');
     });
     await test.step('User opens "Secure Deposits" tab', async() => 
     {
-        await MIDsPage.tab.open(MIDsTabs.Secure_Deposits);
+        await MIDsPage.openTab('Secure Deposits')
     });
     await test.step('User clicks on "Add Secure Deposit" button', async() => 
     {
@@ -167,11 +165,11 @@ test('Create External MID', async ({ adminUser, projectsListPage, MIDsPage, newE
 {
     await test.step('User clicks on "MIDs" tab', async() => 
     {
-        await projectsListPage.sidebar.clickButton(SideBarMenuButtons.MIDS);
+        await projectsListPage.sidebar.openSidebarTab('MIDs');
     });
     await test.step('User opens "External MIDs" tab', async() => 
     {
-        await MIDsPage.tab.open(MIDsTabs.External_MIDs);
+        await MIDsPage.openTab('External MIDs')
     });
     await test.step('User clicks on "Add new" button', async() => 
     {

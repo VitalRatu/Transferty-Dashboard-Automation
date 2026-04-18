@@ -1,32 +1,33 @@
-import { BasePage } from '../BasePage';
 import { Page } from '@playwright/test';
-import { Routes } from '../../page_data/routes';
-import { Tab } from '../related_components/Tab';
 import { UsersListPage } from '../Settings/Users/UsersListPage';
-import { AdminsListPage } from './Users/Admins/AdminsListPage';
+import { AdminsListPage } from './Users/AdminsListPage';
 import { SessionsListPage } from "../Settings/Users/SessionsListPage";
-import { RolesListPage } from '../Settings/Users/Roles/RolesListPage';
+import { RolesAdminListPage } from './Users/RolesAdminListPage';
+import { Orchestrator } from '../Orchestrator';
 
-export class UsersPage extends BasePage 
+export type UsersTabName = 
+    | 'Users' 
+    | 'Admins' 
+    | 'Sessions' 
+    | 'Roles' 
+
+export class UsersPage extends Orchestrator<UsersTabName>
 {
-    public readonly tab: Tab;
-
     public readonly usersListPage: UsersListPage;
 
     public readonly adminsListPage: AdminsListPage;
 
     public readonly sessionsListPage: SessionsListPage;
 
-    public readonly rolesListPage: RolesListPage;
+    public readonly rolesAdminListPage: RolesAdminListPage;
 
-    constructor(page: Page)
+    constructor(page: Page, tabDepth = 0)
     {
-        super(page, Routes.SETTINGS.USERS);
-        this.tab = new Tab(page);
+        super(page, tabDepth);
 
         this.usersListPage = new UsersListPage(page);
         this.adminsListPage = new AdminsListPage(page);
         this.sessionsListPage = new SessionsListPage(page);
-        this.rolesListPage = new RolesListPage(page);
+        this.rolesAdminListPage = new RolesAdminListPage(page);
     }
 }

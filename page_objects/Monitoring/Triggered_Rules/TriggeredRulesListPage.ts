@@ -4,7 +4,6 @@ import { Table } from '../../related_components/Table';
 import { FilterBar } from '../../related_components/FilterBar'; 
 import { Pagination } from '../../related_components/Pagination';
 
-
 export class TriggeredRulesListPage extends BasePage 
 {
     public readonly table: Table;
