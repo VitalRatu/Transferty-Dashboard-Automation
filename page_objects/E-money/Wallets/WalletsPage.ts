@@ -1,19 +1,16 @@
 import { Page} from '@playwright/test';
-import {Tab} from '../../../page_objects/related_components/Tab';
 import { MerchantWalletsListPage } from '.././Wallets/Merchant/MerchantWalletsListPage';
 import { CustomerWalletsListPage } from '.././Wallets/Customer/CustomerWalletsListPage';
 import { OperationalWalletsListPage } from '.././Wallets/Operational/OperationalWalletsListPage';
+import { Orchestrator } from '../../Orchestrator';
 
-/**
- * Represents the Wallets management hub within the E-money section
- * This class orchestrates navigation and access to different wallet categories, including 
- * Operational, Merchant, and Customer wallets, utilizing a secondary tab system
- */
-export class WalletsPage 
+export type WalletsTabName = 
+    | 'Operational' 
+    | 'Merchant' 
+    | 'Customer' 
+
+export class WalletsPage extends Orchestrator<WalletsTabName>
 {
-    
-    /** The secondary Tab component (index 1) used to switch between different wallet types */
-    public readonly tab: Tab;
     
     /** The page instance dedicated to managing internal operational wallets used for system fees and balances */
     public readonly operationalPage: OperationalWalletsListPage;
@@ -31,7 +28,7 @@ export class WalletsPage
      */
     constructor(page: Page, tabDepth: number = 0) 
     {
-        this.tab = new Tab(page, tabDepth);
+        super(page, tabDepth);
         this.operationalPage = new OperationalWalletsListPage(page);
         this.merchantPage = new MerchantWalletsListPage(page);
         this.customerPage = new CustomerWalletsListPage(page);

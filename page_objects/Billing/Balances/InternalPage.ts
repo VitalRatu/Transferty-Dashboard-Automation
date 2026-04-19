@@ -3,6 +3,15 @@ import { Table } from '../../related_components/Table';
 import { FilterBar } from '../../related_components/FilterBar';
 import { BasePage } from '../../BasePage';
 
+export type InternalPageFilters = 
+    | 'Project' 
+    | 'Provider' 
+    | 'PSP' 
+    | 'Internal MID' 
+    | 'External MID' 
+    | 'Currency' 
+    | 'Labels' 
+
 /**
  * Represents the Internal Balances page within the billing module
  * This class provides a structured interface for managing system-level accounts, 
@@ -12,7 +21,7 @@ import { BasePage } from '../../BasePage';
 export class InternalPage extends BasePage
 {
 /** The FilterBar component used for searching internal records and system accounts by currency or date */
-    public readonly filter: FilterBar;
+    public readonly filter: FilterBar<InternalPageFilters>;
     
     /** The Table component used to display and audit internal ledger balances and transaction flows */
     public readonly table: Table;
@@ -25,7 +34,7 @@ export class InternalPage extends BasePage
     constructor(page: Page) 
     {
         super(page, /\/billing\/balances\/internal/);
-        this.filter = new FilterBar(page);
+        this.filter = new FilterBar<InternalPageFilters>(page);
         this.table = new Table(page);
     }
 }

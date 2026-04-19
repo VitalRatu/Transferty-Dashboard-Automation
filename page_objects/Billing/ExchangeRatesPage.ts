@@ -1,6 +1,11 @@
 import { Page, Locator, expect } from '@playwright/test';
 import { FilterBar } from '../related_components/FilterBar';
 import { Table } from '../related_components/Table';
+import { BasePage } from '../BasePage';
+
+export type ExchangeRatesPageFilters = 
+    | 'From' 
+    | 'To'
 
 /**
  * Represents the Exchange Rates management page within the application
@@ -8,13 +13,10 @@ import { Table } from '../related_components/Table';
  * fluctuations, filter by specific currency pairs, and audit the rate history 
  * used for cross-currency transactions
  */
-export class ExchangeRatesPage 
+export class ExchangeRatesPage extends BasePage
 {
-    /** The Playwright Page instance */
-    private readonly page: Page;
-    
     /** The FilterBar component used for searching specific currency codes, providers, or date ranges */
-    public readonly filter: FilterBar;
+    public readonly filter: FilterBar<ExchangeRatesPageFilters>;
     
     /** The Table component used to display the current and historical exchange rate data */
     public readonly table: Table; 
@@ -27,8 +29,8 @@ export class ExchangeRatesPage
      */
     constructor(page: Page, tabDepth: number = 0) 
     {
-        this.page = page;
-        this.filter = new FilterBar(page);
+        super(page, /\/billing\/rates/)
+        this.filter = new FilterBar<ExchangeRatesPageFilters>(page);
         this.table = new Table(page);
     }
 }

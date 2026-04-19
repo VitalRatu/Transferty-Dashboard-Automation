@@ -20,7 +20,7 @@ export class LimitDetailsPage extends BasePage
      */
     constructor(page: Page) 
     {
-        super(page);
+        super(page, /\/emoney\/settings\/\d+/);
         this.view = new DetailsPageReader(page);
     }
 

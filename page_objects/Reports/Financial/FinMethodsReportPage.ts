@@ -3,9 +3,25 @@ import { FilterBar } from '../../related_components/FilterBar';
 import { Table } from '../../related_components/Table';
 import { BasePage } from '../../BasePage';
 
+export type FinMethodsReportPageTabName = 
+    | 'Project' 
+    | 'Period' 
+    | 'Aggregation' 
+    | 'Currency' 
+    | 'Provider' 
+    | 'PSP' 
+    | 'Intermediary' 
+    | 'Internal MID' 
+    | 'Aggregated MIDs' 
+    | 'Tx type' 
+    | 'Location method'
+    | 'Redirect flow' 
+    | 'Customer labels' 
+    | 'Card labels';
+
 export class FinMethodsReportPage extends BasePage
 {
-    public readonly filterBar: FilterBar;
+    public readonly filterBar: FilterBar<FinMethodsReportPageTabName>;
     
     public readonly table: Table;
 
@@ -13,7 +29,7 @@ export class FinMethodsReportPage extends BasePage
     constructor(page: Page) 
     {
         super(page, /\/projects\/\d+\/reports\/financial\/methods/)
-        this.filterBar = new FilterBar(page);
+        this.filterBar = new FilterBar<FinMethodsReportPageTabName>(page);
         this.table = new Table(page);
     }
 

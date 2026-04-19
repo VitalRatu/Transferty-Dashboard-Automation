@@ -4,6 +4,19 @@ import { Table } from '../../related_components/Table';
 import { InternalMidData } from '../../../test_data/MIDsData';  
 import { BasePage } from '../../BasePage';
 
+export type InternalMidsListPageTabName = 
+{
+    'Internal MID': string
+    'Project': string
+    'Provider': string
+    'PSP': string
+    'Currency': string
+    'Method': string
+    'Labels': string
+    'Status': 'Active' | 'Blocked'
+    'Created': string
+}
+
 /**
  * Represents the Internal MIDs management page within the MIDs section
  * Provides functionality to navigate to the creation form and verify existing Internal MID
@@ -12,7 +25,7 @@ import { BasePage } from '../../BasePage';
 export class InternalMidsListPage extends BasePage
 {
     /** The FilterBar component used for searching and initiating new MID creation */
-    public readonly filterBar: FilterBar;
+    public readonly filterBar: FilterBar<InternalMidsListPageTabName>;
     
     /** The Table component used to display and interact with Internal MID records */
     public readonly table: Table;
@@ -25,7 +38,7 @@ export class InternalMidsListPage extends BasePage
     constructor(page: Page) 
     {
         super(page, /\/mids\/internal/);
-        this.filterBar = new FilterBar(page);
+        this.filterBar = new FilterBar<InternalMidsListPageTabName>(page);
         this.table = new Table(page);
     }
 

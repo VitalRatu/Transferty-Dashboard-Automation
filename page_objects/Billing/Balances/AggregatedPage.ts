@@ -3,6 +3,11 @@ import { Table } from '../../related_components/Table';
 import { FilterBar } from '../../related_components/FilterBar';
 import { BasePage } from '../../BasePage';
 
+export type AggregatedPageFilters = 
+    | 'Project' 
+    | 'Aggregated MIDs' 
+    | 'Currency' 
+
 /**
  * Represents the Aggregated MIDs balances page within the billing module
  * This class provides a centralized interface for monitoring consolidated funds 
@@ -12,7 +17,7 @@ import { BasePage } from '../../BasePage';
 export class AggregatedPage extends BasePage
 {
     /** The FilterBar component used for searching through aggregated groups by project, status, or MID details */
-    public readonly filter: FilterBar;
+    public readonly filter: FilterBar<AggregatedPageFilters>;
     
     /** The Table component used to display and audit consolidated balances and transaction summaries for grouped MIDs */
     public readonly table: Table;
@@ -25,7 +30,7 @@ export class AggregatedPage extends BasePage
     constructor(page: Page) 
     {
         super(page, /\/billing\/balances\/aggregated/);
-        this.filter = new FilterBar(page);
+        this.filter = new FilterBar<AggregatedPageFilters>(page);
         this.table = new Table(page);
     }
 }

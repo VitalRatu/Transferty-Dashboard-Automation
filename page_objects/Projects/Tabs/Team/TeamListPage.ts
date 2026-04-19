@@ -3,15 +3,18 @@ import { FilterBar              } from '../../../related_components/FilterBar'  
 import { Table                  } from '../../../related_components/Table'         ;
 import { BasePage } from '../../../BasePage';
 
+export type TeamListPageTabName =
+    | ''
+
 export class TeamListPage extends BasePage
 {
-    public readonly filterBar: FilterBar;
+    public readonly filterBar: FilterBar<TeamListPageTabName>;
     public readonly table: Table;
 
     constructor(page: Page) 
     {
         super(page, /\/projects\/\d+\/team\/team/);
-        this.filterBar = new FilterBar(page);
+        this.filterBar = new FilterBar<TeamListPageTabName>(page);
         this.table = new Table(page);
     }
 

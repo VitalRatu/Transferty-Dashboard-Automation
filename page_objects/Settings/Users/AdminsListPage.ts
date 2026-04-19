@@ -3,16 +3,28 @@ import { FilterBar } from '../../related_components/FilterBar';
 import { Table } from '../../related_components/Table';
 import { BasePage } from '../../BasePage';
 
+export type AdminsListPageTabName = 
+    | 'ID'
+    | 'Email'
+    | 'Partner'
+    | 'First name'
+    | 'Last name'
+    | 'Phone'
+    | 'Role'
+    | 'Status'
+    | 'Last login'
+    | 'Created'
+
 export class AdminsListPage extends BasePage
 {
-    public readonly filterBar: FilterBar;
+    public readonly filterBar: FilterBar<AdminsListPageTabName>;
     
     public readonly table: Table;
 
     constructor(page: Page) 
     {
         super(page, /\/users\/list\/admins/)
-        this.filterBar = new FilterBar(page);
+        this.filterBar = new FilterBar<AdminsListPageTabName>(page);
         this.table = new Table(page);
     }
     public async addNewAdmin(): Promise<void>

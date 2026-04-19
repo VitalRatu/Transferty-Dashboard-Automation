@@ -1,6 +1,12 @@
 import { BasePage } from '../BasePage';
 import { Page } from 'playwright';
+import { FilterBar } from '../related_components/FilterBar';
 
+export type DashboardPageTabName =
+    | 'Currency'
+    | 'Period'
+    | 'Aggregated'
+    
 /**
  * Represents the main landing page of the application after successful authentication
  * Acts as a central hub providing a high-level overview of system metrics, recent activities, 
@@ -8,6 +14,7 @@ import { Page } from 'playwright';
  */
 export class DashboardPage extends BasePage 
 {
+    public readonly filter:FilterBar<DashboardPageTabName>
     /**
      * Initializes a new instance of the DashboardPage class
      * Sets the base navigation route specifically for the dashboard endpoint
@@ -16,5 +23,7 @@ export class DashboardPage extends BasePage
     constructor(page: Page) 
     {
         super(page, /\/dashboard/);
+
+        this.filter = new FilterBar<DashboardPageTabName>(page)
     }
 }

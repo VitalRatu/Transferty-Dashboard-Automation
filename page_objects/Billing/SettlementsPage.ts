@@ -3,6 +3,17 @@ import { FilterBar } from '../related_components/FilterBar';
 import { Table } from '../related_components/Table';
 import { BasePage } from '../BasePage';
 
+export type SettlementsPageFilters = 
+    | 'ID' 
+    | 'Project' 
+    | 'Provider' 
+    | 'Intermediary' 
+    | 'PSP' 
+    | 'Internal MID' 
+    | 'Currency' 
+    | 'Created' 
+    | 'Updated' 
+
 /**
  * Represents the Settlements page within the application
  * Provides a management interface for tracking fund distributions, performing 
@@ -11,7 +22,7 @@ import { BasePage } from '../BasePage';
 export class SettlementsPage extends BasePage
 {
     /** The FilterBar component used for searching through settlement batches and individual records */
-    public readonly filter: FilterBar;
+    public readonly filter: FilterBar<SettlementsPageFilters>;
     
     /** The Table component used to display settlement statuses, amounts, and dates */
     public readonly table: Table; 
@@ -25,7 +36,7 @@ export class SettlementsPage extends BasePage
     constructor(page: Page, tabDepth: number = 0) 
     {
         super(page, /\/billing\/settlements/);
-        this.filter = new FilterBar(page);
+        this.filter = new FilterBar<SettlementsPageFilters>(page);
         this.table = new Table(page);
     }
 

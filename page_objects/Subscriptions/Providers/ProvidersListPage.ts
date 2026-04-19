@@ -1,20 +1,26 @@
 import { Page} from '@playwright/test';
 import { FilterBar } from '../../related_components/FilterBar'; 
 import { Table } from '../../related_components/Table';
+import { BasePage } from '../../BasePage';
 
-export class ProvidersListPage 
+export type ProvidersListPageTabName = 
+    | 'Period' 
+    | 'Project' 
+    | 'Provider'
+    | 'PSP'
+    | 'Internal MID'
+    | 'Currency'
+
+export class ProvidersListPage extends BasePage
 {
-
-    private readonly page: Page;
-
-    private readonly filterBar: FilterBar;
+    public readonly filterBar: FilterBar<ProvidersListPageTabName>;
     
-    private readonly table: Table;
+    public readonly table: Table;
 
     constructor(page: Page) 
     {
-        this.page = page;
-        this.filterBar = new FilterBar(page);
+        super(page, /\/subscriptions\/token-providers/)
+        this.filterBar = new FilterBar<ProvidersListPageTabName>(page);
         this.table = new Table(page);
     }
 

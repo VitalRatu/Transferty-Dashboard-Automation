@@ -3,17 +3,25 @@ import { FilterBar } from '../../related_components/FilterBar';
 import { Table } from '../../related_components/Table';
 import { BasePage } from '../../BasePage';
 
+export type FunnelReportPageTabName = 
+    | 'Project' 
+    | 'Period'
+    | 'Aggregation'
+    | 'Source'
+    | 'Device'
+    | 'Redirect flow'
+    | 'Customer labels'
+
 export class FunnelReportPage extends BasePage
 {
-    public readonly filterBar: FilterBar;
+    public readonly filterBar: FilterBar<FunnelReportPageTabName>;
     
     public readonly table: Table;
-
 
     constructor(page: Page) 
     {
         super(page, /\/projects\/\d+\/reports\/conversion\/funnel/)
-        this.filterBar = new FilterBar(page);
+        this.filterBar = new FilterBar<FunnelReportPageTabName>(page);
         this.table = new Table(page);
     }
 

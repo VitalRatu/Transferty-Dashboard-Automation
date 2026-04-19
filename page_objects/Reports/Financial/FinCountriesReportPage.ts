@@ -3,9 +3,27 @@ import { FilterBar } from '../../related_components/FilterBar';
 import { Table } from '../../related_components/Table';
 import { BasePage } from '../../BasePage';
 
+export type FinCountriesReportPageTabName = 
+    | 'Project' 
+    | 'Period' 
+    | 'Aggregation' 
+    | 'Currency' 
+    | 'Provider' 
+    | 'PSP' 
+    | 'Intermediary' 
+    | 'Internal MID' 
+    | 'Aggregated MIDs' 
+    | 'Tx type' 
+    | 'Tx flow scheme'
+    | 'Location method'
+    | 'Redirect flow' 
+    | 'Customer labels' 
+    | 'Card labels'
+    | 'Tx method'
+
 export class FinCountriesReportPage extends BasePage
 {
-    public readonly filterBar: FilterBar;
+    public readonly filterBar: FilterBar<FinCountriesReportPageTabName>;
     
     public readonly table: Table;
 
@@ -13,7 +31,7 @@ export class FinCountriesReportPage extends BasePage
     constructor(page: Page) 
     {
         super(page, /\/projects\/\d+\/reports\/financial\/countries/)
-        this.filterBar = new FilterBar(page);
+        this.filterBar = new FilterBar<FinCountriesReportPageTabName>(page);
         this.table = new Table(page);
     }
 

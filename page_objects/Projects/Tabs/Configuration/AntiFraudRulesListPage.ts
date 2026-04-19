@@ -3,16 +3,19 @@ import { FilterBar } from '../../../related_components/FilterBar';
 import { Table } from '../../../related_components/Table';
 import { BasePage } from '../../../BasePage';
 
+export type AntifraudRulesListPageTabName =
+    | ''
+
 export class AntifraudRulesListPage extends BasePage
 {
-    public readonly filterBar: FilterBar;
+    public readonly filterBar: FilterBar<AntifraudRulesListPageTabName>;
     
     public readonly table: Table;
 
     constructor(page: Page) 
     {
         super(page, /\/projects\/\d+\/configurations\/antifraud-rules/)
-        this.filterBar = new FilterBar(page);
+        this.filterBar = new FilterBar<AntifraudRulesListPageTabName>(page);
         this.table = new Table(page);
     }
 

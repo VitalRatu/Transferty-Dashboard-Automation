@@ -4,6 +4,13 @@ import { FilterBar } from '../../../related_components/FilterBar';
 import { EMoneyMerchantWallet } from '../../../../test_data/EMoneyWalletsData';
 import { BasePage } from '../../../BasePage';
 
+export type MerchantWalletListPageFilters = 
+    | 'Project' 
+    | 'Wallet ID' 
+    | 'Internal MID'
+    | 'Currency'
+    | 'Created'
+
 /**
  * Represents the Merchant Wallets page within the E-money section
  * Provides a management interface for viewing merchant-specific digital wallets,
@@ -12,7 +19,7 @@ import { BasePage } from '../../../BasePage';
 export class MerchantWalletsListPage extends BasePage
 {
     /** The FilterBar component used for searching and navigating to the creation form */
-    public readonly filter: FilterBar;
+    public readonly filter: FilterBar<MerchantWalletListPageFilters>;
     
     /** The Table component used to display and interact with merchant wallet records */
     public readonly table: Table;
@@ -25,7 +32,7 @@ export class MerchantWalletsListPage extends BasePage
     constructor(page: Page) 
     {
         super(page, /\/emoney\/wallets\/merchant/);
-        this.filter = new FilterBar(page);
+        this.filter = new FilterBar<MerchantWalletListPageFilters>(page);
         this.table = new Table(page);
     }
 

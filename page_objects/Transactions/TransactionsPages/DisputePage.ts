@@ -3,6 +3,18 @@ import { FilterBar } from '../../related_components/FilterBar';
 import { Table } from '../../related_components/Table';
 import { BasePage } from '../../BasePage';
 
+export type DisputePageTabName = 
+    | 'Project'
+    | 'Dispute ID'
+    | 'External ID'
+    | 'Provider'
+    | 'PSP'
+    | 'Tx ID'
+    | 'Currency'
+    | 'Category'
+    | 'Status'
+    | 'Created'
+
 /**
  * Represents the Dispute page in the application for managing chargebacks and transaction disputes
  * Encapsulates the filter bar and data table components specific to dispute records
@@ -10,7 +22,7 @@ import { BasePage } from '../../BasePage';
 export class DisputePage extends BasePage
 {
     /** The FilterBar component used to search disputes and initiate the creation of new ones */
-    public readonly filter: FilterBar;
+    public readonly filter: FilterBar<DisputePageTabName>;
     
     /** The Table component used to display and interact with the grid of dispute records */
     public readonly table: Table;
@@ -23,7 +35,7 @@ export class DisputePage extends BasePage
     constructor(page: Page) 
     {
         super(page, /\/transactions\/disputes/)
-        this.filter = new FilterBar(page);
+        this.filter = new FilterBar<DisputePageTabName>(page);
         this.table = new Table(page);
     }
 

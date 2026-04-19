@@ -3,9 +3,15 @@ import { FilterBar } from '../related_components/FilterBar';
 import { Table } from '../related_components/Table';
 import { BasePage } from '../BasePage';
 
+export type MarginReportPageTabName =
+    | 'Period' 
+    | 'Aggregation'
+    | 'Currency'
+    | 'Project'
+
 export class MarginReportPage extends BasePage
 {
-    public readonly filterBar: FilterBar;
+    public readonly filterBar: FilterBar<MarginReportPageTabName>;
 
     public readonly table: Table;
 
@@ -13,7 +19,7 @@ export class MarginReportPage extends BasePage
     {
         super(page, /\/projects\/\d+\/reports\/margin/)
 
-        this.filterBar = new FilterBar(page);
+        this.filterBar = new FilterBar<MarginReportPageTabName>(page);
         this.table = new Table(page);
     }
 

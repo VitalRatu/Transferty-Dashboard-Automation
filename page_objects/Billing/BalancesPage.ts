@@ -7,20 +7,25 @@ import { InternalPage } from './Balances/InternalPage';
 import { AggregatedPage } from './Balances/AggregatedPage';
 import { CurrencyPage } from './Balances/CurrencyPage';
 import { ChannelPage } from './Balances/ChannelPage';
+import { Orchestrator } from '../Orchestrator';
+
+export type BalancesTabName = 
+    | 'Acquiring' 
+    | 'Distribution' 
+    | 'Secure Deposits' 
+    | 'Internal' 
+    | 'Aggregated' 
+    | 'Currency' 
+    | 'Channel' 
+
 
 /**
  * Acts as the central management hub for all balance-related modules in the Billing section
  * This class orchestrates navigation between specialized balance views, including merchant 
  * acquiring, fund distribution, and aggregated financial tracking
  */
-export class BalancesPage 
+export class BalancesPage extends Orchestrator<BalancesTabName>
 {
-    /** The Playwright Page instance */
-    private readonly page: Page;
-    
-    /** The secondary navigation tab component used to switch between different balance sub-modules */
-    public readonly tab: Tab;
-    
     /** The module for tracking incoming payment flows and merchant acquiring balances */
     public readonly acquiringPage: AcquiringPage;
     
@@ -50,8 +55,7 @@ export class BalancesPage
      */
     constructor(page: Page, tabDepth: number = 0) 
     {
-        this.page = page;
-        this.tab = new Tab(page, tabDepth);
+        super(page, tabDepth);
         this.acquiringPage = new AcquiringPage(page);
         this.distributionPage = new DistributionPage(page);
         this.secureDepositsPage = new SecureDepositsPage(page);

@@ -3,18 +3,26 @@ import { BasePage } from '../BasePage';
 import { Table } from '../related_components/Table'; 
 import { FilterBar } from '../related_components/FilterBar'; 
 
+export type ProjectsListPageTabName =
+    | 'Project ID'
+    | 'Project'
+    | 'Website'
+    | 'Status'
+    | 'Partner'
+    | 'Created'
+
 export class ProjectsListPage extends BasePage 
 {
     public readonly table: Table;
     
-    public readonly filters: FilterBar;
+    public readonly filters: FilterBar<ProjectsListPageTabName>;
 
     constructor(page: Page) 
     {
         super(page, /\/projects/); 
 
         this.table = new Table(page); 
-        this.filters = new FilterBar(page);
+        this.filters = new FilterBar<ProjectsListPageTabName>(page);
     }
 
     public async goToProject(projectName: string): Promise<void>

@@ -3,6 +3,19 @@ import { FilterBar } from '../../related_components/FilterBar';
 import { Table } from '../../related_components/Table';
 import { BasePage } from '../../BasePage';
 
+export type TxAttemptsPageTabName = 
+    | 'Tx ID' 
+    | 'Order ID' 
+    | 'Project' 
+    | 'Provider' 
+    | 'PSP' 
+    | 'Internal MID' 
+    | 'Subscription' 
+    | 'Type'
+    | 'Currency' 
+    | 'Order currency' 
+    | 'Created';
+
 /**
  * Represents the Transaction Attempts (Tx Attempts) page in the application
  * Serves as a container for page-specific components, providing access to the 
@@ -11,7 +24,7 @@ import { BasePage } from '../../BasePage';
 export class TxAttemptsPage extends BasePage
 {
     /** The FilterBar component used to apply search criteria and filter the transaction attempts */
-    public readonly filter: FilterBar;
+    public readonly filter: FilterBar<TxAttemptsPageTabName>;
     
     /** The Table component used to interact with the grid of transaction attempt records */
     public readonly table: Table;
@@ -24,7 +37,7 @@ export class TxAttemptsPage extends BasePage
     constructor(page: Page) 
     {
         super(page, /\/transactions\/tx-attempts/)
-        this.filter = new FilterBar(page);
+        this.filter = new FilterBar<TxAttemptsPageTabName>(page);
         this.table = new Table(page);
     }
 }

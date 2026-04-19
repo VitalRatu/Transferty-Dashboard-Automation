@@ -3,6 +3,14 @@ import { Table } from '../../related_components/Table';
 import { FilterBar } from '../../related_components/FilterBar';
 import { BasePage } from '../../BasePage';
 
+export type AllAdjustmentsPageFilters = 
+    | 'Project' 
+    | 'Currency' 
+    | 'Internal MID / Secure Deposit' 
+    | 'Created' 
+    | 'Rule type' 
+    | 'Action type' 
+
 /**
  * Represents the comprehensive Adjustments log page within the billing module
  * This class provides a centralized interface for viewing, filtering, and auditing 
@@ -11,7 +19,7 @@ import { BasePage } from '../../BasePage';
 export class AllAdjustmentsPage extends BasePage
 {
     /** The FilterBar component used for searching through adjustment records by project, currency, or adjustment type */
-    public readonly filter: FilterBar;
+    public readonly filter: FilterBar<AllAdjustmentsPageFilters>;
     
     /** The Table component used to display and audit the history of manual balance corrections and their current statuses */
     public readonly table: Table;
@@ -24,7 +32,7 @@ export class AllAdjustmentsPage extends BasePage
     constructor(page: Page) 
     {
         super(page, /\/billing\/adjustments\/without-rules/);
-        this.filter = new FilterBar(page);
+        this.filter = new FilterBar<AllAdjustmentsPageFilters>(page);
         this.table = new Table(page);
     }
 

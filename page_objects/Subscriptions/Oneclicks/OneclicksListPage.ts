@@ -1,20 +1,25 @@
 import { Page} from '@playwright/test';
 import { FilterBar } from '../../related_components/FilterBar'; 
 import { Table } from '../../related_components/Table';
+import { BasePage } from '../../BasePage';
 
-export class OneclicksListPage 
+export type OneclicksListPageTabName = 
+    | 'Oneclick token' 
+    | 'Project' 
+    | 'Card mask'
+    | 'Created'
+    | 'Status'
+
+export class OneclicksListPage extends BasePage
 {
-
-    private readonly page: Page;
-
-    private readonly filterBar: FilterBar;
+    public readonly filterBar: FilterBar<OneclicksListPageTabName>;
     
-    private readonly table: Table;
+    public readonly table: Table;
 
     constructor(page: Page) 
     {
-        this.page = page;
-        this.filterBar = new FilterBar(page);
+        super(page, /\/subscriptions\/oneclicks/)
+        this.filterBar = new FilterBar<OneclicksListPageTabName>(page);
         this.table = new Table(page);
     }
 

@@ -5,11 +5,18 @@ import { FilterBar } from '../../../related_components/FilterBar';
 import { Pagination } from '../../../related_components/Pagination';
 import { BasePage } from '../../../BasePage';
 
+export type AggregatedRulesListPageTabName =
+    | 'Rule ID' 
+    | 'Project' 
+    | 'Rule name' 
+    | 'Status'
+    | 'Created'   
+
 export class AggregatedRulesListPage extends BasePage
 {
     public readonly tab: Tab;
     
-    public readonly filter: FilterBar;
+    public readonly filter: FilterBar<AggregatedRulesListPageTabName>;
     
     public readonly table: Table;
 
@@ -19,7 +26,7 @@ export class AggregatedRulesListPage extends BasePage
     {
         super(page, /\/monitoring\/rules\/aggregated/);
         this.tab = new Tab(page);
-        this.filter = new FilterBar(page);
+        this.filter = new FilterBar<AggregatedRulesListPageTabName>(page);
         this.table = new Table(page);
         this.pagination = new Pagination(page);
     }

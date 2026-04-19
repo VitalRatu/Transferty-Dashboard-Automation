@@ -4,11 +4,17 @@ import { Table } from '../../related_components/Table';
 import { FilterBar } from '../../related_components/FilterBar'; 
 import { Pagination } from '../../related_components/Pagination';
 
+export type TriggeredRulesListPageTabName =
+    | 'ID' 
+    | 'Project' 
+    | 'Rule' 
+    | 'Timestamp'
+
 export class TriggeredRulesListPage extends BasePage 
 {
     public readonly table: Table;
     
-    public readonly filter: FilterBar;
+    public readonly filter: FilterBar<TriggeredRulesListPageTabName>;
 
     public readonly pagination: Pagination;
 
@@ -18,7 +24,7 @@ export class TriggeredRulesListPage extends BasePage
 
         this.table = new Table(page); 
 
-        this.filter = new FilterBar(page);
+        this.filter = new FilterBar<TriggeredRulesListPageTabName>(page);
 
         this.pagination = new Pagination(page);
     }

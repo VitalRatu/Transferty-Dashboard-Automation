@@ -2,16 +2,19 @@ import { Page, Locator, expect } from '@playwright/test';
 import {Tab} from '../../page_objects/related_components/Tab';
 import { AllAdjustmentsPage } from './Adjustments/AllAdjustmentsPage';
 import { AutoTransferPage } from './Adjustments/AutoTransferPage';
+import { Orchestrator } from '../Orchestrator';
+
+export type AdjustmentsTabName = 
+    | 'All adjustments' 
+    | 'Auto-transfer by %' 
 
 /**
  * Represents the Adjustments management hub within the Billing section
  * Provides a specialized interface for handling manual balance corrections and 
  * configuring automated fund transfers between different account types
  */
-export class AdjustmentsPage 
+export class AdjustmentsPage extends Orchestrator<AdjustmentsTabName>
 {
-    /** The secondary navigation tab component used to toggle between adjustment logs and transfer settings */
-    public readonly tab: Tab;
     
     /** The component responsible for managing and auditing automated fund movement rules */
     public readonly autoTransferPage: AutoTransferPage;
@@ -27,7 +30,7 @@ export class AdjustmentsPage
      */
     constructor(page: Page, tabDepth: number = 0) 
     {
-        this.tab = new Tab(page, tabDepth);
+        super(page, tabDepth);
         this.allAdjustmentsPage = new AllAdjustmentsPage(page);
         this.autoTransferPage = new AutoTransferPage(page);
     }

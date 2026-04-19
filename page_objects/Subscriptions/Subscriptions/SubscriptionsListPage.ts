@@ -1,20 +1,29 @@
 import { Page} from '@playwright/test';
 import { FilterBar } from '../../related_components/FilterBar'; 
 import { Table } from '../../related_components/Table';
+import { BasePage } from '../../BasePage';
 
-export class SubscriptionsListPage 
+export type SubscriptionsListPageTabName = 
+    | 'Subscription ID' 
+    | 'Project' 
+    | 'Plan'
+    | 'Customer token'
+    | 'BIN'
+    | 'Last four'
+    | 'Method'
+    | 'Created'
+    | 'Status'
+
+export class SubscriptionsListPage extends BasePage
 {
-
-    private readonly page: Page;
-
-    private readonly filterBar: FilterBar;
+    public readonly filterBar: FilterBar<SubscriptionsListPageTabName>;
     
-    private readonly table: Table;
+    public readonly table: Table;
 
     constructor(page: Page) 
     {
-        this.page = page;
-        this.filterBar = new FilterBar(page);
+        super(page, /\/subscriptions\/plans/)
+        this.filterBar = new FilterBar<SubscriptionsListPageTabName>(page);
         this.table = new Table(page);
     }
 

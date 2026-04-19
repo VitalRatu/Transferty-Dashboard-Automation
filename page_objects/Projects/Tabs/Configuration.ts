@@ -3,7 +3,7 @@ import { ProjectDetailsPage     } from './Configuration/ProjectDetailsPage'    ;
 import { MIDsPage               } from '../../MIDs/MIDsPage'                   ;
 import { CurrenciesListPage     } from './Configuration/CurrenciesListPage'    ;
 import { FxSpreadListPage       } from './Configuration/FxSpreadListPage'      ;
-import { APIKeysListPage        } from '../../APIKeys/APIKeysListPage'       ;
+import { APIKeysListPage        } from '../../Developers/APIKeys/APIKeysListPage'       ;
 import { RoutingRulesListPage   } from './Configuration/RoutingRulesListPage'  ;
 import { AntifraudRulesListPage } from './Configuration/AntiFraudRulesListPage';
 import { CheckoutPage           } from './Configuration/CheckoutPage'          ;

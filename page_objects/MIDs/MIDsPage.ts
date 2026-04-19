@@ -1,5 +1,4 @@
 import { Page } from '@playwright/test';
-import { Tab } from '../related_components/Tab';
 import { SecureDepositsListPage } from '..//MIDs/SecureDeposits/SecureDepositsListPage';
 import { InternalMidsListPage } from '../MIDs/InternalMIDs/InternalMidsListPage';
 import { AggregatedMidsListPage } from './AggregatedMIDs/AggregatedMidsListPage';
@@ -11,6 +10,7 @@ export type MIDsTabName =
     | 'Aggregated MIDs' 
     | 'Secure Deposits' 
     | 'External MIDs'
+    
 /**
  * Acts as the central orchestrator for the Merchant Identifiers (MIDs) management section
  * This page aggregates various MID types including Secure Deposits, Internal, Aggregated, and External MIDs,

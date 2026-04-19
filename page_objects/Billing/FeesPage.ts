@@ -3,6 +3,16 @@ import { FilterBar } from '../related_components/FilterBar';
 import { Table } from '../related_components/Table';
 import { BasePage } from '../BasePage';
 
+export type FeesPageFilters = 
+    | 'ID' 
+    | 'Project' 
+    | 'Provider' 
+    | 'Currency' 
+    | 'Tx type' 
+    | 'Internal MID' 
+    | 'Status' 
+    | 'Category' 
+
 /**
  * Represents the Fees management page within the application
  * Provides functionality to configure, monitor, and audit various fee structures, 
@@ -12,7 +22,7 @@ export class FeesPage extends BasePage
 {
 
     /** The FilterBar component used for searching through fee records and applying specific criteria filters */
-    public readonly filter: FilterBar;
+    public readonly filter: FilterBar<FeesPageFilters>;
     
     /** The Table component used to display and interact with the list of fee configurations */
     public readonly table: Table; 
@@ -26,7 +36,7 @@ export class FeesPage extends BasePage
     constructor(page: Page, tabDepth: number = 0) 
     {
         super(page, /\/billing\/fees/);
-        this.filter = new FilterBar(page);
+        this.filter = new FilterBar<FeesPageFilters>(page);
         this.table = new Table(page);
     }
 

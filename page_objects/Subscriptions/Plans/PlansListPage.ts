@@ -1,20 +1,27 @@
 import { Page} from '@playwright/test';
 import { FilterBar } from '../../related_components/FilterBar'; 
 import { Table } from '../../related_components/Table';
+import { BasePage } from '../../BasePage';
 
-export class PlansListPage 
+export type PlansListPageTabName = 
+    | 'Plan ID' 
+    | 'Project' 
+    | 'Name'
+    | 'Default currency'
+    | 'Tria'
+    | 'Created'
+    | 'Status'
+
+export class PlansListPage extends BasePage
 {
-
-    private readonly page: Page;
-
-    private readonly filterBar: FilterBar;
+    public readonly filterBar: FilterBar<PlansListPageTabName>;
     
-    private readonly table: Table;
+    public readonly table: Table;
 
     constructor(page: Page) 
     {
-        this.page = page;
-        this.filterBar = new FilterBar(page);
+        super(page, /\/subscriptions\/plans/)
+        this.filterBar = new FilterBar<PlansListPageTabName>(page);
         this.table = new Table(page);
     }
 

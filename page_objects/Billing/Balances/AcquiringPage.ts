@@ -3,6 +3,14 @@ import { Table } from '../../related_components/Table';
 import { FilterBar } from '../../related_components/FilterBar';
 import { BasePage } from '../../BasePage';
 
+export type AcquiringPageFilters = 
+    | 'Project' 
+    | 'Provider' 
+    | 'PSP' 
+    | 'External MID' 
+    | 'Currency' 
+    | 'Labels' 
+
 /**
  * Represents the Acquiring balances page within the billing module
  * This class provides a specialized interface for monitoring incoming payment flows, 
@@ -12,7 +20,7 @@ import { BasePage } from '../../BasePage';
 export class AcquiringPage extends BasePage
 {
     /** The FilterBar component used for searching through acquiring records by project, terminal, or date */
-    public readonly filter: FilterBar;
+    public readonly filter: FilterBar<AcquiringPageFilters>;
     
     /** The Table component used to display and audit transaction-level balances and processing totals */
     public readonly table: Table;
@@ -25,7 +33,7 @@ export class AcquiringPage extends BasePage
     constructor(page: Page) 
     {
         super(page, /\/billing\/balances\/acquiring/);
-        this.filter = new FilterBar(page);
+        this.filter = new FilterBar<AcquiringPageFilters>(page);
         this.table = new Table(page);
     }
 }

@@ -3,16 +3,19 @@ import { FilterBar              } from '../../../related_components/FilterBar'  
 import { Table                  } from '../../../related_components/Table'         ;
 import { BasePage } from '../../../BasePage';
 
+export type IPWhiteListPageTabName =
+    | ''
+
 export class IPWhiteListPage extends BasePage
 {
-    public readonly filterBar: FilterBar;
+    public readonly filterBar: FilterBar<IPWhiteListPageTabName>;
     public readonly table: Table;
 
     constructor(page: Page) 
     {
         super(page, /\/projects\/\d+\/team\/whitelist/);
 
-        this.filterBar = new FilterBar(page);
+        this.filterBar = new FilterBar<IPWhiteListPageTabName>(page);
         this.table = new Table(page);
     }
 

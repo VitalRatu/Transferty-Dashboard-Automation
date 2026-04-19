@@ -4,6 +4,30 @@ import { Table } from '../../related_components/Table';
 import { CardData } from '../../../test_data/testCards';
 import { BasePage } from '../../BasePage';
 
+export type TransactionsListPageTabName = 
+    | 'Tx ID' 
+    | 'Order ID' 
+    | 'Aggregated MIDs' 
+    | 'External ID' 
+    | 'Subscription' 
+    | 'Customer token' 
+    | 'Provider' 
+    | 'Intermediary' 
+    | 'PSP' 
+    | 'Internal MID' 
+    | 'RRN' 
+    | 'Project' 
+    | 'Method' 
+    | 'Status' 
+    | 'Type' 
+    | 'Currency' 
+    | 'Order currency' 
+    | 'BIN' 
+    | 'Last four' 
+    | 'Country' 
+    | 'Customer IP' 
+    | 'Created';
+
 /**
  * Represents the main Transactions page in the application
  * Provides access to the filter bar and the data table for managing and verifying transaction records
@@ -11,7 +35,7 @@ import { BasePage } from '../../BasePage';
 export class TransactionsListPage extends BasePage
 {
     /** The FilterBar component used for searching and initiating new transaction creation */
-    public readonly filter: FilterBar;
+    public readonly filter: FilterBar<TransactionsListPageTabName>;
     
     /** The Table component used to read and interact with transaction data grids */
     public readonly table: Table;
@@ -24,7 +48,7 @@ export class TransactionsListPage extends BasePage
     constructor(page: Page) 
     {
         super(page, /\/transactions\/all/)
-        this.filter = new FilterBar(page);
+        this.filter = new FilterBar<TransactionsListPageTabName>(page);
         this.table = new Table(page);
     }
 

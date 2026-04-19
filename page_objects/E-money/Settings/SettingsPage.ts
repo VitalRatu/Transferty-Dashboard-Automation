@@ -4,6 +4,9 @@ import { FilterBar } from '../../related_components/FilterBar';
 import { EMoneyLimitsData } from '../../../test_data/EMoneyLimitsData';
 import { BasePage } from '../../BasePage';
 
+export type SettingsPageFilters = 
+    | '' 
+
 /**
  * Represents the Settings page within the E-money section
  * Provides an interface to manage global transaction constraints, customer wallet limits, 
@@ -12,7 +15,7 @@ import { BasePage } from '../../BasePage';
 export class SettingsPage extends BasePage
 {
     /** The FilterBar component used for searching settings and initiating the creation of new limits */
-    public readonly filter: FilterBar;
+    public readonly filter: FilterBar<SettingsPageFilters>;
     
     /** The Table component used to display and interact with the list of configured limits */
     public readonly table: Table;
@@ -25,7 +28,7 @@ export class SettingsPage extends BasePage
     constructor(page: Page) 
     {
         super(page, /\/emoney\/settings/);
-        this.filter = new FilterBar(page);
+        this.filter = new FilterBar<SettingsPageFilters>(page);
         this.table = new Table(page);
     }
 

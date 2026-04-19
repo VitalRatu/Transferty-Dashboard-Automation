@@ -3,6 +3,13 @@ import { Table } from '../../related_components/Table';
 import { FilterBar } from '../../related_components/FilterBar';
 import { BasePage } from '../../BasePage';
 
+export type AutoTransferPageFilters = 
+    | 'Project' 
+    | 'MID from' 
+    | 'MID to' 
+    | 'Created' 
+    | 'Status' 
+
 /**
  * Represents the Automated Transfers page within the adjustments module
  * This class provides a structured interface for configuring fund movement rules, 
@@ -12,7 +19,7 @@ import { BasePage } from '../../BasePage';
 export class AutoTransferPage extends BasePage
 {
     /** The FilterBar component used for searching through transfer rules by status, project, or target wallet */
-    public readonly filter: FilterBar;
+    public readonly filter: FilterBar<AutoTransferPageFilters>;
     
     /** The Table component used to display and audit active auto-transfer configurations and their execution logs */
     public readonly table: Table;
@@ -25,7 +32,7 @@ export class AutoTransferPage extends BasePage
     constructor(page: Page) 
     {
         super(page, /\/billing\/adjustments\/auto-transfer-by-percent/);
-        this.filter = new FilterBar(page);
+        this.filter = new FilterBar<AutoTransferPageFilters>(page);
         this.table = new Table(page);
     }
 }

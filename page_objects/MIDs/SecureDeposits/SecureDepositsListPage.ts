@@ -4,6 +4,15 @@ import { Table } from '../../related_components/Table';
 import { SecureDepositData } from '../../../test_data/MIDsData';
 import { BasePage } from '../../BasePage';
 
+export type SecureDepositsListPageTabName =
+    | 'Secure Deposit' 
+    | 'Project' 
+    | 'Amount' 
+    | 'Currency' 
+    | 'Created Date'
+    | 'Income Date'  
+    | 'Status'
+
 /**
  * Represents the Secure Deposits management page within the MIDs section
  * Provides functionality to initiate the creation of new secure deposits and verify existing 
@@ -12,7 +21,7 @@ import { BasePage } from '../../BasePage';
 export class SecureDepositsListPage extends BasePage
 {
     /** The FilterBar component used for searching and navigating to the creation form */
-    private readonly filterBar: FilterBar;
+    private readonly filterBar: FilterBar<SecureDepositsListPageTabName>;
     
     /** The Table component used to display and interact with secure deposit records */
     private readonly table: Table;
@@ -25,7 +34,7 @@ export class SecureDepositsListPage extends BasePage
     constructor(page: Page) 
     {
         super(page, /\/mids\/secure-deposits/);
-        this.filterBar = new FilterBar(page);
+        this.filterBar = new FilterBar<SecureDepositsListPageTabName>(page);
         this.table = new Table(page);
     }
 

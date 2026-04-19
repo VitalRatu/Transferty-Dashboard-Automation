@@ -3,16 +3,22 @@ import { FilterBar } from '../../../related_components/FilterBar';
 import { Table } from '../../../related_components/Table';
 import { BasePage } from '../../../BasePage';
 
+export type RoutingRulesListPageTabName =
+    | 'Provider'
+    | 'PSP'
+    | 'Internal MID'
+    | 'Status'
+
 export class RoutingRulesListPage extends BasePage
 {
-    public readonly filterBar: FilterBar;
+    public readonly filterBar: FilterBar<RoutingRulesListPageTabName>;
     
     public readonly table: Table;
 
     constructor(page: Page) 
     {
         super(page, /\/projects\/\d+\/configurations\/routing-rules\/all-rules/)
-        this.filterBar = new FilterBar(page);
+        this.filterBar = new FilterBar<RoutingRulesListPageTabName>(page);
         this.table = new Table(page);
     }
 

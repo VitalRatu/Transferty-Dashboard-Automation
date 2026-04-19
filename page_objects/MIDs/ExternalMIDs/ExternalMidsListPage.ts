@@ -4,6 +4,13 @@ import { Table } from '../../related_components/Table';
 import { ExternalMidData } from '../../../test_data/MIDsData';  
 import { BasePage } from '../../BasePage';
 
+export type ExternalMidsListPageTabName =
+    | 'External MID'
+    | 'Project'
+    | 'Provider'
+    | 'Labels'
+    | 'Created'
+
 /**
  * Represents the External MIDs management page within the MIDs section
  * This class provides methods to navigate to the creation form and verify that the external merchant 
@@ -12,7 +19,7 @@ import { BasePage } from '../../BasePage';
 export class ExternalMidsListPage extends BasePage
 {
     /** The FilterBar component used for searching records and initiating the creation flow */
-    public readonly filterBar: FilterBar;
+    public readonly filterBar: FilterBar<ExternalMidsListPageTabName>;
     
     /** The Table component used to display and interact with the list of External MIDs */
     public readonly table: Table;
@@ -25,7 +32,7 @@ export class ExternalMidsListPage extends BasePage
     constructor(page: Page) 
     {
         super(page, /\/mids\/external/);
-        this.filterBar = new FilterBar(page);
+        this.filterBar = new FilterBar<ExternalMidsListPageTabName>(page);
         this.table = new Table(page);
     }
 

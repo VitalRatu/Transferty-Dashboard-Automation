@@ -3,6 +3,10 @@ import { Table } from '../../related_components/Table';
 import { FilterBar } from '../../related_components/FilterBar';
 import { BasePage } from '../../BasePage';
 
+export type CurrencyPageFilters = 
+    | 'Project' 
+    | 'Currency' 
+
 /**
  * Represents the Currency Balances page within the billing module
  * This class provides a specialized interface for monitoring total funds across the system, 
@@ -11,7 +15,7 @@ import { BasePage } from '../../BasePage';
 export class CurrencyPage extends BasePage
 {
     /** The FilterBar component used for searching currency records and applying date or status filters */
-    public readonly filter: FilterBar;
+    public readonly filter: FilterBar<CurrencyPageFilters>;
     
     /** The Table component used to display and audit the consolidated balances for each active currency */
     public readonly table: Table;
@@ -24,7 +28,7 @@ export class CurrencyPage extends BasePage
     constructor(page: Page) 
     {
         super(page, /\/billing\/balances\/currency/);
-        this.filter = new FilterBar(page);
+        this.filter = new FilterBar<CurrencyPageFilters>(page);
         this.table = new Table(page);
     }
 }

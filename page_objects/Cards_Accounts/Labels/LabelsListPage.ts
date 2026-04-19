@@ -4,9 +4,14 @@ import { Table } from '../../related_components/Table';
 import { Pagination } from '../../related_components/Pagination';
 import { BasePage } from '../../BasePage';
 
+export type LabelsListPageTabName =
+    | 'Project'
+    | 'Label'
+    | 'Created'
+
 export class LabelsListPage extends BasePage
 {
-    public readonly filterBar: FilterBar;
+    public readonly filterBar: FilterBar<LabelsListPageTabName>;
     
     public readonly table: Table;
 
@@ -15,7 +20,7 @@ export class LabelsListPage extends BasePage
     constructor(page: Page) 
     {
         super(page, /\/cards-and-accounts\/labels/);
-        this.filterBar = new FilterBar(page);
+        this.filterBar = new FilterBar<LabelsListPageTabName>(page);
         this.table = new Table(page);
         this.pagination = new Pagination(page);
     }

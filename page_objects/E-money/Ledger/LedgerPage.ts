@@ -4,6 +4,16 @@ import { FilterBar } from '../../related_components/FilterBar';
 import { LedgerOperationsData } from '../../../test_data/LedgerOperationsData';
 import { BasePage } from '../../BasePage';
 
+export type LedgerPageFilters = 
+    | 'ID' 
+    | 'Project' 
+    | 'Wallet ID' 
+    | 'Wallet type'
+    | 'Account ID'
+    | 'Type'
+    | 'Tx ID'
+    | 'Created'
+
 /**
  * Represents the Ledger page within the E-money section
  * Provides functionality to audit financial operations, search through transaction history 
@@ -13,7 +23,7 @@ export class LedgerPage extends BasePage
 {
 
     /** The FilterBar component used for searching and navigating to the operation creation form */
-    public readonly filter: FilterBar;
+    public readonly filter: FilterBar<LedgerPageFilters>;
     
     /** The Table component used to display and audit transaction records */
     public readonly table: Table;
@@ -26,7 +36,7 @@ export class LedgerPage extends BasePage
     constructor(page: Page) 
     {
         super(page, /\/emoney\/ledger/);
-        this.filter = new FilterBar(page);
+        this.filter = new FilterBar<LedgerPageFilters>(page);
         this.table = new Table(page);
     }
     

@@ -4,6 +4,16 @@ import { Table } from '../../related_components/Table';
 import { AggregatedMidData } from '../../../test_data/MIDsData';
 import { BasePage } from '../../BasePage';
 
+export type AggregatedMidsListPageTabName = 
+{
+    'Aggregated MID': string
+    'Internal MID': string
+    'Secure Deposit': string
+    'Project': string
+    'Currency': string
+    'Type': 'Incoming' | 'Outgoing' | 'Secure Deposit'
+    'Created': string
+}
 /**
  * Represents the Aggregated MIDs management page within the MIDs section
  * Provides functionality to navigate to the aggregated MID creation form and verify 
@@ -12,7 +22,7 @@ import { BasePage } from '../../BasePage';
 export class AggregatedMidsListPage extends BasePage
 {
     /** The FilterBar component used for searching and initiating the creation of new aggregated MIDs */
-    public readonly filterBar: FilterBar;
+    public readonly filterBar: FilterBar<AggregatedMidsListPageTabName>;
     
     /** The Table component used to display and interact with the list of aggregated MID records */
     public readonly table: Table;
@@ -25,7 +35,7 @@ export class AggregatedMidsListPage extends BasePage
     constructor(page: Page) 
     {
         super(page, /\/mids\/aggregated/);
-        this.filterBar = new FilterBar(page);
+        this.filterBar = new FilterBar<AggregatedMidsListPageTabName>(page);
         this.table = new Table(page);
     }
 

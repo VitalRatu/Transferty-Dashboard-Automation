@@ -3,6 +3,11 @@ import { Page } from '@playwright/test';
 import { Table } from '../related_components/Table'; 
 import { FilterBar } from '../related_components/FilterBar'; 
 
+export type OrdersListPageTabName =
+    | 'Order ID' 
+    | 'Project'
+    | 'Created'
+
 /**
  * Represents the Orders page within the application
  * Provides access to the centralized order management system, allowing users to view,
@@ -14,7 +19,7 @@ export class OrdersListPage extends BasePage
     public readonly table: Table;
     
     /** The FilterBar component used to apply specific search criteria and manage order views */
-    public readonly filters: FilterBar;
+    public readonly filters: FilterBar<OrdersListPageTabName>;
 
     /**
      * Initializes a new instance of the OrdersPage class
@@ -26,6 +31,6 @@ export class OrdersListPage extends BasePage
         super(page, /\/orders/); 
 
         this.table = new Table(page); 
-        this.filters = new FilterBar(page);
+        this.filters = new FilterBar<OrdersListPageTabName>(page);
     }
 }

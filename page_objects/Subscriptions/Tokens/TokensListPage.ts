@@ -1,20 +1,27 @@
 import { Page} from '@playwright/test';
 import { FilterBar } from '../../related_components/FilterBar'; 
 import { Table } from '../../related_components/Table';
+import { BasePage } from '../../BasePage';
 
-export class TokensListPage 
+export type TokensListPageTabName = 
+    | 'Card mask'
+    | 'Project'
+    | 'Subscription token'
+    | 'Provider'
+    | 'PSP'
+    | 'Created'
+    | 'Status'
+
+export class TokensListPage extends BasePage
 {
-
-    private readonly page: Page;
-
-    private readonly filterBar: FilterBar;
+    public readonly filterBar: FilterBar<TokensListPageTabName>;
     
-    private readonly table: Table;
+    public readonly table: Table;
 
     constructor(page: Page) 
     {
-        this.page = page;
-        this.filterBar = new FilterBar(page);
+        super(page, /\/subscriptions\/tokens/)
+        this.filterBar = new FilterBar<TokensListPageTabName>(page);
         this.table = new Table(page);
     }
 

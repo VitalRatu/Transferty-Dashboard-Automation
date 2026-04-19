@@ -4,6 +4,13 @@ import { FilterBar } from '../../../related_components/FilterBar';
 import { EMoneyOperationalWallet } from '../../../../test_data/EMoneyWalletsData';
 import { BasePage } from '../../../BasePage';
 
+export type OperationalWalletsListPageFilters = 
+    | 'Project' 
+    | 'Wallet ID' 
+    | 'Type'
+    | 'Currency'
+    | 'Created'
+
 /**
  * Represents the Operational Wallets page within the E-money section
  * Provides functionality to manage internal system wallets, including navigation to the 
@@ -12,7 +19,7 @@ import { BasePage } from '../../../BasePage';
 export class OperationalWalletsListPage extends BasePage
 {
     /** The FilterBar component used for searching records and initiating the creation of new wallets */
-    public readonly filter: FilterBar;
+    public readonly filter: FilterBar<OperationalWalletsListPageFilters>;
     
     /** The Table component used to display and interact with the list of operational wallets */
     public readonly table: Table;
@@ -25,7 +32,7 @@ export class OperationalWalletsListPage extends BasePage
     constructor(page: Page) 
     {
         super(page, /\/emoney\/wallets\/operational/);
-        this.filter = new FilterBar(page);
+        this.filter = new FilterBar<OperationalWalletsListPageFilters>(page);
         this.table = new Table(page);
     }
 

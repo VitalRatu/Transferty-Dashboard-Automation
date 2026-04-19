@@ -2,12 +2,14 @@ import { expect, Locator, Page } from '@playwright/test';
 import fs from 'fs';
 import path from 'path/win32';
 
-/**
- * Represents the Filter Bar component used for searching, filtering, and performing actions on data tables
- * Provides comprehensive methods for text-based searches, dropdown selections, managing dynamic "More" filters,
- * and handling primary/secondary action buttons
- */
-export class FilterBar 
+export type FilterKey<T> = T extends string ? T : keyof T;
+
+export type FilterValue<T, K> = T extends Record<string, any> 
+    ? (K extends keyof T ? T[K] : string) 
+    : string;
+
+
+export class FilterBar<T extends string | Record<string, any>>
 {
     /** The Playwright Page instance */
     public readonly page: Page;
@@ -23,9 +25,6 @@ export class FilterBar
     
     /** Locator for individual filter item triggers within the bar */
     private readonly filterItems: Locator;
-    
-    /** Locator for the universal search input field within an open filter */
-    private readonly searchInput: Locator;
     
     /** Locator for the button that resets all applied filters */
     private readonly resetButton: Locator;
@@ -66,7 +65,6 @@ export class FilterBar
         this.filterBaseLocator = this.filterWrapper.locator(".filter-container");
         this.actionsContainer = this.filterWrapper.locator(".after-filters-content, .actions-container");
         this.filterItems = this.filterBaseLocator.locator(".filter-item");
-        this.searchInput = this.filterBaseLocator.locator(".filter-search-input");
         this.resetButton = this.filterBaseLocator.locator("#reset-filters-button");
         this.refreshLocator = this.filterWrapper.locator("#table-refresh-button");
         this.moreFilterButton = this.filterBaseLocator.locator("#filter-dropdown-button");
@@ -74,8 +72,62 @@ export class FilterBar
         this.moreFilterDropdownMenuItem = this.filterWrapper.getByRole("option");
         this.checkboxLocatorString = 'input[type="checkbox"]';
         this.showInEurToggleLocator = this.filterWrapper.locator("#show-in-equivalent-checkbox");
-        this.primaryButton = this.actionsContainer.locator(".ui.primary.button, .ui.button.submit-button, ui.button"); 
+        
+        this.primaryButton = this.actionsContainer.locator(".ui.primary.button, .ui.button.submit-button, .ui.button"); 
         this.secondaryButton = this.actionsContainer.locator('.ui.secondary.button');
+    }
+
+    private getFilterItemLocator(filterName: FilterKey<T>): Locator 
+    {
+        const exactMatch = this.filterItems.filter({ 
+            has: this.page.getByText(filterName as string, { exact: true }) 
+        });
+        
+        const escapedName = String(filterName).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        const withValueRegex = new RegExp(`^\\s*${escapedName}\\s*:`, 'i');
+        const matchWithValue = this.filterItems.filter({ hasText: withValueRegex });
+
+        return exactMatch.or(matchWithValue).first();
+    }
+
+    /**
+     * Ensures that a filter is visible on the main filter bar.
+     * If it's hidden, it attempts to find and enable it via the "More" dropdown.
+     */
+    private async isFilterActive(filterName: FilterKey<T>): Promise<void> 
+    {
+        const filterItem = this.getFilterItemLocator(filterName);
+
+        if (await filterItem.isVisible()) 
+        {
+            return; 
+        }
+
+        await this.enableFilter(filterName);
+
+        await this.page.keyboard.press('Escape');
+
+        await expect(filterItem).toBeVisible();
+    }
+
+    /**
+     * Clears the filter if it already has an active value.
+     * Looks for the .smallClearBtn and clicks it.
+     */
+    private async clearFilter(filterName: FilterKey<T>): Promise<void> 
+    {
+        const filterItem = this.getFilterItemLocator(filterName);
+        
+        if (await filterItem.isVisible()) 
+        {
+            const clearBtn = filterItem.locator('.smallClearBtn');
+            if (await clearBtn.count() > 0 && await clearBtn.isVisible()) 
+            {
+                await clearBtn.click();
+                await expect(clearBtn).toBeHidden();
+                await this.page.waitForLoadState('networkidle');
+            }
+        }
     }
 
     /**
@@ -83,11 +135,11 @@ export class FilterBar
      * @param name - The text label of the filter to be clicked (e.g., "Status")
      * @returns A promise that resolves when the filter dropdown is opened
      */
-    private async openFilter(name: string): Promise<void> 
+    private async openFilter(name: FilterKey<T>): Promise<void> 
     {
-        const filterButton = this.filterItems.filter({ hasText: name });
-        await expect(filterButton).toBeVisible();
-        await filterButton.click();
+        const filterItem = this.getFilterItemLocator(name);
+        await expect(filterItem).toBeVisible();
+        await filterItem.click();
     }
     
     /**
@@ -97,31 +149,43 @@ export class FilterBar
      * @param value - The text to type into the search field
      * @returns A promise that resolves when the value is entered and submitted via the Enter key
      */
-    public async filterByText(filterName: string, value: string): Promise<void> 
+    public async filterByText(filterName: FilterKey<T>, value: string): Promise<void> 
     {
+        await this.isFilterActive(filterName);
+        
+        await this.clearFilter(filterName);
+        
         await this.openFilter(filterName);
-        await this.searchInput.fill(value);
-        await expect(this.searchInput).toHaveValue(value);
+        
+        const filterItem = this.getFilterItemLocator(filterName);
+        const scopedSearchInput = filterItem.locator('.filter-search-input');
+        
+        await scopedSearchInput.fill(value);
+        await expect(scopedSearchInput).toHaveValue(value);
         await this.page.keyboard.press("Enter");
+        
+        await this.page.waitForLoadState('networkidle');
     }
 
-    /**
-     * Filters the data by selecting a predefined value from a dropdown list
-     * Automatically verifies that the selected option text is displayed on the filter item after selection
-     * @param filterName - The name of the filter category (e.g., "Currency")
-     * @param optionName - The exact text of the option to select (e.g., "EUR")
-     * @returns A promise that resolves after the option is selected and submitted
-     */
-    public async filterByOption(filterName: string, optionName: string): Promise<void> 
+    
+    public async filterByOption<K extends FilterKey<T>>(filterName: K, optionName: FilterValue<T, K>): Promise<void>
     {
+        await this.isFilterActive(filterName);
+        
+        await this.clearFilter(filterName);
+        
         await this.openFilter(filterName);
+        
         await this.page
             .getByRole("option", { name: optionName, exact: true })
             .click();
+            
         await expect(
-            this.filterItems.filter({ hasText: filterName }),
+            this.getFilterItemLocator(filterName)
         ).toContainText(`${optionName}`);
         await this.page.keyboard.press("Enter");
+
+        await this.page.waitForLoadState('networkidle');
     }
 
     /**
@@ -178,43 +242,46 @@ export class FilterBar
      * Automatically opens the dropdown if it is currently hidden
      * @returns A promise that resolves to an array of available filter names
      */
-    public async getAllAvailableFilterNames(): Promise<string[]> 
+    public async getAllAvailableFilterNames(): Promise<T[]> 
     {
         if (!(await this.moreFilterDropdownMenu.isVisible())) 
         {
             await this.openMoreOptionFilter();
         }
-        return await this.moreFilterDropdownMenuItem.allTextContents();
+
+        return await this.moreFilterDropdownMenuItem.allTextContents() as T[];
     }
 
     /**
      * Determines if a specific filter checkbox is currently enabled in the "More" dropdown
-     * @param filterName - The name of the filter to check
-     * @returns A promise that resolves to a boolean indicating the checked state
      */
-    public async isFilterEnabled(filterName: string): Promise<boolean> 
+    public async isFilterEnabled(filterName: FilterKey<T>): Promise<boolean> 
     {
         if (!(await this.moreFilterDropdownMenu.isVisible())) 
         {
             await this.openMoreOptionFilter();
         }
-        const option: Locator = this.moreFilterDropdownMenuItem.filter({ hasText: filterName });
+        
+        const option = this.moreFilterDropdownMenuItem.filter({ 
+            has: this.page.getByText(filterName as string, { exact: true }) 
+        });
+        
         await expect(option).toBeVisible();
         return await option.locator(this.checkboxLocatorString).isChecked();
     }
 
     /**
      * Activates a specific filter in the "More" dropdown if it is not already enabled
-     * Verifies that the checkbox state reflects the change after the click
-     * @param filterName - The name of the filter to enable
-     * @returns A promise that resolves once the filter is confirmed as enabled
      */
-    public async enableFilter(filterName: string): Promise<void> 
+    public async enableFilter(filterName: FilterKey<T>): Promise<void> 
     {
         const isEnabled = await this.isFilterEnabled(filterName);
         if (!isEnabled) 
         {
-            const option: Locator = this.moreFilterDropdownMenuItem.filter({ hasText: filterName });
+            // ВИПРАВЛЕНО локатор
+            const option = this.moreFilterDropdownMenuItem.filter({ 
+                has: this.page.getByText(filterName as string, { exact: true }) 
+            });
             await option.click();
             await expect(option.locator(this.checkboxLocatorString)).toBeChecked();
         }
@@ -222,15 +289,15 @@ export class FilterBar
 
     /**
      * Deactivates a specific filter in the "More" dropdown if it is currently enabled
-     * @param filterName - The name of the filter to disable
-     * @returns A promise that resolves once the filter is confirmed as disabled
      */
-    public async disableFilter(filterName: string): Promise<void> 
+    public async disableFilter(filterName: FilterKey<T>): Promise<void> 
     {
         const isEnabled = await this.isFilterEnabled(filterName);
         if (isEnabled) 
         {
-            const option: Locator = this.moreFilterDropdownMenuItem.filter({ hasText: filterName });
+            const option = this.moreFilterDropdownMenuItem.filter({ 
+                has: this.page.getByText(filterName as string, { exact: true }) 
+            });
             await option.click();
             await expect(option.locator(this.checkboxLocatorString)).not.toBeChecked();
         }
@@ -240,23 +307,15 @@ export class FilterBar
     {
         await this.page.waitForLoadState('networkidle');
         
-        await expect(this.secondaryButton).toBeVisible();
-
+        await expect(this.secondaryButton.first()).toBeVisible();
         const tempFilePath = path.join(process.cwd(), `export_${Date.now()}.csv`);
-
         const downloadPromise = this.page.waitForEvent('download');
-        
-        await this.clickSecondaryButton();
-        
+        await this.secondaryButton.first().click();
         const download = await downloadPromise;
-
         await download.saveAs(tempFilePath);
-
         try 
         {
-
             const stats = fs.statSync(tempFilePath);
-
             expect(stats.size, 'CSV file should not be empty').toBeGreaterThan(0);
         } 
         finally 
@@ -268,12 +327,13 @@ export class FilterBar
         }
     }
 
+
     /**
      * Clicks the primary action button and waits for a URL navigation to occur
      * Typically used for "Create" or "Add" actions located in the filter bar
      * @returns A promise that resolves when the page navigates away from the current URL
      */
-    public async clickPrimaryButton(buttonName?: string): Promise<void> 
+    public async clickPrimaryButton(buttonName?: string): Promise<void>
     {
         if (buttonName)
         {
@@ -281,9 +341,11 @@ export class FilterBar
             await expect(button).toBeVisible();
             await button.click();
         }
+
         await expect(this.primaryButton).toBeVisible();
         await this.primaryButton.click();
         await this.page.waitForLoadState('networkidle');
+
     }
 
     /**
@@ -291,7 +353,7 @@ export class FilterBar
      * Typically used for secondary actions like "Export" or "Bulk Edit"
      * @returns A promise that resolves when navigation is complete
      */
-    public async clickSecondaryButton(buttonName?: string): Promise<void> 
+    public async clickSecondaryButton(buttonName?: string): Promise<void>
     {
         if (buttonName)
         {
@@ -299,10 +361,12 @@ export class FilterBar
             await expect(button).toBeVisible();
             await button.click();
         }
+
         await expect(this.secondaryButton).toBeVisible();
         await this.secondaryButton.click();
         await this.page.waitForLoadState('networkidle');
     }
+
 
     /**
      * Toggles the "Show in EUR" equivalent checkbox state
@@ -311,20 +375,25 @@ export class FilterBar
      * @throws {Error} If the toggle component is not found or visible
      * @returns A promise that resolves when the toggle action and verification are complete
      */
+
     public async showInEurToggle(): Promise<void>
     {
-        await expect(this.showInEurToggleLocator).toBeVisible().catch((error) => 
+        await expect(this.showInEurToggleLocator).toBeVisible().catch((error) =>
         {
+
             throw new Error(`Show in EUR toggle is not visible: ${error}`);
+
         });
+
         const classAttr = await this.showInEurToggleLocator.getAttribute('class');
         const isCurrentlyChecked = classAttr?.includes('checked');
-        if (isCurrentlyChecked) 
+        if (isCurrentlyChecked)
         {
             await this.showInEurToggleLocator.click();
             await expect(this.showInEurToggleLocator).toHaveClass(/checked/);
         }
-        else if (!isCurrentlyChecked) 
+
+        else if (!isCurrentlyChecked)
         {
             await this.showInEurToggleLocator.click();
             await expect(this.showInEurToggleLocator).not.toHaveClass(/checked/);

@@ -3,6 +3,14 @@ import { Table } from '../../related_components/Table';
 import { FilterBar } from '../../related_components/FilterBar';
 import { BasePage } from '../../BasePage';
 
+export type SecureDepositsPageFilters = 
+    | 'Secure Deposit' 
+    | 'Project' 
+    | 'Amount' 
+    | 'Currency' 
+    | 'Created Date'
+    | 'Income Date'  
+
 /**
  * Represents the Secure Deposits management page within the Balances section
  * This class provides a structured interface for monitoring collateral funds, 
@@ -12,7 +20,7 @@ import { BasePage } from '../../BasePage';
 export class SecureDepositsPage extends BasePage
 {
     /** The FilterBar component used for searching through deposit records by project, status, or date */
-    public readonly filter: FilterBar;
+    public readonly filter: FilterBar<SecureDepositsPageFilters>;
     
     /** The Table component used to display and audit secure deposit records and their current balances */
     public readonly table: Table;
@@ -25,7 +33,7 @@ export class SecureDepositsPage extends BasePage
     constructor(page: Page) 
     {
         super(page, /\/billing\/balances\/secure-deposits/);
-        this.filter = new FilterBar(page);
+        this.filter = new FilterBar<SecureDepositsPageFilters>(page);
         this.table = new Table(page);
     }
 }

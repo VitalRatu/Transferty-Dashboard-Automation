@@ -5,11 +5,18 @@ import { FilterBar } from '../../related_components/FilterBar';
 import { Pagination } from '../../related_components/Pagination';
 import { BasePage } from '../../BasePage';
 
+export type EndpointsListPageTabName =
+    | 'Endpoint ID' 
+    | 'Project' 
+    | 'Created by' 
+    | 'Created'
+    | 'Status'  
+
 export class EndpointsListPage extends BasePage
 {
     public readonly tab: Tab;
     
-    public readonly filter: FilterBar;
+    public readonly filter: FilterBar<EndpointsListPageTabName>;
     
     public readonly table: Table;
 
@@ -19,7 +26,7 @@ export class EndpointsListPage extends BasePage
     {
         super(page, /\/monitoring\/endpoints/);
         this.tab = new Tab(page);
-        this.filter = new FilterBar(page);
+        this.filter = new FilterBar<EndpointsListPageTabName>(page);
         this.table = new Table(page);
         this.pagination = new Pagination(page);
     }

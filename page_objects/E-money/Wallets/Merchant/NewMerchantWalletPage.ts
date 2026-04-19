@@ -23,7 +23,7 @@ export class NewMerchantWalletPage extends BasePage
      */
     constructor(page: Page) 
     {
-        super(page, '/emoney/wallets/operational/add')
+        super(page, /\/emoney\/wallets\/merchant\/add/)
         this.form = new CreationForm(page);
         this.pageLoaded = page.locator('.ui.inverted.text.loader').first();
     }

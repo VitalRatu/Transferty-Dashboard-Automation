@@ -1,19 +1,16 @@
 import { Page } from '@playwright/test';
-import { Tab } from '../related_components/Tab';
 import { WalletsPage } from './Wallets/WalletsPage';
 import { SettingsPage } from './Settings/SettingsPage';
 import { LedgerPage } from './Ledger/LedgerPage';
+import { Orchestrator } from '../Orchestrator';
 
-/**
- * Acts as the primary orchestrator for the E-money section of the application
- * This page consolidates various financial modules including digital wallets, transaction ledgers, 
- * and specific E-money settings, allowing for centralized management of electronic currency flows
- */
-export class EmoneyPage
+export type EMoneyTabName = 
+    | 'Wallets' 
+    | 'Ledger' 
+    | 'Settings' 
+
+export class EmoneyPage extends Orchestrator<EMoneyTabName>
 {
-    /** The primary Tab component used to navigate between Wallets, Ledger, and Settings modules */
-    public readonly tab: Tab;
-    
     /** The page instance dedicated to managing digital wallets and their respective balances */
     public readonly walletsPage: WalletsPage;
     
@@ -31,7 +28,7 @@ export class EmoneyPage
      */
     constructor(page: Page, tabDepth: number = 0) 
     {
-        this.tab = new Tab(page, tabDepth);
+        super(page, tabDepth);
         this.walletsPage = new WalletsPage(page, tabDepth + 1);
         this.ledgerPage = new LedgerPage(page);
         this.settingsPage = new SettingsPage(page);
