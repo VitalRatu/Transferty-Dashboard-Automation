@@ -4,30 +4,31 @@ import { Table } from '../../related_components/Table';
 import { CardData } from '../../../test_data/testCards';
 import { BasePage } from '../../BasePage';
 
-export type TransactionsListPageTabName = 
-    | 'Tx ID' 
-    | 'Order ID' 
-    | 'Aggregated MIDs' 
-    | 'External ID' 
-    | 'Subscription' 
-    | 'Customer token' 
-    | 'Provider' 
-    | 'Intermediary' 
-    | 'PSP' 
-    | 'Internal MID' 
-    | 'RRN' 
-    | 'Project' 
-    | 'Method' 
-    | 'Status' 
-    | 'Type' 
-    | 'Currency' 
-    | 'Order currency' 
-    | 'BIN' 
-    | 'Last four' 
-    | 'Country' 
-    | 'Customer IP' 
-    | 'Created';
-
+export type TransactionsListPageTabName =
+{ 
+    'Tx ID': string 
+    'Order ID': string 
+    'Aggregated MIDs': string 
+    'External ID': string 
+    'Subscription': 'Yes' | 'No' 
+    'Customer token': string 
+    'Provider': string 
+    'Intermediary': string 
+    'PSP': string 
+    'Internal MID': string 
+    'RRN': string 
+    'Project': string 
+    'Method': string 
+    'Status': 'Initial' | 'Success' | 'Error' | 'Declined' | 'Pending' | 'Suspended' | 'Blocked' 
+    'Type': 'payment' | 'payout' | 'refund' 
+    'Currency': string 
+    'Order currency': string 
+    'BIN': string 
+    'Last four': string 
+    'Country': string 
+    'Customer IP': string 
+    'Created': string
+}
 /**
  * Represents the main Transactions page in the application
  * Provides access to the filter bar and the data table for managing and verifying transaction records

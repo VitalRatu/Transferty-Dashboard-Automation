@@ -5,12 +5,13 @@ import { FilterBar } from '../../related_components/FilterBar';
 import { Pagination } from '../../related_components/Pagination';
 
 export type AuditTrailListPageTabName =
-    | 'Project' 
-    | 'Actor' 
-    | 'IP' 
-    | 'Event'
-    | 'Timestamp'  
-
+{
+    'Project': string
+    'Actor': string 
+    'IP': string 
+    'Event': string
+    'Timestamp': string  
+}
 export class AuditTrailListPage extends BasePage 
 {
     public readonly table: Table;

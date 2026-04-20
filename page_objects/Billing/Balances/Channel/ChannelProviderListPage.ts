@@ -5,8 +5,10 @@ import { Pagination } from '../../../related_components/Pagination';
 import { BasePage } from '../../../BasePage';
 
 export type ChannelProviderListPageFilters = 
-    | 'Project' 
-    | 'Provider' 
+{
+    'Project': string
+    'Provider': string
+}
 
 export class ChannelProviderListPage extends BasePage
 {

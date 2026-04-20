@@ -4,18 +4,22 @@ import { Table } from '../../../related_components/Table';
 import { BasePage } from '../../../BasePage';
 
 export type PSPReportPageTabName = 
-    | 'Project' 
-    | 'Period'
-    | 'Conversion type'
-    | 'Currency'
-    | 'Tx type'
-    | 'Tx flow scheme'
-    | 'Payment method'
-    | 'Tx min amount'
-    | 'Tx man amount'
-    | 'PSP'
-    | 'Redirect flow'
-    | 'Customer labels'
+{
+    'Project': string
+    'Period': string
+    'Conversion type': 'Number of transactions' | 'Transactions Amount'
+    'Currency': string
+    
+    'Tx type': 'payment' | 'payout'
+    'Tx flow scheme': 'Direct' | 'Subscriptions'
+    'Payment method': string
+    'Tx min amount': string
+    'Tx max amount': string
+    
+    'PSP': string
+    'Redirect flow': 'Yes' | 'No'
+    'Customer labels': string
+}
 
 export class PSPReportPage extends BasePage
 {

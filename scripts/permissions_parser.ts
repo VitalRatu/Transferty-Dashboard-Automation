@@ -3,7 +3,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { chromium } from '@playwright/test';
 import { adminData } from '../test_data/userCredentials';
-import { Routes } from '../page_data/routes';
+import { Routes } from '../fixtures/authFixtures';
 import { LoginPage } from '../page_objects/LoginPage';
 import { DashboardPage } from '../page_objects/Dashboard/DashboardPage';
 

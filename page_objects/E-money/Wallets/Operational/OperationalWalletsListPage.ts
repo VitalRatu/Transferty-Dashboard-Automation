@@ -5,12 +5,13 @@ import { EMoneyOperationalWallet } from '../../../../test_data/EMoneyWalletsData
 import { BasePage } from '../../../BasePage';
 
 export type OperationalWalletsListPageFilters = 
-    | 'Project' 
-    | 'Wallet ID' 
-    | 'Type'
-    | 'Currency'
-    | 'Created'
-
+{
+    'Project': string
+    'Wallet ID': string
+    'Type': 'Issuer' | 'Agent' | 'Fee'
+    'Currency': string
+    'Created': string
+}
 /**
  * Represents the Operational Wallets page within the E-money section
  * Provides functionality to manage internal system wallets, including navigation to the 

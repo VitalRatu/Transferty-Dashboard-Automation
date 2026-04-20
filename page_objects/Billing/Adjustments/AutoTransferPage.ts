@@ -4,11 +4,13 @@ import { FilterBar } from '../../related_components/FilterBar';
 import { BasePage } from '../../BasePage';
 
 export type AutoTransferPageFilters = 
-    | 'Project' 
-    | 'MID from' 
-    | 'MID to' 
-    | 'Created' 
-    | 'Status' 
+{
+    'Project': string
+    'MID from': string
+    'MID to': string
+    'Created': string
+    'Status': 'Inactive' | 'Active'
+}
 
 /**
  * Represents the Automated Transfers page within the adjustments module

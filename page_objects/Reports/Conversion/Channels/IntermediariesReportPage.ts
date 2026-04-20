@@ -4,19 +4,22 @@ import { Table } from '../../../related_components/Table';
 import { BasePage } from '../../../BasePage';
 
 export type IntermediariesReportPageTabName = 
-    | 'Project' 
-    | 'Period'
-    | 'Conversion type'
-    | 'Currency'
-    | 'Tx type'
-    | 'Tx flow scheme'
-    | 'Payment method'
-    | 'Tx min amount'
-    | 'Tx man amount'
-    | 'Intermediary'
-    | 'Redirect flow'
-    | 'Customer labels'
-
+{
+    'Project': string
+    'Period': string
+    'Conversion type': 'Number of transactions' | 'Transactions Amount'
+    'Currency': string
+    
+    'Tx type': 'payment' | 'payout'
+    'Tx flow scheme': 'Direct' | 'Subscriptions';
+    'Payment method': string
+    'Tx min amount': string
+    'Tx max amount': string 
+    
+    'Intermediary': string;
+    'Redirect flow': 'Yes' | 'No';
+    'Customer labels': string
+}
 export class IntermediariesReportPage extends BasePage
 {
     public readonly filterBar: FilterBar<IntermediariesReportPageTabName>;

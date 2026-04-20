@@ -4,11 +4,12 @@ import { Table } from '../../../related_components/Table';
 import { BasePage } from '../../../BasePage';
 
 export type RoutingRulesListPageTabName =
-    | 'Provider'
-    | 'PSP'
-    | 'Internal MID'
-    | 'Status'
-
+{
+    'Provider': string
+    'PSP': string
+    'Internal MID': string
+    'Status': 'Active' | 'Blocked'
+}
 export class RoutingRulesListPage extends BasePage
 {
     public readonly filterBar: FilterBar<RoutingRulesListPageTabName>;

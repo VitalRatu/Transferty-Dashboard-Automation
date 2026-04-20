@@ -6,12 +6,13 @@ import { Pagination } from '../../../related_components/Pagination';
 import { BasePage } from '../../../BasePage';
 
 export type BasicRulesListPageTabName =
-    | 'Rule ID' 
-    | 'Project' 
-    | 'Rule name' 
-    | 'Status'
-    | 'Created'  
-
+{
+    'Rule ID': string
+    'Project': string
+    'Rule name': string
+    'Status': 'Active' | 'Deactivated'
+    'Created': string
+}
 export class BasicRulesListPage extends BasePage
 {
     public readonly tab: Tab;

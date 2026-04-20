@@ -5,12 +5,13 @@ import { ExternalMidData } from '../../../test_data/MIDsData';
 import { BasePage } from '../../BasePage';
 
 export type ExternalMidsListPageTabName =
-    | 'External MID'
-    | 'Project'
-    | 'Provider'
-    | 'Labels'
-    | 'Created'
-
+{
+    'External MID': string
+    'Project': string
+    'Provider': string
+    'Labels': string
+    'Created': string
+}
 /**
  * Represents the External MIDs management page within the MIDs section
  * This class provides methods to navigate to the creation form and verify that the external merchant 

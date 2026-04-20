@@ -107,10 +107,18 @@ test('Edit Merchant Wallet', async ({ adminUser, dashboardPage, emoneyPage, merc
     await editMerchantWalletPage.editWallet({description: 'Some new desription'})
 });
 
-test.only('Edit Limit Details', async ({ adminUser, projectsListPage, emoneyPage, subscriptionsPage, MIDsPage}) =>
+test.only('Edit Limit Details', async ({ adminUser, projectsListPage, reportsPage, dashboardPage}) =>
 {
     await projectsListPage.page.pause()
-    await projectsListPage.sidebar.openSidebarTab('MIDs')
-    await MIDsPage.openTab('External MIDs')
-    await MIDsPage.externalMids.filterBar.filterByOption('Project', 'automationStuff')
+    await projectsListPage.sidebar.openSidebarTab('Reports')
+    await reportsPage.openTab('Reconciliation')
+    await reportsPage.reconciliationReportPage.openTab('Tx status mismatch')
+    await reportsPage.reconciliationReportPage.recTxStatusMismatchReportPage.createNewReport(
+    {
+        Project: 'automationStuff',
+        TimeFrom: '2026-04-01 00:00:00',
+        TimeTo: 'MI-2026-04-20 00:00:00',
+        TransactionStatus: 'Declined'
+    })
+    await reportsPage.reconciliationReportPage.recTxStatusMismatchReportPage.downloadReport()
 });

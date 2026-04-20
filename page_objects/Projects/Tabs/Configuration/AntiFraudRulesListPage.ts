@@ -4,8 +4,9 @@ import { Table } from '../../../related_components/Table';
 import { BasePage } from '../../../BasePage';
 
 export type AntifraudRulesListPageTabName =
-    | ''
+{
 
+}
 export class AntifraudRulesListPage extends BasePage
 {
     public readonly filterBar: FilterBar<AntifraudRulesListPageTabName>;

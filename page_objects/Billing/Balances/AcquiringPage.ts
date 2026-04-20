@@ -4,13 +4,15 @@ import { FilterBar } from '../../related_components/FilterBar';
 import { BasePage } from '../../BasePage';
 
 export type AcquiringPageFilters = 
-    | 'Project' 
-    | 'Provider' 
-    | 'PSP' 
-    | 'External MID' 
-    | 'Currency' 
-    | 'Labels' 
-
+{
+    'Project': string
+    'Provider': string
+    'PSP': string
+    'External MID': string
+    'Currency': string
+    'Labels': string
+}
+    
 /**
  * Represents the Acquiring balances page within the billing module
  * This class provides a specialized interface for monitoring incoming payment flows, 

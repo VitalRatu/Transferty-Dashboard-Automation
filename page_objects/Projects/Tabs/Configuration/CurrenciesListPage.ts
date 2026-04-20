@@ -4,8 +4,10 @@ import { Table } from '../../../related_components/Table';
 import { BasePage } from '../../../BasePage';
 
 export type CurrenciesListPageTabName =
-    | 'Card country'
-    | 'Currency'
+{
+    'Card country': string
+    'Currency': string
+}
 
 export class CurrenciesListPage extends BasePage
 {

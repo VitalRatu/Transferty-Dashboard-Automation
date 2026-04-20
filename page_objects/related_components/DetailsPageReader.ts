@@ -106,6 +106,7 @@ export class DetailsPageReader
         const button = this.page.getByRole('button', { name: buttonName, exact: true });
         await expect(button).toBeVisible();
         await button.click();
+        await this.page.waitForLoadState('networkidle');
     }
 
     /**
@@ -129,6 +130,7 @@ export class DetailsPageReader
      */
     public async getAllFieldsAndValues(): Promise<Record<string, string>> 
     {
+        await this.page.waitForLoadState('networkidle');
         await this.allFields.first().waitFor({ state: 'visible', timeout: 10000 });
         
         const result: Record<string, string> = {};
@@ -141,7 +143,7 @@ export class DetailsPageReader
             const valueText = await field.locator(this.valueSelector).innerText();
             
             const cleanCaption = captionText.trim();
-            const cleanValue = valueText.trim();
+            const cleanValue = valueText.replace(/\n/g, ' ').trim();
 
             if (cleanCaption) 
             {

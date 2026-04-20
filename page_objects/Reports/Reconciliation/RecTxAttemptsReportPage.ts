@@ -1,12 +1,79 @@
 import { Page } from '@playwright/test';
+import { BaseReconReportPage, ReportFieldMapping } from './BaseReconReportPage';
 
-export class RecTxAttemptsReportPage
+export type TxAttemptsReportFields = 
 {
-    public readonly page: Page;
-    
+    Project: string;
+    Timezone: string;
+    TimeFrom: string;
+    TimeTo: string;
+    Provider: string;
+    Intermediary: string;
+    PSP: string;
+    InternalMID: string;
+    AggregatedMID: string;
+    TransactionType: string;
+    Currency: string;
+    TransactionStatus: string;
+}
+
+export class RecTxAttemptsReportPage extends BaseReconReportPage<TxAttemptsReportFields>
+{
+    protected fieldMapping: ReportFieldMapping<TxAttemptsReportFields> =
+    {
+        Project: {
+            label: 'Project',
+            type: 'dropdown'
+        },
+        Timezone: {
+            label: 'Timezone',
+            type: 'dropdown'
+        },
+        TimeFrom: {
+            label: 'From',
+            type: 'date'
+        },
+        TimeTo: {
+            label: 'To',
+            type: 'date'
+        },
+        Provider: {
+            label: 'Provider',
+            type: 'dropdown'
+        },
+        Intermediary: {
+            label: 'Intermediary',
+            type: 'dropdown'
+        },
+        PSP: {
+            label: 'PSP',
+            type: 'dropdown'
+        },
+        InternalMID: {
+            label: 'Internal MIDs',
+            type: 'dropdown'
+        },
+        AggregatedMID: {
+            label: 'Aggregated MIDs',
+            type: 'dropdown'
+        },
+        TransactionType: {
+            label: 'Transaction type',
+            type: 'dropdown'
+        },
+        Currency: {
+            label: 'Currency',
+            type: 'dropdown'
+        },
+        TransactionStatus: {
+            label: 'Transaction status',
+            type: 'dropdown'
+        }
+    }
+        
     constructor(page: Page) 
     {
-        this.page = page;
+        super(page, /\/reports\/reconciliation\/rec-tx-attempts/)
     }
 
     //TODO implement

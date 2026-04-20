@@ -6,11 +6,13 @@ import { Pagination } from '../../../related_components/Pagination';
 import { BasePage } from '../../../BasePage';
 
 export type AggregatedRulesListPageTabName =
-    | 'Rule ID' 
-    | 'Project' 
-    | 'Rule name' 
-    | 'Status'
-    | 'Created'   
+{
+    'Rule ID': string
+    'Project': string
+    'Rule name': string
+    'Status': 'Active' | 'Deactivated'
+    'Created': string
+}   
 
 export class AggregatedRulesListPage extends BasePage
 {

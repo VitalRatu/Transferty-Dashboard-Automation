@@ -4,10 +4,11 @@ import { FilterBar } from '../../related_components/FilterBar';
 import { BasePage } from '../../BasePage';
 
 export type PSPsubtabTabName = 
-    | 'Name' 
-    | 'Created' 
-    | 'Updated'
-
+{
+    'Name': string
+    'Created': string
+    'Updated': string
+}
 /**
  * Represents the specialized sub-tab for Payment Service Provider (PSP) management
  * This class provides a structured interface for listing, filtering, and interacting 

@@ -4,24 +4,31 @@ import { Table } from '../../related_components/Table';
 import { BasePage } from '../../BasePage';
 
 export type TranDistributionReportPageTabName = 
-    | 'Project' 
-    | 'Period' 
-    | 'Aggregation' 
-    | 'Data type'
-    | 'Currency' 
-    | 'Provider' 
-    | 'PSP' 
-    | 'Intermediary' 
-    | 'Internal MID' 
-    | 'Aggregated MIDs' 
-    | 'Amount from'
-    | 'Amount to'
-    | 'Range group'
-    | 'Tx type' 
-    | 'Tx flow scheme'
-    | 'Redirect flow' 
-    | 'Customer labels' 
-    | 'Card labels'
+{
+    'Project': string
+    'Period': string
+    'Aggregation': 'Hour' | 'Day' | 'Week' | 'Month' | 'Quarter' | 'Year'
+    'Data type': 'Amount' | 'Quantity'
+    'Currency': string
+
+    'Provider': string
+    'PSP': string
+    'Intermediary': string
+    'Internal MID': string
+    'Aggregated MIDs': string
+
+    'Amount from': string
+    'Amount to': string
+    'Range group': 
+        | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '10' 
+        | '11' | '12' | '13' | '14' | '15' | '16' | '17' | '18' | '19' | '20';
+
+    'Tx type': 'payment' | 'payout' | 'refund'
+    'Tx flow scheme': 'Direct' | 'Subscriptions'
+    'Redirect flow': 'Yes' | 'No'
+    'Customer labels': string
+    'Card labels': string
+}
 
 export class TranDistributionReportPage extends BasePage
 {

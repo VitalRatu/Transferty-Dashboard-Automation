@@ -4,22 +4,26 @@ import { Table } from '../../related_components/Table';
 import { BasePage } from '../../BasePage';
 
 export type TranGeneralReportPageTabName = 
-    | 'Project' 
-    | 'Period' 
-    | 'Aggregation' 
-    | 'Currency' 
-    | 'Provider' 
-    | 'PSP' 
-    | 'Intermediary' 
-    | 'Internal MID' 
-    | 'Aggregated MIDs' 
-    | 'Tx type' 
-    | 'Tx flow scheme'
-    | 'Tx method'
-    | 'Data type'
-    | 'Redirect flow' 
-    | 'Customer labels' 
-    | 'Card labels'
+{
+    'Project': string
+    'Period': string
+    'Aggregation': 'Hour' | 'Day' | 'Week' | 'Month' | 'Quarter' | 'Year'
+    'Currency': string
+
+    'Provider': string
+    'PSP': string
+    'Intermediary': string
+    'Internal MID': string
+    'Aggregated MIDs': string
+    
+    'Tx type': 'payment' | 'payout' | 'refund'
+    'Tx flow scheme': 'Direct' | 'Subscriptions' 
+    'Tx method': string
+    'Data type': 'Tx number' | 'Tx amount'
+    'Redirect flow': 'Yes' | 'No' 
+    'Customer labels': string
+    'Card labels': string
+};
 
 export class TranGeneralReportPage extends BasePage
 {

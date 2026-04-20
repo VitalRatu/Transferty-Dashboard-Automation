@@ -4,21 +4,26 @@ import { Table } from '../../related_components/Table';
 import { BasePage } from '../../BasePage';
 
 export type ConCountriesReportPageTabName = 
-    | 'Project' 
-    | 'Period'
-    | 'Conversion type'
-    | 'Tx type'
-    | 'Currency'
-    | 'PSP'
-    | 'Intermediary'
-    | 'Internal MID'
-    | 'Aggregated MIDs'
-    | 'Payment type'
-    | 'Payment method'
-    | 'Tx min amount'
-    | 'Tx max amount'
-    | 'Customer labels'
-    | 'Redirect flow'
+{
+    'Project': string
+    'Period': string
+    'Conversion type': 'Number of transactions' | 'Transactions Amount'
+    'Tx type': string
+    'Currency': string
+
+    'PSP': string
+    'Intermediary': string
+    'Internal MID': string
+    'Aggregated MIDs': string
+
+    'Payment type': 'Direct' | 'Subscriptions'
+    'Payment method': string
+    'Tx min amount': string
+    'Tx max amount': string
+
+    'Customer labels': string
+    'Redirect flow': 'Yes' | 'No';
+};
 
 export class ConCountriesReportPage extends BasePage
 {

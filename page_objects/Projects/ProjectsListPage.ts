@@ -3,13 +3,15 @@ import { BasePage } from '../BasePage';
 import { Table } from '../related_components/Table'; 
 import { FilterBar } from '../related_components/FilterBar'; 
 
-export type ProjectsListPageTabName =
-    | 'Project ID'
-    | 'Project'
-    | 'Website'
-    | 'Status'
-    | 'Partner'
-    | 'Created'
+export type ProjectsListPageTabName = 
+{
+    'Project ID': string
+    'Project': string
+    'Website': string
+    'Status': 'Active' | 'Initial' | 'Blocked'
+    'Partner': string
+    'Created': string
+}
 
 export class ProjectsListPage extends BasePage 
 {

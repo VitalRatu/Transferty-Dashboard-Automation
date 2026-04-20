@@ -4,9 +4,11 @@ import { Table } from '../../../related_components/Table';
 import { BasePage } from '../../../BasePage';
 
 export type FxSpreadListPageTabName =
-    | 'Currency from'
-    | 'Currency to'
-    | 'Status'
+{
+    'Currency from': string
+    'Currency to': string
+    'Status': 'Active' | 'Inactive'
+}
 
 export class FxSpreadListPage extends BasePage
 {

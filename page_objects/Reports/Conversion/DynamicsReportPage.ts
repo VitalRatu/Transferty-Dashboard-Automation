@@ -4,24 +4,28 @@ import { Table } from '../../related_components/Table';
 import { BasePage } from '../../BasePage';
 
 export type DynamicsReportPageTabName = 
-    | 'Project' 
-    | 'Period'
-    | 'Aggregation'
-    | 'Currency'
-    | 'Provider'
-    | 'PSP'
-    | 'Intermediary'
-    | 'Internal MID'
-    | 'Aggregated MIDs'
-    | 'Tx type'
-    | 'Tx method'
-    | 'Tx min amount'
-    | 'Tx max amount'
-    | 'Payment type'
-    | 'Customer labels'
-    | 'Card country'
-    | 'Redirect flow'
+{
+    'Project': string
+    'Period': string
+    'Aggregation': 'Hour' | 'Day' | 'Week' | 'Month' | 'Quarter' | 'Year'
+    'Currency': string
 
+    'Provider': string
+    'PSP': string
+    'Intermediary': string
+    'Internal MID': string
+    'Aggregated MIDs': string
+
+    'Tx type': 'payment' | 'payout' | 'refund'  
+    'Tx method': string
+    'Tx min amount': string
+    'Tx max amount': string
+    'Payment type': 'Direct' | 'Subscriptions'
+
+    'Customer labels': string
+    'Card country': string
+    'Redirect flow': 'Yes' | 'No'
+}
 export class DynamicsReportPage extends BasePage
 {
     public readonly filterBar: FilterBar<DynamicsReportPageTabName>;

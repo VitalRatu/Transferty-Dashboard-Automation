@@ -3,15 +3,17 @@ import { FilterBar } from '../../related_components/FilterBar';
 import { Table } from '../../related_components/Table';
 import { BasePage } from '../../BasePage';
 
-export type FunnelReportPageTabName = 
-    | 'Project' 
-    | 'Period'
-    | 'Aggregation'
-    | 'Source'
-    | 'Device'
-    | 'Redirect flow'
-    | 'Customer labels'
+export type FunnelReportPageTabName = {
+    'Project': string
+    'Period': string
 
+    'Aggregation': 'Hour' | 'Day' | 'Week' | 'Month' | 'Quarter' | 'Year'
+    'Source': 'Checkout' | 'Embedded' | 'H2H'
+    'Device': 'Mobile' | 'Desktop'
+    
+    'Redirect flow': 'Yes' | 'No';
+    'Customer labels': string
+}
 export class FunnelReportPage extends BasePage
 {
     public readonly filterBar: FilterBar<FunnelReportPageTabName>;

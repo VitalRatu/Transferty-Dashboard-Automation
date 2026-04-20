@@ -4,21 +4,22 @@ import { Table } from '../../related_components/Table';
 import { BasePage } from '../../BasePage';
 
 export type FinProvidersReportPageTabName = 
-    | 'Project' 
-    | 'Period' 
-    | 'Aggregation' 
-    | 'Currency' 
-    | 'Provider' 
-    | 'PSP' 
-    | 'Intermediary' 
-    | 'Internal MID' 
-    | 'Tx type' 
-    | 'Currency'
-    | 'Redirect flow' 
-    | 'Customer labels' 
-    | 'Card labels'
-    | 'Tx method'
+{
+    'Period': string 
+    'Project name': string 
 
+    'Provider': string
+    'PSP': string  
+    'Intermediary': string  
+    'Internal MID': string  
+    
+    'Tx type': 'payment' | 'payout' | 'refund'   
+    'Currency': string 
+    'Redirect flow': 'Yes' | 'No'  
+    'Customer labels': string  
+    'Card labels': string 
+    'Tx method': string 
+}
 export class FinProvidersReportPage extends BasePage
 {
     public readonly filterBar: FilterBar<FinProvidersReportPageTabName>;

@@ -4,11 +4,12 @@ import { Table } from '../related_components/Table';
 import { BasePage } from '../BasePage';
 
 export type MarginReportPageTabName =
-    | 'Period' 
-    | 'Aggregation'
-    | 'Currency'
-    | 'Project'
-
+{
+    'Period': string 
+    'Aggregation': 'Hour' | 'Day'
+    'Currency': string
+    'Project': string
+}
 export class MarginReportPage extends BasePage
 {
     public readonly filterBar: FilterBar<MarginReportPageTabName>;

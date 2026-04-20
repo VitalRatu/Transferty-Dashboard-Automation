@@ -5,13 +5,14 @@ import { FilterBar } from '../../related_components/FilterBar';
 import { Pagination } from '../../related_components/Pagination';
 
 export type LimitsListPageTabName =
-    | 'Project' 
-    | 'Period' 
-    | 'Provider'
-    | 'PSP'
-    | 'Internal MID'
-    | 'Currency'
-
+{
+    'Project': string
+    'Period': string 
+    'Provider': string
+    'PSP': string
+    'Internal MID': string
+    'Currency': string
+}
 export class LimitsListPage extends BasePage 
 {
     public readonly table: Table;

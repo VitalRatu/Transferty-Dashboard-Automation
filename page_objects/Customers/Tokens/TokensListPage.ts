@@ -5,13 +5,14 @@ import { Pagination } from '../../related_components/Pagination';
 import { BasePage } from '../../BasePage';
 
 export type TokensListPageTabName =
-    | 'Customer token'
-    | 'Project'
-    | "Merchant's UID"
-    | 'Last IP address'
-    | 'IP country'
-    | 'Status'
-
+{
+    'Customer token': string
+    'Project': string
+    "Merchant's UID": string
+    'Last IP address': string
+    'IP country': string
+    'Status': 'Active' | 'Blocked'
+}
 export class TokensListPage extends BasePage
 {
     private readonly filterBar: FilterBar<TokensListPageTabName>;

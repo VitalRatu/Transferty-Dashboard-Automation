@@ -4,17 +4,18 @@ import { Table } from '../../related_components/Table';
 import { BasePage } from '../../BasePage';
 
 export type DisputePageTabName = 
-    | 'Project'
-    | 'Dispute ID'
-    | 'External ID'
-    | 'Provider'
-    | 'PSP'
-    | 'Tx ID'
-    | 'Currency'
-    | 'Category'
-    | 'Status'
-    | 'Created'
-
+{
+    'Project': string
+    'Dispute ID': string
+    'External ID': string
+    'Provider': string
+    'PSP': string
+    'Tx ID': string
+    'Currency': string
+    'Category': 'Fraud' | 'Customer disputed' | 'Processing Errors' | 'Authorization' | 'Other' 
+    'Status': 'Open' | 'In progress' | 'Won' | 'Lost' | 'Canceled'
+    'Created': string
+}
 /**
  * Represents the Dispute page in the application for managing chargebacks and transaction disputes
  * Encapsulates the filter bar and data table components specific to dispute records

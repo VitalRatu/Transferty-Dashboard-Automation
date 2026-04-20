@@ -4,9 +4,11 @@ import { FilterBar } from '../../related_components/FilterBar';
 import { BasePage } from '../../BasePage';
 
 export type AggregatedPageFilters = 
-    | 'Project' 
-    | 'Aggregated MIDs' 
-    | 'Currency' 
+{
+    'Project': string
+    'Aggregated MIDs': string
+    'Currency': string
+}
 
 /**
  * Represents the Aggregated MIDs balances page within the billing module

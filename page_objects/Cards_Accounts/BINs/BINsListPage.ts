@@ -5,13 +5,15 @@ import { Pagination } from '../../related_components/Pagination';
 import { BasePage } from '../../BasePage';
 
 export type BINsListPageTabName =
-    | 'BIN'
-    | 'Brand'
-    | 'Type'
-    | 'Issuing country'
-    | 'Issuing bank'
-    | 'Autoupdate'
-    | 'Created'
+{
+    'BIN': string
+    'Brand': string
+    'Type': 'Debit' | 'Credit'
+    'Issuing country': string
+    'Issuing bank': string
+    'Autoupdate': 'Yes'| 'No'
+    'Created': string
+}
 
 export class BINsListPage extends BasePage
 {

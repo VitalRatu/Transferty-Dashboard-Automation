@@ -4,13 +4,13 @@ import { Table } from '../../related_components/Table';
 import { BasePage } from '../../BasePage';
 
 export type APIKeysListPageFilters = 
-    | 'Public key' 
-    | 'Project' 
-    | 'Website'
-    | 'Created'
-    | 'Status'
-
-
+{
+    'Public key': string
+    'Project': string
+    'Website': string
+    'Created': string
+    'Status': 'Active' | 'Blocked'
+}
 export class APIKeysListPage extends BasePage
 {
     public readonly filterBar: FilterBar<APIKeysListPageFilters>;

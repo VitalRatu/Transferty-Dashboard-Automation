@@ -3,10 +3,11 @@ import { Page } from 'playwright';
 import { FilterBar } from '../related_components/FilterBar';
 
 export type DashboardPageTabName =
-    | 'Currency'
-    | 'Period'
-    | 'Aggregated'
-    
+{
+    'Currency': string
+    'Period': string
+    'Aggregated': string
+}
 /**
  * Represents the main landing page of the application after successful authentication
  * Acts as a central hub providing a high-level overview of system metrics, recent activities, 

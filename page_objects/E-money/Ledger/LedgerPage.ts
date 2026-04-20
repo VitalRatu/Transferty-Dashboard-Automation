@@ -5,15 +5,16 @@ import { LedgerOperationsData } from '../../../test_data/LedgerOperationsData';
 import { BasePage } from '../../BasePage';
 
 export type LedgerPageFilters = 
-    | 'ID' 
-    | 'Project' 
-    | 'Wallet ID' 
-    | 'Wallet type'
-    | 'Account ID'
-    | 'Type'
-    | 'Tx ID'
-    | 'Created'
-
+{
+    'ID': string
+    'Project': string
+    'Wallet ID': string
+    'Wallet type': 'Issuer' | 'Customer' | 'Agent' | 'Fee' | 'Merchant' 
+    'Account ID': string
+    'Type': 'Payment' | 'Issuance' | 'Settlement' | 'Correction' | 'EM Purchase'
+    'Tx ID': string
+    'Created': string
+}
 /**
  * Represents the Ledger page within the E-money section
  * Provides functionality to audit financial operations, search through transaction history 

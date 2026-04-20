@@ -2,13 +2,15 @@ import { Page, Locator, expect } from '@playwright/test';
 import { FilterBar } from '../related_components/FilterBar';
 import { Table } from '../related_components/Table';
 import { BasePage } from '../BasePage';
-
+ 
 export type ReservePageFilters = 
-    | 'Project' 
-    | 'PSP' 
-    | 'Internal MID' 
-    | 'Status' 
-    | 'Created' 
+{
+    'Project': string
+    'PSP': string
+    'Internal MID': string
+    'Status': 'Scheduled' | 'Active' | 'Inactive'
+    'Created': string
+}
 
 /**
  * Represents the Reserve management page within the application

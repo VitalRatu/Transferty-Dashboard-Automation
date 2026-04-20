@@ -4,14 +4,15 @@ import { Table } from '../../related_components/Table';
 import { BasePage } from '../../BasePage';
 
 export type PlansListPageTabName = 
-    | 'Plan ID' 
-    | 'Project' 
-    | 'Name'
-    | 'Default currency'
-    | 'Tria'
-    | 'Created'
-    | 'Status'
-
+{
+    'Plan ID': string 
+    'Project': string
+    'Name': string
+    'Default currency': string
+    'Trial': 'Yes' | 'No'
+    'Created': string
+    'Status': 'New' | 'Active' | 'Deactivated'
+}
 export class PlansListPage extends BasePage
 {
     public readonly filterBar: FilterBar<PlansListPageTabName>;

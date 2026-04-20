@@ -3,8 +3,9 @@ import { Page } from '@playwright/test';
 import { FilterBar } from '../../related_components/FilterBar'; 
 
 export type ConversionListPageTabName =
-    | 'Project' 
-
+{
+    'Project': string 
+}
 export class ConversionListPage extends BasePage 
 {
     public readonly filter: FilterBar<ConversionListPageTabName>;

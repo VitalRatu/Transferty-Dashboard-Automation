@@ -1,7 +1,4 @@
 import { Page } from 'playwright';
-import { Tab as Tab } from '../related_components/Tab';
-import { FilterBar } from '../related_components/FilterBar';
-import { Table } from '../related_components/Table';
 import { FinancialReportPage } from './FinancialReportPage';
 import { TransactionsReportPage } from './TransactionsReportPage';
 import { ConversionReportPage } from './ConversionReportPage';

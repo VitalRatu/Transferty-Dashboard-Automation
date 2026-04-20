@@ -3,10 +3,12 @@ import { FilterBar } from '../../../related_components/FilterBar';
 import { Table } from '../../../related_components/Table';
 import { Pagination } from '../../../related_components/Pagination';
 import { BasePage } from '../../../BasePage';
-
+ 
 export type ChannelPSPListPageFilters = 
-    | 'Project' 
-    | 'PSP' 
+{
+    'Project': string
+    'PSP': string
+}
 
 export class ChannelPSPListPage extends BasePage
 {

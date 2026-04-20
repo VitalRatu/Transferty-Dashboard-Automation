@@ -4,16 +4,18 @@ import { Table } from '../related_components/Table';
 import { BasePage } from '../BasePage';
 
 export type SettlementsPageFilters = 
-    | 'ID' 
-    | 'Project' 
-    | 'Provider' 
-    | 'Intermediary' 
-    | 'PSP' 
-    | 'Internal MID' 
-    | 'Currency' 
-    | 'Created' 
-    | 'Updated' 
-
+{
+    'ID': string
+    'Project': string
+    'Provider': string
+    'Intermediary': string
+    'PSP': string
+    'Internal MID': string
+    'Currency': string
+    'Created': string
+    'Updated': string
+} 
+  
 /**
  * Represents the Settlements page within the application
  * Provides a management interface for tracking fund distributions, performing 

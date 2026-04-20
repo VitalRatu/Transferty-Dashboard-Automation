@@ -4,11 +4,12 @@ import { Table } from '../../related_components/Table';
 import { BasePage } from '../../BasePage';
 
 export type SessionsListPageTabName = 
-    | 'Login'
-    | 'IP address'
-    | 'Created'
-    | 'Status'
-
+{
+    'Login': string
+    'IP address': string
+    'Created': string
+    'Status': 'Active' | 'Closed'
+}
 export class SessionsListPage extends BasePage
 {
     public readonly filterBar: FilterBar<SessionsListPageTabName>;

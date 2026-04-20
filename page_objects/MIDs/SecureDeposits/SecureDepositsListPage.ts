@@ -5,14 +5,15 @@ import { SecureDepositData } from '../../../test_data/MIDsData';
 import { BasePage } from '../../BasePage';
 
 export type SecureDepositsListPageTabName =
-    | 'Secure Deposit' 
-    | 'Project' 
-    | 'Amount' 
-    | 'Currency' 
-    | 'Created Date'
-    | 'Income Date'  
-    | 'Status'
-
+{
+    'Secure Deposit': string
+    'Project': string 
+    'Amount': string 
+    'Currency': string 
+    'Created Date': string
+    'Income Date': string  
+    'Status': 'Blocked' | 'Active'
+}
 /**
  * Represents the Secure Deposits management page within the MIDs section
  * Provides functionality to initiate the creation of new secure deposits and verify existing 

@@ -4,20 +4,25 @@ import { Table } from '../../related_components/Table';
 import { BasePage } from '../../BasePage';
 
 export type FinMethodsReportPageTabName = 
-    | 'Project' 
-    | 'Period' 
-    | 'Aggregation' 
-    | 'Currency' 
-    | 'Provider' 
-    | 'PSP' 
-    | 'Intermediary' 
-    | 'Internal MID' 
-    | 'Aggregated MIDs' 
-    | 'Tx type' 
-    | 'Location method'
-    | 'Redirect flow' 
-    | 'Customer labels' 
-    | 'Card labels';
+{
+    'Project': string
+    'Period': string 
+    'Aggregation': 'Hour' | 'Day' | 'Week' | 'Month' | 'Quarter' | 'Year'
+    'Currency': string 
+
+    'Provider': string 
+    'PSP': string 
+    'Intermediary': string 
+    'Internal MID': string 
+    'Aggregated MIDs': string 
+    
+    'Tx type': string 
+    'Location method': 'Customer IP' | 'Card Country'
+    'Tx flow scheme': 'Direct' | 'Subscriptions' 
+    'Redirect flow': 'Yes' | 'No' 
+    'Customer labels': string 
+    'Card labels': string
+}
 
 export class FinMethodsReportPage extends BasePage
 {

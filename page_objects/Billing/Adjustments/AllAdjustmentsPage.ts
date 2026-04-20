@@ -4,12 +4,14 @@ import { FilterBar } from '../../related_components/FilterBar';
 import { BasePage } from '../../BasePage';
 
 export type AllAdjustmentsPageFilters = 
-    | 'Project' 
-    | 'Currency' 
-    | 'Internal MID / Secure Deposit' 
-    | 'Created' 
-    | 'Rule type' 
-    | 'Action type' 
+{
+    'Project': string
+    'Currency': string
+    'Internal MID / Secure Deposit': string
+    'Created': string
+    'Rule type': 'Without rules' | 'Auto-transfer by %' | 'Auto-schedule rule'
+    'Action type': 'Top-Up' | 'Settlement' | 'Chargeback' | 'Correction' | 'Transfer'
+}
 
 /**
  * Represents the comprehensive Adjustments log page within the billing module

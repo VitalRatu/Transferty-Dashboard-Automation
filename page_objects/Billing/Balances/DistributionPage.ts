@@ -3,14 +3,15 @@ import { Table } from '../../related_components/Table';
 import { FilterBar } from '../../related_components/FilterBar';
 import { BasePage } from '../../BasePage';
 
-
 export type DistributionPageFilters = 
-    | 'Project' 
-    | 'Provider' 
-    | 'PSP' 
-    | 'External MID' 
-    | 'Currency' 
-    | 'Labels' 
+{
+    'Project': string
+    'Provider': string
+    'PSP': string
+    'External MID': string
+    'Currency': string
+    'Labels': string
+}
 
 /**
  * Represents the Distribution balances page within the billing module

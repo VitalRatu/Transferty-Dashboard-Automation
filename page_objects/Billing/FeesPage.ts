@@ -4,14 +4,16 @@ import { Table } from '../related_components/Table';
 import { BasePage } from '../BasePage';
 
 export type FeesPageFilters = 
-    | 'ID' 
-    | 'Project' 
-    | 'Provider' 
-    | 'Currency' 
-    | 'Tx type' 
-    | 'Internal MID' 
-    | 'Status' 
-    | 'Category' 
+{
+    'ID': string
+    'Project': string
+    'Provider': string
+    'Currency': string
+    'Tx type': 'payment' | 'payout' | 'refund'
+    'Internal MID': string
+    'Status': 'Scheduled' | 'Active' | 'Expired' | 'Deactivated'
+    'Category': 'Cards' | 'APM'
+}
 
 /**
  * Represents the Fees management page within the application

@@ -4,9 +4,10 @@ import { FilterBar } from '../../related_components/FilterBar';
 import { EMoneyLimitsData } from '../../../test_data/EMoneyLimitsData';
 import { BasePage } from '../../BasePage';
 
-export type SettingsPageFilters = 
-    | '' 
-
+export type SettingsPageFilters =
+{
+    
+}
 /**
  * Represents the Settings page within the E-money section
  * Provides an interface to manage global transaction constraints, customer wallet limits, 

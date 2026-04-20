@@ -5,12 +5,13 @@ import { Pagination } from '../related_components/Pagination';
 import { BasePage } from '../BasePage';
 
 export type InvoicesListPageTabName =
-    | 'Invoice ID'
-    | 'Project'
-    | 'Subscription ID'
-    | 'Created'
-    | 'Status'
-
+{
+    'Invoice ID': string
+    'Project': string
+    'Subscription ID': string
+    'Created': string
+    'Status': 'Open' | 'Paid' | 'Unpaid' | 'Pending' | 'Retry'
+}
 export class InvoicesListPage extends BasePage
 {
     public readonly filterBar: FilterBar<InvoicesListPageTabName>;

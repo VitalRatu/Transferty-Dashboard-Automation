@@ -4,8 +4,10 @@ import { Table } from '../related_components/Table';
 import { BasePage } from '../BasePage';
 
 export type ExchangeRatesPageFilters = 
-    | 'From' 
-    | 'To'
+{
+    'From': string
+    'To': string
+}
 
 /**
  * Represents the Exchange Rates management page within the application

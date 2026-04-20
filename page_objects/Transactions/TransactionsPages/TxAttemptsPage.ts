@@ -4,18 +4,19 @@ import { Table } from '../../related_components/Table';
 import { BasePage } from '../../BasePage';
 
 export type TxAttemptsPageTabName = 
-    | 'Tx ID' 
-    | 'Order ID' 
-    | 'Project' 
-    | 'Provider' 
-    | 'PSP' 
-    | 'Internal MID' 
-    | 'Subscription' 
-    | 'Type'
-    | 'Currency' 
-    | 'Order currency' 
-    | 'Created';
-
+{
+    'Tx ID': string 
+    'Order ID': string 
+    'Project': string
+    'Provider': string 
+    'PSP': string 
+    'Internal MID': string 
+    'Subscription': 'Yes' | 'No' 
+    'Type': 'payment' | 'payout' | 'refund'
+    'Currency': string 
+    'Order currency': string 
+    'Created': string
+}
 /**
  * Represents the Transaction Attempts (Tx Attempts) page in the application
  * Serves as a container for page-specific components, providing access to the 

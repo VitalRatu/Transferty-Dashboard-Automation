@@ -5,12 +5,13 @@ import { EMoneyMerchantWallet } from '../../../../test_data/EMoneyWalletsData';
 import { BasePage } from '../../../BasePage';
 
 export type MerchantWalletListPageFilters = 
-    | 'Project' 
-    | 'Wallet ID' 
-    | 'Internal MID'
-    | 'Currency'
-    | 'Created'
-
+{
+    'Project': string
+    'Wallet ID': string 
+    'Internal MID': string
+    'Currency': string
+    'Created': string
+}
 /**
  * Represents the Merchant Wallets page within the E-money section
  * Provides a management interface for viewing merchant-specific digital wallets,

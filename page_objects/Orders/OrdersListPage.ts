@@ -4,10 +4,11 @@ import { Table } from '../related_components/Table';
 import { FilterBar } from '../related_components/FilterBar'; 
 
 export type OrdersListPageTabName =
-    | 'Order ID' 
-    | 'Project'
-    | 'Created'
-
+{
+    'Order ID': string 
+    'Project': string
+    'Created': string
+}
 /**
  * Represents the Orders page within the application
  * Provides access to the centralized order management system, allowing users to view,

@@ -1,15 +1,17 @@
-import { Page, Locator, expect } from '@playwright/test';
+import { Page } from '@playwright/test';
 import { Table } from '../../related_components/Table';
 import { FilterBar } from '../../related_components/FilterBar';
 import { BasePage } from '../../BasePage';
 
 export type SecureDepositsPageFilters = 
-    | 'Secure Deposit' 
-    | 'Project' 
-    | 'Amount' 
-    | 'Currency' 
-    | 'Created Date'
-    | 'Income Date'  
+{
+    'Secure Deposit': string
+    'Project': string
+    'Amount': string
+    'Currency': string
+    'Created Date': string
+    'Income Date': string
+}
 
 /**
  * Represents the Secure Deposits management page within the Balances section

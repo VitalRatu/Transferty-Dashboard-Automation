@@ -4,10 +4,11 @@ import { FilterBar } from '../../related_components/FilterBar';
 import { BasePage } from '../../BasePage';
 
 export type IntermediaryPageTabName = 
-    | 'Name' 
-    | 'Created' 
-    | 'Updated'
-
+{
+    'Name': string
+    'Created': string
+    'Updated': string
+}
 /**
  * Represents the Intermediary management page within the PSP section
  * This class provides a structured interface for managing financial intermediaries, 

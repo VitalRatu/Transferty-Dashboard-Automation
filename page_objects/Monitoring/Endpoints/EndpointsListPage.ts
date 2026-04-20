@@ -6,12 +6,13 @@ import { Pagination } from '../../related_components/Pagination';
 import { BasePage } from '../../BasePage';
 
 export type EndpointsListPageTabName =
-    | 'Endpoint ID' 
-    | 'Project' 
-    | 'Created by' 
-    | 'Created'
-    | 'Status'  
-
+{
+    'Endpoint ID': string
+    'Project': string
+    'Created by': string 
+    'Created': string
+    'Status': 'Active' | 'Inactive'  
+}
 export class EndpointsListPage extends BasePage
 {
     public readonly tab: Tab;

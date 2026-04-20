@@ -5,10 +5,11 @@ import { Pagination } from '../../related_components/Pagination';
 import { BasePage } from '../../BasePage';
 
 export type LabelsListPageTabName =
-    | 'Project'
-    | 'Label'
-    | 'Created'
-
+{
+    'Project': string
+    'Label': string
+    'Created': string
+}
 export class LabelsListPage extends BasePage
 {
     public readonly filterBar: FilterBar<LabelsListPageTabName>;

@@ -4,12 +4,13 @@ import { FilterBar } from '../../../related_components/FilterBar';
 import { BasePage } from '../../../BasePage';
 
 export type CustomerWalletsListFilter = 
-    | 'Project' 
-    | 'Wallet ID' 
-    | 'Account ID' 
-    | 'Currency'
-    | 'Created'
-
+{
+    'Project': string
+    'Wallet ID': string
+    'Account ID': string 
+    'Currency': string
+    'Created': string
+}
 export class CustomerWalletsListPage extends BasePage
 {
     /** The FilterBar component used for searching and filtering customer wallet records */

@@ -4,10 +4,23 @@ import { FilterBar } from '../../../../related_components/FilterBar';
 import { Table } from '../../../../related_components/Table';
 
 export type AssigmentRulesListPageTabName =
-    | 'Provider'
-    | 'Response code'
-    | 'Labels'
+{
+    'Provider': string
 
+    'Response code': 
+        | '2010'
+        | '2020'
+        | '2022'
+        | '2023'
+        | '2025'
+        | '2030'
+        | '2035'    
+        | '2040'
+        | '2050'
+        | '2099'
+
+    'Labels': string
+}
 export class AssigmentRulesListPage extends BasePage 
 {
     public readonly filter: FilterBar<AssigmentRulesListPageTabName>

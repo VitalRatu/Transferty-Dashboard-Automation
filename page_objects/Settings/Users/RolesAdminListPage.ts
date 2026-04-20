@@ -4,7 +4,9 @@ import { Table } from '../../related_components/Table';
 import { BasePage } from '../../BasePage';
 
 export type RolesAdminListPageTabName = 
-    | ''
+{
+    
+}
 
 export class RolesAdminListPage extends BasePage
 {

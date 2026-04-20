@@ -5,11 +5,12 @@ import { FilterBar } from '../../related_components/FilterBar';
 import { Pagination } from '../../related_components/Pagination';
 
 export type TriggeredRulesListPageTabName =
-    | 'ID' 
-    | 'Project' 
-    | 'Rule' 
-    | 'Timestamp'
-
+{
+    'ID': string 
+    'Project': string 
+    'Rule': string 
+    'Timestamp': string
+}
 export class TriggeredRulesListPage extends BasePage 
 {
     public readonly table: Table;

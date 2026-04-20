@@ -4,13 +4,15 @@ import { FilterBar } from '../../related_components/FilterBar';
 import { BasePage } from '../../BasePage';
 
 export type InternalPageFilters = 
-    | 'Project' 
-    | 'Provider' 
-    | 'PSP' 
-    | 'Internal MID' 
-    | 'External MID' 
-    | 'Currency' 
-    | 'Labels' 
+{
+    'Project': string
+    'Provider': string
+    'PSP': string
+    'Internal MID': string
+    'External MID': string
+    'Currency': string
+    'Labels': string
+}
 
 /**
  * Represents the Internal Balances page within the billing module

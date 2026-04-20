@@ -4,12 +4,13 @@ import { Table } from '../../related_components/Table';
 import { BasePage } from '../../BasePage';
 
 export type OneclicksListPageTabName = 
-    | 'Oneclick token' 
-    | 'Project' 
-    | 'Card mask'
-    | 'Created'
-    | 'Status'
-
+{
+    'Oneclick token': string 
+    'Project': string 
+    'Card mask': string
+    'Created': string
+    'Status': 'Active' | 'Inactive'
+}
 export class OneclicksListPage extends BasePage
 {
     public readonly filterBar: FilterBar<OneclicksListPageTabName>;

@@ -40,13 +40,28 @@ export class CreationForm
     constructor(page: Page) 
     {
         this.page = page;
-        this.saveButton = page.locator('.ui.button.submit-button, .ui.primary.button').first();
+        this.saveButton = page.locator('.ui.button.submit-button, .ui.primary.button, .ui.button');
         this.cancelButton = page.locator('.ui.secondary.button').and(page.getByRole('button'));
         this.textInputLocator = page.locator('.Input.text-input, .ui.input.Input, .Input')
         this.dropdownLocator = page.locator('.Input.dropdown-input, .multi-select.Input, .Input');
         this.errorMessageLocator = page.locator('.form-input-error');
         this.labelElement = this.page.locator('span.form-input-label')
         this.checkBoxLocator = this.page.locator('.ui.checkbox, .ui.checked.checkbox')
+    }
+
+    /**
+     * Internal helper to clear any pre-selected values before making a new selection
+     * @param dropdownLocator - The resolved locator of the dropdown input container
+     */
+    private async clearDropdownValues(dropdownLocator: Locator): Promise<void> 
+    {
+        const removeButtons = dropdownLocator.locator('.selected-items-container .delete.icon.remove-item-button');
+        const count = await removeButtons.count();
+        
+        for (let i = 0; i < count; i++) 
+        {
+            await removeButtons.first().click();
+        }
     }
 
     /**
@@ -82,9 +97,20 @@ export class CreationForm
         await this.page.waitForLoadState('networkidle');
         const dropdownInput = this.dropdownLocator.filter({ has: this.page.getByText(label, { exact: true }) }).first();
         await expect(dropdownInput).toBeVisible();
+
+        await this.clearDropdownValues(dropdownInput);
+
         await dropdownInput.click();
         const dropdownList = dropdownInput.getByRole('listbox').first();
         await expect(dropdownList).toBeVisible();
+
+        const noneButton = dropdownList.getByRole('button', { name: 'None', exact: true });
+        if (await noneButton.count() > 0 && await noneButton.isVisible()) 
+        {
+            await noneButton.click();
+            await this.page.waitForTimeout(200); 
+        }
+
         if ((await this.page.getByRole('option', { exact: true }).first().innerText()) === 'No options') 
         {
             throw new Error(`No options available`);
@@ -97,7 +123,7 @@ export class CreationForm
         }
         else 
         {
-            const optionLocator = this.page.getByRole('option', { name: option, exact: true }).first();
+            const optionLocator = dropdownList.getByRole('option', { name: option }).first();
             await expect(optionLocator).toBeVisible();
             await optionLocator.click();
         }
@@ -118,12 +144,21 @@ export class CreationForm
         await this.page.waitForLoadState('networkidle');
         const elementLable = this.labelElement.filter({ has: this.page.getByText(label, { exact: true }) }).first();
         const dropdownInput = elementLable.locator('..').locator('.Input.dropdown-input').nth(index);
-        
         await expect(dropdownInput).toBeVisible();
+
+        await this.clearDropdownValues(dropdownInput);
+
         await dropdownInput.click();
         
         const dropdownList = dropdownInput.getByRole('listbox').first();
         await expect(dropdownList).toBeVisible();
+
+        const noneButton = dropdownList.getByRole('button', { name: 'None', exact: true });
+        if (await noneButton.count() > 0 && await noneButton.isVisible()) 
+        {
+            await noneButton.click();
+            await this.page.waitForTimeout(200); 
+        }
         
         if (option === undefined) 
         {
@@ -133,7 +168,7 @@ export class CreationForm
         } 
         else 
         {
-            const optionLocator = this.page.getByRole('option', { name: option}).first();
+            const optionLocator = dropdownList.getByRole('option', { name: option }).first();
             await expect(optionLocator).toBeVisible();
             await optionLocator.click();
         }
@@ -233,27 +268,39 @@ export class CreationForm
     }
 
     /**
-     * Submits the form by clicking the save button
-     * Automatically waits for network idle and verifies that navigation away from the form URL has occurred
-     * @returns A promise that resolves when the form is saved and navigation is complete
+     * Submits the form by clicking the save button.
+     * Can optionally target a specific save button by its exact text.
+     * @param buttonName - Optional exact text of the button to click (e.g., 'Create', 'Save & Next')
      */
-    public async save(): Promise<void> 
+    public async save(buttonName?: string): Promise<void> 
     {
         await expect(this.errorMessageLocator).toBeHidden();
-        await this.saveButton.click();
+        
+        const targetButton = buttonName 
+            ? this.saveButton.getByText(buttonName, { exact: true }) 
+            : this.saveButton.first();
+            
+        await expect(targetButton).toBeVisible();
+        await targetButton.click();
+        
         await this.page.waitForLoadState('networkidle');
-        await this.page.waitForURL((url) => !url.toString().match(/\/(add.*|create|edit)(\?.*)?$/));
     }
 
     /**
-     * Cancels the form interaction by clicking the cancel button
-     * Verifies that the page navigates back away from the creation/edition route
-     * @returns A promise that resolves when the action is cancelled and navigation is complete
+     * Cancels the form interaction by clicking the cancel button.
+     * Can optionally target a specific cancel button by its exact text.
+     * @param buttonName - Optional exact text of the button to click
      */
-    public async cancel(): Promise<void>
+    public async cancel(buttonName?: string): Promise<void>
     {
-        await this.cancelButton.click()
+        const targetButton = buttonName 
+            ? this.cancelButton.getByText(buttonName, { exact: true }) 
+            : this.cancelButton.first();
+
+        await expect(targetButton).toBeVisible();
+        await targetButton.click();
+        
         await this.page.waitForLoadState('networkidle');
-        await this.page.waitForURL((url) => !url.toString().match(/\/(add.*|create|edit)(\?.*)?$/));
+
     }
 }

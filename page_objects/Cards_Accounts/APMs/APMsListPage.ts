@@ -4,13 +4,14 @@ import { Table } from '../../related_components/Table';
 import { Pagination } from '../../related_components/Pagination';
 import { BasePage } from '../../BasePage';
 
-export type APMsListPageTabName =
-    | 'Payment method'
-    | 'Project'
-    | 'APM ID type'
-    | 'APM account ID'
-    | 'Status'
-
+export type APMsListPageTabName = 
+{
+    'Payment method': string
+    'Project': string
+    'APM ID type': 'Phone' | 'Email' | 'IBAN' | 'None' | 'Wallet ID'
+    'APM account ID': string
+    'Status': 'Active' | 'Blocked'
+}
 export class APMsListPage extends BasePage
 {
     public readonly filterBar: FilterBar<APMsListPageTabName>;

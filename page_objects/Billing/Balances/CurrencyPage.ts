@@ -4,8 +4,10 @@ import { FilterBar } from '../../related_components/FilterBar';
 import { BasePage } from '../../BasePage';
 
 export type CurrencyPageFilters = 
-    | 'Project' 
-    | 'Currency' 
+{
+    'Project': string
+    'Currency': string
+}
 
 /**
  * Represents the Currency Balances page within the billing module

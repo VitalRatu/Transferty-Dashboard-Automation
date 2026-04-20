@@ -4,14 +4,15 @@ import { Table } from '../../related_components/Table';
 import { BasePage } from '../../BasePage';
 
 export type TokensListPageTabName = 
-    | 'Card mask'
-    | 'Project'
-    | 'Subscription token'
-    | 'Provider'
-    | 'PSP'
-    | 'Created'
-    | 'Status'
-
+{
+    'Card mask': string
+    'Project': string
+    'Subscription token': string
+    'Provider': string
+    'PSP': string
+    'Created': string
+    'Status': 'Active' | 'Inactive'
+}
 export class TokensListPage extends BasePage
 {
     public readonly filterBar: FilterBar<TokensListPageTabName>;

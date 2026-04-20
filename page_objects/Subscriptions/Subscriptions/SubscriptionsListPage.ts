@@ -4,16 +4,17 @@ import { Table } from '../../related_components/Table';
 import { BasePage } from '../../BasePage';
 
 export type SubscriptionsListPageTabName = 
-    | 'Subscription ID' 
-    | 'Project' 
-    | 'Plan'
-    | 'Customer token'
-    | 'BIN'
-    | 'Last four'
-    | 'Method'
-    | 'Created'
-    | 'Status'
-
+{
+    'Subscription ID': string 
+    'Project': string
+    'Plan': string
+    'Customer token': string
+    'BIN': string
+    'Last four': string
+    'Method': string
+    'Created': string
+    'Status': 'Initial' | 'Active' | 'Inactive' | 'Retry' | 'Suspended'
+}
 export class SubscriptionsListPage extends BasePage
 {
     public readonly filterBar: FilterBar<SubscriptionsListPageTabName>;

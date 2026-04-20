@@ -4,17 +4,18 @@ import { Table } from '../../related_components/Table';
 import { BasePage } from '../../BasePage';
 
 export type AdminsListPageTabName = 
-    | 'ID'
-    | 'Email'
-    | 'Partner'
-    | 'First name'
-    | 'Last name'
-    | 'Phone'
-    | 'Role'
-    | 'Status'
-    | 'Last login'
-    | 'Created'
-
+{
+    'ID': string
+    'Email': string
+    'Partner': string
+    'First name': string
+    'Last name': string
+    'Phone': string
+    'Role': string
+    'Status': 'Active' | 'Blocked'
+    'Last login': string
+    'Created': string
+}
 export class AdminsListPage extends BasePage
 {
     public readonly filterBar: FilterBar<AdminsListPageTabName>;
