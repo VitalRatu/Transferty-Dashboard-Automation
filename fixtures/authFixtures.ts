@@ -1,6 +1,9 @@
-import { pomTest                  } from './pomFixtures'                          ;
-import { merchantData , adminData } from '../test_data/userCredentials'           ;                ;
-import { DashboardPage            } from '../page_objects/Dashboard/DashboardPage';
+import { pomTest } from './pomFixtures';
+import { merchantData, adminData } from '../test_data/userCredentials';
+import { DashboardPage } from '../page_objects/Dashboard/DashboardPage';
+import { ProjectsListPage } from '../page_objects/Projects/ProjectsListPage';
+import { LoginPage } from '../page_objects/LoginPage';
+import { BrowserContext } from '@playwright/test';
 
 export const Routes = 
 {
@@ -12,13 +15,13 @@ type AuthFixtures =
 {
     merchantUser: DashboardPage;
     adminUser: DashboardPage;
+    newMerchantSession: (email: string, password: string) => Promise<DashboardPage>;
+    newAdminSession: (email: string, password: string) => Promise<ProjectsListPage>;
 };
 
-// Merchant state
 let cachedMerchantStorage: Record<string, string>
 let merchantTokenTimestamp = 0
 
-// Admin state
 let cachedAdminStorage: Record<string, string> 
 let adminTokenTimestamp = 0
 
@@ -118,5 +121,62 @@ export const authTest = pomTest.extend<AuthFixtures>({
         await dashboardPage.sidebar.setLiveMode()
         await use()
     },
-})
+
+    newAdminSession: async ({ browser }, use) => 
+    {
+        const contexts: BrowserContext[] = [];
+
+        const creator = async (email: string, password: string): Promise<ProjectsListPage> => 
+        {
+            const context = await browser.newContext();
+            contexts.push(context);
+            const page = await context.newPage();
+
+            const loginPage = new LoginPage(page);
+            const projectsPage = new ProjectsListPage(page);
+
+            await loginPage.goTo(Routes.LOGIN);
+            await loginPage.signIn(email, password);
+            await projectsPage.sidebar.setLiveMode(true);
+
+            return projectsPage;
+        };
+
+        await use(creator);
+
+        for (const context of contexts) 
+        {
+            await context.close();
+        }
+    },
+
+    newMerchantSession: async ({ browser }, use) => 
+    {
+        const contexts: BrowserContext[] = [];
+
+        const creator = async (email: string, password: string): Promise<DashboardPage> => 
+        {
+            const context = await browser.newContext();
+            contexts.push(context);
+            const page = await context.newPage();
+
+            const loginPage = new LoginPage(page);
+            const dashboardPage = new DashboardPage(page);
+
+            await loginPage.goTo(Routes.LOGIN);
+            await loginPage.signIn(email, password);
+            await dashboardPage.sidebar.setLiveMode(true);
+
+            await dashboardPage.page.waitForURL(/dashboard/, { timeout: 15000 });
+            return dashboardPage;
+        };
+
+        await use(creator);
+
+        for (const context of contexts) 
+        {
+            await context.close();
+        }
+    }
+});
 

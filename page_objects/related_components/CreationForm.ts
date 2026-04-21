@@ -40,7 +40,7 @@ export class CreationForm
     constructor(page: Page) 
     {
         this.page = page;
-        this.saveButton = page.locator('.ui.button.submit-button, .ui.primary.button, .ui.button');
+        this.saveButton = page.locator('.ui.button.submit-button, .ui.primary.button');
         this.cancelButton = page.locator('.ui.secondary.button').and(page.getByRole('button'));
         this.textInputLocator = page.locator('.Input.text-input, .ui.input.Input, .Input')
         this.dropdownLocator = page.locator('.Input.dropdown-input, .multi-select.Input, .Input');

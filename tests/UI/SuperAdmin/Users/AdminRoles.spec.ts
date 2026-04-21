@@ -1,10 +1,10 @@
-import {expect, test, } from '../../../fixtures/fixtures';         
+import {expect, test, } from '../../../../fixtures/fixtures';         
 
-test('Create new admin role', async ({ adminUser, dashboardPage, usersPage, newRolePage, roleDetailsPage}) =>
+test('Create new admin role', async ({ adminUser, projectsListPage, usersPage, newRolePage, roleDetailsPage}) =>
 {
     await test.step('User clicks on "Users" tab on the sidebar', async() => 
     {
-        await dashboardPage.sidebar.openSidebarTab('Users');
+        await projectsListPage.sidebar.openSidebarTab('Users');
     });
 
     await test.step('User clicks on "Roles" tab', async() => 
@@ -54,11 +54,11 @@ test('Create new admin role', async ({ adminUser, dashboardPage, usersPage, newR
     });
 });
 
-test('Edit existing role', async ({ adminUser, dashboardPage, usersPage, newRolePage, roleDetailsPage, editRolePage }) =>
+test('Edit existing role', async ({ adminUser, projectsListPage, usersPage, newRolePage, roleDetailsPage, editRolePage }) =>
 {
     await test.step('User clicks on "Users" tab on the sidebar', async() => 
     {
-        await dashboardPage.sidebar.openSidebarTab('Users');
+        await projectsListPage.sidebar.openSidebarTab('Users');
     });
 
     await test.step('User clicks on "Roles" tab', async() => 

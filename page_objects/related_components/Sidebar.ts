@@ -83,13 +83,15 @@ export class Sidebar
             await expect(this.toggleContainer).not.toHaveClass(/checked/);
         }
     }
-    /**
-     * Navigates to a specific section of the application by clicking a sidebar menu button
-     * Waits for any active loaders to disappear, locates the button by its display name, 
-     * and asserts that the resulting URL matches the expected pattern derived from the button name
-     * @param buttonName - The name of the sidebar button to click as defined in SideBarMenuButtons
-     * @returns A promise that resolves when the navigation and URL verification are complete
-     */
+
+    public async getAvailableSidebarTabs(): Promise<SidebarButtonName[]>
+    {
+        
+        await expect(this.pageLoaded).toBeHidden();
+        const labels = await this.sideButton.allInnerTexts();
+        return labels.map(l => l.trim()) as SidebarButtonName[];
+    }
+
     public async openSidebarTab(buttonName: SidebarButtonName): Promise<void>
     {
         await expect(this.pageLoaded).toBeHidden();

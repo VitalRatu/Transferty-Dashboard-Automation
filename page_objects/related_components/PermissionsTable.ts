@@ -1,5 +1,8 @@
 import { Page, Locator, expect } from '@playwright/test';
+import { ValidAdminPermissions, ValidMerchantPermissions } from '../../test_data/Permissions';
 
+
+export type TransfertyPermissions = ValidAdminPermissions | ValidMerchantPermissions;
 /**
  * Represents the Permissions Table component used across Role Add, Edit, and Details pages.
  * Handles both reading states and syncing checkboxes.
@@ -19,7 +22,7 @@ export class PermissionsTable
         this.dataRows = this.tableLocator.locator('tbody tr:not(.section-name)');
     }
 
-    public async enablePermissions(permissionsNames: string[]): Promise<void> 
+    public async enablePermissions(permissionsNames: TransfertyPermissions[]): Promise<void> 
     {
         await expect(this.tableLocator).toBeVisible();
 
@@ -31,7 +34,7 @@ export class PermissionsTable
             const nameCellText = await row.locator('td').nth(1).innerText();
             const permissionName = nameCellText.trim();
 
-            const shouldBeChecked = permissionsNames.includes(permissionName);
+            const shouldBeChecked = (permissionsNames as string[]).includes(permissionName);
             const rowClass = await row.getAttribute('class');
             const isCurrentlyChecked = rowClass?.includes('permission-active-row') ?? false;
 

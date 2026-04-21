@@ -32,9 +32,9 @@ import { AdminDetailsPage                     } from '../page_objects/Settings/U
 import { NewAdminPage                         } from '../page_objects/Settings/Users/Admins/NewAdminPage'
 import { AggregatedMidDetailsPage             } from '../page_objects/MIDs/AggregatedMIDs/AggregatedMIDDetailsPage'
 import { ProjectsListPage                     } from '../page_objects/Projects/ProjectsListPage'
-import { ProjectPage } from '../page_objects/Projects/ProjectPage'
-import { MonitoringPage } from '../page_objects/Monitoring/MonitoringPage'
-import { SubscriptionsPage } from '../page_objects/Subscriptions/SubscriptionsPage'
+import { ProjectPage                          } from '../page_objects/Projects/ProjectPage'
+import { MonitoringPage                       } from '../page_objects/Monitoring/MonitoringPage'
+import { SubscriptionsPage                    } from '../page_objects/Subscriptions/SubscriptionsPage'
 
 type Fixtures = 
 {

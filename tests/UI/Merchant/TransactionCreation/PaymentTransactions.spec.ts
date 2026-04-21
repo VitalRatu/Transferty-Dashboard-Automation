@@ -1,5 +1,5 @@
-import {test} from '../../fixtures/fixtures';
-import {testCards} from '../../test_data/testCards';
+import {test} from '../../../../fixtures/fixtures';
+import {testCards} from '../../../../test_data/testCards';
 
 test('Visa 4012888888881881 Payment', async ({ merchantUser, transactionsPage, dashboardPage, transactionAddPage }) => 
 {

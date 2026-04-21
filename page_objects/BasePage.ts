@@ -13,7 +13,10 @@ export abstract class BasePage
     public readonly page: Page;
     
     /** The default URL or URL pattern associated with the specific page. */
-    protected readonly url?: string | RegExp;
+    public readonly url?: string | RegExp;
+
+    protected readonly defaultUrlStr?: string;
+    protected readonly expectedUrlRegex?: RegExp;
 
     /** The application's top navigation header component. */
     public readonly header: Header;
@@ -33,10 +36,26 @@ export abstract class BasePage
      * @param page - The Playwright Page instance
      * @param url - The optional default URL route or pattern for this page
      */
-    constructor(page: Page, url?: string | RegExp) 
+    constructor(page: Page, url: string | RegExp) 
     {
         this.page = page;
-        this.url = url;
+
+        if (typeof url === 'string') 
+        {
+            this.defaultUrlStr = url;
+            this.expectedUrlRegex = new RegExp(url);
+        } 
+        else if (url instanceof RegExp) 
+        {
+            this.expectedUrlRegex = url;
+            
+            const cleanString = url.source.replace(/\\\//g, '/'); 
+            
+            if (!/[?*+^$()\[\]{}|\\]/.test(cleanString)) 
+            {
+                this.defaultUrlStr = cleanString;
+            }
+        }
 
         this.header = new Header(page);
         this.sidebar = new Sidebar(page);
@@ -52,15 +71,19 @@ export abstract class BasePage
      * @throws {Error} If neither the argument nor the class `url` property is provided
      * @returns A promise that resolves when the navigation and URL assertion are complete
      */
-    public async goTo(url?: string | RegExp): Promise<void> 
+    public async goTo(targetUrl?: string): Promise<void> 
     {
-        const targetUrl: string | RegExp | undefined = url ?? this.url;
-        if (!targetUrl) 
+        const urlToNavigate = targetUrl ?? this.defaultUrlStr;
+
+        if (!urlToNavigate) 
         {
-             throw new Error('No URL provided for navigation');
+             throw new Error('Cannot navigate');
         }
-        await this.page.goto(targetUrl.toString());
-        await this.page.waitForURL(targetUrl, { timeout: 3000 });
+
+        await this.page.goto(urlToNavigate);
+        
+        const waitPattern = targetUrl ? new RegExp(targetUrl) : this.expectedUrlRegex!;
+        await this.page.waitForURL(waitPattern, { timeout: 5000 });
     }
 
     /**

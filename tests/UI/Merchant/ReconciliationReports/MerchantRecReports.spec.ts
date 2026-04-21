@@ -1,10 +1,10 @@
-import {test} from '../../fixtures/fixtures';         
+import {test} from '../../../../fixtures/fixtures'        
 
-test('Check if admin user can successfully create and download "Reconciliation -> Transactions" report', async ({ adminUser, projectsListPage, reportsPage}) =>
+test('Merchant user "Reconciliation -> Transactions" report', async ({ merchantUser, dashboardPage, reportsPage}) =>
 {
     await test.step('User opens Reconciliation -> Transactions report tab', async() => 
     {
-        await projectsListPage.sidebar.openSidebarTab('Reports')
+        await dashboardPage.sidebar.openSidebarTab('Reports')
         await reportsPage.openTab('Reconciliation')
         await reportsPage.reconciliationReportPage.openTab('Transactions')
     });
@@ -13,7 +13,6 @@ test('Check if admin user can successfully create and download "Reconciliation -
     {
         await reportsPage.reconciliationReportPage.recTransactionReportPage.createNewReport(
         {
-            Project: 'automationStuff',
             TimeFrom: '2026-04-01 00:00:00',
             TimeTo: 'MI-2026-04-20 00:00:00',
             TransactionStatus: 'Success'
@@ -22,11 +21,11 @@ test('Check if admin user can successfully create and download "Reconciliation -
     });
 });
 
-test('Check if admin user can successfully create and download "Reconciliation -> Tx attempts" report', async ({ adminUser, projectsListPage, reportsPage}) =>
+test('Merchant user "Reconciliation -> Tx attempts" report', async ({ merchantUser, dashboardPage, reportsPage}) =>
 {
     await test.step('User opens Reconciliation -> Transactions report tab', async() => 
     {
-        await projectsListPage.sidebar.openSidebarTab('Reports')
+        await dashboardPage.sidebar.openSidebarTab('Reports')
         await reportsPage.openTab('Reconciliation')
         await reportsPage.reconciliationReportPage.openTab('Tx attempts')
     });
@@ -35,7 +34,6 @@ test('Check if admin user can successfully create and download "Reconciliation -
     {
         await reportsPage.reconciliationReportPage.recTxAttemptsReportPage.createNewReport(
         {
-            Project: 'automationStuff',
             TimeFrom: '2026-04-01 00:00:00',
             TimeTo: 'MI-2026-04-20 00:00:00',
             TransactionStatus: 'Success'
@@ -44,24 +42,23 @@ test('Check if admin user can successfully create and download "Reconciliation -
     });
 });
 
-test('Check if admin user can successfully create and download "Reconciliation -> Tx status mismatch" report', async ({ adminUser, projectsListPage, reportsPage}) =>
+test('Merchant user "Reconciliation -> Tx status mismatch" report', async ({ merchantUser, dashboardPage, reportsPage}) =>
 {
     await test.step('User opens Reconciliation -> Transactions report tab', async() => 
     {
-        await projectsListPage.sidebar.openSidebarTab('Reports')
+        await dashboardPage.sidebar.openSidebarTab('Reports')
         await reportsPage.openTab('Reconciliation')
-        await reportsPage.reconciliationReportPage.openTab('Tx attempts')
+        await reportsPage.reconciliationReportPage.openTab('Tx status mismatch')
     });
 
     await test.step('User creates and downloads Transaction reports', async() => 
     {
-        await reportsPage.reconciliationReportPage.recTxAttemptsReportPage.createNewReport(
+        await reportsPage.reconciliationReportPage.recTxStatusMismatchReportPage.createNewReport(
         {
-            Project: 'automationStuff',
             TimeFrom: '2026-04-01 00:00:00',
             TimeTo: 'MI-2026-04-20 00:00:00',
             TransactionStatus: 'Success'
         })
-        await reportsPage.reconciliationReportPage.recTxAttemptsReportPage.downloadReport()
+        await reportsPage.reconciliationReportPage.recTxStatusMismatchReportPage.downloadReport()
     });
 });

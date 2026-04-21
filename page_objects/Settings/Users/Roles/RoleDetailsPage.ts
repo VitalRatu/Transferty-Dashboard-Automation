@@ -14,7 +14,7 @@ export class RoleDetailsPage extends BasePage
 
     constructor(page: Page) 
     {
-        super(page);
+        super(page, /\/users\/list\/roles\/[a-zA-Z0-9]+/);
         this.view = new DetailsPageReader(page);
         
         this.deleteModal = this.page.locator('.ui.small.modal.transition.visible.active.Modal.live');

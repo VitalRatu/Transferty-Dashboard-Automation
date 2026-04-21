@@ -12,7 +12,7 @@ export class EditRolePage extends BasePage
 
     constructor(page: Page) 
     {
-        super(page);
+        super(page, /\/users\/list\/roles\/[a-zA-Z0-9]+\/edit/);
         this.form = new CreationForm(page);
         this.permissions = new PermissionsTable(page);
     }

@@ -1,8 +1,7 @@
-import { Page, Locator, expect } from '@playwright/test';
-import {Tab} from '../../page_objects/related_components/Tab';
-import { AllAdjustmentsPage } from './Adjustments/AllAdjustmentsPage';
-import { AutoTransferPage } from './Adjustments/AutoTransferPage';
-import { Orchestrator } from '../Orchestrator';
+import { Page               } from '@playwright/test'                 ;
+import { AllAdjustmentsPage } from './Adjustments/AllAdjustmentsPage' ;
+import { AutoTransferPage   } from './Adjustments/AutoTransferPage'   ;
+import { Orchestrator       } from '../Orchestrator'                  ;
 
 export type AdjustmentsTabName = 
     | 'All adjustments' 

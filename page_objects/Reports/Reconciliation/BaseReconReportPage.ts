@@ -19,9 +19,9 @@ export abstract class BaseReconReportPage<T> extends BasePage
     public readonly creationForm: CreationForm;
     protected abstract readonly fieldMapping: ReportFieldMapping<T>;
 
-    constructor(page: Page, urlRegex: RegExp) 
+    constructor(page: Page, URL: RegExp) 
     {
-        super(page, urlRegex);
+        super(page, URL);
         this.detailsReader = new DetailsPageReader(page);
         this.creationForm = new CreationForm(page);
     }
