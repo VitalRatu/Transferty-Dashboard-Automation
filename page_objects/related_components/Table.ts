@@ -229,21 +229,14 @@ export class Table
         
         await link.click();
     }
-
-   /**
-    * Retrieves the text value from a target cell in a row identified by a unique value in a search column
-    * @param searchColumn - The name of the column used to find the correct row
-    * @param searchValue - The unique text to search for in the search column
-    * @param resultColumn - The name of the column from which to extract the text value
-    * @returns A promise that resolves to the text content of the target cell
-    */
-    public async getValueFromRow(searchColumn: string, searchValue: string, resultColumn: string): Promise<string> 
+    //TODO RECHECK IF EVER NEEDED
+/*     public async getValueFromRow(searchColumn: string, searchValue: string, resultColumn: string): Promise<string> 
     {
         const row: Locator = await this.getRowLocatorByColumnValue(searchColumn, searchValue);
         await expect(row).toBeVisible();
         const resultColIndex: number = await this.getColumnIndex(resultColumn);
         return await row.getByRole('cell').nth(resultColIndex).innerText();
-    }
+    } */
 
     /**
      * Extracts all text values from a specific column across all visible rows
@@ -363,7 +356,8 @@ export class Table
         
         await this.pagination.click();
         
-        await expect(async () => {
+        await expect(async () => 
+        {
             const rowsAfter: number = await this.getRowCount();
             expect(rowsAfter).toBeGreaterThan(rowsBefore);
         }).toPass({ timeout: 10000 });

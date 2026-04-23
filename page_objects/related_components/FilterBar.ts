@@ -4,12 +4,12 @@ import path from 'path/win32';
 
 export type FilterKey<T> = T extends string ? T : keyof T;
 
-export type FilterValue<T, K> = T extends Record<string, any> 
+export type FilterValue<T, K> = T extends Record<string, string> 
     ? (K extends keyof T ? T[K] : string) 
     : string;
 
 
-export class FilterBar<T extends string | Record<string, any>>
+export class FilterBar<T extends string | Record<string, string>>
 {
     /** The Playwright Page instance */
     public readonly page: Page;
@@ -73,7 +73,7 @@ export class FilterBar<T extends string | Record<string, any>>
         this.checkboxLocatorString = 'input[type="checkbox"]';
         this.showInEurToggleLocator = this.filterWrapper.locator("#show-in-equivalent-checkbox");
         
-        this.primaryButton = this.actionsContainer.locator(".ui.primary.button, .ui.button.submit-button, .ui.button"); 
+        this.primaryButton = this.actionsContainer.locator(".ui.primary.button, .ui.button.submit-button"); 
         this.secondaryButton = this.actionsContainer.locator('.ui.secondary.button');
     }
 
@@ -340,6 +340,7 @@ export class FilterBar<T extends string | Record<string, any>>
             const button = this.primaryButton.getByText(buttonName, {exact: true})
             await expect(button).toBeVisible();
             await button.click();
+            return;
         }
 
         await expect(this.primaryButton).toBeVisible();
@@ -360,6 +361,7 @@ export class FilterBar<T extends string | Record<string, any>>
             const button = this.secondaryButton.getByText(buttonName, {exact: true})
             await expect(button).toBeVisible();
             await button.click();
+            return;
         }
 
         await expect(this.secondaryButton).toBeVisible();
@@ -380,23 +382,21 @@ export class FilterBar<T extends string | Record<string, any>>
     {
         await expect(this.showInEurToggleLocator).toBeVisible().catch((error) =>
         {
-
             throw new Error(`Show in EUR toggle is not visible: ${error}`);
-
         });
 
         const classAttr = await this.showInEurToggleLocator.getAttribute('class');
         const isCurrentlyChecked = classAttr?.includes('checked');
+        
         if (isCurrentlyChecked)
         {
             await this.showInEurToggleLocator.click();
-            await expect(this.showInEurToggleLocator).toHaveClass(/checked/);
+            await expect(this.showInEurToggleLocator).not.toHaveClass(/checked/);
         }
-
-        else if (!isCurrentlyChecked)
+        else 
         {
             await this.showInEurToggleLocator.click();
-            await expect(this.showInEurToggleLocator).not.toHaveClass(/checked/);
+            await expect(this.showInEurToggleLocator).toHaveClass(/checked/);
         }
     }
 }

@@ -19,11 +19,17 @@ export class DetailsPageReader
     /** Locator for all field labels (captions) across the page */
     private readonly allCaptions: Locator;
 
+    /** Locator for all toggles inside the container */
+    private readonly toggleContainer: Locator;
+
     /** CSS selector for the element containing the field label text */
     private readonly captionSelector = '.view-caption';
     
     /** CSS selector for the element containing the field value content */
     private readonly valueSelector = '.view-value';
+
+    /** CSS selector for the toggle container */
+    private readonly toggleSelector = '.ui.toggle.checkbox';
 
     /**
      * Initializes a new instance of the DetailsPageReader class
@@ -36,6 +42,7 @@ export class DetailsPageReader
         this.container = page.locator('.view-page, .View-page').first();
         this.allFields = this.container.locator('.view-field');
         this.allCaptions = this.container.locator(this.captionSelector);
+        this.toggleContainer = this.container.locator('.ui.toggle.checkbox');
     }
 
     /**
@@ -44,12 +51,80 @@ export class DetailsPageReader
      * @param label - The exact text of the field label to search for (e.g., 'Project')
      * @returns A Locator pointing to the specific field container
      */
-    private getFieldLocator(label: string |RegExp): Locator 
+    private getFieldLocator(label: string | RegExp): Locator 
     {
+        const matchInCaption = this.page.locator(this.captionSelector).getByText(label, { exact: true });
+        const matchInValue = this.page.locator(this.valueSelector).getByText(label, { exact: true });
+
         return this.allFields.filter(
         { 
-            has: this.page.locator(this.captionSelector).getByText(label, { exact: true })
+            has: matchInCaption.or(matchInValue)
         });
+    }
+
+    /**
+     * Reads the current state of a toggle within a specific field
+     * @param label - The exact text of the field label
+     * @returns Promise<boolean> - true if enabled, false if disabled
+     */
+    public async isToggleChecked(label: string | RegExp): Promise<boolean> 
+    {
+        const fieldLocator = this.getFieldLocator(label);
+        const toggleContainer = fieldLocator.locator(this.toggleSelector);
+        
+        await expect(toggleContainer).toBeVisible();
+
+        const className = await toggleContainer.getAttribute('class') || '';
+        return className.includes('checked');
+    }
+
+    /**
+     * Sets the state of a toggle within a specific field
+     * @param label - The exact text of the field label
+     * @param targetState - true to enable, false to disable
+     */
+    public async setToggleState(label: string | RegExp, targetState: boolean): Promise<boolean> 
+    {
+        const toggleContainer = this.getToggleContainerLocator(label);
+        
+        await expect(toggleContainer).toBeVisible();
+
+        const className = await toggleContainer.getAttribute('class') || '';
+        
+        if (className.includes('disabled')) 
+        {
+            console.log(`Cannot change state for '${label}'. The toggle is disabled for editing.`);
+            return false;
+        }
+
+        const isCurrentlyChecked = className.includes('checked');
+
+        if (isCurrentlyChecked !== targetState) 
+        {
+            const labelElement = toggleContainer.locator('label');
+            
+            if (await labelElement.count() > 0) 
+            {
+                await labelElement.click({ force: true });
+            } 
+            else 
+            {
+                await toggleContainer.click({ force: true });
+            }
+
+            if (targetState) 
+            {
+                await expect(toggleContainer).toHaveClass(/checked/, { timeout: 10000 });
+            } 
+            else 
+            {
+                await expect(toggleContainer).not.toHaveClass(/checked/, { timeout: 10000 });
+            }
+            
+            await this.page.waitForLoadState('networkidle');
+        }
+
+        return true;
     }
 
     /**
@@ -140,16 +215,47 @@ export class DetailsPageReader
         for (const field of fields) 
         {
             const captionText = await field.locator(this.captionSelector).innerText();
-            const valueText = await field.locator(this.valueSelector).innerText();
+            let cleanCaption = captionText.trim();
+            let cleanValue = '';
+
+            const toggleContainer = field.locator(this.toggleSelector);
             
-            const cleanCaption = captionText.trim();
-            const cleanValue = valueText.replace(/\n/g, ' ').trim();
+            if (await toggleContainer.count() > 0) 
+            {
+                const className = await toggleContainer.first().getAttribute('class') || '';
+                
+                const isChecked = className.includes('checked');
+                
+                cleanValue = isChecked ? 'True' : 'False';
+
+                if (!cleanCaption) 
+                {
+                    const textNextToToggle = await field.locator(this.valueSelector).innerText();
+                    cleanCaption = textNextToToggle.replace(/\n/g, ' ').trim();
+                }
+            } 
+            else 
+            {
+                const valueText = await field.locator(this.valueSelector).innerText();
+                cleanValue = valueText.replace(/\n/g, ' ').trim();
+            }
 
             if (cleanCaption) 
             {
                 result[cleanCaption] = cleanValue;
             }
         }
+        await this.page.waitForLoadState('networkidle');
         return result;
+    }
+
+    public getToggleContainerLocator(label: string | RegExp): Locator 
+    {
+        const dynamicLabel = typeof label === 'string' 
+            ? new RegExp(label.replace(/^De/i, ''), 'i') 
+            : label;
+        
+        const fieldLocator = this.getFieldLocator(dynamicLabel);
+        return fieldLocator.locator(this.toggleSelector).first();
     }
 }

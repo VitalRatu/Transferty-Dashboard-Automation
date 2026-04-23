@@ -1,4 +1,4 @@
-import { Page, expect } from '@playwright/test';
+import { Page, Locator, expect } from '@playwright/test';
 import { BasePage } from '../../../BasePage';
 import { DetailsPageReader } from '../../../related_components/DetailsPageReader';
  
@@ -21,5 +21,16 @@ export class ProjectDetailsPage extends BasePage
     {
         await this.view.clickActionButton('Edit');
         await this.page.waitForURL(/\/projects\/\d+\/edit/);
+    }
+
+    public async setProjectStatus(status: 'Activated' | 'Deactivated'): Promise<boolean> 
+    {
+        const targetState = status === 'Activated';
+        return await this.view.setToggleState('Activated', targetState);
+    }
+
+    public getProjectStatusToggleLocator(): Locator 
+    {
+        return this.view.getToggleContainerLocator('Activated');
     }
 }

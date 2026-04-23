@@ -14,4 +14,10 @@ export abstract class Orchestrator<T extends string>
     {
         await this.tab.open(tabName);
     }
+
+    public async getAllTabNames(): Promise<string[]>
+    {
+        const tabNames = await this.tab.getAllTabNames()
+        return tabNames
+    }
 }

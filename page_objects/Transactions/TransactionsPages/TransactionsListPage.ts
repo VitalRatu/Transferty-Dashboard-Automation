@@ -28,6 +28,7 @@ export type TransactionsListPageTabName =
     'Country': string 
     'Customer IP': string 
     'Created': string
+    'UTR': string
 }
 /**
  * Represents the main Transactions page in the application
