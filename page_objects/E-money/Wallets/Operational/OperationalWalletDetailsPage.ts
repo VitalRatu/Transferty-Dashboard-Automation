@@ -1,8 +1,8 @@
 import { Page, expect } from '@playwright/test';
 import { BasePage } from '../../../BasePage';
 import { DetailsPageReader } from '../../../related_components/DetailsPageReader';
-import { EMoneyFeeWallelObject, EMoneyOperationalWallet } from '../../../../test_data/EMoneyWalletsData'; // 
 import { Table } from '../../../related_components/Table';
+import { EMoneyFeeWallelObjectType, EMoneyOperationalWalletType } from '../../../../types/EMoneyWallets';
 
 /**
  * Represents the detailed view page for an Operational Wallet
@@ -36,7 +36,7 @@ export class OperationalWalletDetailsPage extends BasePage
      * @param expectedData - The data object containing the expected operational wallet attributes
      * @returns A promise that resolves when all detail assertions pass successfully
      */
-    public async verifyWalletDetails(expectedData: Partial<EMoneyOperationalWallet>): Promise<void> 
+    public async verifyWalletDetails(expectedData: Partial<EMoneyOperationalWalletType>): Promise<void> 
     {
         const expectedHeading = new RegExp(`OPERATIONAL WALLET DETAILS`, 'i');
         const detailsPageHeader = this.page.getByRole('heading', { name: expectedHeading });
@@ -103,7 +103,7 @@ export class OperationalWalletDetailsPage extends BasePage
      * @returns A promise that resolves when the fee data verification is complete
      */
     public async verifyFeeInTable(
-        expectedData: Partial<EMoneyFeeWallelObject>, 
+        expectedData: Partial<EMoneyFeeWallelObjectType>, 
         identifier: { index: number } | { uniqueValue: string } = { index: 0 }
     ): Promise<void> 
     {
@@ -165,7 +165,7 @@ export class OperationalWalletDetailsPage extends BasePage
      */
     public async clickEditFeeObjectButton(percent: string): Promise<void>
     {
-        await this.table.clickOnCellValueByUniqueValue('Fee, %', percent, 'Action');
+        await this.table.clickOnColumnValue('Fee, %', percent, 'Action');
     }
 
 }

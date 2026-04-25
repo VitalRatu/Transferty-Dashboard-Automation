@@ -1,7 +1,7 @@
 import { Page, Locator, expect } from '@playwright/test';
 import { Table } from '../../../related_components/Table';
 import { FilterBar } from '../../../related_components/FilterBar';
-import { EMoneyMerchantWallet } from '../../../../test_data/EMoneyWalletsData';
+import { EMoneyMerchantWalletType } from '../../../../types/EMoneyWallets';
 import { BasePage } from '../../../BasePage';
 
 export type MerchantWalletListPageFilters = 
@@ -56,7 +56,7 @@ export class MerchantWalletsListPage extends BasePage
      * @param expectedData - The data object containing expected merchant wallet values
      * @returns A promise that resolves when all row data assertions pass successfully
      */
-    public async verifyRowMatchesData(rowIndex: number, expectedData: EMoneyMerchantWallet): Promise<void>
+    public async verifyRowMatchesData(rowIndex: number, expectedData: EMoneyMerchantWalletType): Promise<void>
     {
         await expect(this.page).toHaveURL(/emoney\/wallets\/merchant/);
         const rowValues = await this.table.getAllValuesFromRowByIndex(rowIndex);

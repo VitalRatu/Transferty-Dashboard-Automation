@@ -1,8 +1,8 @@
 import { Page, Locator, expect } from '@playwright/test';
 import { Table } from '../../related_components/Table';
 import { FilterBar } from '../../related_components/FilterBar';
-import { EMoneyLimitsData } from '../../../test_data/EMoneyLimitsData';
 import { BasePage } from '../../BasePage';
+import { EMoneyLimitsData } from './EditLimitPage';
 
 export type SettingsPageFilters =
 {

@@ -33,8 +33,8 @@ export class ProjectsListPage extends BasePage
         await this.page.waitForURL(/\/projects\/\d+\/configurations\/details/);
     }
 
-    public async exportProjectsCsv(): Promise<void>
+    public async exportProjectsCsv(): Promise<boolean>
     {
-        await this.filters.exportCsv();
+        return await this.filters.exportCsv();
     }
 }

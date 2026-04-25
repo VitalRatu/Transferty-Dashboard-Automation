@@ -38,16 +38,37 @@ export class Tab
      * @param tabIdentifier - The exact text name of the tab to switch to as defined in AllTabs
      * @returns A promise that resolves when the tab is confirmed to be in the active state
      */
-    public async open(tabIdentifier: string): Promise<void> 
+    public async open(tabIdentifier: string): Promise<boolean> 
     {
-        let tab = this.item.getByText(tabIdentifier, { exact: true });
-        const classAttribute: string | null = await tab.getAttribute('class');
-        if(classAttribute?.includes('active'))
+        const tab = this.item.getByText(tabIdentifier, { exact: true });
+
+        try 
         {
-            return;
+            await tab.waitFor({ state: 'visible', timeout: 3000 });
+        } 
+        catch (error) 
+        {
+            return false;
         }
+
+        const classAttribute = await tab.getAttribute('class') || '';
+        const isNativeDisabled = await tab.isDisabled();
+
+        if (classAttribute.includes('disabled') || isNativeDisabled) 
+        {
+            return false;
+        }
+
+        if (classAttribute.includes('active')) 
+        {
+            return true;
+        }
+
         await tab.click();
+        await this.page.waitForLoadState('networkidle');
         await expect(tab).toHaveClass(/active/);
+
+        return true;
     }
 
     /**

@@ -1,7 +1,7 @@
 import { Page, expect } from '@playwright/test';
 import { Table } from '../../related_components/Table';
 import { FilterBar } from '../../related_components/FilterBar';
-import { LedgerOperationsData } from '../../../test_data/LedgerOperationsData';
+import { LedgerOperationsType } from '../../../types/LedgerOperations';
 import { BasePage } from '../../BasePage';
 
 export type LedgerPageFilters = 
@@ -60,7 +60,7 @@ export class LedgerPage extends BasePage
      * @param expectedData - The data object containing expected transaction details defined in LedgerOperationsData
      * @returns A promise that resolves when all ledger assertions pass successfully
      */
-    public async verifyRowMatchesData(rowIndex: number, expectedData: LedgerOperationsData): Promise<void>
+    public async verifyRowMatchesData(rowIndex: number, expectedData: LedgerOperationsType): Promise<void>
     {
         await expect(this.page).toHaveURL(/emoney\/ledger/);
         const rowValues = await this.table.getAllValuesFromRowByIndex(rowIndex);

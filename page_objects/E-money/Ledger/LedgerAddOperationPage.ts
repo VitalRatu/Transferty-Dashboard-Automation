@@ -1,6 +1,6 @@
 import { expect, Locator, Page } from '@playwright/test';
 import { CreationForm } from '../../related_components/CreationForm';
-import { LedgerOperationsData } from '../../../test_data/LedgerOperationsData';
+import { LedgerOperationsType } from '../../../types/LedgerOperations';
 import { BasePage } from '../../BasePage';
 
 /**
@@ -35,7 +35,7 @@ export class LedgerAddOperationPage extends BasePage
      * @param data - The data object containing ledger operation details defined in LedgerOperationsData
      * @returns A promise that resolves when the form is populated and the save action is triggered
      */
-    public async createLedgerOperation(data: LedgerOperationsData): Promise<void>
+    public async createLedgerOperation(data: LedgerOperationsType): Promise<void>
     {
         await expect(this.pageLoaded).toBeHidden();
         await this.form.selectDropDown('Project', data.project);

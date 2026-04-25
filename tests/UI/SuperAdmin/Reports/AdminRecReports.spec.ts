@@ -13,7 +13,7 @@ test('SuperAdmin user "Reconciliation -> Transactions" report', async ({ adminUs
     {
         await adminUser.reportsPage.reconciliationReportPage.recTransactionReportPage.createNewReport(
         {
-            Project: 'automationStuff',
+             Project: `${process.env.PROJECT_NAME} (ID: ${process.env.PROJECT_ID})`,
             TimeFrom: '2026-04-01 00:00:00',
             TimeTo: 'MI-2026-04-20 00:00:00',
             TransactionStatus: 'Success'
@@ -35,7 +35,7 @@ test('SuperAdmin user "Reconciliation -> Tx attempts" report', async ({ adminUse
     {
         await adminUser.reportsPage.reconciliationReportPage.recTxAttemptsReportPage.createNewReport(
         {
-            Project: 'automationStuff',
+            Project: `${process.env.PROJECT_NAME} (ID: ${process.env.PROJECT_ID})`,
             TimeFrom: '2026-04-01 00:00:00',
             TimeTo: 'MI-2026-04-20 00:00:00',
             TransactionStatus: 'Success'
@@ -57,7 +57,7 @@ test('SuperAdmin user "Reconciliation -> Tx status mismatch" report', async ({ a
     {
         await adminUser.reportsPage.reconciliationReportPage.recTxStatusMismatchReportPage.createNewReport(
         {
-            Project: 'automationStuff',
+            Project: `${process.env.PROJECT_NAME} (ID: ${process.env.PROJECT_ID})`,
             TimeFrom: '2026-04-01 00:00:00',
             TimeTo: 'MI-2026-04-20 00:00:00',
             TransactionStatus: 'Success'

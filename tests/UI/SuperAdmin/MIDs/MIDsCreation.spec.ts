@@ -1,5 +1,5 @@
 import { expect, test } from '../../../../fixtures/fixtures';
-import { aggregatedMIDs, externalMIDs, internalMIDs, secureDeposits } from '../../../../test_data/MIDsData';
+import { aggregatedMIDsData, externalMIDsData, internalMIDsData, secureDepositsData } from '../../../../test_data/MIDsData';
 
 test('Create Internal MID', async ({ adminUser }) => 
 {
@@ -20,12 +20,12 @@ test('Create Internal MID', async ({ adminUser }) =>
 
     await test.step('User fills up required data for Internal MID', async() => 
     {
-        await adminUser.newInternalMidPage.createInternalMID(internalMIDs[0]);
+        await adminUser.newInternalMidPage.createInternalMID(internalMIDsData[0]);
     });
 
     await test.step('User checks if Internal MID appeared on the list', async() => 
     {
-        await adminUser.MIDsPage.internalMids.verifyRowMatchesData(0, internalMIDs[0]);
+        await adminUser.MIDsPage.internalMids.verifyRowMatchesData(0, internalMIDsData[0]);
     });
 });
 
@@ -48,24 +48,24 @@ test('Create Incoming Aggregated MID', async ({ adminUser }) =>
 
     await test.step('User fills up required data for Incoming Aggregated MID', async() => 
     {
-        await adminUser.newAggregatedMidPage.createAggregatedMID(aggregatedMIDs[0]);
+        await adminUser.newAggregatedMidPage.createAggregatedMID(aggregatedMIDsData[0]);
     });
 
     await test.step('User checks if Aggregated MID appeared on the list', async() => 
     {
-        await adminUser.MIDsPage.aggregatedMids.verifyRowMatchesData(0, aggregatedMIDs[0]);
+        await adminUser.MIDsPage.aggregatedMids.verifyRowMatchesData(0, aggregatedMIDsData[0]);
     });
 
     await test.step('User deletes the Aggregated MID', async() => 
     {
-        await adminUser.MIDsPage.aggregatedMids.openAggregatedMidDetails({description: aggregatedMIDs[0].description});
+        await adminUser.MIDsPage.aggregatedMids.openAggregatedMidDetails({description: aggregatedMIDsData[0].description});
         await adminUser.aggregatedMidDetailsPage.clickDeleteButton();
     });
 
     await test.step('User checks if Aggregated MID was deleted', async() => 
     {
         const tempConst = await adminUser.MIDsPage.aggregatedMids.table.getAllValuesFromRowByIndex(0);
-        expect(tempConst['Description']).not.toBe(aggregatedMIDs[0].description);  
+        expect(tempConst['Description']).not.toBe(aggregatedMIDsData[0].description);  
     });
 });
 
@@ -88,24 +88,24 @@ test('Create Outgoing Aggregated MID', async ({ adminUser }) =>
 
     await test.step('User fills up required data for Outgoing Aggregated MID', async() => 
     {
-        await adminUser.newAggregatedMidPage.createAggregatedMID(aggregatedMIDs[1]);
+        await adminUser.newAggregatedMidPage.createAggregatedMID(aggregatedMIDsData[1]);
     });
 
     await test.step('User checks if Aggregated MID appeared on the list', async() => 
     {
-        await adminUser.MIDsPage.aggregatedMids.verifyRowMatchesData(0, aggregatedMIDs[1]);
+        await adminUser.MIDsPage.aggregatedMids.verifyRowMatchesData(0, aggregatedMIDsData[1]);
     });
 
     await test.step('User deletes the Aggregated MID', async() => 
     {
-        await adminUser.MIDsPage.aggregatedMids.openAggregatedMidDetails({description: aggregatedMIDs[1].description});
+        await adminUser.MIDsPage.aggregatedMids.openAggregatedMidDetails({description: aggregatedMIDsData[1].description});
         await adminUser.aggregatedMidDetailsPage.clickDeleteButton();
     });
     
     await test.step('User checks if Aggregated MID was deleted', async() => 
     {
         const tempConst = await adminUser.MIDsPage.aggregatedMids.table.getAllValuesFromRowByIndex(0);
-        expect(tempConst['Description']).not.toBe(aggregatedMIDs[1].description);  
+        expect(tempConst['Description']).not.toBe(aggregatedMIDsData[1].description);  
     });
 });
 
@@ -128,24 +128,24 @@ test('Create Secure Deposit Aggregated MID', async ({ adminUser }) =>
 
     await test.step('User fills up required data for Secure Deposit Aggregated MID', async() => 
     {
-        await adminUser.newAggregatedMidPage.createAggregatedMID(aggregatedMIDs[2]);
+        await adminUser.newAggregatedMidPage.createAggregatedMID(aggregatedMIDsData[2]);
     });
 
     await test.step('User checks if Aggregated MID appeared on the list', async() => 
     {
-        await adminUser.MIDsPage.aggregatedMids.verifyRowMatchesData(0, aggregatedMIDs[2]);
+        await adminUser.MIDsPage.aggregatedMids.verifyRowMatchesData(0, aggregatedMIDsData[2]);
     });
 
     await test.step('User deletes the Aggregated MID', async() => 
     {
-        await adminUser.MIDsPage.aggregatedMids.openAggregatedMidDetails({description: aggregatedMIDs[2].description});
+        await adminUser.MIDsPage.aggregatedMids.openAggregatedMidDetails({description: aggregatedMIDsData[2].description});
         await adminUser.aggregatedMidDetailsPage.clickDeleteButton();
     });
     
     await test.step('User checks if Aggregated MID was deleted', async() => 
     {
         const tempConst = await adminUser.MIDsPage.aggregatedMids.table.getAllValuesFromRowByIndex(0);
-        expect(tempConst['Description']).not.toBe(aggregatedMIDs[2].description);  
+        expect(tempConst['Description']).not.toBe(aggregatedMIDsData[2].description);  
     });  
 });
 
@@ -168,12 +168,12 @@ test('Create Secure Deposit', async ({ adminUser }) =>
 
     await test.step('User fills up required data for Secure Deposit', async() => 
     {
-        await adminUser.newSecureDepositPage.createSecureDeposit(secureDeposits[0]);
+        await adminUser.newSecureDepositPage.createSecureDeposit(secureDepositsData[0]);
     });
 
     await test.step('User checks if Secure Deposit appeared on the list', async() => 
     {
-        await adminUser.MIDsPage.secureDeposits.verifyRowMatchesData(0, secureDeposits[0]);
+        await adminUser.MIDsPage.secureDeposits.verifyRowMatchesData(0, secureDepositsData[0]);
     });
 });
 
@@ -196,11 +196,22 @@ test('Create External MID', async ({ adminUser }) =>
 
     await test.step('User fills up required data for External MID', async() => 
     {
-        await adminUser.newExternalMidPage.createExternalMID(externalMIDs[0]);
+        await adminUser.newExternalMidPage.createExternalMID(externalMIDsData[0]);
     });
-    
+
     await test.step('User checks if External MID appeared on the list', async() => 
     {
-        await adminUser.MIDsPage.externalMids.verifyRowMatchesData(0, externalMIDs[0]);
+        await adminUser.MIDsPage.externalMids.verifyRowMatchesData(0, externalMIDsData[0]);
     });
+
+        await test.step('User deletes the External MID', async() => 
+    {
+        await adminUser.MIDsPage.externalMids.openExternalMidDetails({description: externalMIDsData[0].description});
+        await adminUser.externalMidDetailsPage.clickDeleteButton();
+    });
+    await test.step('User checks if External MID was deleted', async() => 
+    {
+        const tempConst = await adminUser.MIDsPage.externalMids.table.getAllValuesFromRowByIndex(0);
+        expect(tempConst['Description']).not.toBe(externalMIDsData[0].description);  
+    }); 
 });

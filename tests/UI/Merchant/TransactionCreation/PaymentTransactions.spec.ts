@@ -1,5 +1,5 @@
 import { test } from '../../../../fixtures/fixtures';
-import { testCards } from '../../../../test_data/testCards';
+import { testCardData } from '../../../../test_data/testCards';
 
 test('Visa 4012888888881881 Payment', async ({ merchantUser }) => 
 {
@@ -13,11 +13,11 @@ test('Visa 4012888888881881 Payment', async ({ merchantUser }) =>
     });
     await test.step('User fills up required data for Transaction', async() => 
     {
-        await merchantUser.transactionAddPage.createTransaction(testCards[0]);
+        await merchantUser.transactionAddPage.createTransaction(testCardData[0]);
     });
     await test.step('User checks if transaction appeared on transaction list page', async() => 
     {
-        await merchantUser.transactionsPage.transactionsListPage.CheckRowData(0, testCards[0]);
+        await merchantUser.transactionsPage.transactionsListPage.CheckRowData(0, testCardData[0]);
     });
 });
 
@@ -33,11 +33,11 @@ test('MasterCard 5413330300003002 Payment', async ({ merchantUser }) =>
     });
     await test.step('User fills up required data for Transaction', async() => 
     {
-        await merchantUser.transactionAddPage.createTransaction(testCards[2]);
+        await merchantUser.transactionAddPage.createTransaction(testCardData[2]);
     });
     await test.step('User checks if transaction appeared on transaction list page', async() => 
     {
-        await merchantUser.transactionsPage.transactionsListPage.CheckRowData(0, testCards[2]);
+        await merchantUser.transactionsPage.transactionsListPage.CheckRowData(0, testCardData[2]);
     });
 });
 
@@ -53,11 +53,11 @@ test('MasterCard 5555555555554444 Payment', async ({ merchantUser }) =>
     });
     await test.step('User fills up required data for Transaction', async() => 
     {
-        await merchantUser.transactionAddPage.createTransaction(testCards[4]);
+        await merchantUser.transactionAddPage.createTransaction(testCardData[4]);
     });
     await test.step('User checks if transaction appeared on transaction list page', async() => 
     {
-        await merchantUser.transactionsPage.transactionsListPage.CheckRowData(0, testCards[4]);
+        await merchantUser.transactionsPage.transactionsListPage.CheckRowData(0, testCardData[4]);
     });
 });
 
@@ -73,11 +73,11 @@ test('Amex 371449635398431 Payment', async ({ merchantUser }) =>
     });
     await test.step('User fills up required data for Transaction', async() => 
     {
-        await merchantUser.transactionAddPage.createTransaction(testCards[6]);
+        await merchantUser.transactionAddPage.createTransaction(testCardData[6]);
     });
     await test.step('User checks if transaction appeared on transaction list page', async() => 
     {
-        await merchantUser.transactionsPage.transactionsListPage.CheckRowData(0, testCards[6]);
+        await merchantUser.transactionsPage.transactionsListPage.CheckRowData(0, testCardData[6]);
     });
 });
 
@@ -93,10 +93,10 @@ test('Unionpay 6212345678901232 Payment', async ({ merchantUser }) =>
     });
     await test.step('User fills up required data for Transaction', async() => 
     {
-        await merchantUser.transactionAddPage.createTransaction(testCards[8]);
+        await merchantUser.transactionAddPage.createTransaction(testCardData[8]);
     });
     await test.step('User checks if transaction appeared on transaction list page', async() => 
     {
-        await merchantUser.transactionsPage.transactionsListPage.CheckRowData(0, testCards[8]);
+        await merchantUser.transactionsPage.transactionsListPage.CheckRowData(0, testCardData[8]);
     });
 });

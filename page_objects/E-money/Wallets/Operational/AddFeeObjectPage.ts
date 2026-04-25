@@ -1,5 +1,5 @@
 import { Page, expect } from '@playwright/test';
-import { EMoneyFeeWallelObject, EMoneyOperationalWallet } from '../../../../test_data/EMoneyWalletsData'; // 
+import { EMoneyFeeWallelObjectType } from '../../../../types/EMoneyWallets'; 
 import { CreationForm } from '../../../related_components/CreationForm';
 import { BasePage } from '../../../BasePage';
 
@@ -31,7 +31,7 @@ export class AddFeeObjectPage extends BasePage
      * @param expectedData - The data object containing fee details (percentage, dates, timezone)
      * @returns A promise that resolves when the new fee entity is successfully added and saved
      */
-    public async addNewFeeObject(expectedData: Partial <EMoneyFeeWallelObject>): Promise<void> 
+    public async addNewFeeObject(expectedData: Partial <EMoneyFeeWallelObjectType>): Promise<void> 
     {
         const expectedHeading = new RegExp('ADD FEE', 'i');
         const editPageHeader = this.page.getByRole('heading', { name: expectedHeading });
@@ -46,7 +46,7 @@ export class AddFeeObjectPage extends BasePage
         
         if (expectedData.expirationDate) 
         {
-             if (expectedData.expirationDate === 'Permanent') 
+            if (expectedData.expirationDate === 'Permanent') 
             {
                 await this.form.setCheckbox('Permanent', true);
             } 

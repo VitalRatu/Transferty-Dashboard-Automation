@@ -39,6 +39,6 @@ export class RecTransactionReportPage extends BaseReconReportPage<TransactionsRe
 
     constructor(page: Page) 
     {
-        super(page, /\/reports\/reconciliation\/rec-transactions/);
+        super(page, /\/reports\/reconciliation\/rec-transactions\/?$/);
     }
 }

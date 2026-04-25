@@ -37,6 +37,6 @@ export class RecTxAttemptsReportPage extends BaseReconReportPage<TxAttemptsRepor
         
     constructor(page: Page) 
     {
-        super(page, /\/reports\/reconciliation\/rec-tx-attempts/)
+        super(page, /\/reports\/reconciliation\/rec-tx-attempts\/?$/)
     }
 }

@@ -1,6 +1,6 @@
 import { expect, Locator, Page } from '@playwright/test';
 import { CreationForm } from '../../../related_components/CreationForm';
-import { EMoneyMerchantWallet} from '../../../../test_data/EMoneyWalletsData';
+import { EMoneyMerchantWalletType} from '../../../../types/EMoneyWallets';
 import { BasePage } from '../../../BasePage';
 
 /**
@@ -35,7 +35,7 @@ export class NewMerchantWalletPage extends BasePage
      * @param data - The data object containing merchant wallet details defined in EMoneyMerchantWallet
      * @returns A promise that resolves when the form is populated and the save action is triggered
      */
-    public async createMerchantlWallet(data: EMoneyMerchantWallet): Promise<void>
+    public async createMerchantlWallet(data: EMoneyMerchantWalletType): Promise<void>
     {
         await expect(this.pageLoaded).toBeHidden();
         await this.form.selectDropDown('Project', data.project);

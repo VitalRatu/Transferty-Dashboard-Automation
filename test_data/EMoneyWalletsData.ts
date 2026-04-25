@@ -1,39 +1,6 @@
-export type EMoneyOperationalWallet = 
-{
-    project: string, 
-    type: string,
-    currency: string,
-    fee?: string,
-    activationDate?: string,
-    expirationDate?: string | 'Permanent',
-    timezone?: string,
-    description: string,
-}
-export type EMoneyFeeWallelObject =
-{
-    fee: string, 
-    activation_date: string, 
-    expirationDate: string | 'Permanent', 
-    timezone:string,
-    status?: 'Active' | 'Expired'
-}
-export type EMoneyMerchantWallet = 
-{
-    project: string,
-    type: string,
-    currency: string,
-    internalMID?: string,
-    description: string
-}
-export type EMoneyCustomerWallet = 
-{
-    project: string,
-    wallet_id: string,
-    type: string,
-    account_id: string,
-    currency: string
-}
-export const EMoneyOperationalWallet: EMoneyOperationalWallet[] =
+import { EMoneyCustomerWalletType, EMoneyMerchantWalletType, EMoneyOperationalWalletType } from "../types/EMoneyWallets"
+
+export const EMoneyOperationalWalletData: EMoneyOperationalWalletType[] =
 [
     //Fee Wallet
     {
@@ -62,7 +29,7 @@ export const EMoneyOperationalWallet: EMoneyOperationalWallet[] =
         description: 'Agent Wallet from automation'
     }
 ]
-export const EMoneyMerchantWallets: EMoneyMerchantWallet[] = 
+export const EMoneyMerchantWalletsData: EMoneyMerchantWalletType[] = 
 [
     {
         project: 'Vitaliy_SuperPay_Project',
@@ -71,7 +38,7 @@ export const EMoneyMerchantWallets: EMoneyMerchantWallet[] =
         description: 'OnePay'
     }
 ]
-export const EMoneyCustomerWallets: EMoneyCustomerWallet[] = 
+export const EMoneyCustomerWalletsData: EMoneyCustomerWalletType[] = 
 [
     {
         project: 'Vitaliy_SuperPay_Project',

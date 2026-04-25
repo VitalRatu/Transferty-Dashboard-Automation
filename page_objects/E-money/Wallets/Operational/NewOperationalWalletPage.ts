@@ -1,8 +1,7 @@
 import { expect, Locator, Page } from '@playwright/test';
 import { CreationForm } from '../../../related_components/CreationForm';
-import { EMoneyOperationalWallet } from '../../../../test_data/EMoneyWalletsData';
 import { BasePage } from '../../../BasePage';
-
+import { EMoneyOperationalWalletType } from '../../../../types/EMoneyWallets';
 /**
  * Represents the page for adding a new Operational Wallet within the E-money system
  * Provides a specialized interface to configure different types of system wallets, 
@@ -37,7 +36,7 @@ export class NewOperationalWalletPage extends BasePage
      * @param data - The data object containing operational wallet configurations defined in EMoneyOperationalWallet
      * @returns A promise that resolves when the form is fully populated and the save action is triggered
      */
-    public async createOperationalWallet(data: EMoneyOperationalWallet): Promise<void>
+    public async createOperationalWallet(data: EMoneyOperationalWalletType): Promise<void>
     {
         await expect(this.pageLoaded).toBeHidden();
         await this.form.selectDropDown('Project', data.project);

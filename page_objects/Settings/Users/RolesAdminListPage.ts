@@ -29,7 +29,7 @@ export class RolesAdminListPage extends BasePage
 
     public async openRoleDetails(roleName: string): Promise<void>
     {
-        await this.table.clickOnCellValueByUniqueValue('Role', roleName, 'Role');
+        await this.table.clickOnColumnValue('Role', roleName, 'Role');
         await this.page.waitForURL(new RegExp('/users/list/roles/[a-f0-9]+', 'i'));
     }
 

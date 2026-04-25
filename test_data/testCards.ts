@@ -1,4 +1,4 @@
-export type CardData = 
+export type CardType = 
 {
   project?: string;
   amount: string;
@@ -10,7 +10,7 @@ export type CardData =
   description?: string;
 };
 
-export const testCards = [
+export const testCardData = [
   {
     amount: "1",
     currency: "USD",

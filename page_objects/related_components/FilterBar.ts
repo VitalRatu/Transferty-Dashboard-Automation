@@ -278,7 +278,6 @@ export class FilterBar<T extends string | Record<string, string>>
         const isEnabled = await this.isFilterEnabled(filterName);
         if (!isEnabled) 
         {
-            // ВИПРАВЛЕНО локатор
             const option = this.moreFilterDropdownMenuItem.filter({ 
                 has: this.page.getByText(filterName as string, { exact: true }) 
             });
@@ -303,16 +302,38 @@ export class FilterBar<T extends string | Record<string, string>>
         }
     }
 
-    public async exportCsv(): Promise<void> 
+    public async exportCsv(): Promise<boolean> 
     {
         await this.page.waitForLoadState('networkidle');
         
-        await expect(this.secondaryButton.first()).toBeVisible();
+        const targetButton = this.secondaryButton.first();
+        
+        try 
+        {
+            await targetButton.waitFor({ state: 'visible', timeout: 3000 });
+        } 
+        catch (error) 
+        {
+            return false;
+        }
+
+        const className = await targetButton.getAttribute('class') || '';
+        const isNativeDisabled = await targetButton.isDisabled();
+
+        if (className.includes('disabled') || isNativeDisabled)
+        {
+            return false;
+        }
+
         const tempFilePath = path.join(process.cwd(), `export_${Date.now()}.csv`);
+        
         const downloadPromise = this.page.waitForEvent('download');
-        await this.secondaryButton.first().click();
+        await targetButton.click();
         const download = await downloadPromise;
+        
         await download.saveAs(tempFilePath);
+        
+        // 4. Валідація та очищення
         try 
         {
             const stats = fs.statSync(tempFilePath);
@@ -325,48 +346,78 @@ export class FilterBar<T extends string | Record<string, string>>
                 fs.unlinkSync(tempFilePath);
             }
         }
+
+        return true;
     }
 
-
     /**
-     * Clicks the primary action button and waits for a URL navigation to occur
+     * Clicks the primary action button and waits for a URL navigation to occur.
+     * Checks if the button is disabled before clicking to support negative testing.
      * Typically used for "Create" or "Add" actions located in the filter bar
-     * @returns A promise that resolves when the page navigates away from the current URL
+     * @param buttonName - Optional exact text of the button to click
+     * @returns Promise<boolean> - true if clicked successfully, false if disabled
      */
-    public async clickPrimaryButton(buttonName?: string): Promise<void>
+    public async clickPrimaryButton(buttonName?: string): Promise<boolean>
     {
-        if (buttonName)
+        const targetButton = buttonName
+            ? this.primaryButton.getByText(buttonName, { exact: true })
+            : this.primaryButton.first();
+
+        try 
         {
-            const button = this.primaryButton.getByText(buttonName, {exact: true})
-            await expect(button).toBeVisible();
-            await button.click();
-            return;
+            await targetButton.waitFor({ state: 'visible', timeout: 3000 });
+        } 
+        catch (error) 
+        {
+            return false;
         }
 
-        await expect(this.primaryButton).toBeVisible();
-        await this.primaryButton.click();
-        await this.page.waitForLoadState('networkidle');
+        const className = await targetButton.getAttribute('class') || '';
+        const isNativeDisabled = await targetButton.isDisabled();
 
+        if (className.includes('disabled') || isNativeDisabled)
+        {
+            return false;
+        }
+
+        await targetButton.click();  
+        return true;
     }
 
     /**
-     * Clicks the secondary action button and waits for the resulting URL navigation
+     * Clicks the secondary action button and waits for the resulting URL navigation.
+     * Checks if the button is disabled before clicking to support negative testing.
      * Typically used for secondary actions like "Export" or "Bulk Edit"
-     * @returns A promise that resolves when navigation is complete
+     * @param buttonName - Optional exact text of the button to click
+     * @returns Promise<boolean> - true if clicked successfully, false if disabled
      */
-    public async clickSecondaryButton(buttonName?: string): Promise<void>
+    public async clickSecondaryButton(buttonName?: string): Promise<boolean>
     {
-        if (buttonName)
+        const targetButton = buttonName
+            ? this.secondaryButton.getByText(buttonName, { exact: true })
+            : this.secondaryButton.first();
+
+        try 
         {
-            const button = this.secondaryButton.getByText(buttonName, {exact: true})
-            await expect(button).toBeVisible();
-            await button.click();
-            return;
+            await targetButton.waitFor({ state: 'visible', timeout: 3000 });
+        } 
+        catch (error) 
+        {
+            return false;
         }
 
-        await expect(this.secondaryButton).toBeVisible();
-        await this.secondaryButton.click();
+        const className = await targetButton.getAttribute('class') || '';
+        const isNativeDisabled = await targetButton.isDisabled();
+
+        if (className.includes('disabled') || isNativeDisabled)
+        {
+            return false;
+        }
+
+        await targetButton.click();
         await this.page.waitForLoadState('networkidle');
+        
+        return true;
     }
 
 

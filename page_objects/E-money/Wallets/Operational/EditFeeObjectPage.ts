@@ -1,5 +1,5 @@
 import { Page, expect } from '@playwright/test';
-import { EMoneyFeeWallelObject, EMoneyOperationalWallet } from '../../../../test_data/EMoneyWalletsData'; // 
+import { EMoneyFeeWallelObjectType} from '../../../../types/EMoneyWallets';
 import { CreationForm } from '../../../related_components/CreationForm';
 import { BasePage } from '../../../BasePage';
 
@@ -32,7 +32,7 @@ export class EditFeeObjectPage extends BasePage
      * @param expectedData - The data object containing the target fee attributes defined in EMoneyFeeWallelObject
      * @returns A promise that resolves when the fee entity is successfully updated and saved
      */
-    public async editFeeObject(expectedData: Partial<EMoneyFeeWallelObject>): Promise<void>
+    public async editFeeObject(expectedData: Partial<EMoneyFeeWallelObjectType>): Promise<void>
     {
         const expectedHeading = new RegExp(`EDIT FEE`, 'i');
         const detailsPageHeader = this.page.getByRole('heading', { name: expectedHeading });

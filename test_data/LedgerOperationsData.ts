@@ -1,13 +1,6 @@
-export type LedgerOperationsData = 
-{
-    project: string,
-    action: string,
-    wallet_from?: string,
-    wallet_to?: string,
-    amount: string,
-    description: string
-}
-export const LedgerOperations: LedgerOperationsData[] =
+import { LedgerOperationsType } from "../types/LedgerOperations"
+
+export const LedgerOperationsData: LedgerOperationsType[] =
 [
     {
         project: 'Vitaliy_SuperPay_Project',

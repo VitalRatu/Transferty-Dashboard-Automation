@@ -1,8 +1,9 @@
-import { Page, Locator, expect } from '@playwright/test';
+import { Page,expect } from '@playwright/test';
 import { Table } from '../../../related_components/Table';
 import { FilterBar } from '../../../related_components/FilterBar';
-import { EMoneyOperationalWallet } from '../../../../test_data/EMoneyWalletsData';
 import { BasePage } from '../../../BasePage';
+import { EMoneyOperationalWalletType } from '../../../../types/EMoneyWallets';
+
 
 export type OperationalWalletsListPageFilters = 
 {
@@ -57,7 +58,7 @@ export class OperationalWalletsListPage extends BasePage
      * @param expectedData - The data object containing expected values for the operational wallet
      * @returns A promise that resolves when all row data assertions pass successfully
      */
-    public async verifyRowMatchesData(rowIndex: number, expectedData: EMoneyOperationalWallet): Promise<void>
+    public async verifyRowMatchesData(rowIndex: number, expectedData: EMoneyOperationalWalletType): Promise<void>
     {
         await expect(this.page).toHaveURL(/emoney\/wallets\/operational/);
         const rowValues = await this.table.getAllValuesFromRowByIndex(rowIndex);

@@ -1,7 +1,7 @@
 import { Page, expect } from '@playwright/test';
 import { CreationForm } from '../../related_components/CreationForm';
 import { BasePage } from '../../BasePage';
-import { SecureDepositData } from '../../../test_data/MIDsData';
+import { SecureDepositType } from '../../../types/MIDs'; 
 
 /**
  * Represents the page for editing an existing Aggregated MID.
@@ -21,7 +21,7 @@ export class EditSecureDepositPage extends BasePage
      */
     constructor(page: Page) 
     {
-        super(page, /\/mids\/secure-deposits\/SD-\d+\/edit/);
+        super(page, /\/mids\/secure-deposits\/SD-\d+\/edit\/?$/);
         this.form = new CreationForm(page);
     }
     
@@ -32,7 +32,7 @@ export class EditSecureDepositPage extends BasePage
      * @param data - The partial data object containing the specific fields to be updated
      * @returns A promise that resolves when the form is submitted and saved
      */
-    public async editDetails(data: Partial<SecureDepositData>): Promise<void> 
+    public async editDetails(data: Partial<SecureDepositType>): Promise<void> 
     {
         const expectedHeading = new RegExp(`EDIT SECURE DEPOSIT`, 'i');
         const editPageHeader = this.page.getByRole('heading', { name: expectedHeading });

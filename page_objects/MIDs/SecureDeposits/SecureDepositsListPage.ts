@@ -1,7 +1,7 @@
 import { Page, Locator, expect } from '@playwright/test';
 import { FilterBar } from '../../related_components/FilterBar'; 
 import { Table } from '../../related_components/Table';
-import { SecureDepositData } from '../../../test_data/MIDsData';
+import { SecureDepositType } from '../../../types/MIDs'; 
 import { BasePage } from '../../BasePage';
 
 export type SecureDepositsListPageTabName =
@@ -34,7 +34,7 @@ export class SecureDepositsListPage extends BasePage
      */
     constructor(page: Page) 
     {
-        super(page, /\/mids\/secure-deposits/);
+        super(page, /\/mids\/secure-deposits\/?$/);
         this.filterBar = new FilterBar<SecureDepositsListPageTabName>(page);
         this.table = new Table(page);
     }
@@ -47,13 +47,33 @@ export class SecureDepositsListPage extends BasePage
     public async addNewSecureDeposit() 
     {
         await this.filterBar.clickPrimaryButton();
-        await this.page.waitForURL(/\/mids\/secure-deposits\/add/);
+        await this.page.waitForURL(/\/mids\/secure-deposits\/add\/?$/);
     }
 
     public async exportSecureDepositsToCSV(): Promise<void>
     {
         await this.filterBar.exportCsv();
         await this.page.waitForLoadState('networkidle');
+    }
+
+    public async openSecureDepositDetails({ description, secureDepositID }: { description?: string, secureDepositID?: string }): Promise<void> 
+    {
+        const detailsUrlPattern = /(?:\/projects\/\d+\/configurations)?\/mids\/secure-deposits\/SD-\d+/;
+
+        if (description) 
+        {
+            await this.table.clickOnColumnValue('Description', description, 'Secure Deposit');
+            await this.page.waitForURL(detailsUrlPattern);
+        } 
+        else if (secureDepositID) 
+        {
+            await this.table.clickOnColumnValue('Secure Deposit', secureDepositID, 'Secure Deposit');
+            await this.page.waitForURL(detailsUrlPattern);
+        } 
+        else 
+        {
+            throw new Error('No parameters provided!');
+        }
     }
 
     /**
@@ -64,7 +84,7 @@ export class SecureDepositsListPage extends BasePage
      * @param expectedData - The data object containing the expected values for the secure deposit
      * @returns A promise that resolves when all assertions for the row data pass successfully
      */
-    public async verifyRowMatchesData(rowIndex: number, expectedData: SecureDepositData): Promise<void>
+    public async verifyRowMatchesData(rowIndex: number, expectedData: SecureDepositType): Promise<void>
     {
         await expect(this.page).toHaveURL(/mids\/secure-deposits/);
         const rowValues = await this.table.getAllValuesFromRowByIndex(rowIndex);

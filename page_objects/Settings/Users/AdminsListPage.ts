@@ -36,7 +36,7 @@ export class AdminsListPage extends BasePage
 
     public async openAdminDetails(adminEmail: string | undefined): Promise<void>
     {
-        await this.table.clickOnCellValueByUniqueValue('Email', adminEmail!, 'Email');
+        await this.table.clickOnColumnValue('Email', adminEmail!, 'Email');
         await this.page.waitForURL(new RegExp('/users/list/admins/[a-f0-9]+/details', 'i'));
     }
 

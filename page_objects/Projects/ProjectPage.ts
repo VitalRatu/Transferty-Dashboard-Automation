@@ -42,9 +42,4 @@ export class ProjectPage extends Orchestrator<ProjectTabName>
         this.monitoringPage = new MonitoringPage(page, tabDepth + 1);
         this.reportsPage = new ReportsPage(page, tabDepth + 1);
     }
-
-    public async openTab(tabName:ProjectTabName)
-    {
-        await this.tab.open(tabName)
-    }
 }

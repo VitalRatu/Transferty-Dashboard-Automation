@@ -1,7 +1,7 @@
 import { Page, Locator, expect } from '@playwright/test';
 import { FilterBar } from '../../related_components/FilterBar'; 
 import { Table } from '../../related_components/Table';
-import { InternalMidData } from '../../../test_data/MIDsData';  
+import { InternalMidType } from '../../../types/MIDs'; 
 import { BasePage } from '../../BasePage';
 
 export type InternalMidsListPageTabName = 
@@ -37,7 +37,7 @@ export class InternalMidsListPage extends BasePage
      */
     constructor(page: Page) 
     {
-        super(page, /\/mids\/internal/);
+        super(page, /\/mids\/internal\/?$/);
         this.filterBar = new FilterBar<InternalMidsListPageTabName>(page);
         this.table = new Table(page);
     }
@@ -50,13 +50,33 @@ export class InternalMidsListPage extends BasePage
     public async addNewInternalMid(): Promise<void>
     {
         await this.filterBar.clickPrimaryButton();
-        await this.page.waitForURL(/\/mids\/internal\/add/);
+        await this.page.waitForURL(/\/mids\/internal\/add\/?$/);
     }
 
     public async exportInternalMidsToCSV(): Promise<void>
     {
         await this.filterBar.exportCsv();
         await this.page.waitForLoadState('networkidle');
+    }
+
+    public async openInternalMidDetails({ description, internalMID }: { description?: string, internalMID?: string }): Promise<void> 
+    {
+        const detailsUrlPattern = /(?:\/projects\/\d+\/configurations)?\/mids\/internal\/MI-\d+/;
+
+        if (description) 
+        {
+            await this.table.clickOnColumnValue('Description', description, 'Internal MID');
+            await this.page.waitForURL(detailsUrlPattern);
+        } 
+        else if (internalMID) 
+        {
+            await this.table.clickOnColumnValue('Internal MID', internalMID, 'Internal MID');
+            await this.page.waitForURL(detailsUrlPattern);
+        } 
+        else 
+        {
+            throw new Error('No parameters provided!');
+        }
     }
 
     /**
@@ -67,7 +87,7 @@ export class InternalMidsListPage extends BasePage
      * @param expectedData - The data object containing expected values for comparison
      * @returns A promise that resolves when all row data assertions pass
      */
-    public async verifyRowMatchesData(rowIndex: number, expectedData: InternalMidData): Promise<void>
+    public async verifyRowMatchesData(rowIndex: number, expectedData: InternalMidType): Promise<void>
     {
         await expect(this.page).toHaveURL(/mids\/internal/);
         const rowValues = await this.table.getAllValuesFromRowByIndex(rowIndex);

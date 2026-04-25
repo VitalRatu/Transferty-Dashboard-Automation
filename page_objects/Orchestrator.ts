@@ -10,9 +10,9 @@ export abstract class Orchestrator<T extends string>
         this.tab = new Tab(page, tabDepth);
     }
 
-    public async openTab(tabName: T): Promise<void>
+    public async openTab(tabName: T): Promise<boolean>
     {
-        await this.tab.open(tabName);
+        return await this.tab.open(tabName);
     }
 
     public async getAllTabNames(): Promise<string[]>

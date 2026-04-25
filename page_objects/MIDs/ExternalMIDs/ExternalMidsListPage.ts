@@ -1,7 +1,7 @@
-import { Page, Locator, expect } from '@playwright/test';
+import { Page, expect } from '@playwright/test';
 import { FilterBar } from '../../related_components/FilterBar'; 
 import { Table } from '../../related_components/Table';
-import { ExternalMidData } from '../../../test_data/MIDsData';  
+import { ExternalMidType } from '../../../types/MIDs';  
 import { BasePage } from '../../BasePage';
 
 export type ExternalMidsListPageTabName =
@@ -32,7 +32,7 @@ export class ExternalMidsListPage extends BasePage
      */
     constructor(page: Page) 
     {
-        super(page, /\/mids\/external/);
+        super(page, /\/mids\/external\/?$/);
         this.filterBar = new FilterBar<ExternalMidsListPageTabName>(page);
         this.table = new Table(page);
     }
@@ -46,7 +46,7 @@ export class ExternalMidsListPage extends BasePage
     public async addNewExternalMid(): Promise<void>
     {
         await this.filterBar.clickPrimaryButton();
-        await this.page.waitForURL(/\/mids\/external\/add/);
+        await this.page.waitForURL(/\/mids\/external\/add\/?$/);
     }
 
     /**
@@ -57,10 +57,32 @@ export class ExternalMidsListPage extends BasePage
      * @param expectedData - The data object containing the expected external MID values
      * @returns A promise that resolves when all assertions for the row data pass successfully
      */
-    public async verifyRowMatchesData(rowIndex: number, expectedData: ExternalMidData): Promise<void>
+    public async openExternalMidDetails({ description, externalMID }: { description?: string, externalMID?: string }): Promise<void>
     {
-        await expect(this.page).toHaveURL(/mids\/external/);
+        const detailsUrlPattern = /(?:\/projects\/\d+\/configurations)?\/mids\/external\/[a-zA-Z0-9]+(?:&project=\d+)?/;
+
+        if (description)
+        {
+            await this.table.clickOnColumnValue('Description', description, 'External MID');
+            await this.page.waitForURL(detailsUrlPattern);
+        }
+        else if (externalMID)
+        {
+            await this.table.clickOnColumnValue('External MID', externalMID, 'External MID');
+            await this.page.waitForURL(detailsUrlPattern);
+        }
+        else
+        {
+            throw new Error('No parameters provided!');
+        }
+    }
+
+    public async verifyRowMatchesData(rowIndex: number, expectedData: ExternalMidType): Promise<void>
+    {
+        await this.page.waitForURL(this.url!, { timeout: 15000 })
+
         const rowValues = await this.table.getAllValuesFromRowByIndex(rowIndex);
+
         expect(rowValues['External MID']).toBe(expectedData.externalMid);
         expect(rowValues['Project']).toBe(expectedData.project);
         expect(rowValues['Provider']).toBe(expectedData.provider);

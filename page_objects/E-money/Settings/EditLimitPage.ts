@@ -1,7 +1,13 @@
 import { expect, Page } from '@playwright/test';
 import { CreationForm } from '../../related_components/CreationForm';
-import { EMoneyLimitsData } from '../../../test_data/EMoneyLimitsData';
 import { BasePage } from '../../BasePage';
+
+export type EMoneyLimitsData = 
+{
+    currency: string,
+    customer_wallet_daily_limit: string,
+    tx_max_amount: string
+}
 
 /**
  * Represents the page for editing existing E-money transaction and wallet limits

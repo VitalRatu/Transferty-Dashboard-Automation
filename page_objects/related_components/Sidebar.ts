@@ -92,13 +92,42 @@ export class Sidebar
         return labels.map(l => l.trim()) as SidebarButtonName[];
     }
 
-    public async openSidebarTab(buttonName: SidebarButtonName): Promise<void>
+    public async openSidebarTab(buttonName: SidebarButtonName): Promise<boolean>
     {
         await expect(this.pageLoaded).toBeHidden();
-        const button = this.sideButton.filter({ hasText: buttonName });
-        await expect(button).toBeVisible(); 
+        
+        const button = this.sideButton.getByText(buttonName, { exact: true });
+
+        try 
+        {
+            await button.waitFor({ state: 'visible', timeout: 3000 });
+        } 
+        catch (error) 
+        {
+            return false;
+        }
+
+        const parentItem = button.locator('xpath=..');
+        const className = await parentItem.getAttribute('class') || await button.getAttribute('class') || '';
+        
+        if (className.includes('disabled')) 
+        {
+            return false;
+        }
+
+        if (className.includes('active')) 
+        {
+            return true;
+        }
+
         await button.click();
-        await expect(this.page).toHaveURL(new RegExp(buttonName.toLowerCase().replace(/-/g, '')));
+        await this.page.waitForLoadState('networkidle');
+        await expect(this.pageLoaded).toBeHidden();
+
+        const cleanPattern = buttonName.toLowerCase().replace(/-/g, '').replace(/\s*&\s*|\s+/g, '.*');
+        await expect(this.page).toHaveURL(new RegExp(cleanPattern));
+
+        return true;
     }
 
 }

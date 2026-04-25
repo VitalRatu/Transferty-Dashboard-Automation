@@ -1,7 +1,7 @@
 import { Page, expect } from '@playwright/test';
 import { FilterBar } from '../../related_components/FilterBar';
 import { Table } from '../../related_components/Table';
-import { CardData } from '../../../test_data/testCards';
+import { CardType } from '../../../test_data/testCards';
 import { BasePage } from '../../BasePage';
 
 export type TransactionsListPageTabName =
@@ -73,7 +73,7 @@ export class TransactionsListPage extends BasePage
      * @param expectedData - The expected CardData object containing amount, currency, transaction type, and card number
      * @returns A promise that resolves when all assertions for the row data pass successfully
      */
-    public async CheckRowData(rowIndex: number, expectedData: CardData): Promise<void>
+    public async CheckRowData(rowIndex: number, expectedData: CardType): Promise<void>
     {
         const rowValues = await this.table.getAllValuesFromRowByIndex(rowIndex);
         expect(rowValues['Amount']).toContain(expectedData.amount);

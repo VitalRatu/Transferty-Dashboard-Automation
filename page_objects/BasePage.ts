@@ -40,6 +40,8 @@ export abstract class BasePage
     {
         this.page = page;
 
+        this.url = url;
+
         if (typeof url === 'string') 
         {
             this.defaultUrlStr = url;
@@ -73,7 +75,7 @@ export abstract class BasePage
      */
     public async goTo(targetUrl?: string): Promise<void> 
     {
-        const urlToNavigate = targetUrl ?? this.defaultUrlStr;
+        const urlToNavigate: string | undefined = targetUrl ?? this.defaultUrlStr;
 
         if (!urlToNavigate) 
         {

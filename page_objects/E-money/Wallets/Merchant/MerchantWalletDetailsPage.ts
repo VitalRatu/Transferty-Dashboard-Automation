@@ -1,7 +1,7 @@
 import { Page, expect } from '@playwright/test';
 import { BasePage } from '../../../BasePage'; 
 import { DetailsPageReader } from '../../../related_components/DetailsPageReader';
-import { EMoneyMerchantWallet } from '../../../../test_data/EMoneyWalletsData';
+import { EMoneyMerchantWalletType } from '../../../../types/EMoneyWallets';
 
 /**
  * Represents the detailed view page for a Merchant Wallet.
@@ -56,7 +56,7 @@ export class MerchantWalletDetailsPage extends BasePage
      * @param expectedData - The expected data to validate against the current UI state
      * @returns A promise that resolves when all provided UI assertions pass successfully
      */
-    public async verifyDetails(expectedData: Partial<EMoneyMerchantWallet>): Promise<void> 
+    public async verifyDetails(expectedData: Partial<EMoneyMerchantWalletType>): Promise<void> 
     {
         const expectedHeading = new RegExp(`MERCHANT WALLET DETAILS`, 'i');
         await expect(this.page.getByRole('heading', {name: expectedHeading })).toBeVisible();

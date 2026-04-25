@@ -1,7 +1,7 @@
 import { Page, expect } from '@playwright/test';
 import { BasePage } from '../../BasePage';
 import { DetailsPageReader } from '../../related_components/DetailsPageReader';
-import { SecureDepositData} from '../../../test_data/MIDsData'; // 
+import { SecureDepositType} from '../../../types/MIDs';  
 
 
 export class SecureDepositDetailsPage extends BasePage 
@@ -16,7 +16,7 @@ export class SecureDepositDetailsPage extends BasePage
      */
     constructor(page: Page) 
     {
-        super(page, /\/mids\/secure-deposits\/SD-\d+/);
+        super(page, /\/mids\/secure-deposits\/SD-\d+\/?$/);
         this.view = new DetailsPageReader(page);
     }
 
@@ -28,7 +28,7 @@ export class SecureDepositDetailsPage extends BasePage
      * @param expectedData - The data object containing the expected Secure Deposit attributes
      * @returns A promise that resolves when all provided detail assertions pass successfully
      */
-    public async verifyDetails(expectedData: Partial<SecureDepositData>): Promise<void> 
+    public async verifyDetails(expectedData: Partial<SecureDepositType>): Promise<void> 
     {
 
         const expectedHeading = new RegExp(`SECURE DEPOSIT DETAILS`, 'i');

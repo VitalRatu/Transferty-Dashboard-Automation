@@ -1,6 +1,4 @@
 import { Page, expect } from '@playwright/test';
-import { DetailsPageReader } from '../../../related_components/DetailsPageReader';
-import { Table } from '../../../related_components/Table';
 import { CreationForm } from '../../../related_components/CreationForm';
 import { BasePage } from '../../../BasePage';
 

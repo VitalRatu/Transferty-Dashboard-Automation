@@ -22,7 +22,7 @@ export class PaymentMethodsPage extends BasePage
         return row.locator('.ui.toggle.checkbox');
     }
 
-    public async isDisabled(methodName: string): Promise<boolean> 
+    private async isDisabled(methodName: string): Promise<boolean> 
     {
         const toggle = await this.getToggleLocator(methodName);
         await expect(toggle).toBeVisible();
@@ -31,7 +31,7 @@ export class PaymentMethodsPage extends BasePage
         return className.includes('disabled');
     }
 
-    public async isMethodActive(methodName: string): Promise<boolean> 
+    private async isMethodActive(methodName: string): Promise<boolean> 
     {
         const toggle = await this.getToggleLocator(methodName);
         await expect(toggle).toBeVisible();
@@ -71,7 +71,6 @@ export class PaymentMethodsPage extends BasePage
         const isDisabled = await this.isDisabled(methodName);
         if (isDisabled) 
         {
-            console.log(`Cannot change state for '${methodName}'. The toggle is disabled for editing`);
             return false;
         }
 

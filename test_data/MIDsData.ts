@@ -1,62 +1,6 @@
-export type InternalMidData = 
-{
-    project: string, 
-    provider: string,
-    paymentMethod: string,
-    externalMid: string,
-    currency: string, 
-    orderExchangeCurrency?: string,
-    description?: string,
-    status?: string
-}
+import { AggregatedMidType, CustomerFeeType, ExternalMidType, InternalMidType, SecureDepositType } from "../types/MIDs"
 
-export type AggregatedMidData =
-{
-    project: string, 
-    type: 'Incoming' | 'Outgoing' | 'Secure Deposit',
-    currency: string, 
-    internalMid: string,
-    description?: string
-}
-
-export type SecureDepositData =
-{
-    project: string,
-    amount: string,
-    currency: string,
-    date: string
-    description?: string
-}
-
-export type ExternalMidData =
-{
-    project: string, 
-    account_management_api_support?: 'Yes' | 'No',
-    provider: string,
-    intermediary: string,
-    psp: string,
-    externalMid: string,   
-    providersMid: string,
-    api_endpoint: string, 
-    providers_credential: {[key: string]: string},
-    description?: string,
-    timezone?: string,
-    balance_api_support?: 'Yes' | 'No',
-    static_result_url?: string,
-    customer_data_randomization?: 'Enable' | 'Disable',
-    customerFees?: CustomerFeeData[],
-}
-
-export type CustomerFeeData =
-{
-    feeType: 'Payments' | 'Payouts';
-    isActive?: boolean,         
-    fixed?: string;       
-    percentage?: string;  
-    min?: string;             
-}
-
-export const internalMIDs: InternalMidData[] = 
+export const internalMIDsData: InternalMidType[] = 
 [
     {
         project: 'Vitaliy_QA Transferty',
@@ -69,7 +13,7 @@ export const internalMIDs: InternalMidData[] =
     }
 ]
 
-export const aggregatedMIDs: AggregatedMidData[] =
+export const aggregatedMIDsData: AggregatedMidType[] =
 [
     {
         project: 'Vitaliy_QA Transferty',
@@ -96,7 +40,7 @@ export const aggregatedMIDs: AggregatedMidData[] =
     }
 ]
 
-export const secureDeposits: SecureDepositData[] =
+export const secureDepositsData: SecureDepositType[] =
 [
     {
         project: 'Vitaliy_QA Transferty',
@@ -107,7 +51,7 @@ export const secureDeposits: SecureDepositData[] =
     }
 ]
 
-export const customerFees: CustomerFeeData[] = 
+export const customerFeesData: CustomerFeeType[] = 
 [
     {
         feeType: 'Payments',
@@ -124,7 +68,7 @@ export const customerFees: CustomerFeeData[] =
     }
 ]
 
-export const externalMIDs: ExternalMidData[] =
+export const externalMIDsData: ExternalMidType[] =
 [
     {
         project: 'Vitaliy_QA Transferty',
@@ -144,6 +88,6 @@ export const externalMIDs: ExternalMidData[] =
         },
         description: 'External MID from automation',
         customer_data_randomization: 'Disable',
-        customerFees: customerFees
+        customerFees: customerFeesData
     }
 ]

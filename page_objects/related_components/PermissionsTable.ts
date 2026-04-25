@@ -26,6 +26,7 @@ export class PermissionsTable
     {
         await expect(this.tableLocator).toBeVisible();
 
+
         const count = await this.dataRows.count();
 
         for (let i = 0; i < count; i++) 

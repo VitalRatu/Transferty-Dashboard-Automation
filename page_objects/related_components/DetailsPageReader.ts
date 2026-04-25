@@ -63,22 +63,6 @@ export class DetailsPageReader
     }
 
     /**
-     * Reads the current state of a toggle within a specific field
-     * @param label - The exact text of the field label
-     * @returns Promise<boolean> - true if enabled, false if disabled
-     */
-    public async isToggleChecked(label: string | RegExp): Promise<boolean> 
-    {
-        const fieldLocator = this.getFieldLocator(label);
-        const toggleContainer = fieldLocator.locator(this.toggleSelector);
-        
-        await expect(toggleContainer).toBeVisible();
-
-        const className = await toggleContainer.getAttribute('class') || '';
-        return className.includes('checked');
-    }
-
-    /**
      * Sets the state of a toggle within a specific field
      * @param label - The exact text of the field label
      * @param targetState - true to enable, false to disable
@@ -87,13 +71,20 @@ export class DetailsPageReader
     {
         const toggleContainer = this.getToggleContainerLocator(label);
         
-        await expect(toggleContainer).toBeVisible();
+        try 
+        {
+            await toggleContainer.waitFor({ state: 'visible', timeout: 3000 });
+        } 
+        catch (error) 
+        {
+            return false;
+        }
 
         const className = await toggleContainer.getAttribute('class') || '';
+        const isNativeDisabled = await toggleContainer.isDisabled();
         
-        if (className.includes('disabled')) 
+        if (className.includes('disabled') || isNativeDisabled) 
         {
-            console.log(`Cannot change state for '${label}'. The toggle is disabled for editing.`);
             return false;
         }
 
@@ -176,12 +167,31 @@ export class DetailsPageReader
      * @param buttonName - The exact visible text of the button to click
      * @returns A promise that resolves when the button is successfully clicked
      */
-    public async clickActionButton(buttonName: string): Promise<void> 
+    public async clickActionButton(buttonName: string): Promise<boolean> 
     {
-        const button = this.page.getByRole('button', { name: buttonName, exact: true });
-        await expect(button).toBeVisible();
-        await button.click();
+        const targetButton = this.page.getByRole('button', { name: buttonName, exact: true });
+        
+        try 
+        {
+            await targetButton.waitFor({ state: 'visible', timeout: 3000 });
+        } 
+        catch (error) 
+        {
+            return false;
+        }
+
+        const className = await targetButton.getAttribute('class') || '';
+        const isNativeDisabled = await targetButton.isDisabled();
+
+        if (className.includes('disabled') || isNativeDisabled) 
+        {
+            return false;
+        }
+        
+        await targetButton.click();
         await this.page.waitForLoadState('networkidle');
+
+        return true;
     }
 
     /**

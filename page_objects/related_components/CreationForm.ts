@@ -1,4 +1,5 @@
 import { Locator, Page, expect } from '@playwright/test';
+import process from 'process';
 
 /**
  * Represents a generic creation and edition form component used across the application
@@ -66,37 +67,51 @@ export class CreationForm
 
     /**
      * Fills a standard text input or textarea identified by its label
-     * Validates that the field is visible, fills it with the provided value, and asserts 
-     * that no validation errors are displayed afterwards
+     * Checks if the field is disabled before attempting to fill it
      * @param label - The exact text of the field label
      * @param value - The text string to enter into the field
-     * @returns A promise that resolves when the field is filled and validated
+     * @returns Promise<boolean> - true if filled successfully, false if disabled
      */
-    public async fillInputField(label: string, value: string) 
+    public async fillInputField(label: string, value: string): Promise<boolean> 
     {
-        await this.page.waitForLoadState('networkidle');
         const fieldLocator = this.textInputLocator.filter({ has: this.page.getByText(label, { exact: true })}).last();
         await expect(fieldLocator).toBeVisible();
+        
         const inputFieldLocator = fieldLocator.locator('input, textarea').first();
+        
+        const className = await fieldLocator.getAttribute('class') || '';
+        const isNativeDisabled = await inputFieldLocator.isDisabled();
+
+        if (className.includes('is-disabled') || className.includes('disabled') || isNativeDisabled) 
+        {
+            return false;
+        }
+
         await expect(inputFieldLocator).toBeVisible();
         await inputFieldLocator.fill(value);
         await expect(inputFieldLocator).toHaveValue(value);
         await expect(this.errorMessageLocator).toBeHidden();
+        
+        return true;
     }
 
     /**
      * Selects an option from a standard dropdown menu
-     * If no option is provided, it defaults to selecting the first available option in the list
+     * Checks if the dropdown is disabled before attempting to open it
      * @param label - The exact text or RegExp of the dropdown label
      * @param option - The exact text of the option to select from the listbox
-     * @throws {Error} If the dropdown is opened but contains "No options"
-     * @returns A promise that resolves when the selection is made and the menu is closed
+     * @returns Promise<boolean> - true if selected successfully, false if disabled
      */
-    public async selectDropDown(label: string | RegExp, option?: string) 
+    public async selectDropDown(label: string | RegExp, option?: string): Promise<boolean>
     {
-        await this.page.waitForLoadState('networkidle');
-        const dropdownInput = this.dropdownLocator.filter({ has: this.page.getByText(label, { exact: true }) }).first();
+        const dropdownInput = this.dropdownLocator.filter({ has: this.page.getByText(label, { exact: true }) });
         await expect(dropdownInput).toBeVisible();
+
+        const className = await dropdownInput.getAttribute('class') || '';
+        if (className.includes('is-disabled') || className.includes('disabled')) 
+        {
+            return false;
+        }
 
         await this.clearDropdownValues(dropdownInput);
 
@@ -123,28 +138,36 @@ export class CreationForm
         }
         else 
         {
-            const optionLocator = dropdownList.getByRole('option', { name: option }).first();
+            const optionLocator = dropdownList.getByRole('option', { name: option, exact: true }).first();
             await expect(optionLocator).toBeVisible();
             await optionLocator.click();
         }
+        
         await this.page.keyboard.press('Escape');
         await expect(this.errorMessageLocator).toBeHidden();
+        
+        return true;
     }
 
     /**
      * Interacts with complex form rows containing multiple dropdowns under a single label
-     * Targets a specific dropdown within the row using a zero-based index
-     * @param label - The exact text of the row label (e.g., 'Wallet from / to')
-     * @param index - The zero-based index of the target dropdown (e.g., 0 for the first, 1 for the second)
+     * Checks if the target dropdown is disabled before interacting
+     * @param label - The exact text of the row label
+     * @param index - The zero-based index of the target dropdown
      * @param option - The text of the option to select
-     * @returns A promise that resolves when the selection is complete
+     * @returns Promise<boolean> - true if selected successfully, false if disabled
      */
-    public async selectMultiDropDown(label: string, index: number, option?: string): Promise<void> 
+    public async selectMultiDropDown(label: string, index: number, option?: string): Promise<boolean> 
     {
-        await this.page.waitForLoadState('networkidle');
         const elementLable = this.labelElement.filter({ has: this.page.getByText(label, { exact: true }) }).first();
         const dropdownInput = elementLable.locator('..').locator('.Input.dropdown-input').nth(index);
         await expect(dropdownInput).toBeVisible();
+
+        const className = await dropdownInput.getAttribute('class') || '';
+        if (className.includes('is-disabled') || className.includes('disabled')) 
+        {
+            return false;
+        }
 
         await this.clearDropdownValues(dropdownInput);
 
@@ -168,13 +191,15 @@ export class CreationForm
         } 
         else 
         {
-            const optionLocator = dropdownList.getByRole('option', { name: option }).first();
+            const optionLocator = dropdownList.getByRole('option', { name: option, exact: true  }).first();
             await expect(optionLocator).toBeVisible();
             await optionLocator.click();
         }
         
         await this.page.keyboard.press('Escape');
         await expect(this.errorMessageLocator).toBeHidden();
+        
+        return true;
     }
 
     /**
@@ -184,12 +209,22 @@ export class CreationForm
      * @param date - The date string to be entered
      * @returns A promise that resolves when the date is entered and the input focus is cleared
      */
-    public async fillDateInput(label: string, date: string): Promise<void> 
+    public async fillDateInput(label: string, date: string): Promise<boolean> 
     {
         await this.page.waitForLoadState('networkidle');
         const fieldContainer = this.textInputLocator.filter({ has: this.page.getByText(label, { exact: true }) }).first();
         await expect(fieldContainer).toBeVisible();
+        
         const input = fieldContainer.locator('input.form-control').first();
+        
+        const className = await fieldContainer.getAttribute('class') || '';
+        const isNativeDisabled = await input.isDisabled();
+
+        if (className.includes('is-disabled') || className.includes('disabled') || isNativeDisabled) 
+        {
+            return false;
+        }
+
         await expect(input).toBeVisible();
         const modifier = process.platform === 'darwin' ? 'Meta' : 'Control';
         await this.page.keyboard.press(`${modifier}+A`);
@@ -197,6 +232,8 @@ export class CreationForm
         await this.page.keyboard.press(`Tab`);
         await this.page.keyboard.press(`Escape`);
         await expect(this.errorMessageLocator).toBeHidden();
+        
+        return true;
     }
 
     /**
@@ -206,7 +243,7 @@ export class CreationForm
      * @param state - The target boolean state (true for checked, false for unchecked)
      * @returns A promise that resolves when the checkbox reaches the target state
      */
-    public async setCheckbox(labelText: string, state: boolean): Promise<void> 
+    public async setCheckbox(labelText: string, state: boolean): Promise<boolean> 
     {
         await this.page.waitForLoadState('networkidle');
         const wrapper = this.checkBoxLocator.filter({ hasText: new RegExp(`^${labelText}$`) }).first();
@@ -215,6 +252,14 @@ export class CreationForm
         await this.page.waitForTimeout(500);
 
         const classAttribute = await wrapper.getAttribute('class') || '';
+        const inputElement = wrapper.locator('input').first();
+        const isNativeDisabled = await inputElement.count() > 0 ? await inputElement.isDisabled() : false;
+
+        if (classAttribute.includes('disabled') || isNativeDisabled) 
+        {
+            return false;
+        }
+
         const isCurrentlyChecked = classAttribute.includes('checked');
 
         if (isCurrentlyChecked !== state) 
@@ -231,76 +276,108 @@ export class CreationForm
         {
             await expect(wrapper).not.toHaveClass(/checked/);
         }
+        
+        return true;
     }
 
     /**
-     * Verifies if an input field, dropdown, or checkbox is in a disabled (read-only) state
-     * Checks for specific CSS classes on containers or the 'disabled' attribute on HTML elements
-     * @param label - The exact text of the field label to check
-     * @throws {Error} If no element with the provided label is found on the page
-     * @returns A promise that resolves when the disabled state assertion passes
+     * Checks if a specific form field is disabled.
+     * Evaluates text inputs, dropdowns, and checkboxes based on classes or native properties.
+     * @param label - The exact text label of the field to check
+     * @returns Promise<boolean> - true if disabled, false if editable or missing
      */
-    public async checkIsDisabled(label: string): Promise<void> 
+    public async checkIsDisabled(label: string): Promise<boolean> 
     {
         await this.page.waitForLoadState('networkidle');
         const textLocator = this.textInputLocator.filter({ has: this.page.getByText(label, { exact: true }) }).last();
-        
         const dropLocator = this.dropdownLocator.filter({ has: this.page.getByText(label, { exact: true }) }).first();
-        
         const checkboxLocator = this.page.getByLabel(label);
 
         if (await textLocator.isVisible()) 
         {
-            await expect(textLocator).toHaveClass(/is-disabled/);
+            const className = await textLocator.getAttribute('class') || '';
+            return className.includes('is-disabled') || className.includes('disabled');
         } 
         else if (await dropLocator.isVisible()) 
         {
-            await expect(dropLocator).toHaveClass(/is-disabled/);
+            const className = await dropLocator.getAttribute('class') || '';
+            return className.includes('is-disabled') || className.includes('disabled');
         }
         else if (await checkboxLocator.count() > 0) 
         {
-            await expect(checkboxLocator).toBeDisabled();
+            return await checkboxLocator.isDisabled();
         }
-        else 
-        {
-            throw new Error(`Field with label "${label}" not found to check for disabled state.`);
-        }
+        
+        return false;
     }
 
     /**
-     * Submits the form by clicking the save button.
-     * Can optionally target a specific save button by its exact text.
-     * @param buttonName - Optional exact text of the button to click (e.g., 'Create', 'Save & Next')
+     * Attempts to save the form interaction.
+     * Checks if the button is disabled before clicking.
+     * @param buttonName - Optional exact text of the button to click
+     * @returns Promise<boolean> - true if clicked successfully, false if disabled
      */
-    public async save(buttonName?: string): Promise<void> 
+    public async save(buttonName?: string): Promise<boolean> 
     {
-        await expect(this.errorMessageLocator).toBeHidden();
-        
         const targetButton = buttonName 
             ? this.saveButton.getByText(buttonName, { exact: true }) 
             : this.saveButton.first();
-            
-        await expect(targetButton).toBeVisible();
-        await targetButton.click();
+
+        try 
+        {
+            await targetButton.waitFor({ state: 'visible', timeout: 3000 });
+        } 
+        catch (error) 
+        {
+            return false;
+        }
+
+        const className = await targetButton.getAttribute('class') || '';
+        const isNativeDisabled = await targetButton.isDisabled();
         
+        if (className.includes('disabled') || isNativeDisabled) 
+        {
+            return false;
+        }
+
+        await targetButton.click();
         await this.page.waitForLoadState('networkidle');
+        
+        return true;
     }
 
     /**
      * Cancels the form interaction by clicking the cancel button.
-     * Can optionally target a specific cancel button by its exact text.
+     * Checks if the button is disabled before clicking.
      * @param buttonName - Optional exact text of the button to click
+     * @returns Promise<boolean> - true if clicked successfully, false if disabled
      */
-    public async cancel(buttonName?: string): Promise<void>
+    public async cancel(buttonName?: string): Promise<boolean>
     {
         const targetButton = buttonName 
             ? this.cancelButton.getByText(buttonName, { exact: true }) 
             : this.cancelButton.first();
 
-        await expect(targetButton).toBeVisible();
+        try 
+        {
+            await targetButton.waitFor({ state: 'visible', timeout: 3000 });
+        } 
+        catch (error) 
+        {
+            return false;
+        }
+
+        const className = await targetButton.getAttribute('class') || '';
+        const isNativeDisabled = await targetButton.isDisabled();
+
+        if (className.includes('disabled') || isNativeDisabled) 
+        {
+            return false;
+        }
+
         await targetButton.click();
-        
         await this.page.waitForLoadState('networkidle');
 
+        return true;
     }
 }

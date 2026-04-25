@@ -1,7 +1,7 @@
 import { expect, Locator, Page } from '@playwright/test';
 import { BasePage } from '../../BasePage';
 import { CreationForm } from '../../related_components/CreationForm';
-import { InternalMidData } from '../../../test_data/MIDsData';
+import { InternalMidType } from '../../../types/MIDs'; ;
 
 /**
  * Represents the page for adding a new Internal Merchant Identifier (MID) to the system
@@ -23,7 +23,7 @@ export class NewInternalMidPage extends BasePage
      */
     constructor(page: Page) 
     {
-        super(page, '/mids/internal/add');
+        super(page, /\/mids\/internal\/add\/?$/);
         this.form = new CreationForm(page);
         this.pageLoaded = page.locator('.ui.inverted.text.loader').first();
     }
@@ -35,7 +35,7 @@ export class NewInternalMidPage extends BasePage
      * @param data - The data object containing internal MID configurations defined in InternalMidData
      * @returns A promise that resolves when all fields are populated and the form is successfully saved
      */
-    public async createInternalMID(data:InternalMidData): Promise<void>
+    public async createInternalMID(data:InternalMidType): Promise<void>
     {
         await expect(this.pageLoaded).toBeHidden();
         await this.form.selectDropDown('Project', data.project);
@@ -55,6 +55,6 @@ export class NewInternalMidPage extends BasePage
         {
             await this.form.selectDropDown('Status', data.status);
         }
-        await this.form.save();
+        expect(await this.form.save()).toBeTruthy();
     }
 }

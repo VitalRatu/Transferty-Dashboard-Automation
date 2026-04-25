@@ -1,7 +1,7 @@
 import { Page, expect } from '@playwright/test';
 import { BasePage } from '../../../BasePage'; // Твой путь к BasePage
 import { DetailsPageReader } from '../../../related_components/DetailsPageReader';
-import { EMoneyCustomerWallet } from '../../../../test_data/EMoneyWalletsData';
+import { EMoneyCustomerWalletType } from '../../../../types/EMoneyWallets';
 
 /**
  * Represents the detailed view page for a Customer Wallet within the E-money section
@@ -45,7 +45,7 @@ export class CustomerWalletDetailsPage extends BasePage
      * @param expectedData - The data object containing the expected customer wallet attributes
      * @returns A promise that resolves when all detail assertions pass successfully
      */
-    public async verifyDetails(expectedData: EMoneyCustomerWallet): Promise<void> 
+    public async verifyDetails(expectedData: EMoneyCustomerWalletType): Promise<void> 
     {
         const expectedHeading = new RegExp(`CUSTOMER WALLET DETAILS`)
         const detailsPageHeader = this.page.getByRole('heading', {name: expectedHeading })

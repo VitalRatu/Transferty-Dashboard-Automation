@@ -31,6 +31,6 @@ export class RecTxStatusMismatchReportPage extends BaseReconReportPage<TxStatusM
 
     constructor(page: Page) 
     {
-        super(page, /\/reports\/reconciliation\/rec-tx-status-mismatch/)
+        super(page, /\/reports\/reconciliation\/rec-tx-status-mismatch\/?$/)
     }
 }

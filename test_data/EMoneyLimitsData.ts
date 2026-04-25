@@ -1,9 +1,4 @@
-export type EMoneyLimitsData = 
-{
-    currency: string,
-    customer_wallet_daily_limit: string,
-    tx_max_amount: string
-}
+import { EMoneyLimitsData } from "../page_objects/E-money/Settings/EditLimitPage";
 
 export const EMoneyLimits: EMoneyLimitsData[] = 
 [

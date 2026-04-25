@@ -1,7 +1,7 @@
 import { expect, Locator, Page } from '@playwright/test';
 import { BasePage } from '../../BasePage';
 import { CreationForm } from '../../related_components/CreationForm';
-import { SecureDepositData } from '../../../test_data/MIDsData';
+import { SecureDepositType } from '../../../types/MIDs'; 
 
 /**
  * Represents the page for creating a new Secure Deposit entity
@@ -23,7 +23,7 @@ export class NewSecureDepositPage extends BasePage
      */
     constructor(page: Page) 
     {
-        super(page, '/mids/secure-deposits/add')
+        super(page, /\/mids\/secure-deposits\/add\/?$/)
         this.form = new CreationForm(page);
         this.pageLoaded = page.locator('.ui.inverted.text.loader').first();
     }
@@ -35,7 +35,7 @@ export class NewSecureDepositPage extends BasePage
      * @param data - The data object containing secure deposit details defined in SecureDepositData
      * @returns A promise that resolves when the form is populated and the save action is triggered
      */
-    public async createSecureDeposit(data:SecureDepositData): Promise<void>
+    public async createSecureDeposit(data:SecureDepositType): Promise<void>
     {
         await expect(this.pageLoaded).toBeHidden();
         await this.form.selectDropDown('Project', data.project);
@@ -49,6 +49,6 @@ export class NewSecureDepositPage extends BasePage
         {
             await this.form.fillInputField('Description', data.description);
         }
-        await this.form.save();
+        expect(await this.form.save()).toBeTruthy()
     }
 }

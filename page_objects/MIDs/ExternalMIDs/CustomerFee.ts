@@ -1,5 +1,5 @@
 import { Locator, Page, expect } from '@playwright/test';
-import { CustomerFeeData } from '../../../test_data/MIDsData';
+import { CustomerFeeType } from '../../../types/MIDs'; 
 import { Table } from '../../related_components/Table';
 
 /**
@@ -26,48 +26,72 @@ export class CustomerFee
     }
 
     /**
-     * Populates the fee data for a specific fee type.
-     * Automatically locates the correct row, toggles it to active if necessary,
-     * and fills in the provided values (fixed, percentage, min).
-     * @param data - The data object containing fee configuration defined in CustomerFeeData
-     * @returns A promise that resolves when all specified inputs for the fee type are filled
+     * Fills the fee data for a specific fee type.
+     * Checks if the row, toggle, and inputs are accessible before interacting.
+     * @param data - The data object containing fee configuration
+     * @returns Promise<boolean> - true if successfully filled, false if missing or disabled due to permissions
      */
-    public async fillFeeData(data: CustomerFeeData): Promise<void> 
+    public async fillFeeData(data: CustomerFeeType): Promise<boolean> 
     {
         const row = await this.table.getRowLocatorByColumnValue('Fee type', data.feeType);
-        const toggle = row.locator('.ui.toggle.checkbox');
-        const isChecked = await toggle.getAttribute('class').then(c => c?.includes('checked'));
+        try 
+        {
+            await row.waitFor({ state: 'visible', timeout: 3000 });
+        } 
+        catch (error) 
+        {
+            return false;
+        }
 
+        const toggle = row.locator('.ui.toggle.checkbox');
+        const classAttr = await toggle.getAttribute('class') || '';
+        const isNativeDisabled = await toggle.isDisabled();
+        const isDisabled = classAttr.includes('disabled') || isNativeDisabled;
+        
+        const isChecked = classAttr.includes('checked');
         const shouldBeActive = data.isActive !== false; 
 
-        if (shouldBeActive && !isChecked) 
+        if (shouldBeActive !== isChecked) 
         {
+            if (isDisabled) 
+            {
+                return false;
+            }
+
             await toggle.click();
-            await expect(toggle).toHaveClass(/checked/);
-        }
-        else if (!shouldBeActive && isChecked)
-        {
-            await toggle.click();
-            await expect(toggle).not.toHaveClass(/checked/);
             
-            return; 
+            if (shouldBeActive) 
+            {
+                await expect(toggle).toHaveClass(/checked/);
+            } 
+            else 
+            {
+                await expect(toggle).not.toHaveClass(/checked/);
+            }
         }
         
-        if (shouldBeActive) 
+        if (!shouldBeActive)
         {
-            if (data.fixed) 
-            {
-                await this.fillInput(row, 'Fixed', data.fixed);
-            }
-            if (data.percentage) 
-            {
-                await this.fillInput(row, '%', data.percentage);
-            }
-            if (data.min) 
-            {
-                await this.fillInput(row, 'Min', data.min);
-            }
+            return true; 
         }
+        
+        if (data.fixed) 
+        {
+            const isFilled = await this.fillInput(row, 'Fixed', data.fixed);
+            if (!isFilled) return false;
+        }
+        if (data.percentage) 
+        {
+            const isFilled = await this.fillInput(row, '%', data.percentage);
+            if (!isFilled) return false;
+        }
+        if (data.min) 
+        {
+            const isFilled = await this.fillInput(row, 'Min', data.min);
+            if (!isFilled) return false;
+        }
+
+        return true;
     }
     
     /**
@@ -78,16 +102,19 @@ export class CustomerFee
      * @param value - The value to fill into the input field
      * @returns A promise that resolves when the input is successfully filled
      */
-    private async fillInput(row: Locator, columnName: string, value: string): Promise<void> 
+    private async fillInput(row: Locator, columnName: string, value: string | number): Promise<boolean> 
     {
-        const colIndex = await this.table.getColumnIndex(columnName);
-        
-        const cell = row.getByRole('cell').nth(colIndex);
-        
-        const input = cell.locator('input').first();
+        const columnIndex = await this.table.getColumnIndex(columnName);
+        const cell = row.getByRole('cell').nth(columnIndex);
+        const input = cell.locator('input');
 
-        await expect(input.locator('..')).not.toHaveClass(/is-disabled/);
+        const isDisabled = await input.isDisabled() || await input.getAttribute('readonly') !== null;
+        if (isDisabled) 
+        {
+            return false;
+        }
 
-        await input.fill(value);
+        await input.fill(String(value));
+        return true;
     }
 }

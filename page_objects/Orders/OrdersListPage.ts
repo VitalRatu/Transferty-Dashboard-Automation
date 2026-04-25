@@ -29,7 +29,7 @@ export class OrdersListPage extends BasePage
      */
     constructor(page: Page) 
     {
-        super(page, /\/orders/); 
+        super(page, /\/orders\/?$/); 
 
         this.table = new Table(page); 
         this.filters = new FilterBar<OrdersListPageTabName>(page);

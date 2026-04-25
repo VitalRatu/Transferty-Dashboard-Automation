@@ -1,7 +1,7 @@
 import { Page, Locator, expect } from '@playwright/test';
 import { FilterBar } from '../../related_components/FilterBar'; 
 import { Table } from '../../related_components/Table';
-import { AggregatedMidData } from '../../../test_data/MIDsData';
+import { AggregatedMidType } from '../../../types/MIDs'; 
 import { BasePage } from '../../BasePage';
 
 export type AggregatedMidsListPageTabName = 
@@ -34,7 +34,7 @@ export class AggregatedMidsListPage extends BasePage
      */
     constructor(page: Page) 
     {
-        super(page, /\/mids\/aggregated/);
+        super(page, /\/mids\/aggregated\/?$/);
         this.filterBar = new FilterBar<AggregatedMidsListPageTabName>(page);
         this.table = new Table(page);
     }
@@ -47,25 +47,27 @@ export class AggregatedMidsListPage extends BasePage
     public async addNewAggregatedMid(): Promise<void>
     {
         await this.filterBar.clickPrimaryButton();
-        await this.page.waitForURL(/\/mids\/aggregated\/add/);
+        await this.page.waitForURL(/\/mids\/aggregated\/add\/?$/);
     }
 
     public async openAggregatedMidDetails({ description, aggregatedMID, internalMID }: { description?: string, aggregatedMID?: string, internalMID?: string }): Promise<void> 
     {
+        const detailsUrlPattern = /(?:\/projects\/\d+\/configurations)?\/mids\/aggregated\/AG-\d{10}/;
+
         if (description) 
         {
-            await this.table.clickOnCellValueByUniqueValue('Description', description, 'Aggregated MID');
-            await this.page.waitForURL(new RegExp(`/mids/aggregated/AG-\\d{10}`));
+            await this.table.clickOnColumnValue('Description', description, 'Aggregated MID');
+            await this.page.waitForURL(detailsUrlPattern);
         } 
         else if (aggregatedMID) 
         {
-            await this.table.clickOnCellValueByUniqueValue('Aggregated MID', aggregatedMID, 'Aggregated MID');
-            await this.page.waitForURL(new RegExp(`/mids/aggregated/${aggregatedMID}`));
+            await this.table.clickOnColumnValue('Aggregated MID', aggregatedMID, 'Aggregated MID');
+            await this.page.waitForURL(detailsUrlPattern);
         } 
-        else if (internalMID)         
+        else if (internalMID)        
         {
-            await this.table.clickOnCellValueByUniqueValue('Internal MIDs / Secure Deposits', internalMID, 'Aggregated MID');
-            await this.page.waitForURL(new RegExp(`/mids/aggregated/AG-\\d{10}`));
+            await this.table.clickOnColumnValue('Internal MIDs / Secure Deposits', internalMID, 'Aggregated MID');
+            await this.page.waitForURL(detailsUrlPattern);
         }
         else 
         {
@@ -81,7 +83,7 @@ export class AggregatedMidsListPage extends BasePage
      * @param expectedData - The data object containing the expected aggregated MID values
      * @returns A promise that resolves when all row data assertions pass successfully
      */
-    public async verifyRowMatchesData(rowIndex: number, expectedData: AggregatedMidData): Promise<void>
+    public async verifyRowMatchesData(rowIndex: number, expectedData: AggregatedMidType): Promise<void>
     {
         await expect(this.page).toHaveURL(/mids\/aggregated/);
         const rowValues = await this.table.getAllValuesFromRowByIndex(rowIndex);

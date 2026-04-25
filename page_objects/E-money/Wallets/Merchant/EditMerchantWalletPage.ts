@@ -1,7 +1,7 @@
 import { Page, expect } from '@playwright/test';
 import { BasePage } from '../../../BasePage'; 
 import { CreationForm } from '../../../related_components/CreationForm';
-import { EMoneyMerchantWallet } from '../../../../test_data/EMoneyWalletsData';
+import { EMoneyMerchantWalletType } from '../../../../types/EMoneyWallets';
 
 /**
  * Represents the Edit page for a Merchant Wallet.
@@ -28,7 +28,7 @@ export class EditMerchantWalletPage extends BasePage
      * @param data - The data object containing fields to be updated
      * @returns A promise that resolves when the form is submitted
      */
-    public async editWallet(data: Partial<EMoneyMerchantWallet>): Promise<void>
+    public async editWallet(data: Partial<EMoneyMerchantWalletType>): Promise<void>
     {
         const expectedHeading = new RegExp(`EDIT MERCHANT WALLET`, 'i');
         const editPageHeader = this.page.getByRole('heading', { name: expectedHeading });

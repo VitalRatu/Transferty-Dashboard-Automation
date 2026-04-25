@@ -11,7 +11,7 @@ export class AdminDetailsPage extends BasePage
 
     constructor(page: Page) 
     {
-        super(page);
+        super(page, /\/users\/list\/admins\/\d+\/details\/?$/);
         this.view = new DetailsPageReader(page);
         
         this.deleteModal = this.page.locator('.ui.small.modal.transition.visible.active.Modal.live');

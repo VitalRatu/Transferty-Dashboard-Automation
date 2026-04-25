@@ -1,8 +1,15 @@
 import { Page, expect } from '@playwright/test';
 import { BasePage } from '../../../BasePage'; 
 import { CreationForm } from '../../../related_components/CreationForm';
-import { EditAdminData } from '../../../../test_data/AdminsData';
 
+export type EditAdminData =
+{
+    status: 'Active' | 'Blocked';
+    role: string;
+    first_name: string;
+    last_name: string;
+    phone: string;
+}
 
 export class EditAdminPage extends BasePage 
 {
@@ -10,7 +17,7 @@ export class EditAdminPage extends BasePage
 
     constructor(page: Page) 
     {
-        super(page);
+        super(page, /\/users\/list\/admins\/\d+\/edit\/?$/);
         this.form = new CreationForm(page);
     }
 

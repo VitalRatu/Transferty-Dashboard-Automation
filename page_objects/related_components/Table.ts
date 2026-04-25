@@ -150,15 +150,8 @@ export class Table
         
         throw new Error(`Row index where column "${columnName}" contains "${value}" not found in ${rowCount} rows`);
     }
-
-    /**
-     * Locates a row by a unique value and clicks the first link within a target column's cell
-     * @param lookupColumn - The column name used to identify the unique row (e.g., 'Tx ID')
-     * @param uniqueValue - The unique identifier to look for in the lookup column
-     * @param targetColumn - The column name containing the link to be clicked (e.g., 'Aggregated MID')
-     * @returns A promise that resolves when the click action is completed
-     */
-    public async clickOnCellValueByUniqueValue(lookupColumn: string, uniqueValue: string, targetColumn: string): Promise<void> 
+    //TODO RECHECK IF EVER NEEDED
+/*     public async clickOnCellValueByUniqueValue(lookupColumn: string, uniqueValue: string, targetColumn: string): Promise<void> 
     {
         await this.page.waitForLoadState('networkidle');
 
@@ -169,7 +162,7 @@ export class Table
         const targetIndex = await this.getColumnIndex(targetColumn);
 
         await row.getByRole('cell').nth(targetIndex).getByRole('link').first().click();
-    }
+    } */
 
     /**
      * Scans every cell in the table for a specific text value and clicks the first available link inside that cell
@@ -208,35 +201,47 @@ export class Table
     }
 
     /**
-     * Finds a specific value within a designated column and clicks on the link inside that exact cell
-     * This avoids heavy loops by leveraging Playwright's native locators and existing row-finding logic
-     * @param columnName - The exact name of the table column header to search within
-     * @param targetValue - The text value to locate and click
-     * @returns A promise that resolves when the targeted value is clicked
+     * Finds a row by searching for a value in a specific column, then clicks a link or button in that row.
+     * @param searchColumn - The column to search within (e.g., 'Description' or 'MID ID')
+     * @param searchValue - The text value to find
+     * @param targetColumn - (Optional) The column where the link should be clicked. If not provided, it clicks in the searchColumn.
      */
-    public async clickOnColumnValue(columnName: string, targetValue: string): Promise<void> 
+    public async clickOnColumnValue(searchColumn: string, searchValue: string, targetColumn?: string): Promise<boolean> 
     {
         await this.page.waitForLoadState('networkidle');
         
-        const row = await this.getRowLocatorByColumnValue(columnName, targetValue);
+        const row = await this.getRowLocatorByColumnValue(searchColumn, searchValue);
         await expect(row).toBeVisible();
 
-        const columnIndex = await this.getColumnIndex(columnName);
-
+        const columnToClick = targetColumn ?? searchColumn;
+        const columnIndex = await this.getColumnIndex(columnToClick);
         const targetCell = row.getByRole('cell').nth(columnIndex);
-
+        
         const link = targetCell.locator('a, [role="link"], button').first();
         
+        try 
+        {
+            await link.waitFor({ state: 'visible', timeout: 3000 });
+        } 
+        catch (error) 
+        {
+            return false;
+        }
+
+        const className = await link.getAttribute('class') || '';
+        const isNativeDisabled = await link.isDisabled();
+
+        if (className.includes('disabled') || isNativeDisabled) 
+        {
+            return false;
+        }
+
         await link.click();
+        
+        await this.page.waitForLoadState('networkidle');
+
+        return true;
     }
-    //TODO RECHECK IF EVER NEEDED
-/*     public async getValueFromRow(searchColumn: string, searchValue: string, resultColumn: string): Promise<string> 
-    {
-        const row: Locator = await this.getRowLocatorByColumnValue(searchColumn, searchValue);
-        await expect(row).toBeVisible();
-        const resultColIndex: number = await this.getColumnIndex(resultColumn);
-        return await row.getByRole('cell').nth(resultColIndex).innerText();
-    } */
 
     /**
      * Extracts all text values from a specific column across all visible rows
@@ -265,7 +270,7 @@ export class Table
      */
     public async getAllValuesFromRowByIndex(rowIndex: number): Promise<Record<string, string>>
     {
-        await this.page.waitForLoadState('load');
+        await this.page.waitForLoadState('networkidle');
         const row = this.tableRows.nth(rowIndex);
         await expect(row).toBeVisible();
         const headerTexts = await this.getHeaders();

@@ -1,7 +1,7 @@
 import { expect, Locator, Page } from '@playwright/test';
 import { BasePage } from '../../BasePage';
 import { CreationForm } from '../../related_components/CreationForm';
-import { AggregatedMidData } from '../../../test_data/MIDsData';
+import { AggregatedMidType } from '../../../types/MIDs'; 
 
 /**
  * Represents the page for configuring and adding a new Aggregated Merchant Identifier (MID)
@@ -26,7 +26,7 @@ export class NewAggregatedMidPage extends BasePage
      */
     constructor(page: Page) 
     {
-        super(page, '/mids/aggregated/add');
+        super(page, /\/mids\/aggregated\/add\/?$/);
         this.form = new CreationForm(page);
         this.pageLoaded = page.locator('.ui.inverted.text.loader').first();
     }
@@ -38,7 +38,7 @@ export class NewAggregatedMidPage extends BasePage
      * @param data - The data object containing aggregated MID configurations defined in AggregatedMidData
      * @returns A promise that resolves when the form is populated and the save action is triggered
      */
-    public async createAggregatedMID(data: AggregatedMidData): Promise<void>
+    public async createAggregatedMID(data: AggregatedMidType): Promise<void>
     {
         await expect(this.pageLoaded).toBeHidden();
         await this.form.selectDropDown('Project', data.project);
@@ -49,6 +49,6 @@ export class NewAggregatedMidPage extends BasePage
         {
             await this.form.fillInputField('Description', data.description);
         }
-        await this.form.save();
+        expect(await this.form.save()).toBeTruthy()
     }
 }

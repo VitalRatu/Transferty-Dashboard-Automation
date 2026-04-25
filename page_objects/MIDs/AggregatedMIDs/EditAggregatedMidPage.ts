@@ -1,7 +1,7 @@
 import { Page, expect } from '@playwright/test';
 import { CreationForm } from '../../related_components/CreationForm';
 import { BasePage } from '../../BasePage';
-import { AggregatedMidData } from '../../../test_data/MIDsData';
+import { AggregatedMidType } from '../../../types/MIDs'; 
 
 /**
  * Represents the page for editing an existing Aggregated MID.
@@ -21,7 +21,7 @@ export class EditAggregatedMidPage extends BasePage
      */
     constructor(page: Page) 
     {
-        super(page, /\/mids\/aggregated\/AG-\d{10}\/edit/);
+        super(page, /\/mids\/aggregated\/AG-\d{10}\/edit\/?$/);
         this.form = new CreationForm(page);
     }
     
@@ -33,13 +33,12 @@ export class EditAggregatedMidPage extends BasePage
      * @param data - The partial data object containing the specific fields to be updated
      * @returns A promise that resolves when the form is submitted and saved
      */
-    public async editDetails(data: Partial<AggregatedMidData>): Promise<void> 
+    public async editDetails(data: Partial<AggregatedMidType>): Promise<void> 
     {
         const expectedHeading = new RegExp(`EDIT AGGREGATED MID`, 'i');
         const editPageHeader = this.page.getByRole('heading', { name: expectedHeading });
         await expect(editPageHeader).toBeVisible();
 
-        // Ensure immutable fields are locked for editing
         await this.form.checkIsDisabled('Project');
 
         if (data.type !== undefined)

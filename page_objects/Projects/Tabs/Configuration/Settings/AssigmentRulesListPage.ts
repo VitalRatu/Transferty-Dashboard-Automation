@@ -33,4 +33,9 @@ export class AssigmentRulesListPage extends BasePage
         this.filter = new FilterBar<AssigmentRulesListPageTabName>(page)
         this.table = new Table(page)
     }
+
+    public async addAssigmentRule(): Promise<boolean>
+    {
+        return await this.filter.clickPrimaryButton('Add');
+    }
 }

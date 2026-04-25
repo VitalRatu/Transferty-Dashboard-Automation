@@ -1,8 +1,8 @@
 import { Page                   } from '@playwright/test'                      ;
-import { ProjectDetailsPage     } from './Configuration/ProjectDetailsPage'    ;
+import { ProjectDetailsPage     } from '../Tabs/Configuration/Project/ProjectDetailsPage'  ;
 import { MIDsPage               } from '../../MIDs/MIDsPage'                   ;
 import { CurrenciesListPage     } from './Configuration/CurrenciesListPage'    ;
-import { FxSpreadListPage       } from './Configuration/FxSpreadListPage'      ;
+import { FxSpreadListPage       } from './Configuration/FxSpread/FxSpreadListPage'      ;
 import { APIKeysListPage        } from '../../Developers/APIKeys/APIKeysListPage'       ;
 import { RoutingRulesListPage   } from './Configuration/RoutingRulesListPage'  ;
 import { AntifraudRulesListPage } from './Configuration/AntiFraudRulesListPage';
